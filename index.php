@@ -22,6 +22,13 @@ $app->run();
 <p>This website is setup by Charles Yang through shell on September 26, 2012.</p>
 <p>You are viewing this page on <? echo date("D M d, Y H:i:s", time()) ?>
 
+<ul>
+	<li><a href="/bobby">Bobby's Site</a></li>
+	<li><a href=""></a></li>
+	<li><a href=""></a></li>
+	<li><a href=""></a></li>
+</ul>
+
 </body>
 </html>
 
