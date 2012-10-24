@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h2>Enter Members:</h2>
-	<form name="members_form" action="scaffolding/insert_member.php" method="post">
+	<form name="members_form" action="insert_member.php" method="post">
 		<ul>
 		<li>Name: <input type="text" name="name" />
 		<li>Address: <input type="text" name="address" />
