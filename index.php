@@ -1,16 +1,16 @@
 <?php
 
-require 'NiceDog.php';
+require 'Slim/Slim.php';
+\Slim\Slim::registerAutoloader();
 
-R('')->controller('test')->action('index')->on('GET');
+$app = new \Slim\Slim();
 
-class Test extends C {
-	public function index() {
-		echo "Hi world";
-	}
-}
+$app->get('/', function() {
+	echo "hello";
+});
 
-run();
+$app->run();
+
 
 ?>
 
@@ -24,4 +24,3 @@ run();
 <p>You are viewing this page on <? echo date("D M d, Y H:i:s", time()) ?>
 </body>
 </html>
-
