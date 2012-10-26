@@ -1,12 +1,12 @@
 <?php
 
-// Setting up the boatstrap
-require_once __DIR__.'/vendor/autoload.php';
+require_once 'Slim/Slim.php';
+\Slim\Slim::registerAutoloader();
 
-$app = new Silex\Application();
+$app = new \Slim\Slim();
 
-$app->get('/hello/{name}', function ($name) use ($app) {
-    echo '<h1>Hello '.$app->escape($name).'</h1>';
+$app->get('/', function () {
+	echo 'Hello world';
 });
 
 $app->run();
