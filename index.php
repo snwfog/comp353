@@ -1,15 +1,16 @@
 <?php
 
-require_once 'Slim/Slim.php';
-\Slim\Slim::registerAutoloader();
+require 'NiceDog.php';
 
-$app = new \Slim\Slim();
+R('')->controller('test')->action('index')->on('GET');
 
-$app->get('/', function () {
-	echo 'Hello world';
-});
+class Test extends C {
+	public function index() {
+		echo "Hi world";
+	}
+}
 
-$app->run();
+run();
 
 ?>
 
