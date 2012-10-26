@@ -1,12 +1,12 @@
 <?php
 
-require 'Slim/Slim.php';
-\Slim\Slim::registerAutoloader();
+// Setting up the boatstrap
+require_once __DIR__.'/vendor/autoload.php';
 
-$app = new \Slim\Slim();
+$app = new Silex\Application();
 
-$app->get('/', function($name = "Hey you!") {
-	echo "Hello, $name";
+$app->get('/hello/{name}', function ($name) use ($app) {
+    echo '<h1>Hello '.$app->escape($name).'</h1>';
 });
 
 $app->run();
@@ -21,14 +21,6 @@ $app->run();
 <p>Welcome to COMP 353 - Databases website</p>
 <p>This website is setup by Charles Yang through shell on September 26, 2012.</p>
 <p>You are viewing this page on <? echo date("D M d, Y H:i:s", time()) ?>
-
-<ul>
-	<li><a href="/bobby">Bobby's Site</a></li>
-	<li><a href=""></a></li>
-	<li><a href=""></a></li>
-	<li><a href=""></a></li>
-</ul>
-
 </body>
 </html>
 
