@@ -1,19 +1,3 @@
-<?php
-
-require 'Slim/Slim.php';
-\Slim\Slim::registerAutoloader();
-
-$app = new \Slim\Slim();
-
-$app->get('/', function() {
-	echo "hello";
-});
-
-$app->run();
-
-
-?>
-
 <html>
 <head>
 <title>COMP353 - Databases</title>
