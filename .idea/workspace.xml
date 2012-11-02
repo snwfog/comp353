@@ -2,262 +2,164 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2207a8e-bdf8-499e-80f4-db141d1a6c00" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/autoload.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/pimple/pimple/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/pimple/pimple/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/pimple/pimple/README.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/pimple/pimple/composer.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/pimple/pimple/lib/Pimple.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/bin/build" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/bin/compile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/bin/skeleton/fat_composer.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/bin/skeleton/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/bin/skeleton/slim_composer.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/composer.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Application.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Application/FormTrait.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Application/MonologTrait.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Application/SecurityTrait.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Application/SwiftmailerTrait.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Application/TranslationTrait.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Application/TwigTrait.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Application/UrlGeneratorTrait.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Controller.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/ControllerCollection.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/ControllerProviderInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/ControllerResolver.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Exception/ControllerFrozenException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/ExceptionHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/HttpCache.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/LazyUrlMatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/DoctrineServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/FormServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/HttpCacheServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/MonologServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/SecurityServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/SessionServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/SwiftmailerServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/SymfonyBridgesServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/TranslationServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/TwigCoreExtension.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/TwigServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/UrlGeneratorServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/ValidatorServiceProvider.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/RedirectableUrlMatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Route.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Route/SecurityTrait.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/ServiceProviderInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/SilexEvents.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Util/Compiler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/silex/silex/src/Silex/WebTestCase.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/ContainerAwareEventDispatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/Debug/TraceableEventDispatcherInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/Event.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/EventDispatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/EventDispatcherInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/EventSubscriberInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/GenericEvent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/ImmutableEventDispatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/composer.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/ApacheRequest.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Cookie.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/Exception/AccessDeniedException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/Exception/FileException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/Exception/FileNotFoundException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/Exception/UnexpectedTypeException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/Exception/UploadException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/File.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/MimeType/ExtensionGuesser.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/MimeType/ExtensionGuesserInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/MimeType/FileBinaryMimeTypeGuesser.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/MimeType/FileinfoMimeTypeGuesser.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/MimeType/MimeTypeExtensionGuesser.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/MimeType/MimeTypeGuesser.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/MimeType/MimeTypeGuesserInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/File/UploadedFile.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/FileBag.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/HeaderBag.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/JsonResponse.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/ParameterBag.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/RedirectResponse.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Request.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/RequestMatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/RequestMatcherInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/ResponseHeaderBag.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/ServerBag.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBag.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBagInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Attribute/NamespacedAttributeBag.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Flash/AutoExpireFlashBag.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Flash/FlashBag.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Session.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/SessionBagInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/SessionInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/Handler/MemcacheSessionHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/Handler/MemcachedSessionHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/Handler/MongoDbSessionHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/Handler/NativeFileSessionHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/Handler/NativeSessionHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/Handler/NullSessionHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/Handler/PdoSessionHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/MetadataBag.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/MockArraySessionStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/MockFileSessionStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/NativeSessionStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/Proxy/AbstractProxy.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/Proxy/NativeProxy.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/Proxy/SessionHandlerProxy.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Session/Storage/SessionStorageInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/StreamedResponse.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/composer.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Bundle/Bundle.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Bundle/BundleInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/CacheClearer/CacheClearerInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/CacheClearer/ChainCacheClearer.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/CacheWarmer/CacheWarmer.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/CacheWarmer/CacheWarmerAggregate.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/CacheWarmer/CacheWarmerInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/CacheWarmer/WarmableInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Client.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Config/FileLocator.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Controller/ControllerResolver.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Controller/ControllerResolverInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DataCollector/ConfigDataCollector.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DataCollector/DataCollector.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DataCollector/DataCollectorInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DataCollector/EventDataCollector.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DataCollector/ExceptionDataCollector.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DataCollector/LoggerDataCollector.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DataCollector/MemoryDataCollector.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DataCollector/RequestDataCollector.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DataCollector/RouterDataCollector.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DataCollector/TimeDataCollector.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Debug/ContainerAwareTraceableEventDispatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Debug/ErrorHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Debug/ExceptionHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Debug/Stopwatch.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Debug/StopwatchEvent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DependencyInjection/AddClassesToCachePass.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DependencyInjection/ConfigurableExtension.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DependencyInjection/Extension.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/DependencyInjection/MergeExtensionConfigurationPass.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Event/FilterControllerEvent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Event/FilterResponseEvent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Event/GetResponseEvent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Event/GetResponseForControllerResultEvent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Event/GetResponseForExceptionEvent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Event/KernelEvent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Event/PostResponseEvent.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/EventListener/EsiListener.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/EventListener/ExceptionListener.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/EventListener/LocaleListener.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/EventListener/ProfilerListener.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/EventListener/ResponseListener.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/EventListener/RouterListener.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/EventListener/StreamedResponseListener.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Exception/AccessDeniedHttpException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Exception/FlattenException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Exception/HttpException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Exception/HttpExceptionInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Exception/MethodNotAllowedHttpException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Exception/NotFoundHttpException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/HttpCache/Esi.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/HttpCache/EsiResponseCacheStrategy.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/HttpCache/EsiResponseCacheStrategyInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/HttpCache/HttpCache.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/HttpCache/Store.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/HttpCache/StoreInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/HttpKernel.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/HttpKernelInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Kernel.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/KernelEvents.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/KernelInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Log/DebugLoggerInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Log/LoggerInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Log/NullLogger.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/BaseMemcacheProfilerStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/FileProfilerStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/MemcacheProfilerStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/MemcachedProfilerStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/MongoDbProfilerStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/MysqlProfilerStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/PdoProfilerStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/Profile.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/Profiler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/ProfilerStorageInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/RedisProfilerStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Profiler/SqliteProfilerStorage.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/TerminableInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/composer.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Annotation/Route.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/CompiledRoute.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Exception/ExceptionInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Exception/InvalidParameterException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Exception/MethodNotAllowedException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Exception/MissingMandatoryParametersException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Exception/ResourceNotFoundException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Exception/RouteNotFoundException.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Generator/ConfigurableRequirementsInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Generator/Dumper/GeneratorDumper.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Generator/Dumper/GeneratorDumperInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Generator/Dumper/PhpGeneratorDumper.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Generator/UrlGenerator.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Generator/UrlGeneratorInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Loader/AnnotationClassLoader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Loader/AnnotationDirectoryLoader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Loader/AnnotationFileLoader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Loader/ClosureLoader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Loader/PhpFileLoader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Loader/XmlFileLoader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Loader/YamlFileLoader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Loader/schema/routing/routing-1.0.xsd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/ApacheUrlMatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/Dumper/ApacheMatcherDumper.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/Dumper/MatcherDumper.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/Dumper/MatcherDumperInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/Dumper/PhpMatcherDumper.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/RedirectableUrlMatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/RedirectableUrlMatcherInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/RequestMatcherInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/TraceableUrlMatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/UrlMatcher.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Matcher/UrlMatcherInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/RequestContext.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/RequestContextAwareInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Route.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/RouteCollection.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/RouteCompiler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/RouteCompilerInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/Router.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/RouterInterface.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Symfony/Component/Routing/composer.json" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Autoloader.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Compiler.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/CompilerInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Environment.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Error.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Error/Loader.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Error/Runtime.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Error/Syntax.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/ExpressionParser.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Extension.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Extension/Core.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Extension/Debug.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Extension/Escaper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Extension/Optimizer.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Extension/Sandbox.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/ExtensionInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Filter.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Filter/Function.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Filter/Method.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Filter/Node.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/FilterInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Function.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Function/Function.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Function/Method.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Function/Node.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/FunctionInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Lexer.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/LexerInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Loader/Array.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Loader/Chain.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Loader/Filesystem.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Loader/String.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/LoaderInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Markup.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/AutoEscape.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Block.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/BlockReference.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Body.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Do.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Embed.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Array.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/AssignName.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Add.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/And.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/BitwiseAnd.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/BitwiseOr.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/BitwiseXor.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Concat.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Div.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Equal.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/FloorDiv.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Greater.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/GreaterEqual.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/In.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Less.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/LessEqual.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Mod.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Mul.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/NotEqual.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/NotIn.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Or.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Power.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Range.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Binary/Sub.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/BlockReference.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Conditional.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Constant.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/ExtensionReference.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Filter.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Filter/Default.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Function.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/GetAttr.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/MethodCall.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Name.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Parent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/TempName.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Test.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Test/Constant.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Test/Defined.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Test/Divisibleby.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Test/Even.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Test/Null.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Test/Odd.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Test/Sameas.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Unary.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Unary/Neg.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Unary/Not.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Expression/Unary/Pos.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Flush.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/For.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/ForLoop.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/If.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Import.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Include.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Macro.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Module.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Print.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Sandbox.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/SandboxedModule.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/SandboxedPrint.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Set.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/SetTemp.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Spaceless.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Node/Text.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/NodeInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/NodeOutputInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/NodeTraverser.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/NodeVisitor/Escaper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/NodeVisitor/Optimizer.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/NodeVisitor/SafeAnalysis.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/NodeVisitor/Sandbox.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/NodeVisitorInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Parser.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/ParserInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Sandbox/SecurityError.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Sandbox/SecurityPolicy.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Sandbox/SecurityPolicyInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Template.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TemplateInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Test/Function.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Test/IntegrationTestCase.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Test/Method.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Test/Node.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Test/NodeTestCase.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TestInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/Token.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/AutoEscape.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Block.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Do.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Embed.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Extends.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Filter.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Flush.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/For.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/From.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/If.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Import.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Include.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Macro.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Sandbox.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Set.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Spaceless.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParser/Use.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParserBroker.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParserBrokerInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenParserInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/libs/Twig/TokenStream.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scaffolding/card_holder.php" afterPath="$PROJECT_DIR$/resources/templates/card_holder.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scaffolding/credit_card.php" afterPath="$PROJECT_DIR$/resources/templates/credit_card.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scaffolding/db_connection.php" afterPath="$PROJECT_DIR$/resources/config.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scaffolding/insert_member.php" afterPath="$PROJECT_DIR$/resources/templates/insert_member.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scaffolding/listing.php" afterPath="$PROJECT_DIR$/resources/templates/listing.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scaffolding/member.php" afterPath="$PROJECT_DIR$/resources/templates/member.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
     </list>
     <ignored path="comp353.iws" />
@@ -278,28 +180,19 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="3" selection-start="13" selection-end="13" vertical-scroll-proportion="0.069869">
+            <state line="13" column="0" selection-start="460" selection-end="460" vertical-scroll-proportion="-8.32">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NiceDog.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NiceDog.php">
+      <file leaf-file-name="index.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/templates/index.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="2" selection-start="6" selection-end="1085" vertical-scroll-proportion="-0.64">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".htaccess" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.htaccess">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="11" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0">
+            <state line="10" column="7" selection-start="216" selection-end="216" vertical-scroll-proportion="0.14414415">
               <folding />
             </state>
           </provider>
@@ -320,15 +213,15 @@
       <list>
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/resources/templates/index.twig" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="665" />
-    <option name="y" value="403" />
-    <option name="width" value="1266" />
-    <option name="height" value="836" />
+    <option name="y" value="22" />
+    <option name="width" value="1280" />
+    <option name="height" value="1256" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -375,6 +268,56 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="comp353" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="comp353" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="comp353" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="comp353" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="comp353" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="comp353" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -382,13 +325,20 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
       <method />
     </configuration>
     <list size="0" />
@@ -421,14 +371,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="665" y="403" width="1266" height="836" extended-state="0" />
+    <frame x="0" y="22" width="1280" height="1256" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960412" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2581967" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3517018" sideWeight="0.67039585" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -437,7 +388,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -498,14 +448,14 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="17" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
+        <state line="3" column="3" selection-start="52" selection-end="52" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.htaccess">
+    <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="11" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0">
+        <state line="24" column="17" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -517,13 +467,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="11" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="0" selection-start="0" selection-end="495" vertical-scroll-proportion="0.0">
@@ -531,30 +474,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="11" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NiceDog.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="2" selection-start="6" selection-end="1085" vertical-scroll-proportion="-0.64">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="11" selection-start="179" selection-end="179" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="3" selection-start="13" selection-end="13" vertical-scroll-proportion="0.069869">
+        <state line="13" column="0" selection-start="460" selection-end="460" vertical-scroll-proportion="-8.32">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/templates/index.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="7" selection-start="216" selection-end="216" vertical-scroll-proportion="0.14414415">
           <folding />
         </state>
       </provider>
