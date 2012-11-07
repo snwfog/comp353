@@ -1,5 +1,7 @@
 <?php 
 session_start();
-session_destroy();
+if(isset($_SESSION['myusername'])){
+	unset($_SESSION['myusername']);
+}
 header("Location:/com353");
 ?>

@@ -24,8 +24,8 @@ $myusername = mysql_real_escape_string($myusername);
 $mypassword = mysql_real_escape_string($mypassword);
 
 if($mypassword == "advance" && $myusername == "mike"){
-	session_register($myusername);
-	session_register($mypassword);
+	session_start();
+	$_SESSION['myusername'] = $myusername;
 	header("Location:loguser.php?myusername=".$myusername);
 }
 else{
