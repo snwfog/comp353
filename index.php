@@ -6,7 +6,7 @@ if(is_login() == TRUE){
 	echo '<a href="views/login/logout.php">Logout</a>';
 	
 }else{
-	echo '<a href="views/login/main_login.php">Login</a>';
+	echo '<a href="views/login/main_login.html">Login</a>';
 }
 
 require_once 'libs/Twig/Autoloader.php';

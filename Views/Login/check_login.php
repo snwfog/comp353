@@ -20,8 +20,8 @@ $mypassword=$_POST['mypassword'];
 // To protect MySQL injection (more detail about MySQL injection)
 $myusername = stripslashes($myusername);
 $mypassword = stripslashes($mypassword);
-$myusername = mysql_real_escape_string($myusername);
-$mypassword = mysql_real_escape_string($mypassword);
+//$myusername = mysql_real_escape_string($myusername); //may cause problem with ENCS SERVER
+//$mypassword = mysql_real_escape_string($mypassword);
 
 if($mypassword == "advance" && $myusername == "mike"){
 	session_start();
