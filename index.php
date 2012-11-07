@@ -4,6 +4,7 @@ include('Function.php');
 if(is_login() == TRUE){
 	echo "Welcome ".$_SESSION['myusername'];
 	echo '<a href="views/login/logout.php">Logout</a>';
+	
 }else{
 	echo '<a href="views/login/main_login.php">Login</a>';
 }
