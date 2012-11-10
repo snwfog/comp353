@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * TODO: Better naming convention.
+ */
+
 $request = $_SERVER['QUERY_STRING'];
 
 $parsed = explode('&', $request);

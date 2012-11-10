@@ -9,16 +9,25 @@
  * --------------------------------------------------------------------------------------------------------------
  */
 
+/**--------------------------------------------------------------------------------------------------------------
+ * Connection to database using the mysqli.class
+ * --------------------------------------------------------------------------------------------------------------
+ */
+$dbconfig = array();
+$dbconfig['host'] = 'localhost';
+$dbconfig['user'] = 'root';
+$dbconfig['pass'] = '';
+$dbconfig['table'] = 'table';
 
 /*--------------------------------------------------------------------------------------------------------------
 /* Define local or server side URL and path constants
 /*--------------------------------------------------------------------------------------------------------------
 */
-$base_url = "http://".$_SERVER['HTTP_HOST'];
-$folder_url = str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$baseURL = "http://".$_SERVER['HTTP_HOST'];
+$folderURL = str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 
-define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . $folder_url);
-define('SITE_ROOT', $base_url . $folder_url);
+define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . $folderURL);
+define('SITE_ROOT', $baseURL . $folderURL);
 
 /*--------------------------------------------------------------------------------------------------------------
 /* Load Twig, the PHP templating framework
