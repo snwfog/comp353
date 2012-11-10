@@ -1,0 +1,12 @@
+	
+{% extends "base.html" %}
+
+{% block content %}
+		<h2 class="username">{{username}}</h2>
+		<h2 class="useremail" >{{useremail}}</h2>
+		<h2 class="userphone" >{{userphone}}</h2>
+		<h2 class="useraddress" >{{useraddress}}</h2>
+		{% for posts in user %}
+		<h2 class="userposts" >{{userposts}}</h2>
+		{% endfor %}
+{% endblock %}

@@ -25,27 +25,27 @@ class News_Model
 	);
 
 	public function __construct() {
-		echo "this is constrcuted";
-		$dbconfig = array();
-		$dbconfig['host'] = 'localhost';
-		$dbconfig['user'] = 'root';
-		$dbconfig['pass'] = 'root';
-		$dbconfig['table'] = 'comp353';
+		// echo "this is constrcuted";
+		// $dbconfig = array();
+		// $dbconfig['host'] = 'localhost';
+		// $dbconfig['user'] = 'root';
+		// $dbconfig['pass'] = 'root';
+		// $dbconfig['table'] = 'comp353';
 
 
-		require_once('libs/mysqli.class.php');
-		// Then simply connect to your DB this way:
-		$db = new DB($dbconfig);
+		// require_once('libs/mysqli.class.php');
+		// // Then simply connect to your DB this way:
+		// $db = new DB($dbconfig);
 
-		// Run a Query:
-		$db->query('SELECT * FROM states');
+		// // Run a Query:
+		// $db->query('SELECT * FROM states');
 
-		// Get an array of items:
-		$result = $db->get();
+		// // Get an array of items:
+		// $result = $db->get();
 
-		print "<pre>";
-		print_r($result);
-		print "</pre>";
+		// print "<pre>";
+		// print_r($result);
+		// print "</pre>";
 	}
 
 	public function getArticles($articleName)
