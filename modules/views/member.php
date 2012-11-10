@@ -8,7 +8,7 @@
 	<h2>Enter Members:</h2>
 	<form name="members_form" action="insert_member.php" method="post">
 		<ul>
-		<li>Namessss: <input type="text" name="name" />
+		<li>Names: <input type="text" name="name" />
 		<li>Address: <input type="text" name="address" />
 		<li>City: <input type="text" name="city" />
 		<li>Province: <input type="text" name="province" />
