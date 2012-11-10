@@ -17,7 +17,7 @@ foreach ($parsed as $argument)
 	$get_vars[$variable] = $value;
 }
 
-$target = 'modules/controllers/' . $page . '.php';
+$target = CONTROLLER_PATH . '/' . $page . '.php';
 
 
 if (file_exists($target))

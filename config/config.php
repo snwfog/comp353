@@ -13,11 +13,11 @@
  * Connection to database using the mysqli.class
  * --------------------------------------------------------------------------------------------------------------
  */
-$dbconfig = array();
-$dbconfig['host'] = 'localhost';
-$dbconfig['user'] = 'root';
-$dbconfig['pass'] = '';
-$dbconfig['table'] = 'table';
+//$dbconfig = array();
+//$dbconfig['host'] = 'localhost';
+//$dbconfig['user'] = 'root';
+//$dbconfig['pass'] = 'root';
+//$dbconfig['table'] = 'comp353';
 
 /*--------------------------------------------------------------------------------------------------------------
 /* Define local or server side URL and path constants
@@ -28,6 +28,18 @@ $folderURL = str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_N
 
 define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . $folderURL);
 define('SITE_ROOT', $baseURL . $folderURL);
+
+/**--------------------------------------------------------------------------------------------------------------
+ * Define project pathing constants.
+ * Apparently PHP's include or require uses absolute pathing from the root folder of the project.
+ * The difference between require and include is that require is obligatory, the system will fail
+ * if a require file is not found. While include will try to move on if the file is not found.
+ * --------------------------------------------------------------------------------------------------------------
+ */
+define('VIEW_PATH', 'modules/views');
+define('MODEL_PATH', 'modules/models');
+define('CONTROLLER_PATH', 'modules/controllers');
+
 
 /*--------------------------------------------------------------------------------------------------------------
 /* Load Twig, the PHP templating framework
