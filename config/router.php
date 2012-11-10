@@ -1,7 +1,15 @@
 <?php
 
 /**
- * TODO: Better naming convention.
+ * Router.php
+ * Dynamically calls the controller and pass relevant variables.
+ *
+ */
+
+
+/**
+ * TODO: Better naming convention???
+ * TODO: Encapsulate the class???
  */
 
 $request = $_SERVER['QUERY_STRING'];

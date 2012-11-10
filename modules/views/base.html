@@ -1,15 +1,29 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<meta charset="UTF-8">
+	<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+	<!-- <meta charset="UTF-8"> -->
+
 	{% block title %}{% endblock %}
+
 </head>
 <body>
-	<div id="header">{% block header %}{% endblock %}</div>
-	<div id="content">{% block content %}{% endblock %}</div>
+	<div id="header">
+
+		{% block header %}{% endblock %}
+
+	</div>
+
+	<div id="content">
+
+		{% block content %}{% endblock %}
+
+	</div>
+
 	<div id="footer">
-            {% block footer %}{% endblock %}
+
+		{% block footer %}{% endblock %}
+
     </div>
 </body>
 </html>
