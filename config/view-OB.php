@@ -1,5 +1,7 @@
 <?php
 
+// OBSOLETE
+
 class View_Model
 {
     private $data = array();
