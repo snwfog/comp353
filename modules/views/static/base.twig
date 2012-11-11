@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+	<title>
+		{% include 'static/title.twig' %}
+	</title>
+</head>
+<body>
+	<div id="header">{% include 'static/header.twig' %}</div>
+    
+
+    <div id="content">
+
+		{% block content %}{% endblock %}
+
+	</div>
+
+    <div id="footer">{% include 'static/footer.twig' %}</div>
+
+</body>
+</html>

@@ -10,8 +10,13 @@ class News_Controller extends View
         // $article = $newModel->getArticles($getVars['article']);
 
         $member = $newModel->getMemberName($getVars['article']);
-//        print_r($member['name']);
 
-        $this->display("base.twig", array());
+        $data = array
+        (
+            'memberName' => $member['name']
+
+        );
+
+        $this->display("news.twig", $data);
     }
 }

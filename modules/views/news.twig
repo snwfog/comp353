@@ -1,14 +1,15 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title></title>
-</head>
-<body>
-	<h1>Welcome to my MVC</h1>
-	<hr />
-	<h2>News</h2>
-	<h4>{{ title }}</h4>
-	<p>{{ content }}</p>
-</body>
-</html>
+{% extends 'static/base.twig' %}
+
+{% block content %}
+
+    <h1>Welcome to my MVC, {{ memberName }}.</h1>
+    <h4>{{ title }}</h4>
+    <p>{{ content }}</p>
+
+    {% for ALLposts in table %}
+        <h2 class="mostRecent">{{ mostRecent }}</h2>
+    {% endfor %}
+
+{% endblock content %}
+
+
