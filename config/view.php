@@ -2,8 +2,8 @@
 
 abstract class View
 {
-    public function render($file, $data)
+    public function display($file, $data)
     {
-        echo Renderer::getInstance()->render($file, $data);
+        Renderer::getInstance()->display($file, $data);
     }
 }
