@@ -1,6 +1,6 @@
 <?php
 
-class News_Controller extends View
+class News_Controller extends Controller
 {
 	public $template = 'news';
 

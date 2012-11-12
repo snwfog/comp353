@@ -4,7 +4,7 @@
  * Template renderer class.
  * This class implement the Singleton pattern. It is used to generate a
  * single Twig instance from which the instance can call to render any view.
- * This class is used in the view.php superclass of all view, as a composite.
+ * This class is used in the controller.php superclass of all view, as a composite.
  * -----------------------------------------------------------------------------
  */
 class Renderer

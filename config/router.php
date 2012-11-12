@@ -6,7 +6,6 @@
  *
  */
 
-
 /**
  * TODO: Better naming convention???
  * TODO: Encapsulate the class???
@@ -25,21 +24,10 @@ foreach ($parsed as $argument)
 	$get_vars[$variable] = $value;
 }
 
-$target = CONTROLLER_PATH . '/' . $page . '.php';
+$class = ucfirst($page) . '_' . CONTROLLER_SUFFIX;
 
-
-if (file_exists($target))
-{
-	include_once($target);
-	$class = ucfirst($page) . '_Controller';
-
-	if (class_exists($class))
-		$controller = new $class($get_vars);
-	else
-		die("The '$class' controller does not exists!");
-}
+if (class_exists($class))
+    $controller = new $class($get_vars);
 else
-{
-	die("Page '$target' controller cannot be located!");
-}
-
+//    header('Location: http://www.google.ca/');
+    die("The '$class' controller does not exists!");

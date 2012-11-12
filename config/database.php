@@ -5,7 +5,7 @@
  *
  *                                ~ ~ ~ ~
  *                THE VARIABLE $dbconfig MUST BE MODIFIED
- *                TO WORK IN ANOTHER PLATFORM OR SYSTEM
+ *                      TO WORK IN ANOTHER SERVER
  *                                ~ ~ ~ ~
  *
  *

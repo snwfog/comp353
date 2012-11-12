@@ -33,12 +33,13 @@ define('MODEL_PATH', 'modules/models');
 define('CONTROLLER_PATH', 'modules/controllers');
 
 /**-----------------------------------------------------------------------------
- * Define filenaming system constant.
+ * Define system class naming suffix.
+ * They are only used as class name, and NOT the filename.
  * -----------------------------------------------------------------------------
  */
-define('CONTROLLER_SUFFIX', '_Controller');
-define('MODEL_SUFFIX', '_Model');
-define('VIEW_SUFFIX', '_View');
+define('CONTROLLER_SUFFIX', 'Controller');
+define('MODEL_SUFFIX', 'Model');
+define('VIEW_SUFFIX', 'View');
 
 /*------------------------------------------------------------------------------
 /* Load Twig, the PHP templating framework
@@ -67,26 +68,32 @@ require_once('database.php');
 Database::getInstance();
 
 /*------------------------------------------------------------------------------
-/* Load the default superclass for view from which all controller must implement
+/* Load super class for controllers from which every controller must extends
 /* if they which to be to be displayed in the web browser
 /*------------------------------------------------------------------------------
 */
-require_once('view.php');
+require_once('controller.php');
 
 /**-----------------------------------------------------------------------------
  * Bootstrap model classes loading
  * -----------------------------------------------------------------------------
  */
-function __autoload($class_name)
+function __autoload($className)
 {
-    list($filename, $suffix) = explode('_', $class_name);
+    list($filename, $suffix) = explode('_', $className);
 
-    $file = 'modules/models/' . strtolower($filename) . '.php';
+    $file = strtolower($filename);
+
+    if (preg_match('/' . CONTROLLER_SUFFIX . '/i', $suffix))
+        $file = CONTROLLER_PATH . '/' . $filename . '.php';
+    else if (preg_match('/' . MODEL_SUFFIX . '/i', $suffix))
+        $file = MODEL_PATH . '/' . $filename . '.php';
 
     if (file_exists($file))
         include_once($file);
     else
-        die("File '$filename' containing class '$class_name' not found.");
+        header('Location: modules/views/static/error.html');
+//        die("File '$file' containing class '$className' could not be located by the autoload function!");
 }
 
 spl_autoload_register('__autoload');
