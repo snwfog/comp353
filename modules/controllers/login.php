@@ -21,11 +21,13 @@ class Login_Controller extends Controller{
     public function login_user(){
        $loginModel = new Login_Model;
        $loginModel->get_user();
+        //notfinished
     }
 
     public function register(){
         if (count($_POST) !== 0){
           $loginModel = new Login_Model;
+
         }else{
           $this->display("registration_form.html",$this->params);
         }
