@@ -21,7 +21,7 @@ $get_vars = array();
 foreach ($parsed as $argument)
 {
 	list($variable, $value) = explode('=', $argument);
-	$get_vars[$variable] = $value;
+	$get_vars[$variable] = urldecode($value);
 }
 
 $class = ucfirst($page) . '_' . CONTROLLER_SUFFIX;

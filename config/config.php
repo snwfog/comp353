@@ -65,24 +65,28 @@ require_once('renderer.php');
 require_once('libs/mysqli.class.php');
 require_once('database.php');
 
-Database::getInstance();
-
 /*------------------------------------------------------------------------------
 /* Load super class for controllers from which every controller must extends
-/* if they which to be to be displayed in the web browser
+/* if they which to be to be displayed in the web browser.
 /*------------------------------------------------------------------------------
 */
 require_once('controller.php');
 
 /**-----------------------------------------------------------------------------
- * Bootstrap model classes loading
+ * Load the session class, which act as LOGIN and SESSION checker.
+ * -----------------------------------------------------------------------------
+ */
+require_once('session.php');
+
+/**-----------------------------------------------------------------------------
+ * Bootstrap classes loading for MODELS and CONTROLLERS only.
  * -----------------------------------------------------------------------------
  */
 function __autoload($className)
 {
     list($filename, $suffix) = explode('_', $className);
 
-    $file = strtolower($filename);
+    $filename = strtolower($filename);
 
     if (preg_match('/' . CONTROLLER_SUFFIX . '/i', $suffix))
         $file = CONTROLLER_PATH . '/' . $filename . '.php';

@@ -2,7 +2,11 @@
 
 class Session
 {
-    private $session = new Session_Model;
+    private $session;
 
+    public function __construct()
+    {
+
+    }
 
 }

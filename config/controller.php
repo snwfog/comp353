@@ -4,9 +4,9 @@ abstract class Controller
 {
 
     /*
-     * TODO: controller should be able to check for login and redirect when necessary.
+     * TODO: controller should be able to check for login and redirect when
      */
-    public function display($file, $data)
+    public function display($file, $data = array())
     {
         Renderer::getInstance()->display($file, $data);
     }
