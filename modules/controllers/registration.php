@@ -5,7 +5,7 @@ class Registration_Controller extends Controller implements IRedirectable
     {
         //Check if there are form data
         if (isset($_POST[]){
-       `}
+       }
         else{
             $this->display("registration_form.html",$this->params);
         }
