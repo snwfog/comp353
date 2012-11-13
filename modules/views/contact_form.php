@@ -9,8 +9,9 @@ if (isset($_POST['first_name']) && issset($_POST['last_name']) && isset($_POST['
 	
 	if(!empty($first_name) && !empty($last_name) && !empty($email) && !empty($text))
 	{
-		//fill this	(put seller_id.email)
-		//$to =  ;
+		$query = "SELECT 'email' FROM 'members','transacts' WHERE 'buyer_id'='members.id'";
+	
+		$to = $query['email'];
 		$subject = 'Buyer contact form';
 		$body = $first_name. $last_name. "\n". $text;
 		$headers = 'From: '.$email;
