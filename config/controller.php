@@ -3,9 +3,18 @@
 abstract class Controller
 {
 
-    /*
-     * TODO: controller should be able to check for login and redirect when
-     */
+    const REDIRECT_ERROR = "modules/views/static/error.html";
+    const REDIRECT_INDEX = "index.php";
+
+    protected $session;
+
+    public function __construct()
+    {
+        if (!(isset($this->session) && $this->session->isValid()))
+            header("Location: " . self::REDIRECT_INDEX);
+        // Else must be a valid session
+    }
+
     public function display($file, $data = array())
     {
         Renderer::getInstance()->display($file, $data);
@@ -21,7 +30,7 @@ abstract class Controller
      *            function.
      * -------------------------------------------------------------------------
      */
-    public function redirect($file = 'index.php')
+    public function redirect($file = self::REDIRECT_INDEX)
     {
         header("Location: $file");
     }

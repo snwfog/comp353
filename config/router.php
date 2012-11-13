@@ -13,21 +13,30 @@
 
 $request = $_SERVER['QUERY_STRING'];
 
-$parsed = explode('&', $request);
+$request_uri = explode('&', $request);
 
-$page = array_shift($parsed);
+$requested_page = array_shift($request_uri);
 
-$get_vars = array();
-foreach ($parsed as $argument)
+// Check if we are looking just for the index page
+if (empty($requested_page) && empty($request_uri))
+    $controller = new Index_Controller;
+else
 {
-	list($variable, $value) = explode('=', $argument);
-	$get_vars[$variable] = urldecode($value);
+    // Otherwise keep checking for other specific controller
+    $url_associative_array = array();
+
+    foreach ($request_uri as $argument)
+    {
+        list($variable, $value) = explode('=', $argument);
+        $url_associative_array[$variable] = urldecode($value);
+    }
+
+    $controller_class = ucfirst($requested_page) . '_' . CONTROLLER_SUFFIX;
+
+    if (class_exists($controller_class))
+        $controller = new $controller_class($url_associative_array);
+    else
+//    header('Location: http://www.google.ca/');
+        die("The '$controller_class' controller does not exists!");
 }
 
-$class = ucfirst($page) . '_' . CONTROLLER_SUFFIX;
-
-if (class_exists($class))
-    $controller = new $class($get_vars);
-else
-//    header('Location: http://www.google.ca/');
-    die("The '$class' controller does not exists!");

@@ -71,6 +71,7 @@ require_once('database.php');
 /*------------------------------------------------------------------------------
 */
 require_once('controller.php');
+require_once('redirectable.php');
 
 /**-----------------------------------------------------------------------------
  * Load the session class, which act as LOGIN and SESSION checker.
