@@ -3,9 +3,14 @@
 class Session
 {
     private $session_model;
+    private $username;
+    private $password;
 
     public function __construct($username, $password)
     {
+        $this->username = $username;
+        $this->password = $password;
+
         // Create a new session model ready to insert session variable
         $this->session_model = new Sessions_Model();
 
@@ -15,6 +20,10 @@ class Session
 
     public function isValid()
     {
+        $user = $this->session_model->getUser($this->username);
+        print_r($user);
+        if (empty($user))
+            return FALSE;
         return TRUE;
     }
 
