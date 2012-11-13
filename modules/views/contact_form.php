@@ -11,7 +11,7 @@ if (isset($_POST['first_name']) && issset($_POST['last_name']) && isset($_POST['
 	{
 		//fill this	(put seller_id.email)
 		//$to =  ;
-		$subject = 'Seller contact form';
+		$subject = 'Buyer contact form';
 		$body = $first_name. $last_name. "\n". $text;
 		$headers = 'From: '.$email;
 	
