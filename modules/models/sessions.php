@@ -4,6 +4,8 @@ class Sessions_Model
 {
     private $db;
 
+    private $table = "test_sessions";
+
     public function __construct()
     {
         $this->db = Database::getInstance();
@@ -13,7 +15,7 @@ class Sessions_Model
     {
 //        $session = hash('sha256', $session);
 
-        $query = "INSERT INTO test_sessions (
+        $query = "INSERT INTO $this->table (
             username, password, session, expire
         ) VALUES ( '$username', '$password', '123123', 0 )";
 
@@ -21,20 +23,34 @@ class Sessions_Model
         if (isset($this->db))
             $this->db->set($query);
         else
-            die("Error inserting into sessions table.");
+            throw new Exception("Error inserting into sessions table.");
     }
 
-   public function getUser($username)
-   {
-       $query = "SELECT username FROM members WHERE username = '$username'";
+    public function getUser($session_id)
+    {
+        $query = "SELECT username FROM members WHERE username = (
+                  SELECT username FROM $this->table WHERE id = '$session_id')";
 
-       if (isset($this->db))
-       {
-           $this->db->query($query);
-           $result = $this->db->get();
-           return $result;
-       }
-       else
-           die("Error getting user.");
-   }
+        if (isset($this->db))
+        {
+            $this->db->query($query);
+            $result = $this->db->get();
+            return $result;
+        }
+        else
+            throw new Exception("Error getting user.");
+    }
+
+    public function setExpire($session_id, $value)
+    {
+        $expire = ($value) ? 1 : 0;
+        $query = "UPDATE $this->table
+                  SET expire = $expire
+                  WHERE id = $session_id";
+
+        if (isset($this->db))
+            $this->db->set($query);
+        else
+            throw new Exception("Could not set session expiration.");
+    }
 }

@@ -2,26 +2,29 @@
 
 class Session
 {
-    private $session_model;
-    private $username;
-    private $password;
+    /**
+     * @var The only variable that is tracked by the session object.
+     */
+    private $session_id;
+
+
+    private $model;
 
     public function __construct($username, $password)
     {
-        $this->username = $username;
-        $this->password = $password;
+        session_start();
 
         // Create a new session model ready to insert session variable
-        $this->session_model = new Sessions_Model();
+        $this->model = new Sessions_Model();
 
         // Set the new session for this member
-        $this->session_model->setSession($username, $password);
+        $this->model->setSession($username, $password);
     }
 
     public function isValid()
     {
-        $user = $this->session_model->getUser($this->username);
-        print_r($user);
+        $user = $this->model->getUser($this->session_id);
+
         if (empty($user))
             return FALSE;
         return TRUE;
@@ -32,13 +35,17 @@ class Session
         return TRUE;
     }
 
-    public function startSession()
+    public function expire($value)
     {
-        session_start();
+        if (isset($this->session_id))
+            $this->model->setExpire($this->session_id, $value);
+        else
+            throw new Exception("Undefined session id.");
     }
 
-    public function endSession()
+    public function __destruct()
     {
+        $this->expire(TRUE);
         session_destroy();
     }
 }
