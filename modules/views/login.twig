@@ -1,0 +1,12 @@
+{% extends 'static/base.twig' %}
+
+{%  block content %}
+
+    <form action="index.php?login">
+    	<input type="text" name="username" length="20" placeholder="Username" />
+    	<input type="password" name="password" length="20"
+               placeholder="Password" />
+    	<a href="">Login</a>
+    </form>
+
+{% endblock content %}
