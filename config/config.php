@@ -92,12 +92,12 @@ function __autoload($className)
     if (preg_match('/' . CONTROLLER_SUFFIX . '/i', $suffix))
         $file = CONTROLLER_PATH . '/' . $filename . '.php';
     else if (preg_match('/' . MODEL_SUFFIX . '/i', $suffix))
-        $file = MODEL_PATH . '/' . $filename . '.php';
+        $file = MODEL_PATH . '/' . $filename . 's' . '.php'; // Note the "s"
 
     if (file_exists($file))
         include_once($file);
     else
-        header('Location: modules/views/static/error.html');
+        header('Location: ' . Controller::REDIRECT_ERROR);
 //        die("File '$file' containing class '$className' could not be located by the autoload function!");
 }
 

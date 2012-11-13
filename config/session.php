@@ -15,7 +15,7 @@ class Session
         session_start();
 
         // Create a new session model ready to insert session variable
-        $this->model = new Sessions_Model();
+        $this->model = new Session_Model();
 
         // Set the new session for this member
         $this->model->setSession($username, $password);

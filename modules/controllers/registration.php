@@ -1,5 +1,4 @@
 <?php
-
 class Registration_Controller extends Controller implements IRedirectable
 {
     public function __construct(array $args)
@@ -12,7 +11,7 @@ class Registration_Controller extends Controller implements IRedirectable
         }
     }
 
-    //private $params = array();
+//private $params = array();
 //    public function __construct(array $data){
 //        $this->params = $data;
 //        $class_methods = get_class_methods($this);
