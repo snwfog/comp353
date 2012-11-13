@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.25)
 # Database: comp353
-# Generation Time: 2012-11-13 19:18:26 +0000
+# Generation Time: 2012-11-13 20:57:51 +0000
 # ************************************************************
 
 
@@ -27,11 +27,11 @@ DROP TABLE IF EXISTS `addresses`;
 
 CREATE TABLE `addresses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `address` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `city` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `province` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `country` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `postal_code` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `city` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `province` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `country` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `postal_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='http://stackoverflow.com/questions/217945/can-i-have-multipl';
 
@@ -96,7 +96,7 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type_id` int(11) NOT NULL,
-  `name` varchar(256) NOT NULL,
+  `name` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `fk_categories_types` (`type_id`),
   CONSTRAINT `fk_categories_types` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`)
@@ -167,10 +167,10 @@ DROP TABLE IF EXISTS `domains`;
 
 CREATE TABLE `domains` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -181,15 +181,18 @@ DROP TABLE IF EXISTS `emails`;
 
 CREATE TABLE `emails` (
   `id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
+  `name` varchar(64) CHARACTER SET latin1 NOT NULL,
+  `member_id` int(11) NOT NULL,
   `domain_id` int(11) NOT NULL,
   `top_level_domain_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_emails_domains` (`domain_id`),
   KEY `fk_emails_top_level_domains` (`top_level_domain_id`),
+  KEY `fk_emails_members` (`member_id`),
   CONSTRAINT `fk_emails_domains` FOREIGN KEY (`domain_id`) REFERENCES `domains` (`id`),
+  CONSTRAINT `fk_emails_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`),
   CONSTRAINT `fk_emails_top_level_domains` FOREIGN KEY (`top_level_domain_id`) REFERENCES `top_level_domains` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -222,11 +225,11 @@ DROP TABLE IF EXISTS `members`;
 
 CREATE TABLE `members` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(256) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `password` varchar(256) NOT NULL DEFAULT '',
+  `username` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `password` varchar(255) NOT NULL DEFAULT '',
   `address_id` int(11) NOT NULL,
   `visitor_id` int(11) NOT NULL,
-  `avatar_url` varchar(256) DEFAULT NULL,
+  `avatar_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `visitor_id_UNIQUE` (`visitor_id`),
@@ -257,7 +260,7 @@ CREATE TABLE `offers` (
   `description` text NOT NULL,
   `price` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `image_url` varchar(256) DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_offers_categories` (`category_id`),
@@ -314,7 +317,7 @@ DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `member_id` int(11) NOT NULL,
-  `session` varchar(256) NOT NULL DEFAULT '',
+  `session` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `member_id_UNIQUE` (`member_id`),
@@ -331,12 +334,12 @@ DROP TABLE IF EXISTS `test_sessions`;
 
 CREATE TABLE `test_sessions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(256) NOT NULL,
-  `password` varchar(256) NOT NULL,
-  `session` varchar(256) NOT NULL DEFAULT '',
+  `username` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `password` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `session` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `expire` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `test_sessions` WRITE;
 /*!40000 ALTER TABLE `test_sessions` DISABLE KEYS */;
@@ -367,7 +370,9 @@ VALUES
 	(26,'asdf','asdf','123123',0),
 	(27,'snw','asdfasdf','123123',0),
 	(28,'snw','asdfasdfasdf','123123',0),
-	(29,'charles','asd','123123',0);
+	(29,'charles','asd','123123',0),
+	(30,'asdfasdf','asdfasdfasdf','123123',0),
+	(31,'chares','asdfaskdf','123123',0);
 
 /*!40000 ALTER TABLE `test_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -380,10 +385,10 @@ DROP TABLE IF EXISTS `top_level_domains`;
 
 CREATE TABLE `top_level_domains` (
   `id` int(11) NOT NULL,
-  `top_level` varchar(8) NOT NULL,
+  `top_level` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `top_level` (`top_level`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -420,7 +425,7 @@ DROP TABLE IF EXISTS `types`;
 
 CREATE TABLE `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(256) CHARACTER SET latin1 NOT NULL,
+  `name` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -450,9 +455,9 @@ DROP TABLE IF EXISTS `visitors`;
 
 CREATE TABLE `visitors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(64) NOT NULL DEFAULT '',
-  `last_name` varchar(64) NOT NULL DEFAULT '',
-  `phone_number` varchar(32) NOT NULL DEFAULT '',
+  `first_name` varchar(255) NOT NULL DEFAULT '',
+  `last_name` varchar(255) NOT NULL DEFAULT '',
+  `phone_number` varchar(255) NOT NULL DEFAULT '',
   `join_date` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `visitors_id_UNIQUE` (`id`)

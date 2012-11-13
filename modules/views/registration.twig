@@ -1,30 +1,33 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
-
+    {% for error in errors %}
+        {% block error %}
+            <div id="error">{{error}}</div>
+        {% endblock %}
+    {% endfor %}
     <form action="index.php?registration" method="POST">
         <h3>Personal Information</h3>
         <ul>
-            <li><input type="text" name="username" placeholder="Username" />
+            <li><input type="text" name="username" placeholder="Username" value="{{form["username"]}}" />
             <li><input type="text" name="password1" placeholder="Password" />
             <li><input type="text" name="password2" placeholder="Confirm Password" />
-            <li><input type="text" name="phone_number" placeholder="Phone Number" />
-            <li><input type="text" name="email" placeholder="Email Address" />
+            <li><input type="text" name="phone_number" placeholder="Phone Number" value="{{form["phone_number"]}}" />
+            <li><input type="text" name="email" placeholder="Email Address" value="{{form["email"]}}"/>
         </ul>
 
         <h3>Address</h3>
         <ul>
-            <li><input type="text" name="address" placeholder="Address" />
-            <li><input type="text" name="city" placeholder="City" />
-            <li><input type="text" name="province" placeholder="Province" />
-            <li><input type="text" name="country" placeholder="Country" />
-            <li><input type="text" name="postal_code" placeholder="Postal Code" />
+            <li><input type="text" name="address" placeholder="Address" value="{{form["address"]}}"/>
+            <li><input type="text" name="city" placeholder="City" value="{{form["city"]}}" />
+            <li><input type="text" name="province" placeholder="Province" value="{{form["province"]}}"/>
+            <li><input type="text" name="country" placeholder="Country" value="{{form["country"]}}"/>
+            <li><input type="text" name="postal_code" placeholder="Postal Code" value="{{form["postal_code"]}}"/>
         </ul>
 
         <h3>Credit Card</h3>
         <ul>
-            <li><input type="text" name="type" placeholder="Credit Card Company"
-                />
+            <li><input type="text" name="type" placeholder="Credit Card Company"/>
             <li><input type="text" name="number" placeholder="Credit Card Number" />
             <li><input type="text" name="expire" placeholder="Expiration Date" />
             <li><input type="text" name="verification" placeholder="Verification Code" />
