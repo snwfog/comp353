@@ -4,18 +4,11 @@
 
     <h1>Hi, Welcome to Auction Max, Visitor</h1>
     <p>To login, click <a href="index.php?login">here</a>.</p>
+    <p>To register, click <a href="index.php?registration">here</a>.</p>
     <p>If you cannot login, it is highly probable that you do not
     have the login database in your local MAMP/WAMP/XAMP SQL server.
-    You can run command to create a new table:
-    <pre>
-        CREATE TABLE test_session (
-            id INT(11) PRIMARY KEY AUTO_INCREMENT,
-            username VARCHAR(256) NOT NULL,
-            password VARCHAR(256) NOT NULL,
-            session VARCHAR(256) NOT NULL,
-            expire INT(1) NOT NULL
-        );
-    </pre>
-    </p>
+    I have uploaded my latest SQL DDL file <a href="">here</a>. Grab it
+    and import it in your local SQL database. Finally, don't forget to change
+    the database information in the <pre>config/database.php</pre> file.</p>
 
 {% endblock content %}

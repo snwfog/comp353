@@ -1,6 +1,6 @@
 <?php
 
-class Sessions_Model
+class Session_Model
 {
     private $db;
 
