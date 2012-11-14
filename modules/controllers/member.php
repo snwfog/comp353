@@ -9,15 +9,7 @@ class Member_Controller extends Controller implements IRedirectable
 
         $email = new Email_Model;
 
-        try
-        {
-            $email->setEmail("good@lord.ca", 2);
-        }
-        catch (Exception $e)
-        {
-            echo "Email already exists.";
-        }
-
+        $email->setDomain('icloud');
 
     }
 

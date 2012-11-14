@@ -62,7 +62,6 @@ require_once('renderer.php');
  * The database connector should be called through the getInstance method.
  * -----------------------------------------------------------------------------
  */
-require_once('libs/mysqli.class.php');
 require_once('database.php');
 require_once('model.php');
 

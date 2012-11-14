@@ -19,5 +19,4 @@ abstract class Model
     {
         return $this->db->query($query);
     }
-
 }

@@ -97,6 +97,4 @@ class Email_Model extends Model
 
         $this->set($query);
     }
-
-
 }

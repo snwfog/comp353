@@ -1,11 +1,9 @@
 <?php
-class Registration_Model
+class Registration_Model extends Model
 {
-    private $db;
-
     public function __construct()
     {
-        $this->db = Database::getInstance();
+        parent::__construct();
     }
 
     public function create_user($username, $password, $password2,
