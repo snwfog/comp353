@@ -2,11 +2,13 @@
 
 class Registration_Controller extends Controller implements IRedirectable{
     public $data = array("errors" => array(), "form" => array());
-    private $password1 = "";
-    private $password2 = "";
-    private $credit_number = "";
-    private $credit_expire =  "";
-    private $credit_verification = "";
+    private $password1;
+    private $password2;
+    private $credit_number;
+    private $credit_expire;
+    private $credit_verification;
+    private $address_instance;
+    private $visitor_instance;
 
     public function __construct(array $args){
       if(isset($_POST["registration_form"])){
@@ -29,23 +31,45 @@ class Registration_Controller extends Controller implements IRedirectable{
     }
 
     public function check_form($form){
-      $registrationModel = new Registration_Model();
-      $addressModel = new Address_Model();
-
+      $memberModel = new Member_Model();
       if($this->password1 == "" && $this-> password2 == ""){
         array_push($this->data["errors"], "Passwords is empty!");
       }elseif($this->password1 !== $this->password2){
         array_push($this->data["errors"], "Confirm password is different!");
       }
-      if($registrationModel->exist_attribute("username", $_POST["username"])){
+      if($memberModel->exist_attribute("username", $_POST["username"])){
         array_push($this->data["errors"], "Username Exist!");
       }
-
       if(count($this->data["errors"])>0){
         $this->display("registration.twig", $this->data);
       }else{
-        $address_instance = $addressModel->create_address($_POST["address"], $_POST["city"], $_POST["province"], $_POST["country"], $_POST["postal_code"], $this);
-        print_r($address_instance);
+        $this->register_member();
+      }
+   }
+
+    private function register_member(){
+      $memberModel = new Member_Model();
+      $addressModel = new Address_Model();
+      $visitorModel = new Visitor_Model();
+      if(!isset($this->address_instance)){
+        $this->address_instance =
+              $addressModel->create_address(
+                                            $_POST["address"],
+                                            $_POST["city"], 
+                                            $_POST["province"], 
+                                            $_POST["country"], 
+                                            $_POST["postal_code"], 
+                                            $this
+                                           );
+      }
+      if(!isset($this->visitor_instance)){
+        $this->visitor_instance = 
+              $visitorModel->create_visitor(
+                                            $_POST["first_name"],
+                                            $_POST["last_name"], 
+                                            $_POST["phone_number"],
+                                            $this
+                                           );
       }
     }
 }
