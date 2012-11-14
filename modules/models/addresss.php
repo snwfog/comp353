@@ -31,26 +31,18 @@ class Address_Model extends Model
       $country = "\"".$country."\"";
       $postal_code = "\"".$postal_code."\"";
       $this->db->setFetchMode(2); //This may cause error if db class is singleton
-      $result = $this->get("Select *
-                        FROM addresses 
-                        WHERE address=".$address."and city=".$city."and postal_code=".$postal_code
-                       );
-      if(count($result) == 1){//no two member can have same address!
-        array_push($registration_controller->data["errors"], "Address Already Exist!");
-        $registration_controller->display("registration.twig", $registration_controller->data);
-      }elseif(count($result) == 0){//no duplicate
-        $insert = array($address, $city, $province, $country, $postal_code);
-        $insert = implode(",", $insert);
-        $new = $this->set("INSERT INTO addresses (address, city, province, country, postal_code)
-                                 VALUES(".$insert.");"
-                                );
+      $insert = array($address, $city, $province, $country, $postal_code);
+      $insert = implode(",", $insert);
+      if($this->set("INSERT INTO addresses (address, city, province, country, postal_code) VALUES(".$insert.");")){
+        echo "b";
         $new = $this->db->id();
-        $new = $this->get("Select *
-                                FROM addresses
-                                WHERE id=".$new
-                               );
+        $new = $this->get("Select * FROM addresses WHERE id=".$new);
         return $new;
-        //todo: database error handling!
+      }else{
+          if($this->db->error_number() == 1062){//1062 = duplicate
+              array_push($registration_controller->data["errors"], "Address Already Exist!");
+              $registration_controller->display("registration.twig", $registration_controller->data);
+          }
       }
 
     }

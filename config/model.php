@@ -17,7 +17,7 @@ abstract class Model
 
     protected function set($query)
     {
-        $this->db->query($query);
+        return $this->db->query($query);
     }
 
 }

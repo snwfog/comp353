@@ -113,9 +113,11 @@ class DB
 			return true;
 		}
 		else
-		{
+		{   //Enable for debugging
 			printf("<b>Problem with SQL:</b> %s\n", $this->SQL);
-			exit;
+            printf($this->mysqli->error);
+            //commented out for error handling.
+			//exit;
 		}
 	}
 
@@ -159,6 +161,13 @@ class DB
 	{
 		return $this->mysqli->insert_id;
 	}
+    /*
+    *@desc  Returns the error code
+    *
+    */
+    public function error_number(){
+      return $this->mysqli->errno;
+    }
 
 	/**
 	 * @desc	Automatically close the connection when finished with this object.
