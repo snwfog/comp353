@@ -20,7 +20,6 @@ class Email_Model extends Model
             $query = "INSERT INTO top_level_domain VALUES($top_level_domain)";
             $this->set($query);
 
-            //
         }
     }
 
