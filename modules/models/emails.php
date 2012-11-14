@@ -5,6 +5,17 @@ class Email_Model extends Model
     public function __construct()
     {
         parent::__construct();
+
+        $result = $this->getColumn
+        (
+            array("id", "username"),
+            "username",
+            "snw",
+            "test_sessions"
+        );
+
+        print_r($result);
+
     }
 
     public function setEmailAndGetId($email, $member_id)
@@ -46,7 +57,7 @@ class Email_Model extends Model
         // Check if this id exists
         $query = "SELECT * FROM emails WHERE id='$id'";
         $mysqli_raw = $this->db->query($query);
-        $result = $this->db->selectField();
+        $result = $this->db->fetch();
 
         if (empty($result))
             return FALSE;
@@ -78,7 +89,7 @@ class Email_Model extends Model
                     AND top_level_domain_id = '$top_level_domain_id'";
 
         $mysqli_raw = $this->db->query($query);
-        $result = $this->db->selectField($field);
+        $result = $this->db->fetch($field);
 
         return empty($result) ? FALSE : $result;
     }

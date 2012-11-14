@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.25)
 # Database: comp353
-# Generation Time: 2012-11-13 20:57:51 +0000
+# Generation Time: 2012-11-14 18:30:53 +0000
 # ************************************************************
 
 
@@ -70,12 +70,12 @@ CREATE TABLE `admins` (
 DROP TABLE IF EXISTS `bids`;
 
 CREATE TABLE `bids` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `member_id` int(11) NOT NULL,
   `offer_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `description` text,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `id_idx` (`member_id`),
@@ -130,7 +130,7 @@ CREATE TABLE `comments` (
 DROP TABLE IF EXISTS `credit_card_types`;
 
 CREATE TABLE `credit_card_types` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -166,12 +166,28 @@ CREATE TABLE `credit_cards` (
 DROP TABLE IF EXISTS `domains`;
 
 CREATE TABLE `domains` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=361 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `domains` WRITE;
+/*!40000 ALTER TABLE `domains` DISABLE KEYS */;
+
+INSERT INTO `domains` (`id`, `name`)
+VALUES
+	(359,''),
+	(358,'charlescy'),
+	(360,'gmail'),
+	(6,'icloud'),
+	(347,'kitty'),
+	(5,'lord'),
+	(349,'sc'),
+	(345,'world');
+
+/*!40000 ALTER TABLE `domains` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table emails
@@ -180,20 +196,33 @@ CREATE TABLE `domains` (
 DROP TABLE IF EXISTS `emails`;
 
 CREATE TABLE `emails` (
-  `id` int(11) NOT NULL,
-  `name` varchar(64) CHARACTER SET latin1 NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL DEFAULT '',
   `member_id` int(11) NOT NULL,
   `domain_id` int(11) NOT NULL,
   `top_level_domain_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`,`member_id`,`domain_id`,`top_level_domain_id`),
   KEY `fk_emails_domains` (`domain_id`),
   KEY `fk_emails_top_level_domains` (`top_level_domain_id`),
   KEY `fk_emails_members` (`member_id`),
   CONSTRAINT `fk_emails_domains` FOREIGN KEY (`domain_id`) REFERENCES `domains` (`id`),
   CONSTRAINT `fk_emails_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`),
   CONSTRAINT `fk_emails_top_level_domains` FOREIGN KEY (`top_level_domain_id`) REFERENCES `top_level_domains` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `emails` WRITE;
+/*!40000 ALTER TABLE `emails` DISABLE KEYS */;
+
+INSERT INTO `emails` (`id`, `name`, `member_id`, `domain_id`, `top_level_domain_id`)
+VALUES
+	(42,'',2,359,137),
+	(31,'charles',2,358,136),
+	(43,'donchoa',2,360,136),
+	(7,'good',2,5,53);
+
+/*!40000 ALTER TABLE `emails` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table member_reserves
@@ -334,12 +363,12 @@ DROP TABLE IF EXISTS `test_sessions`;
 
 CREATE TABLE `test_sessions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `password` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `session` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `username` varchar(255) NOT NULL DEFAULT '',
+  `password` varchar(255) NOT NULL DEFAULT '',
+  `session` varchar(255) NOT NULL DEFAULT '',
   `expire` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `test_sessions` WRITE;
 /*!40000 ALTER TABLE `test_sessions` DISABLE KEYS */;
@@ -372,7 +401,8 @@ VALUES
 	(28,'snw','asdfasdfasdf','123123',0),
 	(29,'charles','asd','123123',0),
 	(30,'asdfasdf','asdfasdfasdf','123123',0),
-	(31,'chares','asdfaskdf','123123',0);
+	(31,'chares','asdfaskdf','123123',0),
+	(32,'asdfasdf','asdfasdf','123123',0);
 
 /*!40000 ALTER TABLE `test_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -384,12 +414,23 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `top_level_domains`;
 
 CREATE TABLE `top_level_domains` (
-  `id` int(11) NOT NULL,
-  `top_level` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `top_level` (`top_level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `top_level_domains` WRITE;
+/*!40000 ALTER TABLE `top_level_domains` DISABLE KEYS */;
+
+INSERT INTO `top_level_domains` (`id`, `name`)
+VALUES
+	(137,''),
+	(53,'ca'),
+	(136,'com');
+
+/*!40000 ALTER TABLE `top_level_domains` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table transacts
