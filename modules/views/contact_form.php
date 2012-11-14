@@ -1,7 +1,7 @@
 <?
 
 if (isset($_POST['first_name']) && issset($_POST['last_name']) && isset($_POST['email'] && isset($_POST['text'])))
-	
+{
 	$first_name=$_POST['first_name'];
 	$last_name=$_POST['last_name'];
 	$email=$_POST['email'];
@@ -29,7 +29,7 @@ if (isset($_POST['first_name']) && issset($_POST['last_name']) && isset($_POST['
 	{
 		echo 'All fields are required.';
 	}
- 
+ }
 ?>
 
 <form action="contact_form.php" method="POST">
