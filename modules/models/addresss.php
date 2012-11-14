@@ -9,14 +9,14 @@ class Address_Model extends Model
 
     public function get_attribute($attribute){
       $result = $this->db->query("Select ".$attribute." FROM addresses");
-      $result = $this->db->selectField("",MYSQL_ASSOC);
+      $result = $this->db->fetch(MYSQL_ASSOC);
       return  $result;
     }
 
     public function exist_attribute($attribute, $value){
       $value = "\"".$value."\"";
       $result = $this->db->query("Select ".$attribute." FROM addresses WHERE ".$attribute."=".$value);
-      $result = $this->db->selectField("",MYSQL_ASSOC);
+      $result = $this->db->fetch(MYSQL_ASSOC);
       if(count($result) > 0){
         return TRUE;
       }else{
@@ -35,8 +35,8 @@ class Address_Model extends Model
       if($this->db->query("INSERT INTO addresses (address, city, province, country, postal_code) VALUES(".$insert.");")){
         $new = $this->db->getLastInsertId();
         $new = $this->db->query("Select * FROM addresses WHERE id=".$new);
-        $new = $this->db->selectField("",MYSQL_ASSOC);
-        return $new;
+        $new = $this->db->fetch(MYSQL_ASSOC);
+        return $new[0];
       }else{
           if($this->db->getErrorId() == 1062)
           {//1062 = duplicate

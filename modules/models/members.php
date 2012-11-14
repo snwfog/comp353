@@ -7,16 +7,10 @@ class Member_Model extends Model
         parent::__construct();
     }
 
-    public function create_member($username, $password, $password2,
-        $address_id, $visitor_id, $avatar_url)
-    {
-        //to do
-    }
-
     public function get_attribute($attribute)
     {
         $this->db->query("Select " . $attribute . " FROM members");
-        $result = $this->db->selectField("",MYSQL_ASSSOC);
+        $result = $this->db->fetch(MYSQL_ASSSOC);
         return $result;
     }
 
@@ -24,7 +18,7 @@ class Member_Model extends Model
     {
         $value = "\"" . $value . "\"";
         $this->db->query("Select " . $attribute . " FROM members WHERE " . $attribute . "=" . $value);
-        $result = $this->db->selectField("",MYSQL_ASSOC);
+        $result = $this->db->fetch(MYSQL_ASSOC);
         if (count($result) > 0)
         {
             return TRUE;
@@ -33,6 +27,29 @@ class Member_Model extends Model
         {
             return FALSE;
         }
+    }
+
+
+    public function create_member($username, $password, $address_id, $visitor_id, $registration_controller){
+      $username = "\"".$username."\"";
+      $password = "\"".sha1($password)."\"";
+      $address_id = "\"".$address_id."\"";
+      $visitor_id = "\"".$visitor_id."\"";
+      $insert = array($username, $password, $address_id, $visitor_id);
+      $insert = implode(",", $insert);
+      if($this->db->query("INSERT INTO members (username, password, address_id, visitor_id) VALUES(".$insert.");")){
+        $new = $this->db->getLastInsertId();
+        $new = $this->db->query("Select * FROM addresses WHERE id=".$new);
+        $new = $this->db->fetch(MYSQL_ASSOC);
+        return $new;
+      }else{
+          if($this->db->getErrorId() == 1062)
+          {//1062 = duplicate
+              array_push($registration_controller->data["errors"], "User name exists");
+          }
+          $registration_controller->display("registration.twig", $registration_controller->data);
+      }
+
     }
 
 }
