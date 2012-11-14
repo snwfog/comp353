@@ -9,6 +9,8 @@ class Email_Model extends Model
 
     public function setEmail($email, $member_id)
     {
+
+
         $email_id = $this->getEmailId($email);
 
         if (empty($email_id))
