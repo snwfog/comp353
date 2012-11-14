@@ -11,9 +11,6 @@ class Index_Controller extends Controller
         else
         {
             $this->display('index.twig');
-
-            $emails = new Email_Model;
-            $emails->setEmail("charles@charlescy.com", 3);
         }
     }
 }
