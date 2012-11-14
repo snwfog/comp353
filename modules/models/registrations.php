@@ -15,7 +15,7 @@ class Registration_Model extends Model
     public function get_attribute($attribute)
     {
         $this->db->query("Select " . $attribute . " FROM members");
-        $result = $this->db->get();
+        $result = $this->db->selectField("",MYSQL_ASSSOC);
         return $result;
     }
 
@@ -23,7 +23,8 @@ class Registration_Model extends Model
     {
         $value = "\"" . $value . "\"";
         $this->db->query("Select " . $attribute . " FROM members WHERE " . $attribute . "=" . $value);
-        if (count($this->db->get()) > 0)
+        $result = $this->db->selectField("",MYSQL_ASSOC);
+        if (count($result) > 0)
         {
             return TRUE;
         }

@@ -24,7 +24,7 @@ class Registration_Controller extends Controller implements IRedirectable{
         $this->check_form($_POST);
 
       }else{
-          $this->display("registration.twig", $this->data);
+        $this->display("registration.twig", $this->data);
       }
     }
 
@@ -42,7 +42,7 @@ class Registration_Controller extends Controller implements IRedirectable{
       }
 
       if(count($this->data["errors"])>0){
-            $this->display("registration.twig", $this->data);
+        $this->display("registration.twig", $this->data);
       }else{
         $address_instance = $addressModel->create_address($_POST["address"], $_POST["city"], $_POST["province"], $_POST["country"], $_POST["postal_code"], $this);
         print_r($address_instance);

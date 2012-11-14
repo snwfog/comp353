@@ -2,21 +2,21 @@
 
 class Address_Model extends Model
 {
-    protected $db;
     public function __construct() {
-        $this->db = Database::getInstance();
+        parent::__construct();
     }
 
 
     public function get_attribute($attribute){
-      $result = $this->get("Select ".$attribute." FROM addresses");
+      $result = $this->db->query("Select ".$attribute." FROM addresses");
+      $result = $this->db->selectField("",MYSQL_ASSOC);
       return  $result;
     }
 
     public function exist_attribute($attribute, $value){
       $value = "\"".$value."\"";
-      $result = $this->get("Select ".$attribute." FROM addresses WHERE ".$attribute."=".$value);
-
+      $result = $this->db->query("Select ".$attribute." FROM addresses WHERE ".$attribute."=".$value);
+      $result = $this->db->selectField("",MYSQL_ASSOC);
       if(count($result) > 0){
         return TRUE;
       }else{
@@ -30,19 +30,19 @@ class Address_Model extends Model
       $province = "\"".$province."\"";
       $country = "\"".$country."\"";
       $postal_code = "\"".$postal_code."\"";
-      $this->db->setFetchMode(2); //This may cause error if db class is singleton
       $insert = array($address, $city, $province, $country, $postal_code);
       $insert = implode(",", $insert);
-      if($this->set("INSERT INTO addresses (address, city, province, country, postal_code) VALUES(".$insert.");")){
-        echo "b";
-        $new = $this->db->id();
-        $new = $this->get("Select * FROM addresses WHERE id=".$new);
+      if($this->db->query("INSERT INTO addresses (address, city, province, country, postal_code) VALUES(".$insert.");")){
+        $new = $this->db->getLastInsertId();
+        $new = $this->db->query("Select * FROM addresses WHERE id=".$new);
+        $new = $this->db->selectField("",MYSQL_ASSOC);
         return $new;
       }else{
-          if($this->db->error_number() == 1062){//1062 = duplicate
+          if($this->db->getErrorId() == 1062)
+          {//1062 = duplicate
               array_push($registration_controller->data["errors"], "Address Already Exist!");
-              $registration_controller->display("registration.twig", $registration_controller->data);
           }
+          $registration_controller->display("registration.twig", $registration_controller->data);
       }
 
     }
