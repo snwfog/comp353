@@ -1,47 +1,34 @@
 <?php
-class Registration_Controller extends Controller implements IRedirectable
-{
-    public function __construct(array $args)
-    {
-        //Check if there are form data
-        if (isset($_POST[]){
-       }
-        else{
-            $this->display("registration_form.html",$this->params);
-        }
+
+class Registration_Controller extends Controller implements IRedirectable{
+    private $data = array("errors" => array(), "form" => array());
+
+    public function __construct(array $args){
+      if(isset($_POST["registration_form"])){
+        $this->data["form"] = $_POST;
+        $this->check_form($_POST);
+
+      }else{
+          $this->display("registration.twig", $this->data);
+      }
     }
 
-//private $params = array();
-//    public function __construct(array $data){
-//        $this->params = $data;
-//        $class_methods = get_class_methods($this);
-//        if(isset($this->params["controller"])){
-//            $method = trim(urldecode($this->params["controller"]), "\"");
-//            if (in_array($method, $class_methods)){
-//                $this::$method();
-//            }else{
-//                echo "no such methods";
-//            }
-//        }
-//    }
-//
-//    public function main_login(){
-//      $this->display("main_login.html",$this->params);
-//    }
-//
-//    public function login_user(){
-//       $loginModel = new Login_Model;
-//       $loginModel->get_user();
-//        //notfinished
-//    }
-//
-//    public function register(){
-//        if (count($_POST) !== 0){
-//          $loginModel = new Login_Model;
-//
-//        }else{
-//
-//        }
-//    }
+    public function check_form($form){
+      $registrationModel = new Registration_Model();
 
+      if($_POST["password1"] == "" && $_POST["password2"] == ""){
+        array_push($this->data["errors"], "Passwords is empty!");
+      }elseif($_POST["password1"] !== $_Post["password2"]){
+        array_push($this->data["errors"], "Confirm password is different!");
+      }
+      if($registrationModel->exist_attribute("username",$_POST["username"])){
+        array_push($this->data["errors"], "Username Exist!");
+      }
+
+      if(count($this->data["errors"])>0){
+            $this->display("registration.twig", $this->data);
+      }else{
+      }
+    }
 }
+?>
