@@ -64,6 +64,7 @@ require_once('renderer.php');
  */
 require_once('libs/mysqli.class.php');
 require_once('database.php');
+require_once('model.php');
 
 /*------------------------------------------------------------------------------
 /* Load super class for controllers from which every controller must extends

@@ -1,15 +1,8 @@
 <?php
 
-class Session_Model
+class Session_Model extends Model
 {
-    private $db;
-
     private $table = "test_sessions";
-
-    public function __construct()
-    {
-        $this->db = Database::getInstance();
-    }
 
     public function setSession($username, $password)
     {
