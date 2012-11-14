@@ -120,15 +120,6 @@ class DB
 	}
 
     /**
-     * A syntax sugar overloaded sql set function
-     */
-    public function set($SQL)
-    {
-        $this->query($SQL);
-    }
-
-
-    /**
 	 * @desc	Get the results
 	 *
 	 * @param	<str|int> $field Select a single field, or leave blank to select all.
