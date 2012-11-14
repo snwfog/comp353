@@ -30,7 +30,7 @@ abstract class Model
 			for ($i = 1; $i < count($what); $i++)
 			{
 				$where_stmt .= " AND ";
-				$where_stmt .= "$what[$i] = '$where[$i]'"
+				$where_stmt .= "$what[$i] = '$where[$i]'";
 			}
 		}
 		else
@@ -47,7 +47,7 @@ abstract class Model
         return empty($result) ? FALSE : $result;
     }
 	
-	protected functiong getUnique($where, $what, $select, $table)
+	protected function getUnique($where, $what, $select, $table)
 	{
         $result = $this->getAll($where, $what, $select, $table);
 		return empty($result[0]) ? FALSE : $result[0];
