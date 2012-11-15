@@ -8,7 +8,9 @@
  *                      TO WORK IN ANOTHER SERVER
  *                                ~ ~ ~ ~
  *
- *
+ * More reading materials for transaction and even better sql handling:
+ * http://forum.codecall.net/topic/44392-php-5-mysqli-prepared-statements/#axzz2CAUU8CJP
+ * http://stackoverflow.com/questions/4381644/capture-error-and-continue-when-inserting-into-a-unique-column
  * -----------------------------------------------------------------------------
  */
 

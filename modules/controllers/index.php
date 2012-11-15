@@ -10,7 +10,13 @@ class Index_Controller extends Controller
         }
         else
         {
-            $this->display('index.twig');
+            $data = array
+            (
+                "title" => "Auction Max",
+                "specifier" => "Visitor"
+            );
+
+            $this->display('index.twig', $data);
         }
     }
 }
