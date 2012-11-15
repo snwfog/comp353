@@ -7,20 +7,19 @@ class Member_Controller extends Controller implements IRedirectable
         // Check for login and session
         // parent::__construct();
 
-        $e = "asdfasdfasdfasdf@asdfdfdfdfdddd.com";
+        $e = "donchoa@gmail.com";
 
         $email = new Email_Model;
-	$email_id = $email->getIdByEmail($e);
+	    $email_id = $email->getIdByEmail($e);
 
 		if (!isset($email_id))
         {
             $email_id = $email->setEmailAndGetId($e, 2);
         }
 
-	$restitched = $email->getEmailById($email_id);
-        echo $restitched;
+	    $restitched = $email->getEmailById($email_id);
         $avatar = new Avatar_Model;
-	$avatar_url = $avatar->getGravatarURL($restitched);
+	    $avatar_url = $avatar->getGravatarURL($restitched);
 
         $data = array
         (
