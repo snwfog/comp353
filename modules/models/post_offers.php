@@ -31,8 +31,8 @@ if (isset($_POST['description']) && issset($_POST['price']))
 	Description:<br> 
 	<textarea name="description" id="description "rows="6" cols="30"></textarea><br><br>
 	Price: <input type="text" name="price" id="price"><br><br>
-	Image: <form action= "upload.php" method="POST" enctype="multipart/form-data">
-			<input type="image_url" name="image_url" id="image_url"><br><br>
+	Image: <form action="upload.php" method="POST" enctype="multipart/form-data">
+			<input type="file" name="file" id="image_url"><br><br>
 			</form>
 	<input type="submit" value="Submit">
 	
