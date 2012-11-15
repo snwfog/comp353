@@ -5,17 +5,6 @@ class Email_Model extends Model
     public function __construct()
     {
         parent::__construct();
-
-        $result = $this->getColumn
-        (
-            array("id", "username"),
-            "username",
-            "snw",
-            "test_sessions"
-        );
-
-        print_r($result);
-
     }
 
     public function setEmailAndGetId($email, $member_id)
@@ -23,115 +12,94 @@ class Email_Model extends Model
         list($name, $domain) = explode("@", $email);
         list($domain, $top_level_domain) = explode(".", $domain);
 
-        $tld_id = $this->getTopLevelDomain($top_level_domain, "name");
-        if (empty($tld_id))
-        {
+        $tld_id = $this->getTopLevelDomain("id", "name", $top_level_domain);
+        if (isset($tld_id))
+            $tld_id = Helper::getIndex($tld_id[0], "id");
+        else
             $tld_id = $this->setTopLevelDomainAndGetId($top_level_domain);
-        }
 
-        $domain_id = $this->getDomain($domain, "name");
-        if (empty($domain_id))
-        {
+        $domain_id = $this->getDomain("id", "name", $domain);
+        if (isset($domain_id))
+            $domain_id = Helper::getIndex($domain_id[0], "id");
+        else
             $domain_id = $this->setDomainAndGetId($domain);
-        }
 
-        $query = "INSERT INTO emails (name
-                    , member_id
-                    , domain_id
-                    , top_level_domain_id
-                  ) VALUES ('$name'
-                    , '$member_id'
-                    , '$domain_id'
-                    , '$tld_id')";
+		// Prepare the data
+		$value = array($name, $member_id, $domain_id, $tld_id);
+		$attribute = array('name', 'member_id', 'domain_id', 'top_level_domain_id');
+		$table = "emails";
 
-        // if success then database insert was okay.
-        // else if not success, there is some sql error that will be shown.
-        $success = $this->db->query($query);
-
-        // If insert is success, get the id
-        return $this->db->getLastInsertId();
+		return $this->setRowAndGetId($value, $attribute, $table);
     }
 
     public function getEmailById($id)
     {
-        // Check if this id exists
-        $query = "SELECT * FROM emails WHERE id='$id'";
-        $mysqli_raw = $this->db->query($query);
-        $result = $this->db->fetch();
+        $result = $this->getUnique(ALL, "id", $id, "emails");
 
-        if (empty($result))
-            return FALSE;
-        else
+        if (isset($result))
         {
             // Restitches the email
             // Since email from id is unique, assume email is at index 0
-            $name = $result[0]['name'];
-            $domain = $this->getDomain($result[0]['domain_id'], "id", "name");
-            $tld = $this->getTopLevelDomain($result[0]['top_level_domain_id'], "id", "name");
+            $name = $result['name'];
+            $domain = Helper::getFirstIndex($this->getDomain("name", "id",
+                $result['domain_id']), "name");
+
+            $tld = Helper::getFirstIndex($this->getTopLevelDomain("name", "id",
+                $result['top_level_domain_id']), "name");
 
             return "$name@$domain.$tld";
         }
     }
 
-    public function getIdByEmail($email, $field = "id")
+    public function getIdByEmail($email)
     {
         list($name, $domain) = explode("@", $email);
         list($domain, $top_level_domain) = explode(".", $domain);
 
-        $top_level_domain_id = $this->getTopLevelDomain($top_level_domain, "name");
+		// The dump way
+		$top_level_domain_id = Helper::getIndex($this->getUnique("id", "name",
+			$top_level_domain, "top_level_domains"), "id");
 
-        $domain_id = $this->getDomain($domain, "name");
+		$domain_id = Helper::getIndex($this->getUnique("id", "name", $domain, "domains"), "id");
 
-        $query = "SELECT id
-                  FROM emails
-                  WHERE name='$name'
-                    AND domain_id = '$domain_id'
-                    AND top_level_domain_id = '$top_level_domain_id'";
+		if (!isset($top_level_domain_id) || !isset($domain_id))
+			return NULL;
 
-        $mysqli_raw = $this->db->query($query);
-        $result = $this->db->fetch($field);
+		$select = "id";
+		$where = array("name", "domain_id", "top_level_domain_id");
+		$what = array($name, $domain_id, $top_level_domain_id);
+		$table = "emails";
 
-        return empty($result) ? FALSE : $result;
-    }
+		$mysqli_result = $this->getUnique($select, $where, $what, $table);
+
+		// The smart way
+		// Maybe later...
+		return Helper::getIndex($mysqli_result, "id");
+	}
 
     /**
-     * SELECT $select FROM $table WHERE $what = $where
-     *
+     * <pre>SELECT $select FROM $table WHERE $where = $what</pre>
+	 * <pre>getAll($select, $where, $what, $table)</pre>
      */
-    public function getTopLevelDomain($where, $what, $select = "id")
+    public function getTopLevelDomain($select, $where, $what, $table = "top_level_domains")
     {
-        return $this->get($where, $what, $select, "top_level_domains");
+        return $this->getAll($select, $where, $what, $table);
     }
 
     public function setTopLevelDomainAndGetId($top_level_domain)
     {
-        $query = "INSERT INTO top_level_domains (name)
-                  VALUES ('$top_level_domain')";
-
-        // if success then database insert was okay.
-        // else if not success, there is some sql error that will be shown.
-        $success = $this->db->query($query);
-
-        // If insert is success, get the id
-        return $this->db->getLastInsertId();
+        return $this->setRowAndGetId($top_level_domain, "name", "top_level_domains");
     }
 
 
-    public function getDomain($where, $select, $select_field = "id")
+    public function getDomain($select, $where, $what, $table = "domains")
     {
-        return $this->get($where, $select, $select_field, "domains");
+        return $this->getAll($select, $where, $what, $table);
     }
+
 
     public function setDomainAndGetId($domain)
     {
-        $query = "INSERT INTO domains (name)
-                  VALUES ('$domain')";
-
-        // If success then database insert was okay.
-        // else if not success, there is some sql error that will be shown.
-        $success = $this->db->query($query);
-
-        // If insert is success, get the id
-        return $this->db->getLastInsertId();
+		return $this->setRowAndGetId($domain, "name", "domains");
     }
 }

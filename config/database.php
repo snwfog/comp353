@@ -11,8 +11,12 @@
  *
  * -----------------------------------------------------------------------------
  */
+
+define("ALL", "*");
+
 class Database
 {
+
 	/**-------------------------------------------------------------------------
 	 * Database configuration variables.
 	 * Replace with appropriate database information during deployment or
@@ -113,7 +117,7 @@ class Database
      * @param int $fetchMode
      * @return array
      */
-    public function fetch($fetchMode = MYSQL_BOTH)
+    public function fetch($fetchMode = MYSQL_ASSOC)
     {
         $data = array();
 

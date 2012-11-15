@@ -80,6 +80,12 @@ require_once('redirectable.php');
 require_once('session.php');
 
 /**-----------------------------------------------------------------------------
+ * Load the helper file, which contains bunch of non-oop functions.
+ * -----------------------------------------------------------------------------
+ */
+ require_once('helper.php');
+
+/**-----------------------------------------------------------------------------
  * Bootstrap classes loading for MODELS and CONTROLLERS only.
  * -----------------------------------------------------------------------------
  */
