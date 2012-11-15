@@ -7,10 +7,9 @@ class Registration_Controller extends Controller implements IRedirectable{
     private $credit_number;
     private $credit_expire;
     private $credit_verification;
-    private $address_instance;
-    private $visitor_instance;
 
     public function __construct(array $args){
+
       if(isset($_POST["registration_form"])){
         $this->password1 = $_POST["password1"];
         $this->password2 = $_POST["password2"];
@@ -51,26 +50,33 @@ class Registration_Controller extends Controller implements IRedirectable{
       $memberModel = new Member_Model();
       $addressModel = new Address_Model();
       $visitorModel = new Visitor_Model();
-      if(!isset($this->address_instance)){
-        $this->address_instance =
-              $addressModel->create_address(
+
+      $address_instance =
+            $addressModel->create_address(
                                             $_POST["address"],
                                             $_POST["city"], 
                                             $_POST["province"], 
                                             $_POST["country"], 
                                             $_POST["postal_code"], 
                                             $this
-                                           );
-      }
-      if(!isset($this->visitor_instance)){
-        $this->visitor_instance = 
+                                         );
+      print_r($address_instance);
+      $visitor_instance =
               $visitorModel->create_visitor(
                                             $_POST["first_name"],
                                             $_POST["last_name"], 
                                             $_POST["phone_number"],
                                             $this
                                            );
-      }
+
+      $member_instance =
+              $memberModel->create_member(
+                                            $_POST["username"],
+                                            $_POST["password1"],
+                                            $address_instance["id"],
+                                            $visitor_instance["id"],
+                                            $this
+                                           );
     }
 }
 ?>
