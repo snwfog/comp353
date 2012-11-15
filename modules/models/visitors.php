@@ -32,13 +32,33 @@ class Visitor_Model extends Model
       $join_date = "CURDATE()";
       $insert = array($f_name, $l_name, $phone_number, $join_date);
       $insert = implode(",", $insert);
-      $this->db->query("Select * FROM visitors WHERE phone_number=".$phone_number);
+      
+      $this->db->query("SELECT *
+                        FROM  `visitors`
+                        JOIN members ON members.visitor_id = visitors.id
+                        WHERE first_name=$f_name AND last_name=$l_name AND phone_number=$phone_number");
       $result = $this->db->fetch(MYSQL_ASSOC);
       if (count($result) == 1)
       {
-          return $result[0];
-      }else
-      {
+        array_push($registration_controller->data["errors"], "First name, last name, phone number in use!");
+        $registration_controller->display("registration.twig", $this->data);
+        exit;
+      }
+
+      $this->db->query("SELECT *
+                        FROM  `visitors`
+                        WHERE NOT EXISTS (
+                                          SELECT *
+                                          FROM  `members`
+                                          WHERE members.visitor_id = visitors.id
+                                          )
+                        AND first_name=$f_name AND last_name=$l_name AND phone_number=$phone_number"
+                       );
+      $result = $this->db->fetch(MYSQL_ASSOC);
+      if(count($result) == 1){
+        return $result[0];
+      }
+      else{
           $this->db->query("INSERT INTO visitors (first_name, last_name, phone_number, join_date) VALUES (".$insert.");");
           $result = $this->db->fetch(MYSQL_ASSOC);
           return $result[0];

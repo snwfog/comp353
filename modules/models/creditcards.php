@@ -47,8 +47,8 @@ class CreditCard_Model extends Model
           }
           $registration_controller->display("registration.twig", $registration_controller->data);
       }
-      }
+   }
 
-    }
+
 }
 ?>

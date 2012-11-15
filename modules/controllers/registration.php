@@ -4,18 +4,12 @@ class Registration_Controller extends Controller implements IRedirectable{
     public $data = array("errors" => array(), "form" => array());
     private $password1;
     private $password2;
-    private $credit_number;
-    private $credit_expire;
-    private $credit_verification;
 
     public function __construct(array $args){
 
       if(isset($_POST["registration_form"])){
         $this->password1 = $_POST["password1"];
         $this->password2 = $_POST["password2"];
-        $this->credit_number =$_POST["credit_number"];
-        $this->credit_expire =$_POST["credit_expire"];
-        $this->credit_verification = $_POST["credit_verification"];
         $_POST["password1"]= "";
         $_POST["password2"]= "";
         $_POST["credit_number"]= "";
@@ -50,17 +44,8 @@ class Registration_Controller extends Controller implements IRedirectable{
       $memberModel = new Member_Model();
       $addressModel = new Address_Model();
       $visitorModel = new Visitor_Model();
+      $creditcardModel = new CreditCard_Model();
 
-      $address_instance =
-            $addressModel->create_address(
-                                            $_POST["address"],
-                                            $_POST["city"], 
-                                            $_POST["province"], 
-                                            $_POST["country"], 
-                                            $_POST["postal_code"], 
-                                            $this
-                                         );
-      print_r($address_instance);
       $visitor_instance =
               $visitorModel->create_visitor(
                                             $_POST["first_name"],
@@ -68,6 +53,16 @@ class Registration_Controller extends Controller implements IRedirectable{
                                             $_POST["phone_number"],
                                             $this
                                            );
+
+      $address_instance =
+            $addressModel->create_address(
+                                            $_POST["address"],
+                                            $_POST["city"], 
+                                            $_POST["province"], 
+                                            $_POST["country"], 
+                                            $_POST["postal_code"],
+                                            $this
+                                         );
 
       $member_instance =
               $memberModel->create_member(
@@ -77,6 +72,9 @@ class Registration_Controller extends Controller implements IRedirectable{
                                             $visitor_instance["id"],
                                             $this
                                            );
+
+
+
     }
 }
 ?>

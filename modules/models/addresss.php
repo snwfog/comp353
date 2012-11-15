@@ -34,15 +34,11 @@ class Address_Model extends Model
       $insert = implode(",", $insert);
       if($this->db->query("INSERT INTO addresses (address, city, province, country, postal_code) VALUES(".$insert.");")){
         $new = $this->db->getLastInsertId();
-        $new = $this->db->query("Select * FROM addresses WHERE id=".$new);
+        $this->db->query("Select * FROM addresses WHERE id=".$new);
         $new = $this->db->fetch(MYSQL_ASSOC);
         return $new[0];
       }else{
-          if($this->db->getErrorId() == 1062)
-          {//1062 = duplicate
-              array_push($registration_controller->data["errors"], "Address Already Exist!");
-          }
-          $registration_controller->display("registration.twig", $registration_controller->data);
+         //error handling
       }
 
     }
