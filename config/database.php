@@ -15,6 +15,7 @@
  */
 
 define("ALL", "*");
+define("ENCRYPYION_TYPE", "sha256");
 
 class Database
 {
@@ -46,7 +47,8 @@ class Database
     private $sql;
     private $mysqli_result;
 
-	private function __construct() {
+	private function __construct()
+    {
         $this->mysqli = new mysqli
         (
             self::$dbconfig['host'],

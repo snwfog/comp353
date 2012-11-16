@@ -6,11 +6,11 @@ abstract class Controller
     const REDIRECT_ERROR = "modules/views/static/error.html";
     const REDIRECT_INDEX = "index.php";
 
-    protected $session;
+    protected static $session;
 
     public function __construct()
     {
-        if (!(isset($this->session) && $this->session->isValid()))
+        if (!(isset(self::$session) && self::$session->isValid()))
             header("Location: " . self::REDIRECT_INDEX);
         // Else must be a valid session
     }

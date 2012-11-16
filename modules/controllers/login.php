@@ -11,7 +11,7 @@ class Login_Controller extends Controller implements IRedirectable
             //$password = hash('sha256', $_POST['password']);
             $password = $_POST['password'];
 
-            $this->session = new Session($username, $password);
+            self::$session = new Session($username, $password);
 
             parent::__construct();
         }
