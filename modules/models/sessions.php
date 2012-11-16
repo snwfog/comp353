@@ -7,7 +7,7 @@ class Session_Model extends Model
         parent::__construct();
     }
 
-    private $table = "test_sessions";
+    private $table = "sessions";
 
     public function getSessionId($member_id)
     {

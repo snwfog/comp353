@@ -10,10 +10,12 @@ class Login_Controller extends Controller implements IRedirectable
             $username = $_POST['username'];
             //$password = hash('sha256', $_POST['password']);
             $password = $_POST['password'];
-
+     
             self::$session = new Session($username, $password);
 
             parent::__construct();
+
+            $this->display("member.twig");
         }
         else
         {

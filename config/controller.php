@@ -10,9 +10,17 @@ abstract class Controller
 
     public function __construct()
     {
-        if (!(isset(self::$session) && self::$session->isValid()))
+        // Check if we invoke making a session
+        if (isset(self::$session))
+        {
+            self::$session->validateSession();
+            if (!self::$session->isValid())
+                header("Location: " . self::REDIRECT_INDEX);
+        }
+        else
+        {
             header("Location: " . self::REDIRECT_INDEX);
-        // Else must be a valid session
+        }
     }
 
     public function display($file, $data = array())

@@ -11,8 +11,6 @@ class Session
 
     public function __construct($username, $password)
     {
-        session_start();
-
         // Create a new session model ready to insert session variable
         $this->session_model = new Session_Model();
         // Create a member model to access member information
@@ -23,7 +21,7 @@ class Session
 //        $this->password = hash('sha256', $password);
     }
 
-    public function isValid()
+    public function validateSession()
     {
         // First get the member id see if its a proper member
         $member_id = $this->member_model->getUserId(
@@ -32,22 +30,44 @@ class Session
         $this->member_id = Helper::getIndex($member_id, "id");
 
         if (!isset($this->member_id))
-            return FALSE;
+            $this->valid_session = FALSE;
+        else
+        {   
+            $this->valid_session = TRUE;
 
-        $this->valid_session = TRUE;
+            // Set all session for this member to expire
+            $this->session_model->setAllExpire($this->member_id);
 
-        // Set all session for this member to expire
-        $this->session_model->setAllExpire($this->member_id);
+            // Create a new session and get an unique session id
+            $this->session_id = $this->session_model->generateNewSession(
+                $this->member_id);
 
-        // Create a new session and get an unique session id
-        $this->session_id = $this->session_model->generateNewSession($this->member_id);
+        }
+    }
 
-        return TRUE;
+    public function isValid()
+    {
+        return $this->valid_session;
     }
 
     public function isLogin()
     {
         return $this->valid_session;
+    }
+
+    public function who()
+    {
+        return $this->member_id;
+    }
+
+    public function which()
+    {
+        return $this->session_id;
+    }
+
+    public function startSession()
+    {
+        session_start();
     }
 
     public function endSession()
@@ -60,11 +80,7 @@ class Session
 
         $this->session_id = NULL;
         $this->member_id = NULL;
-    }
-
-    public function __destruct()
-    {
-        $this->endSession();
+        
         session_destroy();
     }
 }
