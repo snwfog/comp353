@@ -10,13 +10,12 @@ class Login_Controller extends Controller implements IRedirectable
         if (isset($_POST['username']) && isset($_POST['password']))
         {
             $username = $_POST['username'];
-            //$password = hash(ENCRYPTION_TYPE, $_POST['password']);
-            $password = $_POST['password'];
-            
+            $password = hash(ENCRYPTION_TYPE, $_POST['password']);
+
             $session = new Session($username, $password);
 
             $this->verifySession($session);
-            
+
             parent::__construct();
 
             $this->redirect("index.php");

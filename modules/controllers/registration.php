@@ -49,8 +49,10 @@ class Registration_Controller extends Controller implements IRedirectable
         else
         {
             $this->register_member();
-            
-            
+            session_start();
+            $session = new Session($this->data["form"]["username"], hash(ENCRYPTION_TYPE, $this->password1));
+            $this->verifySession($session);
+            $this->redirect("index.php?member");
         }
     }
     
@@ -67,6 +69,7 @@ class Registration_Controller extends Controller implements IRedirectable
             $visitor_instance = $visitorModel->create_visitor($_POST["first_name"], $_POST["last_name"], $_POST["phone_number"], $this);
             $address_instance = $addressModel->create_address($_POST["address"], $_POST["city"], $_POST["province"], $_POST["country"], $_POST["postal_code"], $this);
             $member_instance = $memberModel->create_member($_POST["username"], $this->password1, $email_instance, $address_instance["id"], $visitor_instance["id"], $this);
+            return $member_instance;
         }else{
             array_push($this->data["errors"], "Email Taken!");
             $this->date["form"]["email"] = NULL;

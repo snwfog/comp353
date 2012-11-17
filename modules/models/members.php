@@ -44,8 +44,7 @@ class Member_Model extends Model
     public function create_member($username, $password, $email_id, $address_id, $visitor_id, $registration_controller)
     {
         $username   = "\"" . $username . "\"";
-        $password = "\"" . $password . "\"";
-        //$password   = "\"" . hash(ENCRYPTION_TYPE, $password) . "\"";
+        $password   = "\"" . hash(ENCRYPTION_TYPE, $password) . "\"";
         $address_id = "\"" . $address_id . "\"";
         $visitor_id = "\"" . $visitor_id . "\"";
         $insert     = array(
