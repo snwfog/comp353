@@ -1,6 +1,6 @@
 <?
 
-if (isset($_POST['first_name']) && issset($_POST['last_name']) && isset($_POST['email'] && isset($_POST['text'])))
+if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email'] && isset($_POST['text'])))
 {
 	$first_name=$_POST['first_name'];
 	$last_name=$_POST['last_name'];
