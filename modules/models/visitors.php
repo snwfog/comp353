@@ -52,7 +52,7 @@ class Visitor_Model extends Model
         if (count($result) == 1)
         {
             array_push($registration_controller->data["errors"], "First name, last name, phone number in use!");
-            $registration_controller->display("registration.twig", $this->data);
+            $registration_controller->display("registration.twig", $registration_controller->data);
             exit;
         }
         

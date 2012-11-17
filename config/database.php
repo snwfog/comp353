@@ -15,7 +15,7 @@
  */
 
 define("ALL", "*");
-define("ENCRYPYION_TYPE", "sha256");
+define("ENCRYPTION_TYPE", "sha256");
 
 class Database
 {
