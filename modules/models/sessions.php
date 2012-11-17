@@ -38,7 +38,7 @@ class Session_Model extends Model
 
     public function generateNewSession($member_id)
     {
-        $session_hash = hash(ENCRYPYION_TYPE, date("Y-m-d H:i:s"));
+        $session_hash = hash(ENCRYPTION_TYPE, date("Y-m-d H:i:s"));
 
         $attributes = array("member_id", "session", "expire");
         $values = array($member_id, $session_hash, "0");
