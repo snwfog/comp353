@@ -7,7 +7,7 @@ class Email_Model extends Model
         parent::__construct();
     }
 
-    public function setEmailAndGetId($email, $member_id)
+    public function setEmailAndGetId($email)
     {
         list($name, $domain) = explode("@", $email);
         list($domain, $top_level_domain) = explode(".", $domain);
@@ -25,8 +25,8 @@ class Email_Model extends Model
             $domain_id = $this->setDomainAndGetId($domain);
 
 		// Prepare the data
-		$value = array($name, $member_id, $domain_id, $tld_id);
-		$attribute = array('name', 'member_id', 'domain_id', 'top_level_domain_id');
+		$value = array($name, $domain_id, $tld_id);
+		$attribute = array('name', 'domain_id', 'top_level_domain_id');
 		$table = "emails";
 
 		return $this->setRowAndGetId($value, $attribute, $table);
