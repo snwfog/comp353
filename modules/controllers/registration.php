@@ -62,8 +62,9 @@ class Registration_Controller extends Controller implements IRedirectable
         $visitor_instance = $visitorModel->create_visitor($_POST["first_name"], $_POST["last_name"], $_POST["phone_number"], $this);
         
         $address_instance = $addressModel->create_address($_POST["address"], $_POST["city"], $_POST["province"], $_POST["country"], $_POST["postal_code"], $this);
-        
-        $member_instance = $memberModel->create_member($_POST["username"], $_POST["password1"], $address_instance["id"], $visitor_instance["id"], $this);   
+        print_r($address_instance);
+        print_r($visitor_instance);
+        //$member_instance = $memberModel->create_member($_POST["username"], $_POST["password1"], $address_instance["id"], $visitor_instance["id"], $this);
     }
 }
 ?>

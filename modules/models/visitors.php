@@ -72,8 +72,10 @@ class Visitor_Model extends Model
         else
         {
             $this->db->query("INSERT INTO visitors (first_name, last_name, phone_number, join_date) VALUES (" . $insert . ");");
-            $result = $this->db->fetch(MYSQL_ASSOC);
-            return $result[0];
+            $new = $this->db->getLastInsertId();
+            $this->db->query("Select * FROM visitors WHERE id=" . $new);
+            $new = $this->db->fetch(MYSQL_ASSOC);
+            return $new[0];
         }
         
         
