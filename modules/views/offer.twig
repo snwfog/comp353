@@ -1,0 +1,14 @@
+{% extends 'static/base.twig' %}
+
+<form action="offer.php" method="POST">
+    <input type="text" name="title" placeholder="Title" />
+    <select>
+        {% for offer_type in offer_types %}
+            <option value="{{ offer_type }}">{{ offer_type|capitalize }}</option>
+        {% endfor %}
+    </select>
+    <input type="text" name="price" placeholder="Price"
+    <textarea name="description"></textarea>
+    <input type="submit" value="Post Offer" />
+    {#<a id="offer-submit-button" class="button">Post Offer</a>#}
+</form>
