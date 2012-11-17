@@ -1,7 +1,7 @@
 <?php
-$name = $_FILES['file']['name'];
-$tmp_name = $_FILES['file']['tmp_name'];
-
+//$name = $_FILES['file']['name'];
+//$tmp_name = $_FILES['file']['tmp_name'];
+/*
 if (isset($name))
 {
 
@@ -18,7 +18,7 @@ if (isset($name))
 		echo 'Please choose a file.';
 	}
 }
-
+*/
 //-------Security-File uploading-----------
 if (isset($_FILES['upload'])) 
 {
@@ -29,10 +29,10 @@ if (isset($_FILES['upload']))
 
 	if(in_array($ext, $allowed_exts) == false)
 	{
-		errors[] = 'You can upload only images.';
+		$errors[] = 'You can upload only images.';
 	}
 
-	if($FILES['upload']['size'] > 10000000)
+	if($_FILES['upload']['size'] > 10000000)
 	{
 
 		$errors[] = 'The file was too big';
@@ -41,7 +41,7 @@ if (isset($_FILES['upload']))
 
 	if(empty($errors))
 	{
-		move_uploaded_file($_FILES['upload']['temp_name'], 'files/{$_FILES['upload']['name']}');
+		move_uploaded_file($_FILES['upload']['tmp_name'], "files/{$_FILES['upload']['name']}");
 		//to get ONLY the extention of the file uploaded
 
 	}
@@ -50,34 +50,42 @@ if (isset($_FILES['upload']))
 
 
 
-$error = $_FILES['file']['error'];
+//$error = $_FILES['file']['error'];
 
 ?>
 
 
 
+<!DOCTYPE html>
 <html>
 
-<?php
-	if(isset($errors))
-	{
-		if(empty($errors))
-		{
-			echo '<a href="files/', $_FILES['upload']['name'], '" >View Image</a>'; 
-		}
-		else
-		{
-			foreach($errors as $error)
-			{
-				echo $error;
-			}
-		}
-	}
-?>
 
-<form action= "upload.php" method="POST" enctype="multipart/form-data">
-	<input type="file" name="file"><br><br>
-	<input type="submit" value="Submit">
+<body>
+	<div>
+		<?php
+			if(isset($errors))
+			{
+				if(empty($errors))
+				{
+					echo '<a href="files/', $_FILES['upload']['name'], '" >View Image</a>'; 
+				}
+				else
+				{
+					foreach($errors as $error)
+					{
+						echo $error;
+					}
+				}
+			}
+		?>
+	</div>
+
+<form action= "" method="POST" enctype="multipart/form-data">
+	<input type="file" name="upload"><br><br>
+	<input type="submit" value="Upload">
 </form>
+
+</body>
+
 
 </html>
