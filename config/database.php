@@ -30,7 +30,7 @@ class Database
 	(
 		'host' 	=> 'localhost',
 		'user' 	=> 'root',
-		'pass' 	=> 'root',
+		'pass' 	=> 'root', 
 		'database' => 'comp353'
 	);
 
