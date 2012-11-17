@@ -2,8 +2,13 @@
 
 {% block content %}
 
-    <h1>Hi, Welcome to Auction Max, Visitor</h1>
-    <p>To login, click <a href="index.php?login">here</a>.</p>
+    <h1>Hi, Welcome to Auction Max, {{ specifier }}</h1>
+    {% if not is_logged_in %}
+        <p>To login, click <a href="index.php?login">here</a>.</p>
+    {% else %}
+        <p>You are already logged in, click <a href="index.php?login&logout=1">
+            here</a> to logout.</p>
+    {% endif %}
     <p>To register, click <a href="index.php?registration">here</a>.</p>
     <p>To go to the member page (currently without login), click <a
             href="index.php?member">here</a>.</p>

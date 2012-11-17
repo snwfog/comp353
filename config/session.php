@@ -41,7 +41,6 @@ class Session
             // Create a new session and get an unique session id
             $this->session_id = $this->session_model->generateNewSession(
                 $this->member_id);
-
         }
     }
 
@@ -67,7 +66,12 @@ class Session
 
     public function startSession()
     {
-        session_start();
+        if (!session_id())
+            session_start();
+
+        // Assign session variables
+        $_SESSION['owner_id'] = $this->member_id;
+        $_SESSION['session_id'] = $this->session_id;
     }
 
     public function endSession()

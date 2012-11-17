@@ -6,20 +6,27 @@ abstract class Controller
     const REDIRECT_ERROR = "modules/views/static/error.html";
     const REDIRECT_INDEX = "index.php";
 
-    protected static $session;
+    /**
+     * The data array, you can use it, or you don't have to use it.
+     */
+    protected $data = array();
 
-    public function __construct()
+    public function __construct(Session $session)
     {
         // Check if we invoke making a session
-        if (isset(self::$session))
+        if (isset($session))
         {
-            self::$session->validateSession();
-            if (!self::$session->isValid())
-                header("Location: " . self::REDIRECT_INDEX);
+            $session->validateSession();
+            if (!$session->isValid())
+                $this->redirect(self::REDIRECT_INDEX);
+            else
+            {
+                $session->startSession();
+            }
         }
         else
         {
-            header("Location: " . self::REDIRECT_INDEX);
+            $this->redirect(self::REDIRECT_INDEX);
         }
     }
 
@@ -28,6 +35,35 @@ abstract class Controller
         Renderer::getInstance()->display($file, $data);
     }
 
+    public function isValidSession()
+    {
+        return (isset($_SESSION['session_id'])) ? TRUE : FALSE;
+    }
+
+    public function getSessionId()
+    {
+        return (isset($_SESSION['session_id'])) ? $_SESSION['session_id'] :
+            NULL;
+    }
+
+    public function getMemberId()
+    {
+        return (isset($_SESSION['member_id'])) ? $_SESSION['member_id'] : NULL;
+    }
+
+    public function endSession()
+    {
+        if (session_id())
+            session_destroy();
+    }
+
+    public function startSession()
+    {
+        if (!session_id())
+        {
+            session_start();
+        }
+    }
     /**-------------------------------------------------------------------------
      * Redirect a controller to another controller.
      * Such as in the case where the user is not logged in, hence
