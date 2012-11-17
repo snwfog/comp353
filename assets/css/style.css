@@ -2,7 +2,14 @@ h1.title {
     font: 20;
     font-family: 'Diplomata', cursive;
     text-align: center;
+  background-color: #0000ff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#0000ff), to(#999999)); /* Safari 4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #0000ff, #999999); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, #0000ff, #999999); /* Firefox 3.6-15 */
+  background-image:      -o-linear-gradient(top, #0000ff, #999999); /* Opera 11.10-12.00 */
+  background-image:         linear-gradient(to bottom, #0000ff, #999999); /* Firefox 16+, IE10, Opera 12.50+ */
 }
+
 h2.mostRecent {
     font: 20;
     font-family: "Verdana", Times, serif;
