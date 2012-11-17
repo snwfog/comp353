@@ -3,10 +3,8 @@
 {% block content %}
     <h1>Member Login</h1>
     <form action="index.php?login" method="POST">
-    	<input type="text" name="username" length="20" placeholder="Username"
-               value="{{ username|capitalize }}"/>
-    	<input type="password" name="password" length="20"
-               placeholder="Password" />
+	<input type="text" name="username" placeholder="Username" />
+	<input type="password" name="password" placeholder="Password" />
         <input type="submit" value="Login" />
     	{#<a id="login-submit-button" class="button">Login</a>#}
     </form>
