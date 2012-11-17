@@ -15,7 +15,9 @@ class Login_Controller extends Controller implements IRedirectable
      
             $session = new Session($username, $password);
 
-            parent::__construct($session);
+            $this->verifySession($session);
+            
+            parent::__construct();
 
             $this->redirect("index.php");
         }
