@@ -1,0 +1,11 @@
+#!/bin/zsh
+# This shell script will delete my old database comp353 and create a new# 
+# one and load the latest DDL from the path so I don't have to always 
+# manually delete database entry.
+/Applications/MAMP/Library/bin/mysql --auto-rehash -uroot -proot comp353 <<EOF
+DROP DATABASE comp353;
+CREATE DATABASE comp353;
+USE comp353;
+source /Users/snw/Dropbox/prog/php/comp353/libs/sql-ddl.sql
+EOF
+

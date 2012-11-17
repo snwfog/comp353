@@ -44,7 +44,8 @@ class Member_Model extends Model
     public function create_member($username, $password, $email_id, $address_id, $visitor_id, $registration_controller)
     {
         $username   = "\"" . $username . "\"";
-        $password   = "\"" . hash(ENCRYPTION_TYPE, $password) . "\"";
+        $password = "\"" . $password . "\"";
+        //$password   = "\"" . hash(ENCRYPTION_TYPE, $password) . "\"";
         $address_id = "\"" . $address_id . "\"";
         $visitor_id = "\"" . $visitor_id . "\"";
         $insert     = array(
@@ -55,6 +56,7 @@ class Member_Model extends Model
             $visitor_id
         );
         $insert     = implode(",", $insert);
+        
         if ($this->db->query("INSERT INTO members (username, password, email_id, address_id, visitor_id) VALUES(" . $insert . ");")) {
             $new = $this->db->getLastInsertId();
             $new = $this->db->query("Select * FROM addresses WHERE id=" . $new);
