@@ -11,22 +11,22 @@ abstract class Controller
      */
     protected $data = array();
 
-    public function __construct(Session $session)
+    public function __construct()
+    {
+        $this->startSession();
+        
+        if (!$this->isValidSession())
+            $this->redirect(self::REDIRECT_INDEX);
+    }
+
+    public function verifySession(Session $session)
     {
         // Check if we invoke making a session
         if (isset($session))
         {
             $session->validateSession();
-            if (!$session->isValid())
-                $this->redirect(self::REDIRECT_INDEX);
-            else
-            {
+            if ($session->isValid())
                 $session->startSession();
-            }
-        }
-        else
-        {
-            $this->redirect(self::REDIRECT_INDEX);
         }
     }
 
