@@ -9,27 +9,31 @@ h2.mostRecent {
     font-family: "Verdana", Times, serif;
     text-align: center;
 }
-#header {
+/*#header {
     width: auto;
     text-align: center padding: auto;
    
     margin-left: auto;
     margin-right: auto;
     width: auto;
-}
+}*/
 #search {
+  margin-left: 217px;
+  margin-right: 217px;
   background-color: #a5a5b3;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#a5a5b3), to(#999999)); /* Safari 4+, Chrome */
   background-image: -webkit-linear-gradient(top, #a5a5b3, #999999); /* Chrome 10+, Safari 5.1+, iOS 5+ */
   background-image:    -moz-linear-gradient(top, #a5a5b3, #999999); /* Firefox 3.6-15 */
   background-image:      -o-linear-gradient(top, #a5a5b3, #999999); /* Opera 11.10-12.00 */
   background-image:         linear-gradient(to bottom, #a5a5b3, #999999);
-  padding-bottom: 10px
 }
 
-#searchbutton {
-    padding-top: 10px
+#magnifying
+{
+    position: relative;
+    top: 5px;
 }
+
 #content {
     width: 900px;
     height: 900px;
@@ -38,5 +42,9 @@ h2.mostRecent {
     margin-left: auto;
     margin-right: auto;
 }
-div.username { text-align: right }
+
+p.footer{
+    text-align: center
+}
+
 
