@@ -108,4 +108,11 @@ class Offer_Model extends Model
 
         return (empty($result)) ? NULL : $result[0];
     }
+
+
+    public function deleteOffer($offer_id)
+    {
+        $query = $this->db->query("UPDATE offers SET offers.expire = 1 WHERE offers.id=$offer_id;");
+        return($query);
+    }
 }

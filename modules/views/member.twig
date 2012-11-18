@@ -29,6 +29,7 @@
                 </select>
                 <li><textarea type="text" name="comment" cols="30" rows="6"></textarea>
                 <li><input type="hidden" name="rate" value="TRUE" />
+                <form action="index.php?member&id={{ owner.id }}" method="POST">
                 <li><input type="submit" value="Bid" />
             </ul>
         </form>
@@ -50,14 +51,18 @@
             <th>Delete
         </tr>
         {% for offer in offers %}
-        <tr>
-            <td><a href="index.php?offer&id={{ offer.id }}">View</a>
-            <td><a href="#">{{ offer.type }}</a>
-            <td><a href="#">{{ offer.category }}</a>
-            <td>{{ offer.title }}
-            <td>$ {{ offer.price|number_format('2', '.', ' ') }}
-            <td><a href="#">x</a>
-        </tr>
+            {% if(offer.expire == 0)%}
+                  <tr>
+                      <td><a href="index.php?offer&id={{ offer.id }}">View</a>
+                      <td><a href="#">{{ offer.type }}</a>
+                      <td><a href="#">{{ offer.category }}</a>
+                      <td>{{ offer.title }}
+                      <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+                      <td><form action="index.php?offer&delete={{ offer.id }}" method="POST">
+                              <input type="submit" value="Delete Offer" />
+                          </form>
+                  </tr>
+            {% endif %}
         {% endfor %}
         </table>
     {% else %}

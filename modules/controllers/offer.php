@@ -9,10 +9,9 @@ class Offer_Controller extends Controller implements IRedirectable
         $this->startSession();
 
         // Check if the offer id is set
+        $m_offer = new Offer_Model();
         if (isset($args['id']))
         {
-
-            $m_offer = new Offer_Model();
             $this->offer = $m_offer->getOffer($args['id']);
 
             if ($this->offer)
@@ -55,6 +54,12 @@ class Offer_Controller extends Controller implements IRedirectable
             {
                 $this->redirect(self::REDIRECT_ERROR);
             }
+        }
+        elseif (isset($args['delete']))
+        {
+          if($m_offer->deleteOffer($args['delete'])){
+            $this->back();
+          }
         }
         else
         {
