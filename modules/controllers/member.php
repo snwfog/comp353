@@ -22,6 +22,7 @@ class Member_Controller extends Controller implements IRedirectable
             // If id is not set, we are looking at the owner of the session
             $this->id = $this->getMemberId();
             $this->data["private"] = VIEW_MODE_PRIVATE;
+            $this->data["is_owner"] = TRUE;
         }
 
         $email = new Email_Model;

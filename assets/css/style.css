@@ -1,54 +1,71 @@
-#title {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-h2.mostRecent {
-    font: 20;
-    font-family: "Verdana", Times, serif;
-    text-align: center;
-}
-#search {
-  margin-left: 217px;
-  margin-right: 217px;
-  background-color: #a5a5b3;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#a5a5b3), to(#999999)); /* Safari 4+, Chrome */
-  background-image: -webkit-linear-gradient(top, #a5a5b3, #999999); /* Chrome 10+, Safari 5.1+, iOS 5+ */
-  background-image:    -moz-linear-gradient(top, #a5a5b3, #999999); /* Firefox 3.6-15 */
-  background-image:      -o-linear-gradient(top, #a5a5b3, #999999); /* Opera 11.10-12.00 */
-  background-image:         linear-gradient(to bottom, #a5a5b3, #999999);
-}
-
-#magnifying
+ul li
 {
-    position: relative;
-    top: 5px;
+	margin: 10px 0px 10px 0px;
 }
-
-#content {
-
-    font-family: 'Trocchi', serif;
-   
-    width: 900px;
-    height: 900px;
-    text-align: center padding-bottom: 25px;
-    margin: 0 auto; 
-    margin-left: auto;
-    margin-right: auto;
-
-    /* gradients */
-    background: -webkit-gradient(linear, left top, left bottom, 
-    color-stop(0%, white), color-stop(15%, #F7F7F7), color-stop(100%, #F5F5F5)); 
-    background: -moz-linear-gradient(top, white 0%, #F7F7F7 55%, #F5F5F5 130%);
-}
-
-p.footer{
-    text-align: center
-}
-
 
 table, table th, table td
 {
     border: 1px solid black;
 }
+
+#header ul
+{
+	overflow: hidden;
+}
+
+#header ul li
+{
+    float: left;
+    margin: 0px 20px 0px 20px;
+}
+
+#header #magnifying
+{
+    position: relative;
+    top: 5px;
+
+}
+
+#title 
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*h2.mostRecent {*/
+    /*font: 20;*/
+    /*font-family: "Verdana", Times, serif;*/
+    /*text-align: center;*/
+/*}*/
+/*#search {*/
+  /*margin-left: 217px;*/
+  /*margin-right: 217px;*/
+  /*background-color: #a5a5b3;*/
+  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#a5a5b3), to(#999999));  Safari 4+, Chrome*/
+  /*background-image: -webkit-linear-gradient(top, #a5a5b3, #999999);  Chrome 10+, Safari 5.1+, iOS 5+*/
+  /*background-image:    -moz-linear-gradient(top, #a5a5b3, #999999);  Firefox 3.6-15*/
+  /*background-image:      -o-linear-gradient(top, #a5a5b3, #999999);  Opera 11.10-12.00*/
+  /*background-image:         linear-gradient(to bottom, #a5a5b3, #999999);*/
+/*}*/
+
+/*#content {*/
+
+    /*font-family: 'Trocchi', serif;*/
+
+    /*width: 900px;*/
+    /*text-align: center padding-bottom: 25px;*/
+    /*margin: 0 auto;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+
+     /*gradients*/
+    /*background: -webkit-gradient(linear, left top, left bottom,*/
+    /*color-stop(0%, white), color-stop(15%, #F7F7F7), color-stop(100%, #F5F5F5));*/
+    /*background: -moz-linear-gradient(top, white 0%, #F7F7F7 55%, #F5F5F5 130%);*/
+/*}*/
+
+#footer{
+    text-align: center
+}
+

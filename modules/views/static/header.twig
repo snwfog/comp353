@@ -2,9 +2,27 @@
 
     <a href="index.php"><img id="title" src="assets/img/web/logo.png" alt="Auction Max"></a>
 
-	<form id="search" action="">
-		<input type="text" name="search" placeholder="Search" />
-        <a href=""><img id="magnifying" src="assets/img/web/searchbutton.png" alt="search" width="22" height="22"></a>
-	</form>
+    <ul>
+        <li>
+            <form id="search" action="">
+                <input type="text" name="search" placeholder="Search" />
+                <a href=""><img id="magnifying" src="assets/img/web/searchbutton.png" alt="search" width="22" height="22"></a>
+            </form>
+
+        </li>
+        {% if is_logged_in %}
+            <li><a href="index.php?member">Profile</a></li>
+            <li><a href="index.php?post">Post Offer</a></li>
+            <li><a href="index.php?login&logout=1">Logout</a></li>
+        {% else %}
+            <li><a href="index.php?login">Login</a></li>
+            <li><a href="index.php?registration">Register</a></li>
+        {% endif %}
+
+
+
+
+    </ul>
+
 
 {% endblock header %}

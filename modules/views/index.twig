@@ -1,24 +1,81 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
-    <h1>PLEASE RELOAD THE SQL-DDL IN LIBS FOLDER</h1>
-    <h1>I'VE MADE A LOT OF CHANGE - Charles</h1>
-    <h1>Hi, Welcome to Auction Max, {{ specifier }}</h1>
-    {% if not is_logged_in %}
-        <p>To login, click <a href="index.php?login">here</a>.</p>
-        <p>To register, click <a href="index.php?registration">here</a>.</p>
-    {% else %}
-        <p>You are already logged in, click <a href="index.php?login&logout=1">
-            here</a> to logout.</p>
 
-        <p>To post a new offer, click <a href="index.php?post">here</a>.</p>
-
-        <p>To go to the member page, click <a
-            href="index.php?member">here</a>.</p>
+    {% if hot_offers %}
+        <h1>Amazing Hot Offers Lesser Than ${{ hot_offer_threshold }}!</h1>
+        <table name="offer-table">
+            <tr>
+                <th>View
+                <th>Owner
+                <th>Type
+                <th>Category
+                <th>Title
+                <th>Price
+            </tr>
+            {% for offer in hot_offers %}
+                <tr>
+                    <td><a href="index.php?offer&id={{ offer.id }}">View</a>
+                    <td>
+                        {% if is_logged_in %}
+                            <a href="index.php?member&id={{ offer.owner_id }}">
+                                {{ offer.owner }}
+                            </a>
+                        {% else %}
+                            {{ offer.owner }}
+                        {% endif %}
+                    </td>
+                    <td><a href="#">{{ offer.type }}</a>
+                    <td><a href="#">{{ offer.category }}</a>
+                    <td>{{ offer.title }}
+                    <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+                </tr>
+            {% endfor %}
+        </table>
     {% endif %}
 
-    <p>If you cannot login, it is highly probable that you do not have the login database in your local MAMP/WAMP/XAMP SQL server. I have uploaded my latest SQL DDL file <a href="libs/sql-ddl.sql">here</a>. Grab it and import it in your local SQL database.</p>
+    <hr /><h1>Messages</h1>
+    <ul>
+        <li>Please reload the SQL-DDL in the libs folder.
+            As I have made a lot of changes. - Charles</li>
+        <li>If you cannot login, it is highly probable
+            that you do not have the login database in your
+            local MAMP/WAMP/XAMP SQL server. I have uploaded my
+            latest SQL DDL file <a href="libs/sql-ddl.sql">here</a>.
+            Grab it and import it in your local SQL database.</li>
+        <li>Finally, don't forget to change the database
+            information in the "config/database.php" file.</li>
+    </ul>
 
-    <p>Finally, don't forget to change the database information in the "config/database.php" file.</p>
-
+    {% if offers %}
+        <hr /><h1>All Offers</h1>
+        <table name="offer-table">
+            <tr>
+                <th>View
+                <th>Owner
+                <th>Type
+                <th>Category
+                <th>Title
+                <th>Price
+            </tr>
+            {% for offer in offers %}
+                <tr>
+                    <td><a href="index.php?offer&id={{ offer.id }}">View</a>
+                    <td>
+                        {% if is_logged_in %}
+                            <a href="index.php?member&id={{ offer.owner_id }}">
+                                {{ offer.owner }}
+                            </a>
+                        {% else %}
+                            {{ offer.owner }}
+                        {% endif %}
+                    </td>
+                    <td><a href="#">{{ offer.type }}</a>
+                    <td><a href="#">{{ offer.category }}</a>
+                    <td>{{ offer.title }}
+                    <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
 {% endblock content %}

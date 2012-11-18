@@ -14,11 +14,14 @@
 /* Define local or server side URL and path constants
 /*------------------------------------------------------------------------------
 */
-$baseURL = "http://".$_SERVER['HTTP_HOST'];
-$folderURL = str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+define('BASE_URL', "http://".$_SERVER['HTTP_HOST']);
+define('FOLDER_URL', str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']));
 
-define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . $folderURL);
-define('SITE_ROOT', $baseURL . $folderURL);
+//define('FOLDER_ROOT', '/groups/e/et_comp353_2/');
+define('FOLDER_ROOT', '/Applications/MAMP/htdocs/353/');
+
+define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . FOLDER_URL);
+define('SITE_ROOT', BASE_URL . FOLDER_URL);
 
 /**-----------------------------------------------------------------------------
  * Define project pathing constants.
@@ -99,6 +102,8 @@ function __autoload($className)
         $file = CONTROLLER_PATH . '/' . $filename . '.php';
     else if (preg_match('/' . MODEL_SUFFIX . '/i', $suffix))
         $file = MODEL_PATH . '/' . $filename . 's' . '.php'; // Note the "s"
+
+//    $absolute = FOLDER_ROOT . $file;
 
     if (file_exists($file))
         include_once($file);

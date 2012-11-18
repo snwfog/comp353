@@ -1,40 +1,66 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
+    <h1>Public Standing</h1>
+    <h3>Rating</h3>
 
-    <h2>Rating</h2>
+    <h3>Comments</h3>
 
-    <h2>Comments</h2>
+    {% if not is_owner %}
+        <hr />
+        <form action="index.php?member&id={{ owner.id }}" method="POST">
+            <ul>
+                <li><select name="rating">
+                    {#{% for value 1 to 10 %}#}
+                        {#<option value="{{ category.id }}">{{ </option>#}
+                    {#{% endfor %}#}
+                </select>
+                <li><input type="text" name="comment" placeholder="Comment" />
+                <li><input type="hidden" name="rate" value="TRUE" />
+                <li><input type="submit" value="Bid" />
+            </ul>
+        </form>
+    {% endif %}
 
     <h1>Information</h1>
-    <h1>{{ username }}</h1>
+    <h3>{{ username }}</h3>
     <img src="{{ avatar_url }}" alt="{{ username }}" />
 
     <hr /><h1>Offers</h1>
-    <table name="offer-table">
-    <tr>
-    	<th>View
-    	<th>Type
-    	<th>Category
-    	<th>Title
-    	<th>Price
-    	<th>Delete
-    </tr>
-    {% for offer in offers %}
-    <tr>
-    	<td><a href="index.php?offer&id={{ offer.id }}">View</a>
-    	<td><a href="#">{{ offer.type }}</a>
-    	<td><a href="#">{{ offer.category }}</a>
-    	<td>{{ offer.title }}
-    	<td>$ {{ offer.price|number_format('2', '.', ' ') }}
-    	<td><a href="#">x</a>
-    </tr>
-    {% endfor %}
-    </table>
+    {% if offers %}
+        <table name="offer-table">
+        <tr>
+            <th>View
+            <th>Type
+            <th>Category
+            <th>Title
+            <th>Price
+            <th>Delete
+        </tr>
+        {% for offer in offers %}
+        <tr>
+            <td><a href="index.php?offer&id={{ offer.id }}">View</a>
+            <td><a href="#">{{ offer.type }}</a>
+            <td><a href="#">{{ offer.category }}</a>
+            <td>{{ offer.title }}
+            <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+            <td><a href="#">x</a>
+        </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>You do not have any offers. Click <a href="index.php?post">here</a>
+        to start a new offer.</p>
+    {% endif %}
 
     {# Show bids only if it is private view mode #}
     {% if private %}
-    <hr /><h1>Bids</h1>
+        <hr /><h1>Bids</h1>
+        {% if bids %}
+        {% else %}
+            <p>You do not have any ongoing bids.</p>
+        {% endif %}
+
     {% endif %}
 
 

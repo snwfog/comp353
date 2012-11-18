@@ -4,8 +4,9 @@ class Offer_Controller extends Controller implements IRedirectable
 {
     public function __construct(array $args)
     {
-        parent::__construct();
-
+        // Commenting this code will disable login check
+        // parent::__construct();
+        $this->startSession();
 
         // Check if the offer id is set
         if (isset($args['id']))
@@ -43,8 +44,7 @@ class Offer_Controller extends Controller implements IRedirectable
                 // Check if the current viewer is the offer owner
                 // To disallow owner bidding on his own item
                 if ($this->getMemberId() == $owner["id"])
-//                    $this->data["is_owner"] = TRUE;
-
+                    $this->data["is_owner"] = TRUE;
 
                 // Prepare all the bidding information for this offer
                 $this->getBids($this->offer["id"]);

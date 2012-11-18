@@ -19,6 +19,7 @@
 {% if bids %}
 <table>
     <tr>
+        {% if is_owner %}<th>Accept</th>{% endif %}
         <th>Bidder</th>
         <th>Type</th>
         <th>Category</th>
@@ -27,6 +28,7 @@
     </tr>
     {% for bid in bids %}
         <tr>
+            {% if is_owner %}<td><a href="">Deal!</a></td>{% endif %}
             <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder }}</a></td>
             <td><a href="#">{{ bid.type }}</a></td>
             <td><a href="#">{{ bid.category }}</a></td>
