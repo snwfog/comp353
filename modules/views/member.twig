@@ -3,24 +3,41 @@
 {% block content %}
     <h1>Public Standing</h1>
     <h3>Rating</h3>
-    {% if rating %}
-        <h1>{{ rating }}</h1>
+    {% if avg_rating %}
+        <h1>{{ avg_rating }}</h1>
     {% else %}
         <h1>No rating</h1>
     {% endif %}
 
     <h3>Comments</h3>
     {% if comments %}
-
+        <table name="comment-table">
+            <tr>
+                <th>User
+                <th>Rating
+                <th>Comment
+            </tr>
+            {% for comment in comments %}
+                <tr>
+                    <td>
+                        <a href="index.php?member&id={{ comment.rater_id }}">
+                            {{ comment.rater }}
+                        </a>
+                    <td>{{ comment.rating }}</a>
+                    <td>{{ comment.comment }}</a>
+                </tr>
+            {% endfor %}
+        </table>
     {% else %}
         <p>This person currently has no comment, or has not made
         any transaction.</p>
     {% endif %}
 
 
-    {% if is_owner %}
+    {#{% if not is_owner and is_transact %}#}
+    {% if not is_owner %}
         <hr />
-        <form action="index.php?member&id={{ owner.id }}" method="POST">
+        <form action="index.php?member&id={{ id }}" method="POST">
             <ul>
                 <li><select name="rating">
                     {% for value in 1..10 %}
@@ -28,8 +45,9 @@
                     {% endfor %}
                 </select>
                 <li><textarea type="text" name="comment" cols="30" rows="6"></textarea>
-                <li><input type="hidden" name="rate" value="TRUE" />
-                <li><input type="submit" value="Bid" />
+                <li><input type="hidden" name="ratee_id" value={{ id }}></li>
+                <li><input type="hidden" name="feedback" value="TRUE" />
+                <li><input type="submit" value="Rate" />
             </ul>
         </form>
     {% endif %}
@@ -60,9 +78,11 @@
         </tr>
         {% endfor %}
         </table>
-    {% else %}
+    {% elseif is_owner %}
         <p>You do not have any offers. Click <a href="index.php?post">here</a>
         to start a new offer.</p>
+    {% else %}
+        <p>This member currently has no ongoing offers.</p>
     {% endif %}
 
     {# Show bids only if it is private view mode #}
@@ -74,6 +94,4 @@
         {% endif %}
 
     {% endif %}
-
-
 {% endblock content %}
