@@ -78,4 +78,15 @@ abstract class Controller
     {
         header("Location: $file");
     }
+
+    public function back()
+    {
+        if (isset($_SERVER["HTTP_REFERER"]))
+        {
+            $url_segments = explode("/", $_SERVER["HTTP_REFERER"]);
+            $redirect_uri = array_pop($url_segments);
+            header("Location: $redirect_uri");
+        }
+
+    }
 }

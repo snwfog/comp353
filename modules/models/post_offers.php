@@ -36,7 +36,8 @@ if (isset($_POST['description']) && isset($_POST['price']))
 <form action = "post_offers.php" method="POST" enctype="multipart/form-data">
 	Title: <input type="text" name="title"><br><br>
 	Description:<br> 
-	<textarea name="description" id="description" rows="6" cols="30"></textarea><br><br>
+	
+	<br><br>
 	Type: <select name="type">
 			<option value="goods" id="name"> Goods </option>
 			<option value="service" id="name"> Services </option>

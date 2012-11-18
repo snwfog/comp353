@@ -10,9 +10,32 @@
     <h1>{{ username }}</h1>
     <img src="{{ avatar_url }}" alt="{{ username }}" />
 
-    <h1>Offers</h1>
+    <hr /><h1>Offers</h1>
+    <table name="offer-table">
+    <tr>
+    	<th>View
+    	<th>Type
+    	<th>Category
+    	<th>Title
+    	<th>Price
+    	<th>Delete
+    </tr>
+    {% for offer in offers %}
+    <tr>
+    	<td><a href="index.php?offer&id={{ offer.id }}">View</a>
+    	<td><a href="#">{{ offer.type }}</a>
+    	<td><a href="#">{{ offer.category }}</a>
+    	<td>{{ offer.title }}
+    	<td>$ {{ offer.price|number_format('2', '.', ' ') }}
+    	<td><a href="#">x</a>
+    </tr>
+    {% endfor %}
+    </table>
 
-    <h1>Bids</h1>
+    {# Show bids only if it is private view mode #}
+    {% if private %}
+    <hr /><h1>Bids</h1>
+    {% endif %}
 
 
 {% endblock content %}

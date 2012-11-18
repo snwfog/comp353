@@ -1,8 +1,64 @@
 {% extends 'static/base.twig' %}
 
-<h1>{{ post.title }}</h1>
-<h3>{{ post.type }}</h3>
-<h3>{{ post.price }}</h3>
-<p>{{ post.description }}</p>
+{% block content %}
 
-<h1>{{ post.owner }}</h1>
+<table>
+    <tr><td colspan="2">{{ offer.title }}</td></tr>
+    <tr><td>{{ offer.type }}</td><td>{{ offer.category }}</td></tr>
+    <tr><td>Price:</td><td>{{ offer.price }}</td></tr>
+    <tr>
+        <td>Owner:</td>
+        <td><a href="index.php?member&id={{ owner.id }}">{{ owner.username }}</a>
+        </td>
+    </tr>
+    <tr><td colspan="2"><p>{{ offer.description }}</p></td></tr>
+    <tr><td colspan="2">DERPPPPP IMAGE</td></tr>
+</table>
+
+<hr /><h1>Bids</h1>
+{% if bids %}
+<table>
+    <tr>
+        <th>Bidder</th>
+        <th>Type</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Description</th>
+    </tr>
+    {% for bid in bids %}
+        <tr>
+            <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder }}</a></td>
+            <td><a href="#">{{ bid.type }}</a></td>
+            <td><a href="#">{{ bid.category }}</a></td>
+            <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
+            <td>{{ bid.description }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>There aren't currently any bid for this item.
+        Be the first one to make a bid!</p>
+{% endif %}
+
+{% if not is_owner %}
+<hr />
+<form action="index.php?offer&id={{ offer.id }}" method="POST">
+    <ul>
+        <li><select name="category">
+            {% for key, type in categories %}
+                <option disabled>--- {{ key|capitalize }} -----------</option>
+
+                {% for category in type %}
+                    <option value="{{ category.id }}">{{ category.name|capitalize }}</option>
+                {% endfor %}
+            {% endfor %}
+        </select>
+        <li><input type="text" name="price" placeholder="Price" />
+        <li><input type="text" name="description" placeholder="Description" />
+        <li><input type="hidden" name="bid" value="TRUE" />
+        <li><input type="submit" value="Bid" />
+    </ul>
+</form>
+{% endif %}
+
+{% endblock content %}

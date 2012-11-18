@@ -15,4 +15,27 @@ class Post_Model extends Model
 
 		return parent::setRowAndGetId($value, $attribute, $table);
 	}
+
+	public function getPostByMemberId($member_id)
+	{
+		$query = "SELECT member_id, 
+  					o.id AS id,
+  					t.name AS type,
+  					c.name AS category,
+ 					o.title AS title,
+  					o.price AS price
+  				  FROM posts p 
+    				INNER JOIN offers AS o 
+    					ON p.offer_id = o.id 
+   				 	INNER JOIN categories AS c 
+   				 		ON o.category_id = c.id
+    				INNER JOIN types AS t 
+    					ON c.type_id = t.id
+				  WHERE member_id = $member_id";
+
+		$result_object = $this->db->query($query);
+		$result = $this->db->fetch(MYSQLI_ASSOC);
+
+		return isset($result) ? $result : NULL;
+	}
 }
