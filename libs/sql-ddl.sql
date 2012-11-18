@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.25)
 # Database: comp353
-# Generation Time: 2012-11-18 21:20:14 +0000
+# Generation Time: 2012-11-18 22:39:03 +0000
 # ************************************************************
 
 
@@ -33,14 +33,15 @@ CREATE TABLE `addresses` (
   `country` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `postal_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='http://stackoverflow.com/questions/217945/can-i-have-multipl';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='http://stackoverflow.com/questions/217945/can-i-have-multipl';
 
 LOCK TABLES `addresses` WRITE;
 /*!40000 ALTER TABLE `addresses` DISABLE KEYS */;
 
 INSERT INTO `addresses` (`id`, `address`, `city`, `province`, `country`, `postal_code`)
 VALUES
-	(1,'123 Fake Street','Montreal','Quebec','Canada','H3H1P1');
+	(1,'123 Fake Street','Montreal','Quebec','Canada','H3H1P1'),
+	(2,'123 Real Street','Toronto','Ontario','Canada','8898934');
 
 /*!40000 ALTER TABLE `addresses` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -173,26 +174,6 @@ VALUES
 UNLOCK TABLES;
 
 
-# Dump of table comments
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `comments`;
-
-CREATE TABLE `comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `comment` text NOT NULL,
-  `member_id` int(11) NOT NULL,
-  `transaction_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_comments_transactions_idx` (`transaction_id`),
-  KEY `fk_comments_members_idx` (`member_id`),
-  CONSTRAINT `fk_comments_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_comments_transactions` FOREIGN KEY (`transaction_id`) REFERENCES `transacts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 # Dump of table credit_card_types
 # ------------------------------------------------------------
 
@@ -268,14 +249,15 @@ CREATE TABLE `emails` (
   KEY `fk_emails_top_level_domains` (`top_level_domain_id`),
   CONSTRAINT `fk_emails_domains` FOREIGN KEY (`domain_id`) REFERENCES `domains` (`id`),
   CONSTRAINT `fk_emails_top_level_domains` FOREIGN KEY (`top_level_domain_id`) REFERENCES `top_level_domains` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `emails` WRITE;
 /*!40000 ALTER TABLE `emails` DISABLE KEYS */;
 
 INSERT INTO `emails` (`id`, `name`, `domain_id`, `top_level_domain_id`)
 VALUES
-	(1,'donchoa',1,1);
+	(1,'donchoa',1,1),
+	(2,'donchoa11',1,1);
 
 /*!40000 ALTER TABLE `emails` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -287,18 +269,33 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `feedbacks`;
 
 CREATE TABLE `feedbacks` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `rater_id` int(11) NOT NULL,
   `ratee_id` int(11) NOT NULL,
   `rating` int(11) NOT NULL,
   `comment` text NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
   KEY `fk_feedbacks_members_raters` (`rater_id`),
   KEY `fk_feedbacks_members_ratees` (`ratee_id`),
-  CONSTRAINT `fk_feedbacks_members_raters` FOREIGN KEY (`rater_id`) REFERENCES `members` (`id`),
-  CONSTRAINT `fk_feedbacks_members_ratees` FOREIGN KEY (`ratee_id`) REFERENCES `members` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_feedbacks_members_ratees` FOREIGN KEY (`ratee_id`) REFERENCES `members` (`id`),
+  CONSTRAINT `fk_feedbacks_members_raters` FOREIGN KEY (`rater_id`) REFERENCES `members` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
+LOCK TABLES `feedbacks` WRITE;
+/*!40000 ALTER TABLE `feedbacks` DISABLE KEYS */;
+
+INSERT INTO `feedbacks` (`id`, `rater_id`, `ratee_id`, `rating`, `comment`)
+VALUES
+	(1,2,1,1,'asdfkasjdfklasjdlf\r\n'),
+	(2,2,1,3,'aasdfasdflakjsdlfjasldkf\r\naksdjflaksdjf'),
+	(3,2,1,9,'asdlfkjasdklfjaskldfj\r\nasdkfjasldkjf\r\nalskdjflkasdjf'),
+	(4,2,1,4,'alksdjflkasdf;lkajsdf\r\nasdlfkjaslkdfja\r\nlkasdjfklasjdklf'),
+	(5,2,1,6,'lkasdjfklasjdlfkjaskdlf\r\naskldfjaklsdjfkl;a\r\n;lasdjflkajsdklf\r\nkasdjfklasjdklfasdf'),
+	(6,1,2,1,'asdfasdfasdf');
+
+/*!40000 ALTER TABLE `feedbacks` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table member_reserves
@@ -345,14 +342,15 @@ CREATE TABLE `members` (
   CONSTRAINT `fk_members_emails` FOREIGN KEY (`email_id`) REFERENCES `emails` (`id`),
   CONSTRAINT `fk_members_addresses` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`),
   CONSTRAINT `fk_members_visitors` FOREIGN KEY (`visitor_id`) REFERENCES `visitors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
 
 INSERT INTO `members` (`id`, `username`, `password`, `email_id`, `address_id`, `visitor_id`, `avatar_url`)
 VALUES
-	(1,'snw','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,1,1,NULL);
+	(1,'snw','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,1,1,NULL),
+	(2,'fog','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',2,2,2,NULL);
 
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -432,28 +430,6 @@ VALUES
 UNLOCK TABLES;
 
 
-# Dump of table ratings
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `ratings`;
-
-CREATE TABLE `ratings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rate` int(1) NOT NULL,
-  `transaction_id` int(11) NOT NULL,
-  `member_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `id_idx` (`transaction_id`),
-  KEY `id_idx1` (`member_id`),
-  KEY `fk_ratings__idx` (`transaction_id`),
-  KEY `fk_ratings_members_idx` (`member_id`),
-  CONSTRAINT `fk_ratings_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ratings_transactions` FOREIGN KEY (`transaction_id`) REFERENCES `transacts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 # Dump of table sessions
 # ------------------------------------------------------------
 
@@ -467,7 +443,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_sessions_members_idx` (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
@@ -477,7 +453,10 @@ VALUES
 	(1,1,'28b49417d514d5a281f99d7bffdeb2ac880d30b1f3030b506cbce8a0546ab2d5',1),
 	(2,1,'1361753fad134688e205c2544a18331aa05a460aaabe0b6acda44542f6de4b20',1),
 	(3,1,'507504e8c0f58d329eabe5556acc76167c93f7e93004214ea511e0ec02cb7ae4',1),
-	(4,1,'8acecc82af19d4825e506d75017dae9d685def9bd1b6bd27f66abe3512c264f7',0);
+	(4,1,'8acecc82af19d4825e506d75017dae9d685def9bd1b6bd27f66abe3512c264f7',1),
+	(5,2,'fa9faa030bcaebe090e8ec7d3063f7d6b7c54f24b0baf424503d9e2c3ef3b5ea',1),
+	(6,1,'7f1238f9a49fb00530adb1d157ad78d5cf8d54807d18fed6d82bd113c75e7741',0),
+	(7,2,'6c3af288214e2ade20c8a32644831fc212692ac18c93528da6eeb8f8238ec85b',0);
 
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -585,14 +564,15 @@ CREATE TABLE `visitors` (
   `join_date` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `visitors_id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `visitors` WRITE;
 /*!40000 ALTER TABLE `visitors` DISABLE KEYS */;
 
 INSERT INTO `visitors` (`id`, `first_name`, `last_name`, `phone_number`, `join_date`)
 VALUES
-	(1,'Charles','Yang','5148826452','2012-11-17');
+	(1,'Charles','Yang','5148826452','2012-11-17'),
+	(2,'Charles','Yang','5148826454','2012-11-18');
 
 /*!40000 ALTER TABLE `visitors` ENABLE KEYS */;
 UNLOCK TABLES;
