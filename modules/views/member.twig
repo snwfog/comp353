@@ -3,8 +3,20 @@
 {% block content %}
     <h1>Public Standing</h1>
     <h3>Rating</h3>
+    {% if rating %}
+        <h1>{{ rating }}</h1>
+    {% else %}
+        <h1>No rating</h1>
+    {% endif %}
 
     <h3>Comments</h3>
+    {% if comments %}
+
+    {% else %}
+        <p>This person currently has no comment, or has not made
+        any transaction.</p>
+    {% endif %}
+
 
     {% if is_owner %}
         <hr />

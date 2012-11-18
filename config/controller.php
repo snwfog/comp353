@@ -17,6 +17,9 @@ abstract class Controller
         
         if (!$this->isValidSession())
             $this->redirect(self::REDIRECT_INDEX);
+
+        // If is logged in properly, set a global twig variable
+        $this->data["is_logged_in"] = TRUE;
     }
 
     public function verifySession(Session $session)
