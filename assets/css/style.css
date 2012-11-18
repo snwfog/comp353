@@ -9,14 +9,6 @@ h2.mostRecent {
     font-family: "Verdana", Times, serif;
     text-align: center;
 }
-/*#header {
-    width: auto;
-    text-align: center padding: auto;
-   
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-}*/
 #search {
   margin-left: 217px;
   margin-right: 217px;
@@ -35,12 +27,20 @@ h2.mostRecent {
 }
 
 #content {
+
+    font-family: 'Trocchi', serif;
+   
     width: 900px;
     height: 900px;
     text-align: center padding-bottom: 25px;
     margin: 0 auto; 
     margin-left: auto;
     margin-right: auto;
+
+    /* gradients */
+    background: -webkit-gradient(linear, left top, left bottom, 
+    color-stop(0%, white), color-stop(15%, #F7F7F7), color-stop(100%, #F5F5F5)); 
+    background: -moz-linear-gradient(top, white 0%, #F7F7F7 55%, #F5F5F5 130%);
 }
 
 p.footer{
