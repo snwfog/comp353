@@ -5,13 +5,17 @@
     <h1>Hi, Welcome to Auction Max, {{ specifier }}</h1>
     {% if not is_logged_in %}
         <p>To login, click <a href="index.php?login">here</a>.</p>
+        <p>To register, click <a href="index.php?registration">here</a>.</p>
     {% else %}
         <p>You are already logged in, click <a href="index.php?login&logout=1">
             here</a> to logout.</p>
-    {% endif %}
-    <p>To register, click <a href="index.php?registration">here</a>.</p>
-    <p>To go to the member page (currently without login), click <a
+
+        <p>To post a new offer, click <a href="index.php?post">here</a>.</p>
+
+        <p>To go to the member page, click <a
             href="index.php?member">here</a>.</p>
+    {% endif %}
+
     <p>If you cannot login, it is highly probable that you do not have the login database in your local MAMP/WAMP/XAMP SQL server. I have uploaded my latest SQL DDL file <a href="libs/sql-ddl.sql">here</a>. Grab it and import it in your local SQL database.</p>
 
     <p>Finally, don't forget to change the database information in the "config/database.php" file.</p>

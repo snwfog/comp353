@@ -1,4 +1,4 @@
-# ************************************************************
+﻿# ************************************************************
 # Sequel Pro SQL dump
 # Version 3408
 #
@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.25)
 # Database: comp353
-# Generation Time: 2012-11-17 09:30:12 +0000
+# Generation Time: 2012-11-18 00:23:21 +0000
 # ************************************************************
 
 
@@ -22,6 +22,8 @@
 
 # Dump of table addresses
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `addresses`;
 
 CREATE TABLE `addresses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -38,6 +40,8 @@ CREATE TABLE `addresses` (
 # Dump of table admins
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `admins`;
+
 CREATE TABLE `admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `member_id` int(11) NOT NULL,
@@ -53,6 +57,8 @@ CREATE TABLE `admins` (
 
 # Dump of table bids
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `bids`;
 
 CREATE TABLE `bids` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -76,6 +82,8 @@ CREATE TABLE `bids` (
 # Dump of table categories
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `categories`;
+
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type_id` int(11) NOT NULL,
@@ -83,12 +91,69 @@ CREATE TABLE `categories` (
   PRIMARY KEY (`id`),
   KEY `fk_categories_types` (`type_id`),
   CONSTRAINT `fk_categories_types` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+
+INSERT INTO `categories` (`id`, `type_id`, `name`)
+VALUES
+	(3,2,'Cars & Vehicles'),
+	(4,2,'Housing'),
+	(5,2,'Baby'),
+	(6,2,'Bikes'),
+	(7,2,'Boats'),
+	(8,2,'Books'),
+	(9,2,'Business'),
+	(10,2,'Computer'),
+	(11,2,'Household'),
+	(12,2,'Jewelry'),
+	(13,2,'Sporting'),
+	(14,2,'Tickets'),
+	(15,2,'Tools'),
+	(16,2,'Appliances'),
+	(17,2,'Arts'),
+	(18,2,'Auto'),
+	(19,2,'Cars'),
+	(20,2,'CD'),
+	(21,2,'Cellphone'),
+	(22,2,'Clothes'),
+	(23,2,'Electronics'),
+	(24,2,'Collectibles'),
+	(25,2,'Furniture'),
+	(26,2,'Motorcycles'),
+	(27,2,'Music Instruments'),
+	(28,2,'Photo'),
+	(29,2,'Video'),
+	(30,2,'Toys and Games'),
+	(31,2,'Video Gaming'),
+	(32,1,'Beauty'),
+	(33,1,'Computer'),
+	(34,1,'Creative'),
+	(35,1,'Cycle'),
+	(36,1,'Event'),
+	(37,1,'Financial'),
+	(38,1,'Legal'),
+	(39,1,'Lessons'),
+	(40,1,'Pet'),
+	(41,1,'Automotive'),
+	(42,1,'Farm and Garden'),
+	(43,1,'Household'),
+	(44,1,'Labor and Move'),
+	(45,1,'Real Estate'),
+	(46,1,'Skill and Trade'),
+	(47,1,'Therapeutic'),
+	(48,1,'Travel'),
+	(49,1,'Write');
+
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table comments
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `comments`;
 
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -108,6 +173,8 @@ CREATE TABLE `comments` (
 # Dump of table credit_card_types
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `credit_card_types`;
+
 CREATE TABLE `credit_card_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) NOT NULL,
@@ -118,6 +185,8 @@ CREATE TABLE `credit_card_types` (
 
 # Dump of table credit_cards
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `credit_cards`;
 
 CREATE TABLE `credit_cards` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -140,6 +209,8 @@ CREATE TABLE `credit_cards` (
 # Dump of table domains
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `domains`;
+
 CREATE TABLE `domains` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
@@ -151,6 +222,8 @@ CREATE TABLE `domains` (
 
 # Dump of table emails
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `emails`;
 
 CREATE TABLE `emails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -169,6 +242,8 @@ CREATE TABLE `emails` (
 
 # Dump of table member_reserves
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `member_reserves`;
 
 CREATE TABLE `member_reserves` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -189,6 +264,8 @@ CREATE TABLE `member_reserves` (
 
 # Dump of table members
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `members`;
 
 CREATE TABLE `members` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -214,6 +291,8 @@ CREATE TABLE `members` (
 # Dump of table offers
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `offers`;
+
 CREATE TABLE `offers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -225,12 +304,14 @@ CREATE TABLE `offers` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_offers_categories` (`category_id`),
   CONSTRAINT `fk_offers_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
 
 # Dump of table posts
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `posts`;
 
 CREATE TABLE `posts` (
   `member_id` int(11) NOT NULL,
@@ -247,6 +328,8 @@ CREATE TABLE `posts` (
 
 # Dump of table ratings
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `ratings`;
 
 CREATE TABLE `ratings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -268,6 +351,8 @@ CREATE TABLE `ratings` (
 # Dump of table sessions
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `sessions`;
+
 CREATE TABLE `sessions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `member_id` int(11) NOT NULL,
@@ -283,6 +368,8 @@ CREATE TABLE `sessions` (
 # Dump of table top_level_domains
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `top_level_domains`;
+
 CREATE TABLE `top_level_domains` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -294,6 +381,8 @@ CREATE TABLE `top_level_domains` (
 
 # Dump of table transacts
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `transacts`;
 
 CREATE TABLE `transacts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -319,16 +408,30 @@ CREATE TABLE `transacts` (
 # Dump of table types
 # ------------------------------------------------------------
 
+DROP TABLE IF EXISTS `types`;
+
 CREATE TABLE `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `types` WRITE;
+/*!40000 ALTER TABLE `types` DISABLE KEYS */;
+
+INSERT INTO `types` (`id`, `name`)
+VALUES
+	(1,'Service'),
+	(2,'Good');
+
+/*!40000 ALTER TABLE `types` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table visitor_reserves
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `visitor_reserves`;
 
 CREATE TABLE `visitor_reserves` (
   `visitor_id` int(11) NOT NULL,
@@ -344,6 +447,8 @@ CREATE TABLE `visitor_reserves` (
 
 # Dump of table visitors
 # ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `visitors`;
 
 CREATE TABLE `visitors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
