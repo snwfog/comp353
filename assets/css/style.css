@@ -30,10 +30,10 @@ h2.mostRecent {
     height: 600px;
     text-align: center padding-bottom: 25px;
     margin: 0 auto;
-    border: 3px solid gray;
     margin-left: auto;
     margin-right: auto;
-    
+    -webkit-border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 0 1px #fff;
 }
 div.username { text-align: right }
 
