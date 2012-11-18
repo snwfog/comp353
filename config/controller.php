@@ -48,7 +48,7 @@ abstract class Controller
 
     public function getMemberId()
     {
-        return (isset($_SESSION['member_id'])) ? $_SESSION['member_id'] : NULL;
+        return (isset($_SESSION['owner_id'])) ? $_SESSION['owner_id'] : NULL;
     }
 
     public function endSession()
