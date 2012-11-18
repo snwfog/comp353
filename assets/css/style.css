@@ -1,4 +1,4 @@
-img.title {
+#title {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -9,7 +9,7 @@ h2.mostRecent {
     font-family: "Verdana", Times, serif;
     text-align: center;
 }
-div.header {
+#header {
     width: auto;
     text-align: center padding: auto;
     border: 5px solid gray;
@@ -17,7 +17,7 @@ div.header {
     margin-right: auto;
     width: auto;
 }
-form.search {
+#search {
   background-color: #a5a5b3;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#a5a5b3), to(#999999)); /* Safari 4+, Chrome */
   background-image: -webkit-linear-gradient(top, #a5a5b3, #999999); /* Chrome 10+, Safari 5.1+, iOS 5+ */
@@ -25,17 +25,15 @@ form.search {
   background-image:      -o-linear-gradient(top, #a5a5b3, #999999); /* Opera 11.10-12.00 */
   background-image:         linear-gradient(to bottom, #a5a5b3, #999999);
 }
-div.content {
-    width: auto;
+#content {
+    width: 700px;
+    height: 600px;
     text-align: center padding-bottom: 25px;
-    margin: 25px;
-    border: 5px solid gray;
-    margin-left: 500px;
-    margin-right: 500px;
-    width: auto;
+    margin: 0 auto;
+    border: 3px solid gray;
+    margin-left: auto;
+    margin-right: auto;
+    
 }
 div.username { text-align: right }
 
-#bigheader {
-	font-size: 50pt;
-}
