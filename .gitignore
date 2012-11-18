@@ -1,3 +1,4 @@
 modules/views/cache/*
+*.esproj
 !.gitignore
 !*.sql

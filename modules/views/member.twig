@@ -6,16 +6,16 @@
 
     <h3>Comments</h3>
 
-    {% if not is_owner %}
+    {% if is_owner %}
         <hr />
         <form action="index.php?member&id={{ owner.id }}" method="POST">
             <ul>
                 <li><select name="rating">
-                    {#{% for value 1 to 10 %}#}
-                        {#<option value="{{ category.id }}">{{ </option>#}
-                    {#{% endfor %}#}
+                    {% for value in 1..10 %}
+                        <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
                 </select>
-                <li><input type="text" name="comment" placeholder="Comment" />
+                <li><textarea type="text" name="comment" cols="30" rows="6"></textarea>
                 <li><input type="hidden" name="rate" value="TRUE" />
                 <li><input type="submit" value="Bid" />
             </ul>
