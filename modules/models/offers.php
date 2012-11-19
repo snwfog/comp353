@@ -21,7 +21,8 @@ class Offer_Model extends Model
             o.title AS title,
             o.price AS price,
             o.image_url AS image_url,
-            o.description AS description
+            o.description AS description,
+            expire
         FROM offers AS o
           INNER JOIN categories AS c
             ON o.category_id = c.id

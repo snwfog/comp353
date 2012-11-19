@@ -16,30 +16,34 @@
 </table>
 
 <hr /><h1>Bids</h1>
-{% if bids %}
-<table>
-    <tr>
-        {% if is_owner %}<th>Accept</th>{% endif %}
-        <th>Bidder</th>
-        <th>Type</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th>Description</th>
-    </tr>
-    {% for bid in bids %}
+{% if offer.expire == 0 %}
+    {% if bids%}
+    <table>
         <tr>
-            {% if is_owner %}<td><a href="">Deal!</a></td>{% endif %}
-            <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder }}</a></td>
-            <td><a href="#">{{ bid.type }}</a></td>
-            <td><a href="#">{{ bid.category }}</a></td>
-            <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
-            <td>{{ bid.description }}</td>
+            {% if is_owner %}<th>Accept</th>{% endif %}
+            <th>Bidder</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Description</th>
         </tr>
-    {% endfor %}
-</table>
+        {% for bid in bids %}
+            <tr>
+                {% if is_owner %}<td><a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}">Deal!</a></td>{% endif %}
+                <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder }}</a></td>
+                <td><a href="#">{{ bid.type }}</a></td>
+                <td><a href="#">{{ bid.category }}</a></td>
+                <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
+                <td>{{ bid.description }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>There aren't currently any bid for this item.
+            Be the first one to make a bid!</p>
+    {% endif %}
 {% else %}
-    <p>There aren't currently any bid for this item.
-        Be the first one to make a bid!</p>
+    <p> Offer is closed.</p>
 {% endif %}
 
 {% if not is_owner %}

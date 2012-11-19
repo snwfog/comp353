@@ -50,7 +50,7 @@ abstract class Controller
     }
 
     public function getMemberId()
-    {
+    {    
         return (isset($_SESSION['owner_id'])) ? $_SESSION['owner_id'] : NULL;
     }
 
