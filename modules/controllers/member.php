@@ -77,6 +77,6 @@ class Member_Controller extends Controller implements IRedirectable
     {
         $m_feedback = new Feedback_Model();
         $this->data["comments"] = $m_feedback->getFeedback($this->id);
-        $this->data["avg_rating"] = $m_feedback->getRating($this->id);
+        $this->data["avg_rating"] = intval(round($m_feedback->getRating($this->id)));
     }
 }

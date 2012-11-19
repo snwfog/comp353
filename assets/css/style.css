@@ -34,6 +34,16 @@ table, table th, table td
     margin-right: auto;
 }
 
+#content #earned-rating
+{
+    color: yellowgreen;
+}
+
+#content #unearned-rating
+{
+    color: lightgray;
+}
+
 /*h2.mostRecent {*/
     /*font: 20;*/
     /*font-family: "Verdana", Times, serif;*/
