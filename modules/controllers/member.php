@@ -50,6 +50,7 @@ class Member_Controller extends Controller implements IRedirectable
         $solds = $m_transact->getSoldTransactionByMemberId($this->getMemberId());
 
         $this->getFeedback();
+        $this->getOngoingBid();
 
         $public_info = $m_member->getPublicMemberInfo($this->id);
         $this->data["public_info"] = $public_info;
@@ -86,5 +87,11 @@ class Member_Controller extends Controller implements IRedirectable
         $m_feedback = new Feedback_Model();
         $this->data["comments"] = $m_feedback->getFeedback($this->id);
         $this->data["avg_rating"] = intval(round($m_feedback->getRating($this->id)));
+    }
+
+    private function getOngoingBid()
+    {
+        $m_bids = new Bid_Model();
+        $this->data["bids"] = $m_bids->getBidByMemberId($this->id);
     }
 }

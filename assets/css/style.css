@@ -34,12 +34,12 @@ table, table th, table td
     margin-right: auto;
 }
 
-#content #earned-rating
+#content .earned-rating
 {
     color: yellowgreen;
 }
 
-#content #unearned-rating
+#content .unearned-rating
 {
     color: lightgray;
 }

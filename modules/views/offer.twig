@@ -16,24 +16,37 @@
 </table>
 
 <hr /><h1>Bids</h1>
-{% if bids%}
+{% if bids %}
 <table>
     <tr>
-        {% if (is_owner and not( offer.expire)) %}<th>Accept</th>{% endif %}
+        {% if (is_owner and not( offer.expire)) %}
+            <th>Action</th>
+        {% else %}
+            <th>Status</th>
+        {% endif %}
         <th>Bidder</th>
         <th>Type</th>
         <th>Category</th>
         <th>Price</th>
         <th>Description</th>
-        <th>Status</th>
     </tr>
     {% for bid in bids %}
         <tr>
-            {% if ( is_owner  and not( offer.expire)) %}
+            {% if (is_owner and not (offer.expire)) %}
                 <td>
                     <a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}&bid_id={{bid.id}}">
                         Deal!
                     </a>
+                </td>
+            {% else %}
+                <td>
+                    {% if not transact.bid_id %}
+                        Available
+                    {% elseif bid.id == transact.bid_id  %}
+                        Winner
+                    {% else %}
+                        Loser
+                    {% endif %}
                 </td>
             {% endif %}
             <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder}}</a></td>
@@ -41,18 +54,11 @@
             <td><a href="#">{{ bid.category }}</a></td>
             <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
             <td>{{ bid.description }}</td>
-            <td>
-                  {% if not transact.bid_id %}
-                      in progress...
-                  {% elseif bid.id == transact.bid_id  %}
-                      WINNER
-                  {% else %}
-                      LOSER
-                  {% endif %}
-            </td>
         </tr>
     {% endfor %}
 </table>
+{% elseif is_owner %}
+    <p>No one is currently interested in this item.</p>
 {% else %}
     <p>There aren't currently any bid for this item.
         Be the first one to make a bid!</p>

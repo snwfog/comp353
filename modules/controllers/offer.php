@@ -8,6 +8,8 @@ class Offer_Controller extends Controller implements IRedirectable
         // parent::__construct();
         $this->startSession();
 
+        $this->data["is_logged_in"] = $this->isValidSession();
+
         // Check if the offer id is set
         $m_offer = new Offer_Model();
         if (isset($args['id']))
