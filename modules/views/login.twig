@@ -1,6 +1,7 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
+	<div id="login">
     <h1>Member Login</h1>
     <form action="index.php?login" method="POST">
 	<input type="text" name="username" placeholder="Username" />
@@ -8,4 +9,5 @@
         <input type="submit" value="Login" />
     	{#<a id="login-submit-button" class="button">Login</a>#}
     </form>
+    </div>
 {% endblock content %}

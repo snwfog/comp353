@@ -3,6 +3,7 @@
 {% block content %}
 
     {% if hot_offers %}
+    <div id="index">
         <h1>Amazing Hot Offers Lesser Than ${{ hot_offer_threshold }}!</h1>
         <table name="offer-table">
             <tr>
@@ -78,4 +79,5 @@
             {% endfor %}
         </table>
     {% endif %}
+    </div>
 {% endblock content %}
