@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="index.php?post" method="POST">
+<form action="index.php?post" method="POST" enctype="multipart/form-data">
 <ul>
     <li><input type="text" name="title" placeholder="Title" />
     <li><select name="category">
@@ -16,6 +16,7 @@
     </select>
     <li><input type="text" name="price" placeholder="Price" />
     <li><textarea name="description" rows="6" cols="30"></textarea>
+    <li><input type="file" name="image" placeholder="image_url"/>
     <li><input type="hidden" name="submit" value="TRUE" />
     <li><input type="submit" value="Post Offer" />
     {#<a id="offer-submit-button" class="button">Post Offer</a>#}
