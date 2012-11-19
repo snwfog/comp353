@@ -11,6 +11,10 @@ class Member_Controller extends Controller implements IRedirectable
         // Check for login and session
         parent::__construct();
 
+        // Load the member model
+        $m_member = new Member_Model();
+
+        // Check if we are making any feedbacks
         $this->checkForFeedback();
 
         if (isset($args['id']) && empty($args['id']))
@@ -28,6 +32,8 @@ class Member_Controller extends Controller implements IRedirectable
             $this->id = $this->getMemberId();
             $this->data["private"] = VIEW_MODE_PRIVATE;
             $this->data["is_owner"] = TRUE;
+            $private_info = $m_member->getPrivateMemberInfo($this->id);
+            $this->data["private_info"] = $private_info;
         }
 
         $m_email = new Email_Model;
@@ -45,14 +51,16 @@ class Member_Controller extends Controller implements IRedirectable
 
         $this->getFeedback();
 
-        $this->data["username"]= "Charles";
+        $public_info = $m_member->getPublicMemberInfo($this->id);
+        $this->data["public_info"] = $public_info;
         $this->data["title"]= "Member";
         $this->data["specifier"]= "Charles";
+
         $this->data["offers"] = $offers;
-        $this->data["avatar_url"] = "$avatar_url";
+        $this->data["avatar_url"] = $avatar_url;
         $this->data["id"] = $this->id;
-        $this->data["boughts"]=$boughts;
-        $this->data["solds"]=$solds;
+        $this->data["boughts"]= $boughts;
+        $this->data["solds"]= $solds;
 
         $this->display("member.twig", $this->data);
     }

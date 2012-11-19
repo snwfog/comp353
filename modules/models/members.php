@@ -24,17 +24,48 @@ class Member_Model extends Model
     public function getPublicMemberInfo($member_id)
     {
         // First check if the member exists
-        $members = $this->getAll(ALL, "member_id", $member_id, "members");
+        $members = $this->getAll(ALL, "id", $member_id, "members");
         if (count($members) > 1 || empty($members))
             return NULL;
         // Else this member must exists
-        $query = "SELECT * "
+        $query = "SELECT
+          m.username AS username,
+          v.join_date AS join_date
+        FROM visitors AS v
+          INNER JOIN members AS m ON m.visitor_id = v.id
+        WHERE m.id = $member_id";
 
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch(MYSQLI_ASSOC);
+
+        return empty($result) ? NULL : $result[0];
     }
 
     public function getPrivateMemberInfo($member_id)
     {
+        // First check if the member exists
+        $members = $this->getAll(ALL, "id", $member_id, "members");
+        if (count($members) > 1 || empty($members))
+            return NULL;
+        // Else this member must exists
+        $query = "SELECT
+          v.first_name AS first_name,
+          v.last_name AS last_name,
+          v.phone_number AS phone_number,
+          a.address AS address,
+          a.city AS city,
+          a.province AS province,
+          a.country AS country,
+          a.postal_code AS postal_code
+        FROM visitors AS v
+          INNER JOIN members AS m ON m.visitor_id = v.id
+          INNER JOIN addresses AS a ON m.address_id = a.id
+        WHERE m.id = $member_id";
 
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch(MYSQLI_ASSOC);
+
+        return empty($result) ? NULL : $result[0];
     }
 
     public function get_attribute($attribute)

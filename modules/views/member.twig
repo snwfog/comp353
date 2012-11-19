@@ -64,8 +64,54 @@
     {% endif %}
 
     <h1>Member Information</h1>
-    <h3>{{ username }}</h3>
-    <img src="{{ avatar_url }}" alt="{{ username }}" />
+    <table>
+        <tr>
+            <td>Avatar</td>
+            <td><img src="{{ avatar_url }}" alt="{{ username }}" /></td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td>{{ public_info.username }}</td>
+        </tr>
+        <tr>
+            <td>Member Since</td>
+            <td>{{ public_info.join_data|date('F j, Y') }}</td>
+        </tr>
+        {% if private %}
+            <tr>
+                <td>First Name</td>
+                <td>{{ private_info.first_name }}</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>{{ private_info.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td>{{ private_info.phone_number }}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{ private_info.address }}</td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td>{{ private_info.city }}</td>
+            </tr>
+            <tr>
+                <td>Province</td>
+                <td>{{ private_info.province }}</td>
+            </tr>
+            <tr>
+                <td>Country</td>
+                <td>{{ private_info.country }}</td>
+            </tr>
+            <tr>
+                <td>Postal Code</td>
+                <td>{{ private_info.postal_code }}</td>
+            </tr>
+        {% endif %}
+    </table>
 
     <hr /><h1>Offers</h1>
     {% if offers %}
