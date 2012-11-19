@@ -58,6 +58,13 @@
 
 
 
+<!-- End PHP Code For Image Upload -->
+        <!-- Start Image Upload Form -->
+        <form method="post" enctype="multipart/form-data" action="">
+        <input type="file" name="image"><br><br>
+        <input name="Submit" type="submit" value="Upload image">    
+        </form>
+        <!-- End Image Upload Form -->
 
 
 
