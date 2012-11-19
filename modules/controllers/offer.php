@@ -54,7 +54,7 @@ class Offer_Controller extends Controller implements IRedirectable
                 // Prepare all the bidding information for this offer
                 $this->getBids($this->offer["id"]);
 
-                $this->display("offer.twig", $this->data); 
+                $this->display("offer.twig", $this->data);
             }
             else
             {
@@ -81,6 +81,7 @@ class Offer_Controller extends Controller implements IRedirectable
         $bids = $m_bid->getBidByOfferId($offer_id);
 
         $this->data["bids"] = $bids;
+
     }
 
 

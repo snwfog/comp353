@@ -9,7 +9,8 @@ class Bid_Model extends Model
 
     public function getBidByOfferId($offer_id)
     {
-        $query = "SELECT m.id AS bidder_id,
+        $query = "SELECT b.id, 
+          m.id AS bidder_id,
           m.username AS bidder,
           t.name AS type,
           t.id AS type_id,

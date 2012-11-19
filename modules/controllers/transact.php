@@ -9,7 +9,7 @@ class Transact_Controller extends Controller implements IRedirectable
             $transactModel = new Transact_Model();
             $offerModel = new Offer_Model();
 
-            $transactModel->createTransaction($args["offer_id"],$args["bidder_id"], $this->getMemberId());
+            $transactModel->createTransaction($args["offer_id"],$args["bidder_id"], $this->getMemberId(), $args["bid_id"]);
             $offerModel->deleteOffer($args["offer_id"]);
 
             //to-do take percentage of the sale from transacted offers

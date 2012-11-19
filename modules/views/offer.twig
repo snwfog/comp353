@@ -29,16 +29,22 @@
     </tr>
     {% for bid in bids %}
         <tr>
-            {% if ( is_owner  and not( offer.expire)) %}<td><a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}">Deal!</a></td>{% endif %}
+            {% if ( is_owner  and not( offer.expire)) %}
+                <td>
+                    <a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}&bid_id={{bid.id}}">
+                        Deal!
+                    </a>
+                </td>
+            {% endif %}
             <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder}}</a></td>
             <td><a href="#">{{ bid.type }}</a></td>
             <td><a href="#">{{ bid.category }}</a></td>
             <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
             <td>{{ bid.description }}</td>
             <td>
-                  {% if not transact.buyer_id %}
+                  {% if not transact.bid_id %}
                       in progress...
-                  {% elseif bid.bidder_id == transact.buyer_id  %}
+                  {% elseif bid.id == transact.bid_id  %}
                       WINNER
                   {% else %}
                       LOSER

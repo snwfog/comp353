@@ -8,9 +8,9 @@ class Transact_Model extends Model
         parent::__construct();
     }
     
-    public function createTransaction($offer_id, $buyer_id, $seller_id){
-      $attribute = array("offer_id, buyer_id, seller_id, transact_date");
-      $value = array($offer_id, $buyer_id, $seller_id, date("Y-n-d"));
+    public function createTransaction($offer_id, $buyer_id, $seller_id, $bid_id){
+      $attribute = array("offer_id, buyer_id, seller_id, transact_date, bid_id");
+      $value = array($offer_id, $buyer_id, $seller_id, date("Y-n-d"), $bid_id);
       return $this->setRowAndGetId($value, $attribute, "transacts");
     }
 
