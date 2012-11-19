@@ -15,5 +15,6 @@ class Transact_Controller extends Controller implements IRedirectable
             //to-do take percentage of the sale from transacted offers
             $this->back();
         }
+
     }
 }

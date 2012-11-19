@@ -38,6 +38,10 @@ class Member_Controller extends Controller implements IRedirectable
 
         $m_post = new Post_Model();
         $offers = $m_post->getPostByMemberId($this->id);
+        
+        $m_transact = new Transact_Model();
+        $boughts = $m_transact->getBoughtTransactionByMemberId($this->getMemberId());
+        $solds = $m_transact->getSoldTransactionByMemberId($this->getMemberId());
 
         $this->getFeedback();
 
@@ -47,6 +51,8 @@ class Member_Controller extends Controller implements IRedirectable
         $this->data["offers"] = $offers;
         $this->data["avatar_url"] = "$avatar_url";
         $this->data["id"] = $this->id;
+        $this->data["boughts"]=$boughts;
+        $this->data["solds"]=$solds;
 
         $this->display("member.twig", $this->data);
     }

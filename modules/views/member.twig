@@ -98,4 +98,47 @@
         {% endif %}
 
     {% endif %}
+
+
+
+    {% if private %}
+        <hr /><h1>Transaction</h1>
+        {% if solds %}
+            <h2>SOLD</h2>
+            <table name="sold-table">
+            <tr>
+                <th>Title
+                <th>Price
+                <th>Buyer
+            </tr>
+            {% for x in solds %}
+                      <tr>
+                          <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
+                          <td><a href="#">{{ x.price }}</a>
+                          <td><a href="index.php?member&id={{x.buyer_id}}">{{ x.username }}</a>
+                      </tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+
+
+        {% if boughts %}
+            <h2>SOLD</h2>
+            <table name="bought-table">
+            <tr>
+                <th>Title
+                <th>Price
+                <th>Seller
+            </tr>
+            {% for x in boughts %}
+                      <tr>
+                          <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
+                          <td><a href="#">{{ x.price }}</a>
+                          <td><a href="index.php?member&id={{x.seller_id}}">{{ x.username }}</a>
+                      </tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+
+    {% endif %}
 {% endblock content %}
