@@ -1,24 +1,36 @@
-ul li
-{
-	margin: 10px 0px 10px 0px;
-}
 
-table, table th, table td
+
+
+/**
+ * Static styling
+ */
+
+#header
 {
-    border: 1px solid black;
+  overflow: hidden;
+  width: 100%;
+  background-color: aqua;
+  
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+
 }
 
 #header ul
 {
+
 	overflow: hidden;
 	vertical-align: middle;
+  
 }
 
 #header ul li
 {
     float: left;
     margin: 0px 20px 0px 20px;
+    color: red;
+  
 }
+
 
 #header #magnifying
 {
@@ -32,6 +44,7 @@ table, table th, table td
     display: block;
     margin-left: auto;
     margin-right: auto;
+
 }
 
 #content .earned-rating
@@ -76,7 +89,45 @@ table, table th, table td
     /*background: -moz-linear-gradient(top, white 0%, #F7F7F7 55%, #F5F5F5 130%);*/
 /*}*/
 
-#footer{
-    text-align: center
+
+
+
+#content
+{
+background-color: white;
+height: 100%;
+min-height: 410px;
 }
 
+
+#footer{
+    text-align: center;
+    background-color: aqua;
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    text-shadow: 1px 1px rgba(255, 255, 255, 1);   
+    overflow: hidden;
+
+}
+
+
+#error
+{
+   text-align: center;
+   color: red;
+}
+
+
+/*
+
+*/
+
+ul li
+{
+  margin: 10px 0px 10px 0px;
+}
+
+table, table th, table td
+{
+    border: 1px solid black;
+}
