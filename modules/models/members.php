@@ -21,6 +21,22 @@ class Member_Model extends Model
             array($username, $password), "members");
     }
 
+    public function getPublicMemberInfo($member_id)
+    {
+        // First check if the member exists
+        $members = $this->getAll(ALL, "member_id", $member_id, "members");
+        if (count($members) > 1 || empty($members))
+            return NULL;
+        // Else this member must exists
+        $query = "SELECT * "
+
+    }
+
+    public function getPrivateMemberInfo($member_id)
+    {
+
+    }
+
     public function get_attribute($attribute)
     {
         $this->db->query("Select " . $attribute . " FROM members");
@@ -41,7 +57,8 @@ class Member_Model extends Model
     }
 
 
-    public function create_member($username, $password, $email_id, $address_id, $visitor_id, $registration_controller)
+    public function create_member($username, $password, $email_id, $address_id,
+                                  $visitor_id, $registration_controller)
     {
         $username   = "\"" . $username . "\"";
         $password   = "\"" . hash(ENCRYPTION_TYPE, $password) . "\"";

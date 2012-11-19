@@ -4,7 +4,18 @@
     <h1>Public Standing</h1>
     <h3>Rating</h3>
     {% if avg_rating %}
-        <h1>{{ avg_rating }}</h1>
+        <h1>
+            <span id="earned-rating">
+                {% for i in 1..avg_rating %}
+                    &diams;
+                {% endfor %}
+            </span>
+            <span id="unearned-rating">
+                {% for i in 1..(10-avg_rating) %}
+                    &diams;
+                {% endfor %}
+            </span>
+        </h1>
     {% else %}
         <h1>No rating</h1>
     {% endif %}
@@ -32,7 +43,7 @@
         <p>This person currently has no comment, or has not made
         any transaction.</p>
     {% endif %}
-
+    <hr />
 
     {#{% if not is_owner and is_transact %}#}
     {% if not is_owner %}
@@ -52,7 +63,7 @@
         </form>
     {% endif %}
 
-    <h1>Information</h1>
+    <h1>Member Information</h1>
     <h3>{{ username }}</h3>
     <img src="{{ avatar_url }}" alt="{{ username }}" />
 
@@ -100,7 +111,7 @@
     {% if private %}
         <hr /><h1>Transaction History</h1>
         {% if solds %}
-            <h3>SOLD</h3>
+            <h2>Sold</h2>
             <table name="sold-table">
             <tr>
                 <th>Title
