@@ -75,9 +75,7 @@
                       <td><a href="#">{{ offer.category }}</a>
                       <td>{{ offer.title }}
                       <td>$ {{ offer.price|number_format('2', '.', ' ') }}
-                      <td><form action="index.php?offer&delete={{ offer.id }}" method="POST">
-                              <input type="submit" value="Delete Offer" />
-                          </form>
+                      <td><a href="index.php?offer&delete={{ offer.id }}">Delete</a>
                   </tr>
             {% endif %}
         {% endfor %}
@@ -102,9 +100,9 @@
 
 
     {% if private %}
-        <hr /><h1>Transaction</h1>
+        <hr /><h1>Transaction History</h1>
         {% if solds %}
-            <h2>SOLD</h2>
+            <h3>SOLD</h3>
             <table name="sold-table">
             <tr>
                 <th>Title

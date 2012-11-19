@@ -38,6 +38,12 @@ class Offer_Controller extends Controller implements IRedirectable
                 $m_category = new Category_Model();
                 $categories = $m_category->getAllCategories();
 
+                $m_transact = new Transact_Model();
+                if( $transact = $m_transact->getTransactionByOfferId($args['id'])){
+                  $this->data["transact"] = $transact[0];
+
+                }
+
                 $this->data["categories"] = $categories;
 
                 // Check if the current viewer is the offer owner
@@ -48,7 +54,7 @@ class Offer_Controller extends Controller implements IRedirectable
                 // Prepare all the bidding information for this offer
                 $this->getBids($this->offer["id"]);
 
-                $this->display("offer.twig", $this->data);
+                $this->display("offer.twig", $this->data); 
             }
             else
             {

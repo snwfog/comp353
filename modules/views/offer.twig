@@ -16,35 +16,42 @@
 </table>
 
 <hr /><h1>Bids</h1>
-{% if offer.expire == 0 %}
-    {% if bids%}
-    <table>
+{% if bids%}
+<table>
+    <tr>
+        {% if (is_owner and not( offer.expire)) %}<th>Accept</th>{% endif %}
+        <th>Bidder</th>
+        <th>Type</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Status</th>
+    </tr>
+    {% for bid in bids %}
         <tr>
-            {% if is_owner %}<th>Accept</th>{% endif %}
-            <th>Bidder</th>
-            <th>Type</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Description</th>
+            {% if ( is_owner  and not( offer.expire)) %}<td><a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}">Deal!</a></td>{% endif %}
+            <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder}}</a></td>
+            <td><a href="#">{{ bid.type }}</a></td>
+            <td><a href="#">{{ bid.category }}</a></td>
+            <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
+            <td>{{ bid.description }}</td>
+            <td>
+                  {% if not transact.buyer_id %}
+                      in progress...
+                  {% elseif bid.bidder_id == transact.buyer_id  %}
+                      WINNER
+                  {% else %}
+                      LOSER
+                  {% endif %}
+            </td>
         </tr>
-        {% for bid in bids %}
-            <tr>
-                {% if is_owner %}<td><a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}">Deal!</a></td>{% endif %}
-                <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder }}</a></td>
-                <td><a href="#">{{ bid.type }}</a></td>
-                <td><a href="#">{{ bid.category }}</a></td>
-                <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
-                <td>{{ bid.description }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    {% else %}
-        <p>There aren't currently any bid for this item.
-            Be the first one to make a bid!</p>
-    {% endif %}
+    {% endfor %}
+</table>
 {% else %}
-    <p> Offer is closed.</p>
+    <p>There aren't currently any bid for this item.
+        Be the first one to make a bid!</p>
 {% endif %}
+
 
 {% if not is_owner %}
 <hr />
