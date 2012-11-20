@@ -29,13 +29,13 @@
 {
     float: left;
     margin: 0px 20px 0px 20px;
-    color: red;
+    color: aqua;
   
 }
 
 #header ul li:hover
 {
-  background-color: yellow;
+  background-color: white;
 }
 
 
@@ -134,6 +134,9 @@ End of static style
 
 */
 
+
+/*general style for everything
+*/
 ul li
 {
   margin: 10px 0px 10px 0px;
@@ -154,6 +157,16 @@ p
 {
    font-family: "Calibri";
 }
+
+td:hover {
+  background-color: aqua;
+  cursor: pointer;
+}
+
+
+
+
+
 
 /**
 index styling
@@ -209,9 +222,68 @@ login styling
   background-color: red;
 } 
 
+
 /**
 end of login styling 
 */
+
+
+
+
+
+/**
+registration styling
+*/
+
+
+#registration h3
+{
+ font-weight: lighter; 
+   font-family: "Calibri";
+   color: blue; 
+}
+
+#registration ul li
+{
+  color: white;
+
+}
+
+
+#registration ul
+{
+   overflow: hidden;
+  vertical-align: middle;
+   font-weight: lighter; 
+    font-family: "Calibri";
+}
+
+
+#registration input
+{
+  font-size: 1em;
+  font-family: "Calibri";
+  font-weight: lighter; 
+  border: 1px solid red;
+  border-radius: 3px;
+  height: 20px;
+  margin: 5px 0px; 
+
+}
+
+
+#registration input[type="submit"]:hover
+{
+  background-color: red;
+}
+/*
+end of registration styling
+*/
+
+
+
+
+
 
 
 /**
@@ -273,20 +345,86 @@ member profile styling
     color:blue;
 }
 
-
-
-
 /**
 end of member profile styling
 */
+
 
 
 /**
 post offer styling
 */
 
+#post ul
+{
+
+  overflow: hidden;
+  vertical-align: middle;
+   font-weight: lighter; 
+    font-family: "Calibri";
+}
+
+#post input
+{
+ 
+  font-size: 1em;
+  font-family: "Calibri";
+  font-weight: lighter; 
+  border: 1px solid red;
+  border-radius: 3px;
+  height: 20px;
+  margin: 5px 0px; 
+
+}
+
+#post input[type=submit]:hover
+{
+  background-color: red;
+} 
+
+#post input[type=file]
+{   
+   border: white;
+}
+
+#post select
+{
+  font-size: 1em;
+  font-family: "Calibri";
+  font-weight: lighter; 
+  border: 1px solid red;
+  border-radius: 3px;
+  height: 20px;
+  margin: 5px 0px;
+}
+
+#post textarea
+{
+  font-size: 1em;
+  font-family: "Calibri";
+  font-weight: lighter; 
+  border: 1px solid red;
+  border-radius: 3px;
+  height: 150px;
+  width: 500px;
+  margin: 5px 0px;
+}
+
+#post ul li
+{
+      color: white;
+}
 
 
 /**
 end of post offer styling 
+*/
+
+
+
+
+
+/**
+
+
 */

@@ -6,6 +6,7 @@
             <div id="error">{{ error }}</div></br>
         {% endblock %}
     {% endfor %}
+   <div id="registration"> 
     <form action="index.php?registration" method="POST">
         <h3>Personal Information</h3>
         <ul>
@@ -29,5 +30,5 @@
         <input type="hidden" name="registration_form" value="TRUE" />
         <a class="registration-submit-button" class="button"><input type="submit" value="Submit" /></a>
     </form>
-
+</div>
 {% endblock content %}
