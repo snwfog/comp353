@@ -30,39 +30,53 @@ class CreditCard_Model extends Model
             return FALSE;
         }
     }
-    
-    public function create_credit_card($member_id, $credit_card_type_id, $number, $expire, $verification)
+
+    public function getMemberCreditCard($member_id)
     {
-        $member_id           = "\"" . $member_id . "\"";
-        $credit_card_type_id = "\"" . $credit_card_type_id . "\"";
-        $number              = "\"" . $number . "\"";
-        $expire              = "\"" . $expire . "\"";
-        $verification        = "\"" . $verification . "\"";
-        $insert              = array(
+        $result = $this->db->query("Select * FROM credit_cards WHERE credit_cards.member_id = $member_id");
+        $result = $this->db->fetch(MYSQL_ASSOC);
+        return $result;
+    }
+    
+    public function create_credit_card($member_id, $credit_card_type_id, $number, $expire, $verification, $holder_name)
+    {
+        $holder_name     = "\"" . $holder_name . "\"";
+        $expire     = "\"" . $expire . "\"";
+        $number     = "\"" . $number . "\"";
+        $verification    = "\"" . $verification . "\"";
+        $insert = array(
             $member_id,
             $credit_card_type_id,
             $number,
             $expire,
-            $verification
+            $verification,
+            $holder_name
         );
-        $insert              = implode(",", $insert);
-        if ($this->db->query("INSERT INTO addresses (member_id, credit_card_type, number, expire, verification_code) 
-                           VALUES(" . $insert . ");"))
+        $insert = implode(",", $insert);
+        if ($this->db->query("INSERT INTO credit_cards
+                                    (member_id, credit_card_type_id, number, expire, verification_code, holder_name)
+                              VALUES(" . $insert . ");"))
         {
             $new = $this->db->getLastInsertId();
             $new = $this->db->query("Select * FROM addresses WHERE id=" . $new);
             $new = $this->db->fetch(MYSQL_ASSOC);
             return $new;
         }
-        else
-        {
-            if ($this->db->getErrorId() == 1062)
-            //1062 = duplicate
-            {
-                array_push($registration_controller->data["errors"], "Credit Card Already Exist!");
-            }
-            $registration_controller->display("registration.twig", $registration_controller->data);
-        }
+    }
+
+
+    public function getCreditCardTypes()
+    {
+        $result = $this->db->query("Select * FROM credit_card_types");
+        $result = $this->db->fetch(MYSQL_ASSOC);
+        return $result;
+    }
+
+    public function isUniqueCreditCard($number, $member_id)
+    {
+        $result = $this->db->query("Select * FROM credit_cards WHERE number = $number AND NOT member_id = $member_id");
+        $result = $this->db->fetch(MYSQL_ASSOC);
+        return $result ? FALSE : TRUE;
     }
     
     

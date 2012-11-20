@@ -65,7 +65,7 @@
 {% endif %}
 
 
-{% if not is_owner %}
+{% if (CanBid and not(is_owner)) %}
 <hr />
 <form action="index.php?offer&id={{ offer.id }}" method="POST">
     <ul>
@@ -84,6 +84,8 @@
         <li><input type="submit" value="Bid" />
     </ul>
 </form>
+{% elseif not(CanBid) %}
+     <a href="index.php?creditcard">Add a Credit Card To Bid</a>
 {% endif %}
 
 {% endblock content %}

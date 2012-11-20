@@ -40,11 +40,15 @@ class Offer_Controller extends Controller implements IRedirectable
                 $m_category = new Category_Model();
                 $categories = $m_category->getAllCategories();
 
+                // Get owner transaction
                 $m_transact = new Transact_Model();
                 if( $transact = $m_transact->getTransactionByOfferId($args['id'])){
                   $this->data["transact"] = $transact[0];
 
                 }
+
+                //Can bid?
+                $this->data["CanBid"] = $this->CanBids();
 
                 $this->data["categories"] = $categories;
 
@@ -105,5 +109,12 @@ class Offer_Controller extends Controller implements IRedirectable
         );
 
         return $bid_id;
+    }
+
+    public function CanBids()
+    {
+        $m_card = new CreditCard_Model();
+        $result = $m_card->getMemberCreditCard($this->getMemberId());
+        return $result ? TRUE : FALSE;
     }
 }

@@ -1,0 +1,45 @@
+<?php
+
+class CreditCard_Controller extends Controller implements IRedirectable
+{   
+    protected $data;
+    public function __construct(array $args)
+    {
+        parent::__construct();
+        $this->data["errors"] = array();
+        $creditcardModel = new CreditCard_Model();
+        $this->data['type']= $creditcardModel->getCreditCardTypes();
+        if(isset($_POST["creditcardform"])){
+            if( $creditcard = $creditcardModel->getMemberCreditCard($this->getMemberId())){
+              $this->checkNumber();
+              //update credit card info
+            }else{
+              $this->checkNumber();
+              $creditcardModel->create_credit_card(
+                    $this->getMemberId(),
+                    $_POST['credit_card_type'],
+                    $_POST["credit_card_number"],
+                    $_POST["expiration_month"].$_POST["expiration_year"],
+                    $_POST["verification_number"],
+                    $_POST["card_holder"],
+                    $this
+                    );
+
+            }
+        }else{
+          $this->display("creditcard.twig", $this->data);
+        }
+
+    }
+
+
+
+    public function checkNumber(){
+        $creditcardModel = new CreditCard_Model();
+        if(!$creditcardModel->isUniqueCreditCard($_POST["credit_card_number"], $this->getMemberId())){
+          array_push($this->data["errors"],"Credit Card Exists!");
+          $this->display("creditcard.twig", $this->data);
+          exit;
+        }
+    }
+}
