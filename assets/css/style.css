@@ -8,10 +8,12 @@
 #header
 {
   overflow: hidden;
-  width: 100%;
+  width: 70%;
   background-color: aqua;
-  
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+
+  margin: auto;
+
 
 }
 
@@ -102,10 +104,14 @@
 background-color: white;
 height: 100%;
 min-height: 410px;
+width: 70%;
+margin: auto;
 }
 
 
 #footer{
+  margin: auto;
+  width: 70%;
     text-align: center;
     background-color: aqua;
     border-top: 1px solid rgba(0, 0, 0, 0.4);
@@ -135,11 +141,19 @@ ul li
 
 table, table th, table td
 {
-    border: 1px solid black;
-  
+    border: 1px solid blue;
+    font-family: "Calibri";
     padding: 5px;
 }
+th
+{
+  background-color: aqua;
+}
 
+p
+{
+   font-family: "Calibri";
+}
 
 /**
 index styling
@@ -195,10 +209,84 @@ login styling
   background-color: red;
 } 
 
-
-
 /**
 end of login styling 
 */
 
 
+/**
+member profile styling
+*/
+
+#rating h1
+{
+ font-weight: lighter; 
+   font-family: "Calibri";
+   color: blue;
+}
+
+#rating h3
+{
+  font-weight: lighter;
+  color: blue; 
+  font-family: "Calibri";
+}
+
+
+#info h1
+{
+  font-weight: lighter; 
+    font-family: "Calibri";
+    color:blue;
+}
+
+
+#offer h1
+{
+  font-weight: lighter; 
+    font-family: "Calibri";
+    color:blue;
+
+}
+
+
+#bid h1
+{
+  font-weight: lighter; 
+    font-family: "Calibri";
+    color:blue;
+}
+
+
+
+#transaction h1
+{
+  font-weight: lighter; 
+    font-family: "Calibri";
+    color:blue;
+}
+
+#transaction h2
+{
+  font-weight: lighter; 
+    font-family: "Calibri";
+    color:blue;
+}
+
+
+
+
+/**
+end of member profile styling
+*/
+
+
+/**
+post offer styling
+*/
+
+
+
+/**
+end of post offer styling 
+*/
