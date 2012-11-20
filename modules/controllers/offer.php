@@ -113,8 +113,14 @@ class Offer_Controller extends Controller implements IRedirectable
 
     public function CanBids()
     {
-        $m_card = new CreditCard_Model();
-        $result = $m_card->getMemberCreditCard($this->getMemberId());
-        return $result ? TRUE : FALSE;
+        // Check if its a valid session
+        if ($this->isValidSession())
+        {
+            $m_card = new CreditCard_Model();
+            $result = $m_card->getMemberCreditCard($this->getMemberId());
+            return $result ? TRUE : FALSE;
+        }
+
+        return FALSE;
     }
 }
