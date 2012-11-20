@@ -290,25 +290,14 @@ end of member profile styling
 /**
 post offer styling
 */
-
-#post ul
-{
-
-    overflow: hidden;
-    vertical-align: middle;
-    font-weight: lighter;
-}
-
 #post input
 {
-
     margin: 5px 0px;
     height: 20px;
     border: 1px solid red;
     border-radius: 3px;
     font-weight: lighter;
     font-size: 1em;
-
 }
 
 #post input[type=submit]:hover
@@ -341,22 +330,3 @@ post offer styling
     font-weight: lighter;
     font-size: 1em;
 }
-
-#post ul li
-{
-    color: white;
-}
-
-
-/**
-end of post offer styling 
-*/
-
-
-
-
-
-/**
-
-
-*/

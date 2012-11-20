@@ -718,3 +718,28 @@ div.dropdown-slider .ddm:active {
 div.dropdown-slider .ddm:last-child {
 	border-bottom: none;
 }
+
+
+.ddm.blue span.icon,
+button.blue span.icon,
+a.button.blue span.icon,
+.ddm.green span.icon,
+button.green span.icon,
+a.button.green span.icon,
+.ddm.red span.icon,
+button.red span.icon,
+a.button.red span.icon {
+    background-image: url(../img/web/google+-ui-sprite-white.png);
+}
+
+.ddm.blue:hover span.icon,
+button.blue:hover span.icon,
+a.button.blue:hover span.icon,
+.ddm.green:hover span.icon,
+button.green:hover span.icon,
+a.button.green:hover span.icon,
+.ddm.red:hover span.icon,
+button.red:hover span.icon,
+a.button.red:hover span.icon {
+    background-image: url(../img/web/google+-ui-sprite-white.png);
+}

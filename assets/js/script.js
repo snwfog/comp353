@@ -6,10 +6,81 @@ This script is NOT for UI, or animation, do that in global-script instead.
 */
 
 $(function() {
+  var bidOfferValidator, confirmMsg, displayError, loginValidator, postOfferValidator;
   $('.tiptip a.button, .tiptip button').tipTip();
-  return $(".submit, .delete").click(function() {
-    if (confirm("Ready to submit?")) {
-      return $.submit;
+  /*
+      Validator Error Handler
+  */
+
+  displayError = function(errors, event, confirmMsg) {
+    var error, errorString, _i, _len;
+    if (confirmMsg == null) {
+      confirmMsg = "Proceed to submit?";
     }
-  });
+    if (errors.length > 0) {
+      errorString = "";
+      for (_i = 0, _len = errors.length; _i < _len; _i++) {
+        error = errors[_i];
+        errorString += "<li>" + error.message + "</li>";
+      }
+      return $('.error-field').html(errorString);
+    } else {
+      if (confirmMsg != null) {
+        if (confirm(confirmMsg)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+  };
+  /*
+      Login Form Validator
+  */
+
+  confirmMsg = "Proceed to sign in?";
+  loginValidator = new FormValidator("login-form", [
+    {
+      name: 'username',
+      rules: 'required|max_length[30]'
+    }, {
+      name: 'password',
+      rules: 'required'
+    }
+  ], displayError);
+  /*
+      Post Offer Form Validator
+  */
+
+  postOfferValidator = new FormValidator("post-offer-form", [
+    {
+      name: "title",
+      rules: "required|max_length[50]"
+    }, {
+      name: "category",
+      rules: "required"
+    }, {
+      name: "price",
+      rules: "required|numeric"
+    }, {
+      name: "description",
+      rules: "required"
+    }
+  ], displayError);
+  /*
+      Bid On Offer Form Validator
+  */
+
+  return bidOfferValidator = new FormValidator("bid-offer-form", [
+    {
+      name: "category",
+      rules: "required"
+    }, {
+      name: "price",
+      rules: "required|numeric"
+    }, {
+      name: "description",
+      rules: "required|max_length[100]"
+    }
+  ], displayError);
 });
