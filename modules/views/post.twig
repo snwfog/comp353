@@ -1,7 +1,7 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
-
+<div id="post">
 <form action="index.php?post" method="POST" enctype="multipart/form-data">
 <ul>
     <li><input type="text" name="title" placeholder="Title" />
@@ -22,5 +22,5 @@
     {#<a id="offer-submit-button" class="button">Post Offer</a>#}
 </ul>
 </form>
-
+</div>
 {% endblock content %}
