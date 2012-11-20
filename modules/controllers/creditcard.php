@@ -21,7 +21,6 @@ class CreditCard_Controller extends Controller implements IRedirectable
                       $_POST["card_holder"]
                     );
               $this->back();
-              $this->back();
             }else{
               $this->checkNumber();
               $creditcardModel->create_credit_card(

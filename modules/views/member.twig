@@ -137,22 +137,23 @@
         {% endif %}
     </table>
     {% if private %}
+        <h4>Credit Card Information (<a href="index.php?creditcard">Change/Add</a>)</h4>
         <table>
             <tr>
                 <td>HolderName</td>
-                <td></td>
+                <td>{{creditcard.holder_name}}</td>
             </tr>
             <tr>
                 <td>Credit Card Type</td>
-                <td></td>
+                <td>{{creditcard.credit_card_type}}</td>
             </tr>
             <tr>
                 <td>Number</td>
-                <td></td>
+                <td>{{ creditcard.number }}</td>
             </tr>
             <tr>
                 <td>Expire</td>
-                <td></td>
+                <td>{{ creditcard.expire }}</td>
             </tr>
         </table>
     {% endif %}

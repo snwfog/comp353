@@ -92,6 +92,13 @@ class CreditCard_Model extends Model
         return $result;
     }
 
+    public function getCreditCardTypeName($id)
+    {
+        $result = $this->db->query("Select type FROM credit_card_types where id = $id");
+        $result = $this->db->fetch(MYSQL_ASSOC);
+        return $result;
+    }
+
     public function isUniqueCreditCard($number, $member_id)
     {
         $result = $this->db->query("Select * FROM credit_cards WHERE number = $number AND NOT member_id = $member_id");

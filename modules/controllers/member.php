@@ -49,6 +49,15 @@ class Member_Controller extends Controller implements IRedirectable
         $boughts = $m_transact->getBoughtTransactionByMemberId($this->getMemberId());
         $solds = $m_transact->getSoldTransactionByMemberId($this->getMemberId());
 
+        $m_creditcard= new CreditCard_Model();
+        $creditcard = $m_creditcard->getMemberCreditCard($this->getMemberId());
+
+        if (isset($creditcard)){
+            $creditcard = $creditcard[0];
+            $type_name = $m_creditcard->getCreditCardTypeName($creditcard["credit_card_type_id"]);
+            $creditcard["credit_card_type"] = $type_name[0]["type"];
+        }
+
         $this->getFeedback();
         $this->getOngoingBid();
 
@@ -62,6 +71,7 @@ class Member_Controller extends Controller implements IRedirectable
         $this->data["id"] = $this->id;
         $this->data["boughts"]= $boughts;
         $this->data["solds"]= $solds;
+        $this->data["creditcard"]= $creditcard;
 
         $this->display("member.twig", $this->data);
     }
