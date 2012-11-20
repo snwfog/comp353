@@ -65,6 +65,26 @@ class CreditCard_Model extends Model
     }
 
 
+    public function update_credit_card($member_id, $credit_card_type_id, $number, $expire, $verification, $holder_name)
+    {
+        $holder_name     = "\"" . $holder_name . "\"";
+        $expire     = "\"" . $expire . "\"";
+        $number     = "\"" . $number . "\"";
+        $verification    = "\"" . $verification . "\"";
+        $result = $this->db->query("Update credit_cards
+                                    SET credit_card_type_id = $credit_card_type_id,
+                                        number = $number, 
+                                        expire = $expire, 
+                                        verification_code = $verification, 
+                                        holder_name = $holder_name
+                                    WHERE member_id = $member_id;");
+        if ($result)
+        {
+           return TRUE;
+        }
+    }
+
+
     public function getCreditCardTypes()
     {
         $result = $this->db->query("Select * FROM credit_card_types");

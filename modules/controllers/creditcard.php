@@ -12,18 +12,28 @@ class CreditCard_Controller extends Controller implements IRedirectable
         if(isset($_POST["creditcardform"])){
             if( $creditcard = $creditcardModel->getMemberCreditCard($this->getMemberId())){
               $this->checkNumber();
-              //update credit card info
+              $creditcardModel->update_credit_card(
+                      $this->getMemberId(),
+                      $_POST['credit_card_type'],
+                      $_POST["credit_card_number"],
+                      $_POST["expiration_month"].$_POST["expiration_year"],
+                      $_POST["verification_number"],
+                      $_POST["card_holder"]
+                    );
+              $this->back();
+              $this->back();
             }else{
               $this->checkNumber();
               $creditcardModel->create_credit_card(
-                    $this->getMemberId(),
-                    $_POST['credit_card_type'],
-                    $_POST["credit_card_number"],
-                    $_POST["expiration_month"].$_POST["expiration_year"],
-                    $_POST["verification_number"],
-                    $_POST["card_holder"],
-                    $this
+                      $this->getMemberId(),
+                      $_POST['credit_card_type'],
+                      $_POST["credit_card_number"],
+                      $_POST["expiration_month"].$_POST["expiration_year"],
+                      $_POST["verification_number"],
+                      $_POST["card_holder"],
+                      $this
                     );
+              $this->back();
 
             }
         }else{
