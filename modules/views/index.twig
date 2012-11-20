@@ -16,7 +16,12 @@
             </tr>
             {% for offer in hot_offers %}
                 <tr>
-                    <td><a href="index.php?offer&id={{ offer.id }}">View</a>
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?offer&id={{ offer.id }}"
+                               class="button" title="View Offer">
+                                <span class="icon icon113">View</span></a>
+                        </div>
                     <td>
                         {% if is_logged_in %}
                             <a href="index.php?member&id={{ offer.owner_id }}">
@@ -61,7 +66,12 @@
             </tr>
             {% for offer in offers %}
                 <tr>
-                    <td><a href="index.php?offer&id={{ offer.id }}">View</a>
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?offer&id={{ offer.id }}"
+                               class="button" title="View Offer">
+                            <span class="icon icon113">View</span></a>
+                        </div>
                     <td>
                         {% if is_logged_in %}
                             <a href="index.php?member&id={{ offer.owner_id }}">

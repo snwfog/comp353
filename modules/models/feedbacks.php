@@ -9,7 +9,7 @@ class Feedback_Model extends Model
 
     public function getFeedback($member_id)
     {
-         $query = "SELECT
+        $query = "SELECT
            f.id AS feedback_id,
            m2.id AS ratee_id,
            m2.username AS ratee,
@@ -30,7 +30,7 @@ class Feedback_Model extends Model
 
     public function getRating($member_id)
     {
-        $query = "SELECT AVG(f.rating) AS rating
+        $query = "SELECT ROUND(AVG(f.rating)) AS rating
                   FROM feedbacks AS f
                   WHERE f.ratee_id = $member_id";
         $mysqli_result = $this->db->query($query);

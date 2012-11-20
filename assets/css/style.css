@@ -1,5 +1,15 @@
+html {
+    font-family: Helvetica Neue, Helvetica, Arial, Calibri;
+    font-weight: lighter;
+}
 
+ul, ol {
+    list-style: none;
+}
 
+tr:hover {
+    background-color: powderblue;
+}
 
 /**
  * Static styling
@@ -7,21 +17,18 @@
 
 #header
 {
-  overflow: hidden;
-  width: 70%;
-  background-color: aqua;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    overflow: hidden;
 
-  margin: auto;
-
-
+    margin: auto;
+    width: 70%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    background-color: aqua;
 }
 
 #header ul
 {
-
-	overflow: hidden;
-	vertical-align: middle;
+    overflow: hidden;
+    vertical-align: middle;
 }
 
 
@@ -30,12 +37,12 @@
     float: left;
     margin: 0px 20px 0px 20px;
     color: aqua;
-  
+
 }
 
 #header ul li:hover
 {
-  background-color: white;
+    background-color: white;
 }
 
 
@@ -43,14 +50,13 @@
 {
     position: relative;
     top: 5px;
-
 }
 
-#title 
+#title
 {
     display: block;
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
 
 }
 
@@ -64,68 +70,31 @@
     color: lightgray;
 }
 
-/*h2.mostRecent {*/
-    /*font: 20;*/
-    /*font-family: "Verdana", Times, serif;*/
-    /*text-align: center;*/
-/*}*/
-/*#search {*/
-  /*margin-left: 217px;*/
-  /*margin-right: 217px;*/
-  /*background-color: #a5a5b3;*/
-  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#a5a5b3), to(#999999));  Safari 4+, Chrome*/
-  /*background-image: -webkit-linear-gradient(top, #a5a5b3, #999999);  Chrome 10+, Safari 5.1+, iOS 5+*/
-  /*background-image:    -moz-linear-gradient(top, #a5a5b3, #999999);  Firefox 3.6-15*/
-  /*background-image:      -o-linear-gradient(top, #a5a5b3, #999999);  Opera 11.10-12.00*/
-  /*background-image:         linear-gradient(to bottom, #a5a5b3, #999999);*/
-/*}*/
-
-/*#content {*/
-
-    /*font-family: 'Trocchi', serif;*/
-
-    /*width: 900px;*/
-    /*text-align: center padding-bottom: 25px;*/
-    /*margin: 0 auto;*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-
-     /*gradients*/
-    /*background: -webkit-gradient(linear, left top, left bottom,*/
-    /*color-stop(0%, white), color-stop(15%, #F7F7F7), color-stop(100%, #F5F5F5));*/
-    /*background: -moz-linear-gradient(top, white 0%, #F7F7F7 55%, #F5F5F5 130%);*/
-/*}*/
-
-
-
-
 #content
 {
-background-color: white;
-height: 100%;
-min-height: 410px;
-width: 70%;
-margin: auto;
+    margin: auto;
+    min-height: 410px;
+    width: 70%;
+    height: 100%;
+    background-color: white;
 }
-
 
 #footer{
-  margin: auto;
-  width: 70%;
-    text-align: center;
-    background-color: aqua;
+    overflow: hidden;
+    margin: auto;
+    width: 70%;
     border-top: 1px solid rgba(0, 0, 0, 0.4);
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    text-shadow: 1px 1px rgba(255, 255, 255, 1);   
-    overflow: hidden;
+    background-color: aqua;
+    text-align: center;
+    text-shadow: 1px 1px rgba(255, 255, 255, 1);
 
 }
-
 
 #error
 {
-   text-align: center;
-   color: red;
+    color: red;
+    text-align: center;
 }
 
 /*
@@ -135,38 +104,19 @@ End of static style
 */
 
 
-/*general style for everything
+/*
+general style for everything
 */
 ul li
 {
-  margin: 10px 0px 10px 0px;
+    margin: 10px 0px 10px 0px;
 }
 
 table, table th, table td
 {
-    border: 1px solid blue;
-    font-family: "Calibri";
     padding: 5px;
+    border: 1px solid blue;
 }
-th
-{
-  background-color: aqua;
-}
-
-p
-{
-   font-family: "Calibri";
-}
-
-td:hover {
-  background-color: aqua;
-  cursor: pointer;
-}
-
-
-
-
-
 
 /**
 index styling
@@ -174,14 +124,14 @@ index styling
 
 #index h1
 {
-  color: red;
-  font-size: 2em;
-  font-weight: lighter;
+    color: red;
+    font-weight: lighter;
+    font-size: 2em;
 }
 
 #index ul
 {
-  background-color: aqua;
+    background-color: aqua;
 }
 
 /**
@@ -193,34 +143,31 @@ end of index styling
 login styling
 */
 
-#login 
+#login
 {
-  text-align: center;
-   font-family: "Calibri";
+    text-align: center;
 }
 
 #login h1
 {
-  font-weight: lighter;
+    font-weight: lighter;
 }
 
 #login input
 {
- 
-  font-size: 1em;
-  font-family: "Calibri";
-  font-weight: lighter; 
-  border: 1px solid #891424;
-  border-radius: 3px;
-  height: 20px;
-  margin: 5px 0px; 
+    margin: 5px 0px;
+    height: 20px;
+    border: 1px solid #891424;
+    border-radius: 3px;
+    font-weight: lighter;
 
+    font-size: 1em;
 }
 
 #login input[type=submit]:hover
 {
-  background-color: red;
-} 
+    background-color: red;
+}
 
 
 /**
@@ -238,43 +185,40 @@ registration styling
 
 #registration h3
 {
- font-weight: lighter; 
-   font-family: "Calibri";
-   color: blue; 
+    color: blue;
+    font-weight: lighter;
 }
 
 #registration ul li
 {
-  color: white;
+    color: white;
 
 }
 
 
 #registration ul
 {
-   overflow: hidden;
-  vertical-align: middle;
-   font-weight: lighter; 
-    font-family: "Calibri";
+    overflow: hidden;
+    vertical-align: middle;
+    font-weight: lighter;
 }
 
 
 #registration input
 {
-  font-size: 1em;
-  font-family: "Calibri";
-  font-weight: lighter; 
-  border: 1px solid red;
-  border-radius: 3px;
-  height: 20px;
-  margin: 5px 0px; 
+    margin: 5px 0px;
+    height: 20px;
+    border: 1px solid red;
+    border-radius: 3px;
+    font-weight: lighter;
+    font-size: 1em;
 
 }
 
 
 #registration input[type="submit"]:hover
 {
-  background-color: red;
+    background-color: red;
 }
 /*
 end of registration styling
@@ -292,57 +236,49 @@ member profile styling
 
 #rating h1
 {
- font-weight: lighter; 
-   font-family: "Calibri";
-   color: blue;
+    color: blue;
+    font-weight: lighter;
 }
 
 #rating h3
 {
-  font-weight: lighter;
-  color: blue; 
-  font-family: "Calibri";
+    color: blue;
+    font-weight: lighter;
 }
 
 
 #info h1
 {
-  font-weight: lighter; 
-    font-family: "Calibri";
     color:blue;
+    font-weight: lighter;
 }
 
 
 #offer h1
 {
-  font-weight: lighter; 
-    font-family: "Calibri";
     color:blue;
-
+    font-weight: lighter;
 }
 
 
 #bid h1
 {
-  font-weight: lighter; 
-    font-family: "Calibri";
     color:blue;
+    font-weight: lighter;
 }
 
 
 
 #transaction h1
 {
-  font-weight: lighter; 
-    font-family: "Calibri";
     color:blue;
+    font-weight: lighter;
 }
 
 #transaction h2
 {
-  font-weight: lighter; 
-    font-family: "Calibri";
     color:blue;
+    font-weight: lighter;
 }
 
 /**
@@ -358,61 +294,57 @@ post offer styling
 #post ul
 {
 
-  overflow: hidden;
-  vertical-align: middle;
-   font-weight: lighter; 
-    font-family: "Calibri";
+    overflow: hidden;
+    vertical-align: middle;
+    font-weight: lighter;
 }
 
 #post input
 {
- 
-  font-size: 1em;
-  font-family: "Calibri";
-  font-weight: lighter; 
-  border: 1px solid red;
-  border-radius: 3px;
-  height: 20px;
-  margin: 5px 0px; 
+
+    margin: 5px 0px;
+    height: 20px;
+    border: 1px solid red;
+    border-radius: 3px;
+    font-weight: lighter;
+    font-size: 1em;
 
 }
 
 #post input[type=submit]:hover
 {
-  background-color: red;
-} 
+    background-color: red;
+}
 
 #post input[type=file]
-{   
-   border: white;
+{
+    border: white;
 }
 
 #post select
 {
-  font-size: 1em;
-  font-family: "Calibri";
-  font-weight: lighter; 
-  border: 1px solid red;
-  border-radius: 3px;
-  height: 20px;
-  margin: 5px 0px;
+    margin: 5px 0px;
+    height: 20px;
+    border: 1px solid red;
+    border-radius: 3px;
+    font-weight: lighter;
+    font-size: 1em;
 }
 
 #post textarea
 {
-  font-size: 1em;
-  font-family: "Calibri";
-  font-weight: lighter; 
-  border: 1px solid red;
-  border-radius: 3px;
-  height: 150px;
-  width: 500px;
-  margin: 5px 0px;
+    margin: 5px 0px;
+    width: 500px;
+    height: 150px;
+    border: 1px solid red;
+    border-radius: 3px;
+    font-weight: lighter;
+    font-size: 1em;
 }
 
 #post ul li
 {
-      color: white;
+    color: white;
 }
 
 

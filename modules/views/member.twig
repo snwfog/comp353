@@ -38,9 +38,12 @@
             {% for comment in comments %}
                 <tr>
                     <td>
-                        <a href="index.php?member&id={{ comment.rater_id }}">
-                            {{ comment.rater }}
+                        <div class="tiptip">
+                        <a href="index.php?member&id={{ comment.rater_id }}"
+                           class="button" title="{{ comment.rater }}">
+                            <span class="icon icon191"></span>
                         </a>
+                        </div>
                     <td>
                         <span class="earned-rating">
                             {% for i in 1..comment.rating %}
@@ -179,12 +182,21 @@
         {% for offer in offers %}
             {% if(offer.expire == 0)%}
                   <tr>
-                      <td><a href="index.php?offer&id={{ offer.id }}">View</a>
+                      <td><div class="tiptip">
+                          <a href="index.php?offer&id={{ offer.id }}"
+                             class="button" title="View Offer">
+                              <span class="icon icon113"></span></a>
+                      </div>
                       <td><a href="#">{{ offer.type }}</a>
                       <td><a href="#">{{ offer.category }}</a>
                       <td>{{ offer.title }}
                       <td>$ {{ offer.price|number_format('2', '.', ' ') }}
-                      <td><a href="index.php?offer&delete={{ offer.id }}">Delete</a>
+                      <td>
+                          <div class="tiptip">
+                              <a href="index.php?offer&delete={{ offer.id }}"
+                                 class="button delete" title="Delete Offer">
+                                  <span class="icon icon186"></span></a>
+                          </div>
                   </tr>
             {% endif %}
         {% endfor %}
@@ -218,7 +230,11 @@
             </tr>
             {% for bid in bids %}
                 <tr>
-                    <td><a href="index.php?offer&id={{ bid.offer_id }}">View</a></td>
+                    <td><div class="tiptip">
+                        <a href="index.php?offer&id={{ bid.offer_id }}"
+                           class="button" title="View Bid">
+                            <span class="icon icon113"></span></a>
+                    </div>
                     <td>Not yet implemented</td>
                     <td><a href="#">{{ bid.type }}</a></td>
                     <td><a href="#">{{ bid.category }}</a></td>

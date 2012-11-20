@@ -1,13 +1,16 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
-	<div id="login">
     <h1>Member Login</h1>
-    <form action="index.php?login" method="POST">
-	<input type="text" name="username" placeholder="Username" />
-	<input type="password" name="password" placeholder="Password" />
-        <input type="submit" value="Login" />
-    	{#<a id="login-submit-button" class="button">Login</a>#}
-    </form>
-    </div>
+        <form action="index.php?login" method="POST">
+            <ul>
+                <li><input type="text" name="username" placeholder="Username" />
+                <li><input type="password" name="password" placeholder="Password" />
+                <li><input type="submit" value="Login" />
+                <li><button class="action blue submit">
+                        <span class="label">Sign In</span>
+                    </button>
+            </ul>
+        </form>
+
 {% endblock content %}

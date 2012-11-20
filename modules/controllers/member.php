@@ -15,7 +15,7 @@ class Member_Controller extends Controller implements IRedirectable
         $m_member = new Member_Model();
 
         // Check if we are making any feedbacks
-        $this->checkForFeedback();
+        $this->setFeedback();
 
         if (isset($args['id']) && empty($args['id']))
             $this->redirect(self::REDIRECT_INDEX);
@@ -77,7 +77,7 @@ class Member_Controller extends Controller implements IRedirectable
     }
 
 
-    private function checkForFeedback()
+    private function setFeedback()
     {
         if (isset($_POST['feedback']))
         {
@@ -96,7 +96,7 @@ class Member_Controller extends Controller implements IRedirectable
     {
         $m_feedback = new Feedback_Model();
         $this->data["comments"] = $m_feedback->getFeedback($this->id);
-        $this->data["avg_rating"] = intval(round($m_feedback->getRating($this->id)));
+        $this->data["avg_rating"] = intval($m_feedback->getRating($this->id));
     }
 
     private function getOngoingBid()
