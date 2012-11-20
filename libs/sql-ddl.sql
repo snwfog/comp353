@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 19, 2012 at 06:50 AM
+-- Generation Time: Nov 20, 2012 at 02:20 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   `country` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `postal_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='http://stackoverflow.com/questions/217945/can-i-have-multipl' AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='http://stackoverflow.com/questions/217945/can-i-have-multipl' AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `addresses`
@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS `addresses` (
 
 INSERT INTO `addresses` (`id`, `address`, `city`, `province`, `country`, `postal_code`) VALUES
 (1, '123 Fake Street', 'Montreal', 'Quebec', 'Canada', 'H3H1P1'),
-(2, '123 Real Street', 'Toronto', 'Ontario', 'Canada', '8898934');
+(2, '123 Real Street', 'Toronto', 'Ontario', 'Canada', '8898934'),
+(3, '7979 de madere', 'Montreal', 'Quebec', 'Canada', 'h1p3c7');
 
 -- --------------------------------------------------------
 
@@ -172,12 +173,22 @@ CREATE TABLE IF NOT EXISTS `credit_cards` (
   `number` char(16) NOT NULL DEFAULT '',
   `expire` char(4) NOT NULL,
   `verification_code` char(3) NOT NULL,
+  `holder_name` varchar(256) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `number_UNIQUE` (`number`),
   UNIQUE KEY `member_id_UNIQUE` (`member_id`),
   KEY `id_idx` (`member_id`),
   KEY `fk_credit_cards_credit_card_types` (`credit_card_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `credit_cards`
+--
+
+INSERT INTO `credit_cards` (`id`, `member_id`, `credit_card_type_id`, `number`, `expire`, `verification_code`, `holder_name`) VALUES
+(1, 2, 1, '1010101', '512', '123', 'FUCK'),
+(2, 1, 1, '01010101', '0512', '123', 'FUCK'),
+(5, 3, 1, '109283091', '0110', '191', 'Mike');
 
 -- --------------------------------------------------------
 
@@ -189,7 +200,15 @@ CREATE TABLE IF NOT EXISTS `credit_card_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `credit_card_types`
+--
+
+INSERT INTO `credit_card_types` (`id`, `type`) VALUES
+(1, 'PokemonBadge'),
+(2, 'PokemonCard');
 
 -- --------------------------------------------------------
 
@@ -202,14 +221,15 @@ CREATE TABLE IF NOT EXISTS `domains` (
   `name` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `domains`
 --
 
 INSERT INTO `domains` (`id`, `name`) VALUES
-(1, 'gmail');
+(1, 'gmail'),
+(2, 'hotmail');
 
 -- --------------------------------------------------------
 
@@ -226,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `emails` (
   UNIQUE KEY `name` (`name`,`domain_id`,`top_level_domain_id`),
   KEY `fk_emails_domains` (`domain_id`),
   KEY `fk_emails_top_level_domains` (`top_level_domain_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `emails`
@@ -234,7 +254,8 @@ CREATE TABLE IF NOT EXISTS `emails` (
 
 INSERT INTO `emails` (`id`, `name`, `domain_id`, `top_level_domain_id`) VALUES
 (1, 'donchoa', 1, 1),
-(2, 'donchoa11', 1, 1);
+(2, 'donchoa11', 1, 1),
+(3, 'viet_mike.pham', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -286,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   KEY `id_idx` (`address_id`),
   KEY `fk_members_visitors_idx` (`visitor_id`),
   KEY `fk_members_emails` (`email_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `members`
@@ -294,7 +315,8 @@ CREATE TABLE IF NOT EXISTS `members` (
 
 INSERT INTO `members` (`id`, `username`, `password`, `email_id`, `address_id`, `visitor_id`, `avatar_url`) VALUES
 (1, 'snw', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 1, 1, 1, NULL),
-(2, 'fog', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 2, 2, 2, NULL);
+(2, 'fog', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 2, 2, 2, NULL),
+(3, 'mike', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 3, 3, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -383,6 +405,22 @@ INSERT INTO `posts` (`member_id`, `offer_id`, `id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `prices`
+--
+
+CREATE TABLE IF NOT EXISTS `prices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `plan_name` varchar(45) NOT NULL,
+  `service_fee` int(11) NOT NULL,
+  `base_storage_fee` int(11) NOT NULL,
+  `size_fee` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Plan_UNIQUE` (`plan_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sessions`
 --
 
@@ -394,7 +432,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_sessions_members_idx` (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `sessions`
@@ -406,8 +444,27 @@ INSERT INTO `sessions` (`id`, `member_id`, `session`, `expire`) VALUES
 (3, 1, '507504e8c0f58d329eabe5556acc76167c93f7e93004214ea511e0ec02cb7ae4', 1),
 (4, 1, '8acecc82af19d4825e506d75017dae9d685def9bd1b6bd27f66abe3512c264f7', 1),
 (5, 2, 'fa9faa030bcaebe090e8ec7d3063f7d6b7c54f24b0baf424503d9e2c3ef3b5ea', 1),
-(6, 1, '7f1238f9a49fb00530adb1d157ad78d5cf8d54807d18fed6d82bd113c75e7741', 0),
-(7, 2, '6c3af288214e2ade20c8a32644831fc212692ac18c93528da6eeb8f8238ec85b', 0);
+(6, 1, '7f1238f9a49fb00530adb1d157ad78d5cf8d54807d18fed6d82bd113c75e7741', 1),
+(7, 2, '6c3af288214e2ade20c8a32644831fc212692ac18c93528da6eeb8f8238ec85b', 0),
+(8, 1, 'a903de29e3eca5d4272485b8fa236759364a9918924c5563a06164bbcbdfc251', 0),
+(9, 3, 'ee13a2a6c10281a734a081e6e98077cc824c911d9394178bb4efc3bc7918dc14', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `storages`
+--
+
+CREATE TABLE IF NOT EXISTS `storages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `transact_id` int(11) NOT NULL,
+  `acquire_date` date DEFAULT NULL,
+  `pickup_date` date DEFAULT NULL,
+  `weight` int(11) DEFAULT NULL,
+  `status` enum('Not Received','Received','Picked Up') DEFAULT 'Not Received',
+  PRIMARY KEY (`id`),
+  KEY `fk_storages_transact_idx` (`transact_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -495,7 +552,7 @@ CREATE TABLE IF NOT EXISTS `visitors` (
   `join_date` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `visitors_id_UNIQUE` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `visitors`
@@ -503,7 +560,8 @@ CREATE TABLE IF NOT EXISTS `visitors` (
 
 INSERT INTO `visitors` (`id`, `first_name`, `last_name`, `phone_number`, `join_date`) VALUES
 (1, 'Charles', 'Yang', '5148826452', '2012-11-17'),
-(2, 'Charles', 'Yang', '5148826454', '2012-11-18');
+(2, 'Charles', 'Yang', '5148826454', '2012-11-18'),
+(3, 'mike', 'pham', '5142911195', '2012-11-19');
 
 -- --------------------------------------------------------
 
@@ -591,6 +649,12 @@ ALTER TABLE `offers`
 ALTER TABLE `posts`
   ADD CONSTRAINT `fk_posts_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_posts_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `storages`
+--
+ALTER TABLE `storages`
+  ADD CONSTRAINT `fk_storages_transact` FOREIGN KEY (`transact_id`) REFERENCES `transacts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `transacts`
