@@ -3,7 +3,14 @@
 {% block content %}
 
 <table>
-    <tr><td colspan="2">{{ offer.title }}</td></tr>
+    <tr>
+        <td colspan="2">
+            {{ offer.title }}
+            {% if (CanStore and is_owner) %}
+                <a href=    "index.php?storage&transaction_id={{ transact.id}}"> Store Item </a>
+            {% endif %}
+        </td>
+    </tr>
     <tr><td>{{ offer.type }}</td><td>{{ offer.category }}</td></tr>
     <tr><td>Price:</td><td>$ {{ offer.price|number_format('2', '.', ' ') }}</td></tr>
     <tr>

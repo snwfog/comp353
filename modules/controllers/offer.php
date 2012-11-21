@@ -42,14 +42,14 @@ class Offer_Controller extends Controller implements IRedirectable
 
                 // Get owner transaction
                 $m_transact = new Transact_Model();
-                if( $transact = $m_transact->getTransactionByOfferId($args['id'])){
+                $transact = $m_transact->getTransactionByOfferId($args['id']);
+                if( $transact ){
                   $this->data["transact"] = $transact[0];
-
+                  $this->data["CanStore"] = $this->canStoreOffer($transact[0]);
                 }
 
                 //Can bid?
                 $this->data["CanBid"] = $this->CanBids();
-
                 $this->data["categories"] = $categories;
 
                 // Check if the current viewer is the offer owner
@@ -121,6 +121,18 @@ class Offer_Controller extends Controller implements IRedirectable
             return $result ? TRUE : FALSE;
         }
 
+        return FALSE;
+    }
+
+    public function canStoreOffer($transact)
+    {
+        // Check if its a valid session
+        if ($this->isValidSession())
+        {
+            $m_storage = new Storage_Model();
+            $result = $m_storage->in_storage($transact["id"]);
+            return $result ? FALSE : TRUE;
+        }
         return FALSE;
     }
 }
