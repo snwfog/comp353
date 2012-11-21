@@ -102,6 +102,6 @@ class Member_Controller extends Controller implements IRedirectable
     private function getOngoingBid()
     {
         $m_bids = new Bid_Model();
-        $this->data["bids"] = $m_bids->getBidByMemberId($this->id);
+        $this->data["bids"] = $m_bids->getOngoingBidByMemberId($this->id);
     }
 }

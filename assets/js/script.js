@@ -6,8 +6,25 @@ This script is NOT for UI, or animation, do that in global-script instead.
 */
 
 $(function() {
-  var bidOfferValidator, confirmMsg, displayError, loginValidator, postOfferValidator;
+  var bidOfferValidator, confirmAction, confirmMsg, displayError, loginValidator, postOfferValidator;
   $('.tiptip a.button, .tiptip button').tipTip();
+  /*
+      A few button confirmation
+  */
+
+  $('.delete').click(function() {
+    return confirmAction("Are you sure you want to perform a delete?");
+  });
+  $('.confirm').click(function() {
+    return confirmAction("Are you sure you want to accept this offer?");
+  });
+  confirmAction = function(msg) {
+    if (confirm(msg)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   /*
       Validator Error Handler
   */

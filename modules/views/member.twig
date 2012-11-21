@@ -78,7 +78,13 @@
                 <li><textarea type="text" name="comment" cols="30" rows="6"></textarea>
                 <li><input type="hidden" name="ratee_id" value={{ id }}></li>
                 <li><input type="hidden" name="feedback" value="TRUE" />
-                <li><input type="submit" value="Rate" />
+                <li><div class="tiptip">
+                        <button type="submit" name="submit" id="submit-bid"
+                                class="action blue submit" title="Rate User">
+                            <span class="icon icon41"></span>
+                            <span class="label">Rate</span>
+                        </button>
+                    </div>
             </ul>
         </form>
     {% endif %}

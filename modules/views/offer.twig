@@ -34,8 +34,9 @@
         <tr>
             {% if (is_owner and not (offer.expire)) %}
                 <td>
-                    <div class="tiptip"><a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}&bid_id={{bid.id}}"
-                                           class="button" title="Accept Offer">
+                    <div class="tiptip">
+                        <a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}&bid_id={{bid.id}}"
+                                           class="button confirm" title="Accept Offer">
                         <span class="icon icon43"></span>
                     </a></div>
                 </td>

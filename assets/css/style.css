@@ -11,6 +11,68 @@ tr:hover {
     background-color: powderblue;
 }
 
+h1, h2, h3, h4, h5 {
+    clear: both;
+    font-family: Serifa BT;
+}
+
+form {
+    color: #333;
+    width: 640px;
+    margin: 0 auto;
+    border: 1px solid #CCC;
+    padding: 20px 20px 50px;
+    background: #EEE;
+}
+
+input {
+    color: #666;
+    background: #FCFCFC;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    vertical-align:middle;
+    display:inline-block;
+    margin:-4px 0 0;
+}
+input[type="text"],
+input[type="password"] {
+    vertical-align:middle;
+    display:inline-block;
+    width:250px;
+    padding:8px 8px;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -o-border-radius:3px;
+    border:1px solid #999;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+    background:#FFF;
+    color:#333;
+    border:1px solid #333;
+}
+
+textarea {
+    width:640px;
+    height:150px;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -o-border-radius:3px;
+    border:1px solid #999;
+}
+select {
+    min-width:150px;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -o-border-radius:3px;
+    border:1px solid #999;
+}
+
 /**
  * Static styling
  */
@@ -284,49 +346,3 @@ member profile styling
 /**
 end of member profile styling
 */
-
-
-
-/**
-post offer styling
-*/
-#post input
-{
-    margin: 5px 0px;
-    height: 20px;
-    border: 1px solid red;
-    border-radius: 3px;
-    font-weight: lighter;
-    font-size: 1em;
-}
-
-#post input[type=submit]:hover
-{
-    background-color: red;
-}
-
-#post input[type=file]
-{
-    border: white;
-}
-
-#post select
-{
-    margin: 5px 0px;
-    height: 20px;
-    border: 1px solid red;
-    border-radius: 3px;
-    font-weight: lighter;
-    font-size: 1em;
-}
-
-#post textarea
-{
-    margin: 5px 0px;
-    width: 500px;
-    height: 150px;
-    border: 1px solid red;
-    border-radius: 3px;
-    font-weight: lighter;
-    font-size: 1em;
-}

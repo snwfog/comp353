@@ -7,9 +7,18 @@ This script is NOT for UI, or animation, do that in global-script instead.
 $ ->
   $('.tiptip a.button, .tiptip button').tipTip()
 
-#  # Submit button checking
-#  $(".submit, .delete").click ->
-#    if confirm "Ready to submit?"
+  ###
+    A few button confirmation
+  ###
+  $('.delete').click ->
+    confirmAction "Are you sure you want to perform a delete?"
+
+  $('.confirm').click ->
+    confirmAction "Are you sure you want to accept this offer?"
+
+  confirmAction = (msg) ->
+    if confirm msg then true else false
+
   ###
     Validator Error Handler
   ###
