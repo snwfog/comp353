@@ -45,9 +45,39 @@ class Member_Controller extends Controller implements IRedirectable
         $m_post = new Post_Model();
         $offers = $m_post->getPostByMemberId($this->id);
         
+        //transaction preparing
         $m_transact = new Transact_Model();
         $boughts = $m_transact->getBoughtTransactionByMemberId($this->getMemberId());
         $solds = $m_transact->getSoldTransactionByMemberId($this->getMemberId());
+
+        $m_storage = new Storage_Model();
+        foreach($boughts as $key => $value){
+            if($m_storage->in_storage($value["id"])){
+                if($m_storage->ready_for_pick_up($value["id"])){
+                    $boughts[$key]["status"] = "Item Ready is available";
+                }else{
+                    $boughts[$key]["status"] = "Item not in storage yet";
+                }
+            }else{
+                $boughts[$key]["status"]="n/a";
+            }
+        }
+
+        foreach($solds as $key => $value){
+            if($m_storage->in_storage($value["id"])){
+                if($m_storage->picked_up($value["id"])){
+                    $solds[$key]["status"] = "Buyer picked up Item";
+                }elseif($m_storage->ready_for_pick_up($value["id"])){
+                    $boughts[$key]["status"] = "Waiting for pick up";
+                }else{
+                    $solds[$key]["status"] = "Pending...";
+                }
+
+            }else{
+                $solds[$key]["status"]= "link";
+            }
+       }
+        //end transaction
 
         $m_creditcard= new CreditCard_Model();
         $creditcard = $m_creditcard->getMemberCreditCard($this->getMemberId());
@@ -72,7 +102,6 @@ class Member_Controller extends Controller implements IRedirectable
         $this->data["boughts"]= $boughts;
         $this->data["solds"]= $solds;
         $this->data["creditcard"]= $creditcard;
-
         $this->display("member.twig", $this->data);
     }
 

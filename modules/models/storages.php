@@ -18,6 +18,18 @@ class Storage_Model extends Model
       return $result;
     }
 
+    public function ready_for_pick_up($transaction_id){
+      $this->db->query("Select * FROM storages WHERE transact_id = $transaction_id and acquire_date <> NULL");
+      $result = $this->db->fetch(MYSQL_ASSOC);
+      return $result;
+    }
+
+    public function picked_up($transaction_id){
+      $this->db->query("Select * FROM storages WHERE transact_id = $transaction_id and  pickup_date <> NULL");
+      $result = $this->db->fetch(MYSQL_ASSOC);
+      return $result;
+    }
+
 
 }
 ?>

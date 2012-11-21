@@ -272,12 +272,19 @@
                 <th>Title
                 <th>Price
                 <th>Buyer
+                <th>Storage Status
             </tr>
             {% for x in solds %}
                       <tr>
                           <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
                           <td><a href="#">{{ x.price }}</a>
                           <td><a href="index.php?member&id={{x.buyer_id}}">{{ x.username }}</a>
+                          <td>
+                              {% if x.status == "link" %}
+                                  <a href="index.php?storage&transaction_id={{x.id}}">Store Item</a>
+                              {% else %}
+                                  {{ x.status }}
+                              {% endif %}
                       </tr>
             {% endfor %}
             </table>
@@ -297,6 +304,7 @@
                           <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
                           <td><a href="#">{{ x.price }}</a>
                           <td><a href="index.php?member&id={{x.seller_id}}">{{ x.username }}</a>
+                          <td>{{x.status}}
                       </tr>
             {% endfor %}
             </table>
