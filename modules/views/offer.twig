@@ -92,6 +92,8 @@
             </div>
     </ul>
 </form>
+{% elseif not(is_logged_in) %}
+    <p> Please <a href="index.php?login">Login</a> to bid </p>
 {% elseif not(CanBid) %}
      <a href="index.php?creditcard">Add a Credit Card To Bid</a>
 {% endif %}
