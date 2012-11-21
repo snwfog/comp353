@@ -25,6 +25,7 @@ class Index_Controller extends Controller
         $this->data["offers"] = $m_offer->getAllActiveOffer();
         $this->data["hot_offers"] = $m_offer->getHotOfferByPrice($hot_offer_threshold);
         $this->data["hot_offer_threshold"] = $hot_offer_threshold;
+        $this->data['giveaways'] = $m_offer->getGiveaways();
         $this->display('index.twig', $this->data);
     }
 }

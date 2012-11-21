@@ -1,42 +1,47 @@
 {% block header %}
 
 <div id="header">
-    <a href="index.php"><img id="title" src="assets/img/web/logo.png" alt="Auction Max"></a>
+    {#<a href="index.php"><img id="title" src="assets/img/web/logo.png" alt="Auction Max"></a>#}
+    <div id="nav">
+        <div class="tiptip">
 
-    <div class="tiptip">
+            {#<form id="search" action="">#}
+                {#<input type="text" name="search" placeholder="Search" />#}
+                {#<a href="" class="button" title="Search">#}
+                    {#<span class="icon icon198"></span></a>#}
 
-        {#<form id="search" action="">#}
-            {#<input type="text" name="search" placeholder="Search" />#}
-            {#<a href="" class="button" title="Search">#}
-                {#<span class="icon icon198"></span></a>#}
+            {#</form>#}
 
-        {#</form>#}
-
-        <a href="index.php" class="button" title="Home">
-            <span class="icon icon108"></span><span class="label"></span>
-        </a>
-
-        {% if is_logged_in %}
-            <a href="index.php?member" class="button" title="Profile">
-                <span class="icon icon191"></span><span class="label">Profile</span>
+            <a href="index.php" class="button" title="Home">
+                <span class="icon icon108"></span><span class="label"></span>
             </a>
-            <a href="index.php?post" class="button" title="Post Offer">
-                <span class="icon icon130"></span><span class="label">Post Offer</span>
-            </a>
-            <a href="index.php?login&logout=1" class="button" title="Sign Out">
-                <span class="icon icon151"></span><span class="label">Sign Out</span>
-            </a>
-        {% else %}
-            <a href="index.php?login" class="button" title="Sign In">
-                <span class="icon icon116"></span><span class="label">Sign In</span>
-            </a>
-            <a href="index.php?registration" class="button" title="Register">
-                <span class="icon icon111"></span><span class="label">Register</span>
-            </a>
-        {% endif %}
 
+            {% if is_logged_in %}
+                <a href="index.php?member" class="button" title="Profile">
+                    <span class="icon icon191"></span><span class="label">Profile</span>
+                </a>
+                <a href="index.php?post" class="button" title="Post Offer">
+                    <span class="icon icon130"></span><span class="label">Post Offer</span>
+                </a>
 
+                {% if is_admin %}
+                    <a href="index.php?admin" class="button" title="Post Offer">
+                        <span class="icon icon185"></span><span class="label">Admin</span>
+                    </a>
+                {% endif %}
 
+                <a href="index.php?login&logout=1" class="button" title="Sign Out">
+                    <span class="icon icon151"></span><span class="label">Sign Out</span>
+                </a>
+            {% else %}
+                <a href="index.php?login" class="button" title="Sign In">
+                    <span class="icon icon116"></span><span class="label">Sign In</span>
+                </a>
+                <a href="index.php?registration" class="button" title="Register">
+                    <span class="icon icon111"></span><span class="label">Register</span>
+                </a>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock header %}

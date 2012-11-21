@@ -20,6 +20,9 @@ abstract class Controller
 
         // If is logged in properly, set a global twig variable
         $this->data["is_logged_in"] = TRUE;
+
+        // Loading a few frequently used twig data
+        $this->data["messages"] = array();
     }
 
     public function verifySession(Session $session)

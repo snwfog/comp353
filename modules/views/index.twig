@@ -4,7 +4,7 @@
 
     {% if hot_offers %}
     <div id="index">
-        <h1>Amazing Hot Offers Lesser Than ${{ hot_offer_threshold }}!</h1>
+        <h1>Great Hot Offers Lesser Than ${{ hot_offer_threshold }}!</h1>
         <table name="offer-table">
             <tr>
                 <th>View
@@ -35,6 +35,41 @@
                     <td><a href="#">{{ offer.category }}</a>
                     <td>{{ offer.title }}
                     <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if giveaways %}
+    <hr /><h1>Amazing Giveaways</h1>
+        <table name="offer-table">
+            <tr>
+                <th>View
+                <th>Owner
+                <th>Type
+                <th>Category
+                <th>Title
+            </tr>
+            {% for offer in giveaways %}
+                <tr>
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?offer&id={{ offer.id }}"
+                               class="button" title="View Offer">
+                                <span class="icon icon113">View</span></a>
+                        </div>
+                    <td>
+                        {% if is_logged_in %}
+                            <a href="index.php?member&id={{ offer.owner_id }}">
+                                {{ offer.owner }}
+                            </a>
+                        {% else %}
+                            {{ offer.owner }}
+                        {% endif %}
+                    </td>
+                    <td><a href="#">{{ offer.type }}</a>
+                    <td><a href="#">{{ offer.category }}</a>
+                    <td>{{ offer.title }}
                 </tr>
             {% endfor %}
         </table>

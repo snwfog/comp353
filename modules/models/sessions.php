@@ -78,6 +78,15 @@ class Session_Model extends Model
             throw new Exception("Error getting user.");
     }
 
+    public function isAdmin($member_id)
+    {
+        $query = "SELECT 1 FROM admins WHERE member_id = '$member_id'";
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch();
+
+        return ($this->db->numberOfRows() > 0);
+    }
+
     public function setExpire($session_id, $value)
     {
         $expire = ($value) ? 1 : 0;

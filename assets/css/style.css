@@ -1,19 +1,56 @@
+/* General style for everything */
+
 html {
     font-family: Helvetica Neue, Helvetica, Arial, Calibri;
     font-weight: lighter;
+}
+
+a:visited, a:link {
+    color: #4C8FFD;
+    text-decoration-style: dashed;
+}
+
+a:hover {
+    color: red;
+}
+
+a:active {
+    color: aqua;
 }
 
 ul, ol {
     list-style: none;
 }
 
-tr:hover {
-    background-color: powderblue;
+ul li
+{
+    margin: 10px 0px 10px 0px;
 }
 
 h1, h2, h3, h4, h5 {
     clear: both;
+    margin: 20px 0;
     font-family: Serifa BT;
+}
+
+h1 {
+    font-size: 30px;
+    color: #4C8FFD;
+}
+
+hr {
+    border: 1px dashed black;
+    margin: 30px auto 0;
+    clear: both;
+}
+
+table, table th, table td
+{
+    padding: 5px;
+    border: 1px dashed #d3d3d3;
+    text-align: left;
+    vertical-align: middle;
+    padding: 10px;
 }
 
 form {
@@ -80,38 +117,8 @@ select {
 #header
 {
     overflow: hidden;
-
     margin: auto;
     width: 70%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    background-color: aqua;
-}
-
-#header ul
-{
-    overflow: hidden;
-    vertical-align: middle;
-}
-
-
-#header ul li
-{
-    float: left;
-    margin: 0px 20px 0px 20px;
-    color: aqua;
-
-}
-
-#header ul li:hover
-{
-    background-color: white;
-}
-
-
-#header #magnifying
-{
-    position: relative;
-    top: 5px;
 }
 
 #title
@@ -134,215 +141,14 @@ select {
 
 #content
 {
-    margin: auto;
-    min-height: 410px;
+    margin: 0px auto 50px;
     width: 70%;
-    height: 100%;
-    background-color: white;
 }
 
 #footer{
-    overflow: hidden;
     margin: auto;
     width: 70%;
-    border-top: 1px solid rgba(0, 0, 0, 0.4);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    background-color: aqua;
+    padding: 5px;
     text-align: center;
     text-shadow: 1px 1px rgba(255, 255, 255, 1);
-
 }
-
-#error
-{
-    color: red;
-    text-align: center;
-}
-
-/*
-
-End of static style
-
-*/
-
-
-/*
-general style for everything
-*/
-ul li
-{
-    margin: 10px 0px 10px 0px;
-}
-
-table, table th, table td
-{
-    padding: 5px;
-    border: 1px solid blue;
-}
-
-/**
-index styling
-*/
-
-#index h1
-{
-    color: red;
-    font-weight: lighter;
-    font-size: 2em;
-}
-
-#index ul
-{
-    background-color: aqua;
-}
-
-/**
-end of index styling
-*/
-
-
-/**
-login styling
-*/
-
-#login
-{
-    text-align: center;
-}
-
-#login h1
-{
-    font-weight: lighter;
-}
-
-#login input
-{
-    margin: 5px 0px;
-    height: 20px;
-    border: 1px solid #891424;
-    border-radius: 3px;
-    font-weight: lighter;
-
-    font-size: 1em;
-}
-
-#login input[type=submit]:hover
-{
-    background-color: red;
-}
-
-
-/**
-end of login styling 
-*/
-
-
-
-
-
-/**
-registration styling
-*/
-
-
-#registration h3
-{
-    color: blue;
-    font-weight: lighter;
-}
-
-#registration ul li
-{
-    color: white;
-
-}
-
-
-#registration ul
-{
-    overflow: hidden;
-    vertical-align: middle;
-    font-weight: lighter;
-}
-
-
-#registration input
-{
-    margin: 5px 0px;
-    height: 20px;
-    border: 1px solid red;
-    border-radius: 3px;
-    font-weight: lighter;
-    font-size: 1em;
-
-}
-
-
-#registration input[type="submit"]:hover
-{
-    background-color: red;
-}
-/*
-end of registration styling
-*/
-
-
-
-
-
-
-
-/**
-member profile styling
-*/
-
-#rating h1
-{
-    color: blue;
-    font-weight: lighter;
-}
-
-#rating h3
-{
-    color: blue;
-    font-weight: lighter;
-}
-
-
-#info h1
-{
-    color:blue;
-    font-weight: lighter;
-}
-
-
-#offer h1
-{
-    color:blue;
-    font-weight: lighter;
-}
-
-
-#bid h1
-{
-    color:blue;
-    font-weight: lighter;
-}
-
-
-
-#transaction h1
-{
-    color:blue;
-    font-weight: lighter;
-}
-
-#transaction h2
-{
-    color:blue;
-    font-weight: lighter;
-}
-
-/**
-end of member profile styling
-*/

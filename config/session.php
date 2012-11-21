@@ -12,9 +12,9 @@ class Session
     public function __construct($username, $password)
     {
         // Create a new session model ready to insert session variable
-        $this->session_model = new Session_Model();
+        $this->m_session = new Session_Model();
         // Create a member model to access member information
-        $this->member_model = new Member_Model();
+        $this->m_member = new Member_Model();
 
         $this->username = $username;
         $this->password = $password;
@@ -24,7 +24,7 @@ class Session
     public function validateSession()
     {
         // First get the member id see if its a proper member
-        $member_id = $this->member_model->getUserId(
+        $member_id = $this->m_member->getUserId(
             $this->username, $this->password);
 
         $this->member_id = Helper::getIndex($member_id, "id");
@@ -36,11 +36,14 @@ class Session
             $this->valid_session = TRUE;
 
             // Set all session for this member to expire
-            $this->session_model->setAllExpire($this->member_id);
+            $this->m_session->setAllExpire($this->member_id);
 
             // Create a new session and get an unique session id
-            $this->session_id = $this->session_model->generateNewSession(
+            $this->session_id = $this->m_session->generateNewSession(
                 $this->member_id);
+
+            // Check if this user is an admin
+            $this->is_admin = $this->m_session->isAdmin($this->member_id);
         }
     }
 
@@ -53,6 +56,12 @@ class Session
     {
         return $this->valid_session;
     }
+
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
+
 
     public function who()
     {
@@ -72,12 +81,17 @@ class Session
         // Assign session variables
         $_SESSION['owner_id'] = $this->member_id;
         $_SESSION['session_id'] = $this->session_id;
+
+        // Check for admin
+        $_SESSION['is_admin'] = $this->is_admin;
+
+
     }
 
     public function endSession()
     {
         if (isset($this->session_id))
-            $this->session_model->setAllExpire($this->member_id);
+            $this->m_session->setAllExpire($this->member_id);
 
         if ($this->valid_session)
             $this->valid_session = FALSE;

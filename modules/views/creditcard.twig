@@ -1,6 +1,7 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
+    <h1>Credit Card Information</h1>
     {% for error in errors %}
         {% block error %}
             <div id="error">{{ error }}</div></br>
@@ -22,7 +23,9 @@
             <li><input type="text" name="verification_number" placeholder="Verification Number" maxlength="3"/>
         </ul>
         <input type="hidden" name="creditcardform" value="TRUE" />
-        <a class="registration-submit-button" class="button"><input type="submit" value="Submit" /></a>
+        <button type="submit" name="submit" class="action blue submit">
+            <span class="label">Submit</span>
+        </button>
     </form>
 
 {% endblock content %}
