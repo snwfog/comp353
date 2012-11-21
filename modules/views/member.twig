@@ -272,6 +272,7 @@
                 <th>Title
                 <th>Price
                 <th>Buyer
+                <th>Transaction Date
                 <th>Storage Status
             </tr>
             {% for x in solds %}
@@ -279,6 +280,7 @@
                           <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
                           <td><a href="#">{{ x.price }}</a>
                           <td><a href="index.php?member&id={{x.buyer_id}}">{{ x.username }}</a>
+                          <td>{{ x.transact_date }}
                           <td>
                               {% if x.status == "link" %}
                                   <a href="index.php?storage&transaction_id={{x.id}}">Store Item</a>
@@ -298,13 +300,16 @@
                 <th>Title
                 <th>Price
                 <th>Seller
+                <th>Transaction Date
+                <th>Storage
             </tr>
             {% for x in boughts %}
                       <tr>
                           <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
                           <td><a href="#">{{ x.price }}</a>
                           <td><a href="index.php?member&id={{x.seller_id}}">{{ x.username }}</a>
-                          <td>{{x.status}}
+                          <td>{{ x.transact_date }}
+                          <td>{{ x.status }}
                       </tr>
             {% endfor %}
             </table>

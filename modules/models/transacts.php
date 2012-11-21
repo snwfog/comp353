@@ -15,7 +15,7 @@ class Transact_Model extends Model
     }
 
     public function getSoldTransactionByMemberId($id){
-      $this->db->query("SELECT t.id, t.offer_id, t.buyer_id, O.title, O.description, O.price, M.username
+      $this->db->query("SELECT t.id, t.transact_date, t.offer_id, t.buyer_id, O.title, O.description, O.price, M.username
                         FROM transacts T
                         INNER JOIN offers AS O 
                             ON (T.offer_id = O.id)
@@ -28,7 +28,7 @@ class Transact_Model extends Model
     }
 
     public function getBoughtTransactionByMemberId($id){
-      $this->db->query("SELECT t.id, t.offer_id, t.seller_id, O.title, O.description, O.price, M.username
+      $this->db->query("SELECT t.id, t.transact_date, t.offer_id, t.seller_id, O.title, O.description, O.price, M.username
                         FROM transacts T
                         INNER JOIN offers AS O
                             ON (T.offer_id = O.id)
