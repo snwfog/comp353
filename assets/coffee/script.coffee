@@ -53,6 +53,30 @@ $(document).ready ->
       ]
     })
 
+  noteFormConfirm = (msg, event) ->
+    n = noty({
+      layout: 'center',
+      type: 'alert',
+      text: msg,
+      modal: true,
+      animation: {
+        open: {height: 'toggle'},
+        close: {height: 'toggle'},
+        easing: 'swing',
+        speed: 50
+      },
+      buttons: [
+        {
+          addClass: 'btn btn-primary', text: 'Continue', onClick: ($noty) ->
+            $noty.close()
+        },
+        {
+          addClass: 'btn btn-danger', text: 'Cancel', onClick: ($noty) ->
+            $noty.close()
+        }
+      ]
+    })
+
   # Hack to prevent default link follow click through so we
   # can call noty confirmation to follow the link through.
   $(".delete, .confirm").live 'click', ->
@@ -72,27 +96,24 @@ $(document).ready ->
 ################################################################################
 # Validator Error Handler
 ################################################################################
-
-  displayError = (errors, event, confirmMsg = "Proceed to submit?") ->
+  displayError = (errors, event) ->
     if errors.length > 0
       errorString = ""
       for error in errors
         noteAlert error.message, "warning"
     else
-      if confirmMsg?
-        if confirm confirmMsg then true else false
-
+      return confirm "Ready to submit your form?"
 
   ###
     Login Form Validator
   ###
-  confirmMsg = "Proceed to sign in?"
-
   loginValidator = new FormValidator("login-form", [{
       name: 'username',
+      display: 'Username'
       rules: 'required|max_length[30]'
     }, {
       name: 'password',
+      display: 'Password',
       rules: 'required'
     }], displayError)
 

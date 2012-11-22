@@ -12,6 +12,19 @@ $ ->
           was expired <b>" + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning"
 
 ################################################################################
+# Rainbow unicorn mode
+################################################################################
+  $.ajax({
+    url: "index.php?ajax&is_admin=1",
+    dataType: "json"
+  }).done (data) ->
+    if data?
+      if data.is_admin?
+        noteAlert "Hey <b>#{data.admin_username}</b>,
+          you are now in <b>Rainbow Unicorn Mode</b>
+          AKA <b>Admin Mode</b>.", "success"
+
+################################################################################
 # Noty Confirmation Setup
 # Since this function is in the local scope of the script.coffee
 # I just copy & pasted here for simplicity

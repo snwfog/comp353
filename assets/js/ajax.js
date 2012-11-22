@@ -12,6 +12,16 @@ $(function() {
       });
     }
   });
+  $.ajax({
+    url: "index.php?ajax&is_admin=1",
+    dataType: "json"
+  }).done(function(data) {
+    if (data != null) {
+      if (data.is_admin != null) {
+        return noteAlert("Hey <b>" + data.admin_username + "</b>,          you are now in <b>Rainbow Unicorn Mode</b>          AKA <b>Admin Mode</b>.", "success");
+      }
+    }
+  });
   return noteAlert = function(msg, type) {
     var n;
     return n = noty({

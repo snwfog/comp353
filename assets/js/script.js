@@ -6,7 +6,7 @@ This script is NOT for UI, or animation, do that in global-script instead.
 */
 
 $(document).ready(function() {
-  var bidOfferValidator, confirmMsg, displayError, loginValidator, noteAlert, noteConfirm, postOfferValidator;
+  var bidOfferValidator, displayError, loginValidator, noteAlert, noteConfirm, noteFormConfirm, postOfferValidator;
   $('.tiptip a.button, .tiptip button').tipTip();
   noteAlert = function(msg, type) {
     var n;
@@ -62,6 +62,40 @@ $(document).ready(function() {
       ]
     });
   };
+  noteFormConfirm = function(msg, event) {
+    var n;
+    return n = noty({
+      layout: 'center',
+      type: 'alert',
+      text: msg,
+      modal: true,
+      animation: {
+        open: {
+          height: 'toggle'
+        },
+        close: {
+          height: 'toggle'
+        },
+        easing: 'swing',
+        speed: 50
+      },
+      buttons: [
+        {
+          addClass: 'btn btn-primary',
+          text: 'Continue',
+          onClick: function($noty) {
+            return $noty.close();
+          }
+        }, {
+          addClass: 'btn btn-danger',
+          text: 'Cancel',
+          onClick: function($noty) {
+            return $noty.close();
+          }
+        }
+      ]
+    });
+  };
   $(".delete, .confirm").live('click', function() {
     this.blur();
     return false;
@@ -76,11 +110,8 @@ $(document).ready(function() {
     loc = $(this).attr("href");
     return noteConfirm("Are you sure you want to accept this offer?", loc);
   });
-  displayError = function(errors, event, confirmMsg) {
+  displayError = function(errors, event) {
     var error, errorString, _i, _len, _results;
-    if (confirmMsg == null) {
-      confirmMsg = "Proceed to submit?";
-    }
     if (errors.length > 0) {
       errorString = "";
       _results = [];
@@ -90,26 +121,21 @@ $(document).ready(function() {
       }
       return _results;
     } else {
-      if (confirmMsg != null) {
-        if (confirm(confirmMsg)) {
-          return true;
-        } else {
-          return false;
-        }
-      }
+      return confirm("Ready to submit your form?");
     }
   };
   /*
       Login Form Validator
   */
 
-  confirmMsg = "Proceed to sign in?";
   loginValidator = new FormValidator("login-form", [
     {
       name: 'username',
+      display: 'Username',
       rules: 'required|max_length[30]'
     }, {
       name: 'password',
+      display: 'Password',
       rules: 'required'
     }
   ], displayError);

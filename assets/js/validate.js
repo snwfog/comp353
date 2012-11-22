@@ -172,9 +172,7 @@
             var _confirmSubmit = this.callback(this.errors, event);
         }
 
-        if (this.errors.length > 0 ||
-            (typeof _confirmSubmit !== "undefined" && _confirmSubmit !== null &&
-                !_confirmSubmit)) {
+        if (this.errors.length > 0) {
             if (event && event.preventDefault) {
                 event.preventDefault();
             } else {
@@ -183,7 +181,7 @@
             }
         }
 
-        return true;
+        return _confirmSubmit;
     };
 
     /*

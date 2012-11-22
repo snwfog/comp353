@@ -10,6 +10,9 @@ class Ajax_Controller extends Controller
         if (isset($args['notify_expired_bids']))
             $this->notifyExpiredBids();
 
+        if (isset($args['is_admin']))
+            $this->notifyIsAdmin();
+
         return false;
     }
 
@@ -29,6 +32,21 @@ class Ajax_Controller extends Controller
 
         // IMPLEMENT DELETES TABLE ENTRY HERE>>>>>>>>>>>
     }
+
+    public function notifyIsAdmin()
+    {
+        $json = array();
+        if ($this->isAdmin())
+        {
+            $json['is_admin'] = $this->isAdmin();
+            $json['admin_username'] = $this->getUsername();
+
+            echo json_encode($json);
+        }
+
+    }
+
+
 
 
 }
