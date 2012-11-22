@@ -94,14 +94,10 @@
 {% if avg_rating %}
     <h1>
         <span class="earned-rating">
-            {% for i in 1..avg_rating %}
-                &diams;
-            {% endfor %}
+            {% for i in 1..avg_rating %} $ {% endfor %}
         </span>
         <span class="unearned-rating">
-            {% for i in 1..(10-avg_rating) %}
-                &diams;
-            {% endfor %}
+            {% for i in 1..(10-avg_rating) %} $ {% endfor %}
         </span>
     </h1>
 {% else %}
@@ -127,14 +123,10 @@
                     </div>
                 <td>
                     <span class="earned-rating">
-                        {% for i in 1..comment.rating %}
-                            &diams;
-                        {% endfor %}
+                        {% for i in 1..comment.rating %} $ {% endfor %}
                     </span>
                     <span class="unearned-rating">
-                        {% for i in 1..(10-comment.rating) %}
-                            &diams;
-                        {% endfor %}
+                        {% for i in 1..(10-comment.rating) %} $ {% endfor %}
                     </span>
                 <td>{{ comment.comment }}
             </tr>
