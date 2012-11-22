@@ -11,8 +11,7 @@ class Index_Controller extends Controller
         if ($this->isValidSession())
         {
             $this->data["specifier"] = "Member";
-            $this->data["is_logged_in"] = TRUE;
-
+            parent::__construct();
         }
         else
         {

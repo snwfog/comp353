@@ -21,8 +21,14 @@ abstract class Controller
         // If is logged in properly, set a global twig variable
         $this->data["is_logged_in"] = TRUE;
 
+        // Global set for admin
+        $this->data["is_admin"] = $this->isAdmin();
+
         // Loading a few frequently used twig data
         $this->data["messages"] = array();
+
+        // Get the username if possible
+        $this->data["username"] = $this->getUsername();
     }
 
     public function verifySession(Session $session)
@@ -56,6 +62,17 @@ abstract class Controller
     {    
         return (isset($_SESSION['owner_id'])) ? $_SESSION['owner_id'] : NULL;
     }
+
+    public function getUsername()
+    {
+        return (isset($_SESSION['user'])) ? $_SESSION['user'] : NULL;
+    }
+
+    public function isAdmin()
+    {
+        return (isset($_SESSION['is_admin'])) ? $_SESSION['is_admin'] : FALSE;
+    }
+
 
     public function endSession()
     {

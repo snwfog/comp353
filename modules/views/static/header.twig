@@ -1,7 +1,6 @@
 {% block header %}
 
 <div id="header">
-    {#<a href="index.php"><img id="title" src="assets/img/web/logo.png" alt="Auction Max"></a>#}
     <div id="nav">
         <div class="tiptip">
 
@@ -11,6 +10,9 @@
                     {#<span class="icon icon198"></span></a>#}
 
             {#</form>#}
+            {% if is_admin %}
+                <img src="assets/img/web/admin-logo.jpeg" alt="Admin" id="unicorn" />
+            {% endif %}
 
             <a href="index.php" class="button" title="Home">
                 <span class="icon icon108"></span><span class="label"></span>
@@ -18,15 +20,21 @@
 
             {% if is_logged_in %}
                 <a href="index.php?member" class="button" title="Profile">
-                    <span class="icon icon191"></span><span class="label">Profile</span>
+                    <span class="icon icon191"></span><span class="label">
+                    {% if username %} {{ username }} {% else %} Profile {% endif %}
+                    </span>
                 </a>
                 <a href="index.php?post" class="button" title="Post Offer">
                     <span class="icon icon130"></span><span class="label">Post Offer</span>
                 </a>
 
                 {% if is_admin %}
-                    <a href="index.php?admin" class="button" title="Post Offer">
+                    <a href="index.php?admin" class="button" title="Admin Tool">
                         <span class="icon icon185"></span><span class="label">Admin</span>
+                    </a>
+
+                    <a href="index.php?garage" class="button" title="Garage">
+                        <span class="icon icon2"></span><span class="label">Garage</span>
                     </a>
                 {% endif %}
 

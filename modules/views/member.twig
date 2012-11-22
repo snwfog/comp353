@@ -4,93 +4,6 @@
 
 {#----------------------------------------------------------------------------#}
 {#----------------------------------------------------------------------------#}
-{# PUBLIC STANDING RATING AND COMMENTS #}
-{#----------------------------------------------------------------------------#}
-{#----------------------------------------------------------------------------#}
-  <div id="rating">  
-    <h1>Public Standing</h1>
-    <h3>Overall Rating</h3>
-    {% if avg_rating %}
-        <h1>
-            <span class="earned-rating">
-                {% for i in 1..avg_rating %}
-                    &diams;
-                {% endfor %}
-            </span>
-            <span class="unearned-rating">
-                {% for i in 1..(10-avg_rating) %}
-                    &diams;
-                {% endfor %}
-            </span>
-        </h1>
-    {% else %}
-        <h1>No rating</h1>
-    {% endif %}
-
-    <h3>Comments</h3>
-    {% if comments %}
-        <table name="comment-table">
-            <tr>
-                <th>User
-                <th>Rating
-                <th>Comment
-            </tr>
-            {% for comment in comments %}
-                <tr>
-                    <td>
-                        <div class="tiptip">
-                        <a href="index.php?member&id={{ comment.rater_id }}"
-                           class="button" title="{{ comment.rater }}">
-                            <span class="icon icon191"></span>
-                        </a>
-                        </div>
-                    <td>
-                        <span class="earned-rating">
-                            {% for i in 1..comment.rating %}
-                                &diams;
-                            {% endfor %}
-                        </span>
-                        <span class="unearned-rating">
-                            {% for i in 1..(10-comment.rating) %}
-                                &diams;
-                            {% endfor %}
-                        </span>
-                    <td>{{ comment.comment }}
-                </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <p>This person currently has no comment, or has not made
-        any transaction.</p>
-    {% endif %}
-    <hr />
-
-    {#{% if not is_owner and is_transact %}#}
-    {% if not is_owner %}
-        <hr />
-        <form action="index.php?member&id={{ id }}" method="POST">
-            <ul>
-                <li><select name="rating">
-                    {% for value in 1..10 %}
-                        <option value="{{ value }}">{{ value }}</option>
-                    {% endfor %}
-                </select>
-                <li><textarea type="text" name="comment" cols="30" rows="6"></textarea>
-                <li><input type="hidden" name="ratee_id" value={{ id }}></li>
-                <li><input type="hidden" name="feedback" value="TRUE" />
-                <li><div class="tiptip">
-                        <button type="submit" name="submit" id="submit-bid"
-                                class="action blue submit" title="Rate User">
-                            <span class="icon icon41"></span>
-                            <span class="label">Rate</span>
-                        </button>
-                    </div>
-            </ul>
-        </form>
-    {% endif %}
-</div>
-{#----------------------------------------------------------------------------#}
-{#----------------------------------------------------------------------------#}
 {# MEMBER INFORMATION #}
 {#----------------------------------------------------------------------------#}
 {#----------------------------------------------------------------------------#}
@@ -167,6 +80,95 @@
         </table>
     {% endif %}
 </div>
+
+
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# PUBLIC STANDING RATING AND COMMENTS #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+<div id="rating">
+<hr />
+<h1>Public Standing</h1>
+<h3>Overall Rating</h3>
+{% if avg_rating %}
+    <h1>
+        <span class="earned-rating">
+            {% for i in 1..avg_rating %}
+                &diams;
+            {% endfor %}
+        </span>
+        <span class="unearned-rating">
+            {% for i in 1..(10-avg_rating) %}
+                &diams;
+            {% endfor %}
+        </span>
+    </h1>
+{% else %}
+    <h1>No rating</h1>
+{% endif %}
+
+<h3>Comments</h3>
+{% if comments %}
+    <table name="comment-table">
+        <tr>
+            <th>User
+            <th>Rating
+            <th>Comment
+        </tr>
+        {% for comment in comments %}
+            <tr>
+                <td>
+                    <div class="tiptip">
+                    <a href="index.php?member&id={{ comment.rater_id }}"
+                       class="button" title="{{ comment.rater }}">
+                        <span class="icon icon191"></span>
+                    </a>
+                    </div>
+                <td>
+                    <span class="earned-rating">
+                        {% for i in 1..comment.rating %}
+                            &diams;
+                        {% endfor %}
+                    </span>
+                    <span class="unearned-rating">
+                        {% for i in 1..(10-comment.rating) %}
+                            &diams;
+                        {% endfor %}
+                    </span>
+                <td>{{ comment.comment }}
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>This person currently has no comment, or has not made
+    any transaction.</p>
+{% endif %}
+
+{#{% if not is_owner and is_transact %}#}
+{% if not is_owner %}
+    <form action="index.php?member&id={{ id }}" method="POST">
+        <ul>
+            <li><select name="rating">
+                {% for value in 1..10 %}
+                    <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+            <li><textarea type="text" name="comment" cols="30" rows="6"></textarea>
+            <li><input type="hidden" name="ratee_id" value={{ id }}></li>
+            <li><input type="hidden" name="feedback" value="TRUE" />
+            <li><div class="tiptip">
+                    <button type="submit" name="submit" id="submit-bid"
+                            class="action blue submit" title="Rate User">
+                        <span class="icon icon41"></span>
+                        <span class="label">Rate</span>
+                    </button>
+                </div>
+        </ul>
+    </form>
+{% endif %}
+</div>
+
 {#----------------------------------------------------------------------------#}
 {#----------------------------------------------------------------------------#}
 {# OFFER SECTION #}
@@ -183,7 +185,9 @@
             <th>Category
             <th>Title
             <th>Price
-            <th>Delete
+            {% if is_admin or is_owner %}
+                <th>Delete
+            {% endif %}
         </tr>
         {% for offer in offers %}
             {% if(offer.expire == 0)%}
@@ -197,12 +201,14 @@
                       <td><a href="#">{{ offer.category }}</a>
                       <td>{{ offer.title }}
                       <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+                      {% if is_admin or is_owner %}
                       <td>
                           <div class="tiptip">
                               <a href="index.php?offer&delete={{ offer.id }}"
                                  class="button delete" title="Delete Offer">
                                   <span class="icon icon186"></span></a>
                           </div>
+                      {% endif %}
                   </tr>
             {% endif %}
         {% endfor %}
@@ -289,7 +295,7 @@
             {% for x in solds %}
                       <tr>
                           <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
-                          <td><a href="#">{{ x.price }}</a>
+                          <td><a href="#">$ {{ x.price|number_format('2', '.', ' ') }}</a>
                           <td><a href="index.php?member&id={{x.buyer_id}}">{{ x.username }}</a>
                           <td>{{ x.transact_date }}
                           <td>
@@ -317,7 +323,7 @@
             {% for x in boughts %}
                       <tr>
                           <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
-                          <td><a href="#">{{ x.price }}</a>
+                          <td><a href="#">$ {{ x.price|number_format('2', '.', ' ') }}</a>
                           <td><a href="index.php?member&id={{x.seller_id}}">{{ x.username }}</a>
                           <td>{{ x.transact_date }}
                           <td>{{ x.status }}

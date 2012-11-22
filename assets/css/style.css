@@ -76,18 +76,16 @@ input[type="radio"] {
 input[type="text"],
 input[type="password"] {
     vertical-align:middle;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
     display:inline-block;
     width:250px;
     padding:8px 8px;
-    border-radius:3px;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    -o-border-radius:3px;
     border:1px solid #999;
 }
 input[type="text"]:focus,
 input[type="password"]:focus {
     background:#FFF;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
     color:#333;
     border:1px solid #333;
 }
@@ -95,18 +93,12 @@ input[type="password"]:focus {
 textarea {
     width:640px;
     height:150px;
-    border-radius:3px;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    -o-border-radius:3px;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
     border:1px solid #999;
 }
+
 select {
     min-width:150px;
-    border-radius:3px;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    -o-border-radius:3px;
     border:1px solid #999;
 }
 
@@ -119,24 +111,18 @@ select {
     overflow: hidden;
     margin: auto;
     width: 70%;
-}
-
-#title
-{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-
+    background-color: #4C8FFD;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
 }
 
 #content .earned-rating
 {
-    color: yellowgreen;
+    color: orangered;
 }
 
 #content .unearned-rating
 {
-    color: lightgray;
+    color: rgba(100, 100, 100, 0.1);
 }
 
 #content
@@ -150,5 +136,20 @@ select {
     width: 70%;
     padding: 5px;
     text-align: center;
-    text-shadow: 1px 1px rgba(255, 255, 255, 1);
+    background-color: #4C8FFD;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
+    color: white;
+}
+
+
+/* Easter Eggs */
+#unicorn {
+    position: absolute;
+    top: 20px;
+    right: 10%;
+    clear: none;
+    overflow: hidden;
+    z-index: -100;
+    opacity: 0.15;
+    width: 20%;
 }

@@ -44,6 +44,9 @@ class Session
 
             // Check if this user is an admin
             $this->is_admin = $this->m_session->isAdmin($this->member_id);
+
+            // Generate the session username
+            $this->owner_username = $this->m_session->getUsername($this->member_id);
         }
     }
 
@@ -68,6 +71,12 @@ class Session
         return $this->member_id;
     }
 
+    public function whoName()
+    {
+        return $this->username;
+    }
+
+
     public function which()
     {
         return $this->session_id;
@@ -84,8 +93,7 @@ class Session
 
         // Check for admin
         $_SESSION['is_admin'] = $this->is_admin;
-
-
+        $_SESSION['user'] = $this->username;
     }
 
     public function endSession()
