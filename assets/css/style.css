@@ -31,6 +31,7 @@ h1, h2, h3, h4, h5 {
     clear: both;
     margin: 20px 0;
     font-family: Serifa BT;
+    text-shadow: 1px 1px rgba(100, 100, 100, 0.2);
 }
 
 h1 {
@@ -39,7 +40,7 @@ h1 {
 }
 
 hr {
-    border: 1px dashed black;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.2);
     margin: 30px auto 0;
     clear: both;
 }
@@ -115,6 +116,12 @@ select {
     box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
 }
 
+#content
+{
+    margin: 50px auto 50px;
+    width: 70%;
+}
+
 #content .earned-rating
 {
     color: orangered;
@@ -123,12 +130,6 @@ select {
 #content .unearned-rating
 {
     color: rgba(100, 100, 100, 0.1);
-}
-
-#content
-{
-    margin: 0px auto 50px;
-    width: 70%;
 }
 
 #footer{
@@ -145,7 +146,7 @@ select {
 /* Easter Eggs */
 #unicorn {
     position: absolute;
-    top: 20px;
+    top: 50px;
     right: 10%;
     clear: none;
     overflow: hidden;

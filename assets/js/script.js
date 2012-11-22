@@ -5,42 +5,90 @@ This script is used for data validation, and ajax.
 This script is NOT for UI, or animation, do that in global-script instead.
 */
 
-$(function() {
-  var bidOfferValidator, confirmAction, confirmMsg, displayError, loginValidator, postOfferValidator;
+$(document).ready(function() {
+  var bidOfferValidator, confirmMsg, displayError, loginValidator, noteAlert, noteConfirm, postOfferValidator;
   $('.tiptip a.button, .tiptip button').tipTip();
-  /*
-      A few button confirmation
-  */
-
+  noteAlert = function(msg, type) {
+    var n;
+    return n = noty({
+      layout: 'bottomRight',
+      type: type,
+      text: msg,
+      animation: {
+        open: {
+          height: 'toggle'
+        },
+        close: {
+          height: 'toggle'
+        },
+        easing: 'swing',
+        speed: 200
+      },
+      timeout: 5000
+    });
+  };
+  noteConfirm = function(msg, url) {
+    var n;
+    return n = noty({
+      layout: 'center',
+      type: 'alert',
+      text: msg,
+      modal: true,
+      animation: {
+        open: {
+          height: 'toggle'
+        },
+        close: {
+          height: 'toggle'
+        },
+        easing: 'swing',
+        speed: 50
+      },
+      buttons: [
+        {
+          addClass: 'btn btn-primary',
+          text: 'Continue',
+          onClick: function($noty) {
+            $noty.close();
+            return window.location = url;
+          }
+        }, {
+          addClass: 'btn btn-danger',
+          text: 'Cancel',
+          onClick: function($noty) {
+            return $noty.close();
+          }
+        }
+      ]
+    });
+  };
+  $(".delete, .confirm").live('click', function() {
+    this.blur();
+    return false;
+  });
   $('.delete').click(function() {
-    return confirmAction("Are you sure you want to perform a delete?");
+    var loc;
+    loc = $(this).attr("href");
+    return noteConfirm("Are you sure you want to perform a delete?", loc);
   });
   $('.confirm').click(function() {
-    return confirmAction("Are you sure you want to accept this offer?");
+    var loc;
+    loc = $(this).attr("href");
+    return noteConfirm("Are you sure you want to accept this offer?", loc);
   });
-  confirmAction = function(msg) {
-    if (confirm(msg)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  /*
-      Validator Error Handler
-  */
-
   displayError = function(errors, event, confirmMsg) {
-    var error, errorString, _i, _len;
+    var error, errorString, _i, _len, _results;
     if (confirmMsg == null) {
       confirmMsg = "Proceed to submit?";
     }
     if (errors.length > 0) {
       errorString = "";
+      _results = [];
       for (_i = 0, _len = errors.length; _i < _len; _i++) {
         error = errors[_i];
-        errorString += "<li>" + error.message + "</li>";
+        _results.push(noteAlert(error.message, "warning"));
       }
-      return $('.error-field').html(errorString);
+      return _results;
     } else {
       if (confirmMsg != null) {
         if (confirm(confirmMsg)) {

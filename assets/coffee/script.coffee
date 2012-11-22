@@ -4,31 +4,80 @@ This script is used for data validation, and ajax.
 This script is NOT for UI, or animation, do that in global-script instead.
 ###
 
-$ ->
+$(document).ready ->
+################################################################################
+# Google+ Style Tooltips Setup
+################################################################################
+
   $('.tiptip a.button, .tiptip button').tipTip()
 
-  ###
-    A few button confirmation
-  ###
+################################################################################
+# Noty Confirmation Setup
+################################################################################
+  noteAlert = (msg, type) ->
+    n = noty({
+      layout: 'bottomRight',
+      type: type,
+      text: msg,
+      animation: {
+        open: {height: 'toggle'},
+        close: {height: 'toggle'},
+        easing: 'swing',
+        speed: 200
+      },
+      timeout: 5000
+    })
+
+  noteConfirm = (msg, url) ->
+    n = noty({
+      layout: 'center',
+      type: 'alert',
+      text: msg,
+      modal: true,
+      animation: {
+        open: {height: 'toggle'},
+        close: {height: 'toggle'},
+        easing: 'swing',
+        speed: 50
+      },
+      buttons: [
+        {
+          addClass: 'btn btn-primary', text: 'Continue', onClick: ($noty) ->
+            $noty.close()
+            window.location = url
+        },
+        {
+          addClass: 'btn btn-danger', text: 'Cancel', onClick: ($noty) ->
+            $noty.close()
+        }
+      ]
+    })
+
+  # Hack to prevent default link follow click through so we
+  # can call noty confirmation to follow the link through.
+  $(".delete, .confirm").live 'click', ->
+    this.blur()
+    false
+
+  # Confirm delete and confirm class link with noty on click
+  # Customize the msg when needed.
   $('.delete').click ->
-    confirmAction "Are you sure you want to perform a delete?"
+    loc = $(this).attr "href"
+    noteConfirm "Are you sure you want to perform a delete?", loc
 
   $('.confirm').click ->
-    confirmAction "Are you sure you want to accept this offer?"
+    loc = $(this).attr "href"
+    noteConfirm "Are you sure you want to accept this offer?", loc
 
-  confirmAction = (msg) ->
-    if confirm msg then true else false
-
-  ###
-    Validator Error Handler
-  ###
+################################################################################
+# Validator Error Handler
+################################################################################
 
   displayError = (errors, event, confirmMsg = "Proceed to submit?") ->
     if errors.length > 0
       errorString = ""
       for error in errors
-        errorString += "<li>#{error.message}</li>"
-      $('.error-field').html errorString
+        noteAlert error.message, "warning"
     else
       if confirmMsg?
         if confirm confirmMsg then true else false
@@ -77,3 +126,4 @@ $ ->
     name: "description",
     rules: "required|max_length[100]"
   }], displayError)
+
