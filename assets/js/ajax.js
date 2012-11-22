@@ -8,7 +8,7 @@ $(function() {
   }).done(function(data) {
     if (data != null) {
       return $.each(data, function(i, item) {
-        return noteAlert("Your bids \"" + item.description + "\"          was expired on " + item.date + ".", "warning");
+        return noteAlert(("Your bids \"<b>" + item.description + "</b>\"          was expired <b>") + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning");
       });
     }
   });
