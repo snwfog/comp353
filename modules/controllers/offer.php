@@ -5,10 +5,7 @@ class Offer_Controller extends Controller implements IRedirectable
     public function __construct(array $args)
     {
         // Commenting this code will disable login check
-        // parent::__construct();
-        $this->startSession();
-
-        $this->data["is_logged_in"] = $this->isValidSession();
+        parent::__construct(FALSE);
 
         // Check if the offer id is set
         $m_offer = new Offer_Model();

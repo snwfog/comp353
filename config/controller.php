@@ -11,24 +11,30 @@ abstract class Controller
      */
     protected $data = array();
 
-    public function __construct()
+    public function __construct($redirect = TRUE)
     {
         $this->startSession();
         
         if (!$this->isValidSession())
-            $this->redirect(self::REDIRECT_INDEX);
+        {
+            if ($redirect)
+                $this->redirect(self::REDIRECT_INDEX);
+        }
+        else
+        {
+            // If is logged in properly, set a global twig variable
+            $this->data["is_logged_in"] = TRUE;
 
-        // If is logged in properly, set a global twig variable
-        $this->data["is_logged_in"] = TRUE;
+            // Global set for admin
+            $this->data["is_admin"] = $this->isAdmin();
 
-        // Global set for admin
-        $this->data["is_admin"] = $this->isAdmin();
+            // Loading a few frequently used twig data
+            $this->data["messages"] = array();
 
-        // Loading a few frequently used twig data
-        $this->data["messages"] = array();
+            // Get the username if possible
+            $this->data["username"] = $this->getUsername();
+        }
 
-        // Get the username if possible
-        $this->data["username"] = $this->getUsername();
     }
 
     public function verifySession(Session $session)

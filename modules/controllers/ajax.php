@@ -13,6 +13,12 @@ class Ajax_Controller extends Controller
         if (isset($args['is_admin']))
             $this->notifyIsAdmin();
 
+        if (isset($args['notify_receive']))
+            $this->notifyReceive();
+
+        if (isset($args['notify_acquire']))
+            $this->notifyAcquire();
+
         return false;
     }
 
@@ -33,6 +39,39 @@ class Ajax_Controller extends Controller
         // IMPLEMENT DELETES TABLE ENTRY HERE>>>>>>>>>>>
     }
 
+    public function notifyReceive()
+    {
+        $json = array();
+        $this->m_notifications = new Notification_Model();
+        $result = $this->m_notifications->getReceivedOffers($this->getMemberId());
+        if (!empty($result))
+        {
+            $json = array();
+
+            foreach($result as $row)
+                $json[] = $row;
+
+            echo json_encode($json);
+        }
+    }
+
+    public function notifyAcquire()
+    {
+        $json = array();
+        $this->m_notifications = new Notification_Model();
+        $result = $this->m_notifications->getAcquireOffers($this->getMemberId());
+        if (!empty($result))
+        {
+            $json = array();
+
+            foreach($result as $row)
+                $json[] = $row;
+
+            echo json_encode($json);
+        }
+    }
+
+
     public function notifyIsAdmin()
     {
         $json = array();
@@ -45,6 +84,8 @@ class Ajax_Controller extends Controller
         }
 
     }
+
+
 
 
 

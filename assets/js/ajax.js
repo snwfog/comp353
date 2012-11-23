@@ -3,12 +3,32 @@
 $(function() {
   var noteAlert;
   $.ajax({
+    url: "index.php?ajax&notify_acquire=1",
+    dataType: "json"
+  }).done(function(data) {
+    if (data != null) {
+      return $.each(data, function(i, item) {
+        return noteAlert("Your bid \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                  just arrived at the garage. You may come and pick it up                  during our regular business hour within the next <b>14</b> days.", "success");
+      });
+    }
+  });
+  $.ajax({
     url: "index.php?ajax&notify_expired_bids=1",
     dataType: "json"
   }).done(function(data) {
     if (data != null) {
       return $.each(data, function(i, item) {
-        return noteAlert(("Your bids \"<b>" + item.description + "</b>\"          was expired <b>") + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning");
+        return noteAlert(("Your bids \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.description + "</a></b>\"        was expired <b>") + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning");
+      });
+    }
+  });
+  $.ajax({
+    url: "index.php?ajax&notify_receive=1",
+    dataType: "json"
+  }).done(function(data) {
+    if (data != null) {
+      return $.each(data, function(i, item) {
+        return noteAlert("Hey, we just received your item \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"          in our garage. Rest assured as we've already notified          the bidder to come and pick it up.", "success");
       });
     }
   });

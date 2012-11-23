@@ -113,6 +113,7 @@ select {
     margin: auto;
     width: 70%;
     background-color: #4C8FFD;
+    border-radius: 0 0 3px 3px;
     box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
 }
 

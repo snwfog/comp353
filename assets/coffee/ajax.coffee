@@ -1,4 +1,17 @@
 $ ->
+
+################################################################################
+# Fetch ready for pickup offer function handler
+################################################################################
+  $.ajax({
+  url: "index.php?ajax&notify_acquire=1",
+  dataType: "json"
+  }).done (data) ->
+    if data?
+      $.each data, (i, item) ->
+        noteAlert "Your bid \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
+                  just arrived at the garage. You may come and pick it up
+                  during our regular business hour within the next <b>14</b> days.", "success"
 ################################################################################
 # Fetch expired bids function handler
 ################################################################################
@@ -8,9 +21,20 @@ $ ->
   }).done (data) ->
     if data?
       $.each data, (i, item) ->
-        noteAlert "Your bids \"<b>#{item.description}</b>\"
-          was expired <b>" + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning"
-
+        noteAlert "Your bids \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.description}</a></b>\"
+        was expired <b>" + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning"
+################################################################################
+# Fetch received offer function handler
+################################################################################
+  $.ajax({
+  url: "index.php?ajax&notify_receive=1",
+  dataType: "json"
+  }).done (data) ->
+    if data?
+      $.each data, (i, item) ->
+        noteAlert "Hey, we just received your item \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
+          in our garage. Rest assured as we've already notified
+          the bidder to come and pick it up.", "success"
 ################################################################################
 # Rainbow unicorn mode
 ################################################################################
