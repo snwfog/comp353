@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.25)
 # Database: comp353
-# Generation Time: 2012-11-21 19:10:26 +0000
+# Generation Time: 2012-11-23 16:06:49 +0000
 # ************************************************************
 
 
@@ -63,8 +63,17 @@ CREATE TABLE `admins` (
   KEY `id_idx` (`member_id`),
   KEY `fk_admin_members_idx` (`member_id`),
   CONSTRAINT `fk_admin_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `admins` WRITE;
+/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
+
+INSERT INTO `admins` (`id`, `member_id`)
+VALUES
+	(1,1);
+
+/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table bids
@@ -88,7 +97,7 @@ CREATE TABLE `bids` (
   CONSTRAINT `fk_bids_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
   CONSTRAINT `fk_bids_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_bids_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `bids` WRITE;
 /*!40000 ALTER TABLE `bids` DISABLE KEYS */;
@@ -102,10 +111,21 @@ VALUES
 	(5,1,12,33,0,'Gonna repair your computer for free lolz',1),
 	(6,2,8,36,123,'Will host one birthday party at your home for free.',1),
 	(7,2,8,34,45,'Will draw your naked portrait',1),
-	(8,1,33,37,89,'financial helping you.',0);
+	(8,1,33,37,89,'financial helping you.',0),
+	(9,1,33,40,89,'Ill give your pet a nice grooming, worth of 89 dollar',0);
 
 /*!40000 ALTER TABLE `bids` ENABLE KEYS */;
 UNLOCK TABLES;
+
+DELIMITER ;;
+/*!50003 SET SESSION SQL_MODE="" */;;
+/*!50003 CREATE */ /*!50017 DEFINER=`root`@`localhost` */ /*!50003 TRIGGER `after_bids_update` AFTER UPDATE ON `bids` FOR EACH ROW BEGIN
+  IF (NEW.expire = 1) THEN
+    INSERT INTO notify_queue (bid_id, expire_date) VALUES (NEW.id, curdate());
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;
 
 
 # Dump of table categories
@@ -310,7 +330,7 @@ CREATE TABLE `feedbacks` (
   KEY `fk_feedbacks_members_ratees` (`ratee_id`),
   CONSTRAINT `fk_feedbacks_members_ratees` FOREIGN KEY (`ratee_id`) REFERENCES `members` (`id`),
   CONSTRAINT `fk_feedbacks_members_raters` FOREIGN KEY (`rater_id`) REFERENCES `members` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 LOCK TABLES `feedbacks` WRITE;
 /*!40000 ALTER TABLE `feedbacks` DISABLE KEYS */;
@@ -323,7 +343,8 @@ VALUES
 	(4,2,1,4,'alksdjflkasdf;lkajsdf\r\nasdlfkjaslkdfja\r\nlkasdjfklasjdklf'),
 	(5,2,1,6,'lkasdjfklasjdlfkjaskdlf\r\naskldfjaklsdjfkl;a\r\n;lasdjflkajsdklf\r\nkasdjfklasjdklfasdf'),
 	(6,1,2,1,'asdfasdfasdf'),
-	(7,2,1,6,'This guy sucks.');
+	(7,2,1,6,'This guy sucks.'),
+	(8,1,2,1,'hes alright i guess.');
 
 /*!40000 ALTER TABLE `feedbacks` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -394,8 +415,8 @@ CREATE TABLE `members` (
   KEY `id_idx` (`address_id`),
   KEY `fk_members_visitors_idx` (`visitor_id`),
   KEY `fk_members_emails` (`email_id`),
-  CONSTRAINT `fk_members_emails` FOREIGN KEY (`email_id`) REFERENCES `emails` (`id`),
   CONSTRAINT `fk_members_addresses` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`),
+  CONSTRAINT `fk_members_emails` FOREIGN KEY (`email_id`) REFERENCES `emails` (`id`),
   CONSTRAINT `fk_members_visitors` FOREIGN KEY (`visitor_id`) REFERENCES `visitors` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
@@ -410,6 +431,88 @@ VALUES
 	(4,'scavenger101','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',4,4,4,NULL);
 
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table notify_acquire
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `notify_acquire`;
+
+CREATE TABLE `notify_acquire` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `storage_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_notify_acquire_storages` (`storage_id`),
+  CONSTRAINT `fk_notify_acquire_storages` FOREIGN KEY (`storage_id`) REFERENCES `storages` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+LOCK TABLES `notify_acquire` WRITE;
+/*!40000 ALTER TABLE `notify_acquire` DISABLE KEYS */;
+
+INSERT INTO `notify_acquire` (`id`, `storage_id`)
+VALUES
+	(1,1);
+
+/*!40000 ALTER TABLE `notify_acquire` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table notify_pickup
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `notify_pickup`;
+
+CREATE TABLE `notify_pickup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `storage_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_notify_pickup_storages` (`storage_id`),
+  CONSTRAINT `fk_notify_pickup_storages` FOREIGN KEY (`storage_id`) REFERENCES `storages` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+LOCK TABLES `notify_pickup` WRITE;
+/*!40000 ALTER TABLE `notify_pickup` DISABLE KEYS */;
+
+INSERT INTO `notify_pickup` (`id`, `storage_id`)
+VALUES
+	(1,1);
+
+/*!40000 ALTER TABLE `notify_pickup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table notify_queue
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `notify_queue`;
+
+CREATE TABLE `notify_queue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bid_id` int(11) NOT NULL,
+  `expire_date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_notify_queue_bids` (`bid_id`),
+  CONSTRAINT `fk_notify_queue_bids` FOREIGN KEY (`bid_id`) REFERENCES `bids` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+LOCK TABLES `notify_queue` WRITE;
+/*!40000 ALTER TABLE `notify_queue` DISABLE KEYS */;
+
+INSERT INTO `notify_queue` (`id`, `bid_id`, `expire_date`)
+VALUES
+	(1,1,'2012-11-22'),
+	(2,2,'2012-11-22'),
+	(3,3,'2012-11-22'),
+	(4,4,'2012-11-22'),
+	(5,5,'2012-11-22'),
+	(6,1,'2012-11-22'),
+	(7,2,'2012-11-22'),
+	(8,3,'2012-11-22'),
+	(9,4,'2012-11-22'),
+	(10,5,'2012-11-22');
+
+/*!40000 ALTER TABLE `notify_queue` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -430,34 +533,31 @@ CREATE TABLE `offers` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_offers_categories` (`category_id`),
   CONSTRAINT `fk_offers_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `offers` WRITE;
 /*!40000 ALTER TABLE `offers` DISABLE KEYS */;
 
 INSERT INTO `offers` (`id`, `title`, `description`, `price`, `category_id`, `image_url`, `expire`)
 VALUES
-	(2,'asdlfkjaskdlfj','kljaskldjfklasjdklf',0.00,41,'NULL',0),
-	(3,'alksdflkasdjfklj','lkjflaksdjfklajskdlfjaklsdfklajsdklf',0.00,41,'NULL',0),
-	(4,'asdkfjaslkdfj','jlkajskldfjaklsdjflkajskldf\r\n',0.00,12,'NULL',0),
-	(5,'asdjfaskjdfhjk','jklasdjfklajsdklfjaskdlfj\r\n',0.00,41,'NULL',0),
-	(6,'asldkfjaklsdfj','jlkjaskdlfj',0.00,41,'NULL',0),
-	(7,'alsdjfklasdjfkl','lkajsdklfjaklsdjflkajsdklfjasdf',0.00,12,'NULL',0),
 	(8,'Eye lash','Integer at massa diam. Etiam euismod lectus in metus suscipit eget mattis dolor pharetra. Nulla ultrices vestibulum arcu, ac ornare risus posuere vel. Fusce gravida sagittis justo, nec vestibulum sapien tincidunt sit amet. Nullam tempor ante et purus luctus pretium quis in erat. Morbi hendrerit hendrerit metus, nec vehicula magna lacinia sed. Vivamus ac mi odio. Nam viverra erat nec metus scelerisque tempus. Donec eleifend feugiat nunc, eget scelerisque neque varius vitae. Vivamus facilisis, risus sed varius rutrum, leo ipsum sodales lectus, vitae adipiscing sapien tellus non lorem. Maecenas felis odio, auctor sit amet condimentum at, condimentum non ligula. Mauris non arcu odio, sed tristique nibh. Morbi eu felis a nisi sodales laoreet at eu odio. Suspendisse aliquam bibendum orci ut lacinia. Praesent sem erat, gravida a accumsan quis, tempus ut tortor.\r\n\r\nSed massa nulla, facilisis tristique faucibus vel, euismod eu arcu. Pellentesque ultrices gravida justo, sit amet interdum ligula eleifend quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus consectetur lobortis elit, quis euismod enim mattis sit amet. Cras viverra nibh erat. Fusce tincidunt venenatis est, et scelerisque tortor scelerisque nec. Mauris porttitor, augue at aliquet accumsan, metus elit scelerisque ipsum, id auctor diam ante vel ',12323.00,32,'NULL',1),
 	(9,'Sup sup sup','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',23942394.00,3,'NULL',0),
 	(10,'Sup sup sup','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',23942394.00,3,'NULL',1),
-	(11,'Hello Kitty Tooth brush','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',23.00,32,'NULL',0),
+	(11,'Hello Kitty Tooth brush','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',23.00,32,'NULL',1),
 	(12,'Mega Man Atari Game','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',2.00,31,'NULL',1),
-	(13,'Apple iPad Mini Black','Brand new Apple iPad mini in black. Asking for 400. Cash only. SErious offer contact.',400.00,23,'NULL',0),
+	(13,'Apple iPad Mini Black','Brand new Apple iPad mini in black. Asking for 400. Cash only. SErious offer contact.',400.00,23,'NULL',1),
 	(14,'','',0.00,32,'NULL',1),
 	(15,'','',0.00,32,'NULL',1),
 	(16,'','',0.00,32,'NULL',1),
 	(17,'','',0.00,32,'NULL',1),
-	(18,'MenBody Magazine July 1983','Selling my July 1983 MenBodys magazine. In good shape, used by my grand parents.',3.99,13,'NULL',0),
+	(18,'MenBody Magazine July 1983','Selling my July 1983 MenBodys magazine. In good shape, used by my grand parents.',3.99,13,'NULL',1),
 	(25,'Old car 1980','Giving away my little car from my grand dad.',4.00,19,'NULL',1),
-	(31,'Baby clothes','Give away 3 years old baby clothes',0.00,5,'NULL',0),
+	(31,'Baby clothes','Give away 3 years old baby clothes',0.00,5,'NULL',1),
 	(32,'Macbook pro 13 in 2009','still in good condition. PST',800.00,33,'NULL',1),
-	(33,'Database assignment tutoring','99 Dollar per hours for database comp353 tutoring.',99.00,39,'NULL',0);
+	(33,'Database assignment tutoring','99 Dollar per hours for database comp353 tutoring.',99.00,39,'NULL',0),
+	(34,'asdfasdf','asdfasdfasdf',33343.00,32,'NULL',1),
+	(35,'123 123 123 ','123123123123',123.00,32,'NULL',0),
+	(36,'Unicorn rainbow candy','Selling unicorn rainbow cotton candy. Will grant you 3 wishes upon eating them.',9999999.00,30,'NULL',0);
 
 /*!40000 ALTER TABLE `offers` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -493,7 +593,7 @@ CREATE TABLE `posts` (
   KEY `fk_posts_offers_idx1` (`offer_id`),
   CONSTRAINT `fk_posts_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_posts_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
@@ -513,7 +613,10 @@ VALUES
 	(1,25,17),
 	(1,31,19),
 	(1,32,20),
-	(2,33,21);
+	(2,33,21),
+	(1,34,22),
+	(1,35,23),
+	(1,36,24);
 
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -549,7 +652,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_sessions_members_idx` (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
@@ -604,9 +707,46 @@ VALUES
 	(46,1,'971f379ed2592358cfe3b3d404ec698fbc0b3ba5e3993ffd41b6db45e9d5d509',1),
 	(47,2,'5d9d769417a83ad04708ab0088d5fad537038e3f645f902c28cdb07cdc9a5894',1),
 	(48,1,'1bb5f74b258e4b8dfbf06262c21ea80567fbf26b7dd0a4c6e799d826e68a0323',1),
-	(49,2,'088271669683141d15e8ebca2ba2780a96209a19dc17c583c1e935e49d08a837',0),
+	(49,2,'088271669683141d15e8ebca2ba2780a96209a19dc17c583c1e935e49d08a837',1),
 	(50,1,'3277ea3146dbe3529e33c3c1f4b10f7a17d5cd917ba86519ed5d490a2909403b',1),
-	(51,1,'23f21e0dabc812c8fe892843fc49a76b0466fee8ee312354d099f5e0279b2c53',0);
+	(51,1,'23f21e0dabc812c8fe892843fc49a76b0466fee8ee312354d099f5e0279b2c53',1),
+	(52,1,'d879c8bb6aecd2ef5b97ee80334dd4ec06cb23d8c6ec9874631b9b3c1c9bc5ce',1),
+	(53,1,'582079334f9a5ceae9c7ac3fd645bac74ec933ef3d145f3373bdab8e4295d348',1),
+	(54,1,'d6d81a7a831530f79ded951b02ebac8038508dfec49becb016e9d73cae7ecaee',1),
+	(55,1,'625524ee49ce4b10e06acca452ed547a8cfba3ba060cf15b63a7d4f3c1905a23',1),
+	(56,1,'8c0fa121525383550fb6874b55660eb2814e62a87fb149e9f2a266b34dd6ceef',1),
+	(57,1,'aa26db8d58fcd22d2877483fcf4d27a5191ffb17d3b6470ba915c7f2849be9be',1),
+	(58,1,'7822328bfc01b531dc94cea9aeb77685df6405a039b7c2f0b38b87c6207b130d',1),
+	(59,1,'0c91f56e4fc01c15cbff07ad6062c2f4f316e005f1094d9d29bfaac0be461dd1',1),
+	(60,1,'e6ff98738dd45d29ebbe31b1e46f30f34380d1a0cdff981d6806958b6b2f8c3d',1),
+	(61,1,'24eba33ae19e5044cc7518ad1ee85342695dcdff2d6a6f5545f46615730bc565',1),
+	(62,1,'370124177985e2b9bfb9462ae3ae3c09c8ee921e9f2a49780b569f5c6430fd22',1),
+	(63,1,'30fdbe795de89fd6fed4a2b0ccff4e863024f02ad7193be4b0dd5d947bdb0074',1),
+	(64,2,'d208fb1f4fdd32aa6b91c22896c1b1d32402720e81bbd4f193cfdff23683d9ac',1),
+	(65,2,'ba886df02dc44d675a4c0ea225cefeccef375580ff7858d894d652826d5e5463',1),
+	(66,1,'32610e7bf60886a6ada3f1acc6fd9fb92d58552a1779d03694c5cd58e9d57446',1),
+	(67,1,'d9ad142000088e09dbe4de0ed41527d7099767bbdc902a31134bbc8ea8ff9aa3',1),
+	(68,2,'852933ad8981c5210077d4c5218d17440c8eec3c2f382fbd75c0562393fe6d50',1),
+	(69,1,'f6a3c1a117811d2d0c298b1686a1bdafa067f155e55895e3486060c11cc2ac74',1),
+	(70,1,'3bdc6729778591ca5b6140fecebbf660eb71cb06c6f62794999caaaecda7e4ce',1),
+	(71,1,'72f682ccfafcd5f95c157d6feca2c120f81b42f635ecfd403e8781037247b191',1),
+	(72,2,'3d2429597094571deb95026ec6e1a877d54a41ca48978dd242c34e564381dc6b',1),
+	(73,1,'81cf9741cb0ed56fc5d2358e3527cbc4ea4d8e17cf1021edabc3f452c525ea46',1),
+	(74,1,'3b89c538f439c2f25afdce6a78294d0018d2f0e7fda3cba7017bcfc7ed7fc76a',1),
+	(75,1,'52e79d98ce477c2d32c89512d4a2951924ad9558cd3acc3e7faa9599d46a5b2f',1),
+	(76,1,'9c0bc77aba9c2a9f30980cc15d6a53c97cf270d61cc1ade7b0ce40b204036af4',1),
+	(77,1,'b1dac1b21162d23287cc2806c3b93843aca59f4ea44b38f433353e1832e519d8',1),
+	(78,1,'7774be148cbbbf2be4744e11395e3136a43915d36729a4262ce13c225c486449',1),
+	(79,1,'5dcba98bf066febb547cfaaea41af16124ac138de2b201fb278f356d2d4b7289',1),
+	(80,1,'1e3feeeb7a254b5a1d8dad1b19732deeb4c86eb41815d1fa9cc70ee0802411bc',1),
+	(81,1,'2dff0de8625dfdc16dcedaf18e60de295ebaf4778b82f242c48b216111a50d3b',1),
+	(82,1,'71d313fb9fcd3f6aa54a2681e559682b23f2ddc0af8e55bd6d46900f777b09d8',1),
+	(83,1,'fa2c5a892d458eaa298c0d14192264b91c663deadc5cb90774f4fa174215c04a',1),
+	(84,1,'5740b2d78b614315b50acc25a51a7fcffe147b952d244cf248a693c352e6ecdd',1),
+	(85,2,'34b041d018d02b4b0967bd4ef0dd8761418167121f17f80df56a298fa914ab78',0),
+	(86,1,'b7db3f3ba0e6a97b98956c7e1b634b36cf78f0024ef97f17b5bb51f773493928',1),
+	(87,1,'174ef43500ac8080338c9fea4c237e6004a837ffdc45652e75c1c1f607c1ea84',1),
+	(88,1,'37a5448707c569bdc576d56751aaef91a1714f76306c952d0d8d145a8d58aca4',0);
 
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -627,8 +767,29 @@ CREATE TABLE `storages` (
   PRIMARY KEY (`id`),
   KEY `fk_storages_transact_idx` (`transact_id`),
   CONSTRAINT `fk_storages_transact` FOREIGN KEY (`transact_id`) REFERENCES `transacts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `storages` WRITE;
+/*!40000 ALTER TABLE `storages` DISABLE KEYS */;
+
+INSERT INTO `storages` (`id`, `transact_id`, `acquire_date`, `pickup_date`, `weight`, `status`)
+VALUES
+	(1,3,'2012-11-23','2012-11-23',NULL,'Not Received');
+
+/*!40000 ALTER TABLE `storages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+DELIMITER ;;
+/*!50003 SET SESSION SQL_MODE="" */;;
+/*!50003 CREATE */ /*!50017 DEFINER=`root`@`localhost` */ /*!50003 TRIGGER `after_storages_update` AFTER UPDATE ON `storages` FOR EACH ROW BEGIN
+  IF (NEW.pickup_date IS NOT NULL) THEN
+    INSERT INTO notify_pickup(storage_id) VALUES (NEW.id);
+  ELSEIF (NEW.acquire_date IS NOT NULL) THEN
+    INSERT INTO notify_acquire(storage_id) VALUES (NEW.id);
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;
 
 
 # Dump of table top_level_domains
@@ -676,9 +837,9 @@ CREATE TABLE `transacts` (
   KEY `fk_transactions_members_idx1` (`seller_id`),
   KEY `fk_transactions_members_idx2` (`seller_id`),
   KEY `fk_transacts_bids_idx` (`bid_id`),
-  CONSTRAINT `fk_transacts_bids` FOREIGN KEY (`bid_id`) REFERENCES `bids` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_transactions_members` FOREIGN KEY (`buyer_id`) REFERENCES `members` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_transactions_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_transactions_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_transacts_bids` FOREIGN KEY (`bid_id`) REFERENCES `bids` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `transacts` WRITE;
@@ -701,7 +862,7 @@ CREATE TABLE `types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `types` WRITE;
 /*!40000 ALTER TABLE `types` DISABLE KEYS */;
@@ -816,7 +977,8 @@ AS select
    `offers`.`image_url` AS `image_url`,
    `offers`.`expire` AS `expire`
 from `offers`
-where ((`offers`.`price` < 7.99) and (`offers`.`expire` <> 1));
+where ((`offers`.`price` < 7.99) and (`offers`.`expire` <> 1) and (not(exists(select 1 from `giveaways`
+where (`giveaways`.`offer_id` = `offers`.`id`)))));
 
 --
 -- Dumping routines (PROCEDURE) for database 'comp353'
