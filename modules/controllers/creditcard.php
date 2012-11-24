@@ -20,7 +20,7 @@ class CreditCard_Controller extends Controller implements IRedirectable
                       $_POST["verification_number"],
                       $_POST["card_holder"]
                     );
-              $this->back();
+              header('Location: ' . $_POST["previous_page"]);
             }else{
               $this->checkNumber();
               $creditcardModel->create_credit_card(
@@ -32,11 +32,13 @@ class CreditCard_Controller extends Controller implements IRedirectable
                       $_POST["card_holder"],
                       $this
                     );
-              $this->back();
+              header('Location: ' . $_POST["previous_page"]);
 
             }
         }else{
+          $this->data["previous_page"] = $_SERVER['HTTP_REFERER'];
           $this->display("creditcard.twig", $this->data);
+
         }
 
     }
