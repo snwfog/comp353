@@ -1,43 +1,173 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
-    <h1>Public Standing</h1>
-    <h3>Rating</h3>
-    {% if rating %}
-        <h1>{{ rating }}</h1>
-    {% else %}
-        <h1>No rating</h1>
+
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# MEMBER INFORMATION #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+
+<div id="info">
+    <h1>Member Information</h1>
+    <table>
+        <tr>
+            <td>Avatar</td>
+            <td><img src="{{ avatar_url }}" alt="{{ username }}" /></td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td>{{ public_info.username }}</td>
+        </tr>
+        <tr>
+            <td>Member Since</td>
+            <td>{{ public_info.join_data|date('F j, Y') }}</td>
+        </tr>
+        {% if private %}
+            <tr>
+                <td>First Name</td>
+                <td>{{ private_info.first_name }}</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>{{ private_info.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td>{{ private_info.phone_number }}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{ private_info.address }}</td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td>{{ private_info.city }}</td>
+            </tr>
+            <tr>
+                <td>Province</td>
+                <td>{{ private_info.province }}</td>
+            </tr>
+            <tr>
+                <td>Country</td>
+                <td>{{ private_info.country }}</td>
+            </tr>
+            <tr>
+                <td>Postal Code</td>
+                <td>{{ private_info.postal_code }}</td>
+            </tr>
+        {% endif %}
+    </table>
+    {% if private %}
+        <h4>Credit Card Information (<a href="index.php?creditcard">Change/Add</a>)</h4>
+        <table>
+            <tr>
+                <td>HolderName</td>
+                <td>{{creditcard.holder_name}}</td>
+            </tr>
+            <tr>
+                <td>Credit Card Type</td>
+                <td>{{creditcard.credit_card_type}}</td>
+            </tr>
+            <tr>
+                <td>Number</td>
+                <td>{{ creditcard.number }}</td>
+            </tr>
+            <tr>
+                <td>Expire</td>
+                <td>{{ creditcard.expire }}</td>
+            </tr>
+        </table>
     {% endif %}
-
-    <h3>Comments</h3>
-    {% if comments %}
-
-    {% else %}
-        <p>This person currently has no comment, or has not made
-        any transaction.</p>
-    {% endif %}
+</div>
 
 
-    {% if is_owner %}
-        <hr />
-        <form action="index.php?member&id={{ owner.id }}" method="POST">
-            <ul>
-                <li><select name="rating">
-                    {% for value in 1..10 %}
-                        <option value="{{ value }}">{{ value }}</option>
-                    {% endfor %}
-                </select>
-                <li><textarea type="text" name="comment" cols="30" rows="6"></textarea>
-                <li><input type="hidden" name="rate" value="TRUE" />
-                <li><input type="submit" value="Bid" />
-            </ul>
-        </form>
-    {% endif %}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# PUBLIC STANDING RATING AND COMMENTS #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+<div id="rating">
+<hr />
+<h1>Public Standing</h1>
+<h3>Overall Rating</h3>
+{% if avg_rating %}
+    <h1>
+        <span class="earned-rating">
+            {% for i in 1..avg_rating %} $ {% endfor %}
+        </span>
+        <span class="unearned-rating">
+            {% for i in 1..(10-avg_rating) %} $ {% endfor %}
+        </span>
+    </h1>
+{% else %}
+    <h1>No rating</h1>
+{% endif %}
 
-    <h1>Information</h1>
-    <h3>{{ username }}</h3>
-    <img src="{{ avatar_url }}" alt="{{ username }}" />
+<h3>Comments</h3>
+{% if comments %}
+    <table name="comment-table">
+        <tr>
+            <th>User
+            <th>Rating
+            <th>Comment
+        </tr>
+        {% for comment in comments %}
+            <tr>
+                <td>
+                    <div class="tiptip">
+                    <a href="index.php?member&id={{ comment.rater_id }}"
+                       class="button" title="{{ comment.rater }}">
+                        <span class="icon icon191"></span>
+                    </a>
+                    </div>
+                <td>
+                    <span class="earned-rating">
+                        {% for i in 1..comment.rating %} $ {% endfor %}
+                    </span>
+                    <span class="unearned-rating">
+                        {% for i in 1..(10-comment.rating) %} $ {% endfor %}
+                    </span>
+                <td>{{ comment.comment }}
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>This person currently has no comment, or has not made
+    any transaction.</p>
+{% endif %}
 
+{#{% if not is_owner and is_transact %}#}
+{% if not is_owner %}
+    <form action="index.php?member&id={{ id }}" method="POST">
+        <ul>
+            <li><select name="rating">
+                {% for value in 1..10 %}
+                    <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+            <li><textarea type="text" name="comment" cols="30" rows="6"></textarea>
+            <li><input type="hidden" name="ratee_id" value={{ id }}></li>
+            <li><input type="hidden" name="feedback" value="TRUE" />
+            <li><div class="tiptip">
+                    <button type="submit" name="submit" id="submit-bid"
+                            class="action blue submit" title="Rate User">
+                        <span class="icon icon41"></span>
+                        <span class="label">Rate</span>
+                    </button>
+                </div>
+        </ul>
+    </form>
+{% endif %}
+</div>
+
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# OFFER SECTION #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+  
+  <div id="offer"> 
     <hr /><h1>Offers</h1>
     {% if offers %}
         <table name="offer-table">
@@ -47,33 +177,154 @@
             <th>Category
             <th>Title
             <th>Price
-            <th>Delete
+            {% if is_admin or is_owner %}
+                <th>Delete
+            {% endif %}
         </tr>
         {% for offer in offers %}
-        <tr>
-            <td><a href="index.php?offer&id={{ offer.id }}">View</a>
-            <td><a href="#">{{ offer.type }}</a>
-            <td><a href="#">{{ offer.category }}</a>
-            <td>{{ offer.title }}
-            <td>$ {{ offer.price|number_format('2', '.', ' ') }}
-            <td><a href="#">x</a>
-        </tr>
+            {% if(offer.expire == 0)%}
+                  <tr>
+                      <td><div class="tiptip">
+                          <a href="index.php?offer&id={{ offer.id }}"
+                             class="button" title="View Offer">
+                              <span class="icon icon113"></span></a>
+                      </div>
+                      <td><a href="#">{{ offer.type }}</a>
+                      <td><a href="#">{{ offer.category }}</a>
+                      <td>{{ offer.title }}
+                      <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+                      {% if is_admin or is_owner %}
+                      <td>
+                          <div class="tiptip">
+                              <a href="index.php?offer&delete={{ offer.id }}"
+                                 class="button delete" title="Delete Offer">
+                                  <span class="icon icon186"></span></a>
+                          </div>
+                      {% endif %}
+                  </tr>
+            {% endif %}
         {% endfor %}
         </table>
-    {% else %}
+    {% elseif is_owner %}
         <p>You do not have any offers. Click <a href="index.php?post">here</a>
         to start a new offer.</p>
+    {% else %}
+        <p>This member currently has no ongoing offers.</p>
     {% endif %}
+    <div class="tiptip">
+        <a href="#" class="button" title="Offer History">
+            <span class="icon icon140"></span>
+            <span class="label">Offer History</span>
+        </a>
+    </div>
+  </div>
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# ON GOING BIDS SECTION #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
 
+   <div id="bid"> 
     {# Show bids only if it is private view mode #}
     {% if private %}
         <hr /><h1>Bids</h1>
         {% if bids %}
+            <table>
+            <tr>
+                <th>Offer</th>
+                <th>Status</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Description</th>
+            </tr>
+            {% for bid in bids %}
+                <tr>
+                    <td><div class="tiptip">
+                        <a href="index.php?offer&id={{ bid.offer_id }}"
+                           class="button" title="View Bid">
+                            <span class="icon icon113"></span></a>
+                    </div>
+                    <td>Not yet implemented</td>
+                    <td><a href="#">{{ bid.type }}</a></td>
+                    <td><a href="#">{{ bid.category }}</a></td>
+                    <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
+                    <td>{{ bid.description }}</td>
+                </tr>
+            {% endfor %}
+            </table>
         {% else %}
             <p>You do not have any ongoing bids.</p>
+        {% endif %}
+    {% endif %}
+       <div class="tiptip">
+           <a href="#" class="button" title="Bid Summary">
+               <span class="icon icon140"></span>
+               <span class="label">Bid Summary</span>
+           </a>
+       </div>
+   </div> 
+
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# TRANSACTION HISTORY #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+
+   <div id="transaction"> 
+    {% if private %}
+        <hr /><h1>Transaction History</h1>
+        {% if solds %}
+            <h2>Sold</h2>
+            <table name="sold-table">
+            <tr>
+                <th>Title
+                <th>Price
+                <th>Buyer
+                <th>Transaction Date
+                <th>Storage Status
+            </tr>
+            {% for x in solds %}
+                      <tr>
+                          <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
+                          <td><a href="#">$ {{ x.price|number_format('2', '.', ' ') }}</a>
+                          <td><a href="index.php?member&id={{x.buyer_id}}">{{ x.username }}</a>
+                          <td>{{ x.transact_date }}
+                          <td>
+                              {% if x.status == "link" %}
+                                  <a href="index.php?storage&transaction_id={{x.id}}">Store Item</a>
+                              {% else %}
+                                  {{ x.status }}
+                              {% endif %}
+                      </tr>
+            {% endfor %}
+            </table>
+        {% endif %}
+
+
+        {% if boughts %}
+            <h2>Bought</h2>
+            <table name="bought-table">
+            <tr>
+                <th>Title
+                <th>Price
+                <th>Seller
+                <th>Transaction Date
+                <th>Storage
+            </tr>
+            {% for x in boughts %}
+                      <tr>
+                          <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
+                          <td><a href="#">$ {{ x.price|number_format('2', '.', ' ') }}</a>
+                          <td><a href="index.php?member&id={{x.seller_id}}">{{ x.username }}</a>
+                          <td>{{ x.transact_date }}
+                          <td>{{ x.status }}
+                      </tr>
+            {% endfor %}
+            </table>
         {% endif %}
 
     {% endif %}
 
-
+    </div>
 {% endblock content %}

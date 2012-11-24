@@ -2,8 +2,15 @@
 
 {% block content %}
 
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# HOT OFFER SECTION #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+
     {% if hot_offers %}
-        <h1>Amazing Hot Offers Lesser Than ${{ hot_offer_threshold }}!</h1>
+    <div id="index">
+        <h1>Great Hot Offers Lesser Than ${{ hot_offer_threshold }}!</h1>
         <table name="offer-table">
             <tr>
                 <th>View
@@ -15,7 +22,12 @@
             </tr>
             {% for offer in hot_offers %}
                 <tr>
-                    <td><a href="index.php?offer&id={{ offer.id }}">View</a>
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?offer&id={{ offer.id }}"
+                               class="button" title="View Offer">
+                                <span class="icon icon113">View</span></a>
+                        </div>
                     <td>
                         {% if is_logged_in %}
                             <a href="index.php?member&id={{ offer.owner_id }}">
@@ -33,6 +45,54 @@
             {% endfor %}
         </table>
     {% endif %}
+
+
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# GIVEAWAY SECTION #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+
+    {% if giveaways %}
+    <hr /><h1>Amazing Giveaways</h1>
+        <table name="offer-table">
+            <tr>
+                <th>View
+                <th>Owner
+                <th>Type
+                <th>Category
+                <th>Title
+            </tr>
+            {% for offer in giveaways %}
+                <tr>
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?offer&id={{ offer.id }}"
+                               class="button" title="View Offer">
+                                <span class="icon icon113">View</span></a>
+                        </div>
+                    <td>
+                        {% if is_logged_in %}
+                            <a href="index.php?member&id={{ offer.owner_id }}">
+                                {{ offer.owner }}
+                            </a>
+                        {% else %}
+                            {{ offer.owner }}
+                        {% endif %}
+                    </td>
+                    <td><a href="#">{{ offer.type }}</a>
+                    <td><a href="#">{{ offer.category }}</a>
+                    <td>{{ offer.title }}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# MESSAGE SECTION #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
 
     <hr /><h1>Messages</h1>
     <ul>
@@ -47,6 +107,13 @@
             information in the "config/database.php" file.</li>
     </ul>
 
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# ALL OFFERS SECTION #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+
+
     {% if offers %}
         <hr /><h1>All Offers</h1>
         <table name="offer-table">
@@ -60,7 +127,12 @@
             </tr>
             {% for offer in offers %}
                 <tr>
-                    <td><a href="index.php?offer&id={{ offer.id }}">View</a>
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?offer&id={{ offer.id }}"
+                               class="button" title="View Offer">
+                            <span class="icon icon113">View</span></a>
+                        </div>
                     <td>
                         {% if is_logged_in %}
                             <a href="index.php?member&id={{ offer.owner_id }}">
@@ -78,4 +150,49 @@
             {% endfor %}
         </table>
     {% endif %}
+
+
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+{# OFFER SECTION #}
+{#----------------------------------------------------------------------------#}
+{#----------------------------------------------------------------------------#}
+    {% if garage_sales %}
+        <hr /><h1>Authentic Garage Sales</h1>
+        <table name="garage-sales-table">
+            <tr>
+                <th>View
+                <th>Owner
+                <th>Type
+                <th>Category
+                <th>Title
+                <th>Price
+            </tr>
+            {% for offer in garage_sales %}
+                <tr>
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?offer&id={{ offer.offer_id }}"
+                               class="button" title="View Offer">
+                                <span class="icon icon113">View</span></a>
+                        </div>
+                    <td>
+                        {% if is_logged_in %}
+                            <a href="index.php?member&id={{ offer.owner_id }}">
+                                {{ offer.owner }}
+                            </a>
+                        {% else %}
+                            {{ offer.owner }}
+                        {% endif %}
+                    </td>
+                    <td><a href="#">{{ offer.type }}</a>
+                    <td><a href="#">{{ offer.category }}</a>
+                    <td>{{ offer.title }}
+                    <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+</div>
 {% endblock content %}

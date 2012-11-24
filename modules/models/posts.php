@@ -23,7 +23,8 @@ class Post_Model extends Model
   					t.name AS type,
   					c.name AS category,
  					o.title AS title,
-  					o.price AS price
+  					o.price AS price,
+                    expire
   				  FROM posts p 
     				INNER JOIN offers AS o 
     					ON p.offer_id = o.id 

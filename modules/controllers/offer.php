@@ -5,14 +5,12 @@ class Offer_Controller extends Controller implements IRedirectable
     public function __construct(array $args)
     {
         // Commenting this code will disable login check
-        // parent::__construct();
-        $this->startSession();
+        parent::__construct(FALSE);
 
         // Check if the offer id is set
+        $m_offer = new Offer_Model();
         if (isset($args['id']))
         {
-
-            $m_offer = new Offer_Model();
             $this->offer = $m_offer->getOffer($args['id']);
 
             if ($this->offer)
@@ -39,6 +37,16 @@ class Offer_Controller extends Controller implements IRedirectable
                 $m_category = new Category_Model();
                 $categories = $m_category->getAllCategories();
 
+                // Get owner transaction
+                $m_transact = new Transact_Model();
+                $transact = $m_transact->getTransactionByOfferId($args['id']);
+                if( $transact ){
+                  $this->data["transact"] = $transact[0];
+                  $this->data["CanStore"] = $this->canStoreOffer($transact[0]);
+                }
+
+                //Can bid?
+                $this->data["CanBid"] = $this->CanBids();
                 $this->data["categories"] = $categories;
 
                 // Check if the current viewer is the offer owner
@@ -56,6 +64,12 @@ class Offer_Controller extends Controller implements IRedirectable
                 $this->redirect(self::REDIRECT_ERROR);
             }
         }
+        elseif (isset($args['delete']))
+        {
+          if($m_offer->deleteOffer($args['delete'])){
+            $this->back();
+          }
+        }
         else
         {
             // Go back to where the user come from
@@ -70,6 +84,7 @@ class Offer_Controller extends Controller implements IRedirectable
         $bids = $m_bid->getBidByOfferId($offer_id);
 
         $this->data["bids"] = $bids;
+
     }
 
 
@@ -91,5 +106,30 @@ class Offer_Controller extends Controller implements IRedirectable
         );
 
         return $bid_id;
+    }
+
+    public function CanBids()
+    {
+        // Check if its a valid session
+        if ($this->isValidSession())
+        {
+            $m_card = new CreditCard_Model();
+            $result = $m_card->getMemberCreditCard($this->getMemberId());
+            return $result ? TRUE : FALSE;
+        }
+
+        return FALSE;
+    }
+
+    public function canStoreOffer($transact)
+    {
+        // Check if its a valid session
+        if ($this->isValidSession())
+        {
+            $m_storage = new Storage_Model();
+            $result = $m_storage->in_storage($transact["id"]);
+            return $result ? FALSE : TRUE;
+        }
+        return FALSE;
     }
 }

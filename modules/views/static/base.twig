@@ -7,24 +7,33 @@
 	</title>
 
     <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.tiptip.js"></script>
+    <script type="text/javascript" src="assets/js/noty/jquery.noty.js"></script>
+    <script type="text/javascript" src="assets/js/noty/layouts/bottomRight.js"></script>
+    <script type="text/javascript" src="assets/js/noty/layouts/center.js"></script>
+    <script type="text/javascript" src="assets/js/noty/themes/default.js"></script>
+    <script type="text/javascript" src="assets/js/validate.js"></script>
+    <script type="text/javascript" src="assets/js/moment.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript" src="assets/js/ajax.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/button-style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="assets/css/tiptip.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+
+
 	{#<link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'>#}
 
 		
 </head>
 <body>
 	<div id="header">{% include 'static/header.twig' %}</div>
-    <hr />
-
     <div id="content"> 
 
 		{% block content %}{% endblock %}
 
 	</div>
-
-    <hr />
     <div id="footer">{% include 'static/footer.twig' %}</div>
 
 </body>

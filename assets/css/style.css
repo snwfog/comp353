@@ -1,72 +1,157 @@
+/* General style for everything */
+
+html {
+    font-family: Helvetica Neue, Helvetica, Arial, Calibri;
+    font-weight: lighter;
+}
+
+a:visited, a:link {
+    color: #4C8FFD;
+    text-decoration-style: dashed;
+}
+
+a:hover {
+    color: red;
+}
+
+a:active {
+    color: aqua;
+}
+
+ul, ol {
+    list-style: none;
+}
+
 ul li
 {
-	margin: 10px 0px 10px 0px;
+    margin: 10px 0px 10px 0px;
+}
+
+h1, h2, h3, h4, h5 {
+    clear: both;
+    margin: 20px 0;
+    font-family: Serifa BT;
+    text-shadow: 1px 1px rgba(100, 100, 100, 0.2);
+}
+
+h1 {
+    font-size: 30px;
+    color: #4C8FFD;
+}
+
+hr {
+    border-bottom: 1px solid rgba(100, 100, 100, 0.2);
+    margin: 30px auto 0;
+    clear: both;
 }
 
 table, table th, table td
 {
-    border: 1px solid black;
+    padding: 5px;
+    border: 1px dashed #d3d3d3;
+    text-align: left;
+    vertical-align: middle;
+    padding: 10px;
 }
 
-#header ul
+form {
+    color: #333;
+    width: 640px;
+    margin: 0 auto;
+    border: 1px solid #CCC;
+    padding: 20px 20px 50px;
+    background: #EEE;
+}
+
+input {
+    color: #666;
+    background: #FCFCFC;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    vertical-align:middle;
+    display:inline-block;
+    margin:-4px 0 0;
+}
+input[type="text"],
+input[type="password"] {
+    vertical-align:middle;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
+    display:inline-block;
+    width:250px;
+    padding:8px 8px;
+    border:1px solid #999;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+    background:#FFF;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
+    color:#333;
+    border:1px solid #333;
+}
+
+textarea {
+    width:640px;
+    height:150px;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.1);
+    border:1px solid #999;
+}
+
+select {
+    min-width:150px;
+    border:1px solid #999;
+}
+
+/**
+ * Static styling
+ */
+
+#header
 {
-	overflow: hidden;
-	vertical-align: middle;
+    overflow: hidden;
+    margin: auto;
+    width: 70%;
+    background-color: #4C8FFD;
+    border-radius: 0 0 3px 3px;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
 }
 
-#header ul li
+#content
 {
-    float: left;
-    margin: 0px 20px 0px 20px;
+    margin: 50px auto 50px;
+    width: 70%;
 }
 
-#header #magnifying
+#content .earned-rating
 {
-    position: relative;
-    top: 5px;
-
+    color: orangered;
 }
 
-#title 
+#content .unearned-rating
 {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    color: rgba(100, 100, 100, 0.1);
 }
-
-/*h2.mostRecent {*/
-    /*font: 20;*/
-    /*font-family: "Verdana", Times, serif;*/
-    /*text-align: center;*/
-/*}*/
-/*#search {*/
-  /*margin-left: 217px;*/
-  /*margin-right: 217px;*/
-  /*background-color: #a5a5b3;*/
-  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#a5a5b3), to(#999999));  Safari 4+, Chrome*/
-  /*background-image: -webkit-linear-gradient(top, #a5a5b3, #999999);  Chrome 10+, Safari 5.1+, iOS 5+*/
-  /*background-image:    -moz-linear-gradient(top, #a5a5b3, #999999);  Firefox 3.6-15*/
-  /*background-image:      -o-linear-gradient(top, #a5a5b3, #999999);  Opera 11.10-12.00*/
-  /*background-image:         linear-gradient(to bottom, #a5a5b3, #999999);*/
-/*}*/
-
-/*#content {*/
-
-    /*font-family: 'Trocchi', serif;*/
-
-    /*width: 900px;*/
-    /*text-align: center padding-bottom: 25px;*/
-    /*margin: 0 auto;*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-
-     /*gradients*/
-    /*background: -webkit-gradient(linear, left top, left bottom,*/
-    /*color-stop(0%, white), color-stop(15%, #F7F7F7), color-stop(100%, #F5F5F5));*/
-    /*background: -moz-linear-gradient(top, white 0%, #F7F7F7 55%, #F5F5F5 130%);*/
-/*}*/
 
 #footer{
-    text-align: center
+    margin: auto;
+    width: 70%;
+    padding: 5px;
+    text-align: center;
+    background-color: #4C8FFD;
+    box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
+    color: white;
 }
 
+
+/* Easter Eggs */
+#unicorn {
+    position: absolute;
+    top: 50px;
+    right: 10%;
+    clear: none;
+    overflow: hidden;
+    z-index: -100;
+    opacity: 0.15;
+    width: 20%;
+}

@@ -1,11 +1,14 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
+
+    <h1>Registration</h1>
     {% for error in errors %}
         {% block error %}
             <div id="error">{{ error }}</div></br>
         {% endblock %}
     {% endfor %}
+   <div id="registration"> 
     <form action="index.php?registration" method="POST">
         <h3>Personal Information</h3>
         <ul>
@@ -27,7 +30,10 @@
             <li><input type="text" name="postal_code" placeholder="Postal Code" value="{{form["postal_code"]}}"/>
         </ul>
         <input type="hidden" name="registration_form" value="TRUE" />
-        <a class="registration-submit-button" class="button"><input type="submit" value="Submit" /></a>
+        <button class="action blue submit">
+            <span class="label">Register</span>
+        </button>
+        <input type="submit" value="Submit" />
     </form>
-
+</div>
 {% endblock content %}

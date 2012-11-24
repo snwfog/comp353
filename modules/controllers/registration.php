@@ -61,7 +61,7 @@ class Registration_Controller extends Controller implements IRedirectable
         $memberModel     = new Member_Model();
         $addressModel    = new Address_Model();
         $visitorModel    = new Visitor_Model();
-        $creditcardModel = new CreditCard_Model();
+        //$creditcardModel = new CreditCard_Model();
         $email_instance  = new Email_Model();
 
 

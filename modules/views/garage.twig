@@ -1,0 +1,63 @@
+{% extends 'static/base.twig' %}
+{% block content %}
+<div id="garage">
+
+<h1>Garage</h1>
+{% if storages %}
+    <table name="storage-table">
+        <tr>
+            <th>Action
+            <th>View
+            <th>Type
+            <th>Category
+            <th>Title
+            <th>Price
+        </tr>
+        {% for offer in storages %}
+            <tr>
+                <td>
+                    {% if offer.receive %}
+                        <div class="tiptip">
+                            <a href="index.php?garage&pickup={{ offer.id }}"
+                               class="button confirm" title="Item Picked Up">
+                                <span class="icon icon44"></span></a>
+                        </div>
+                    {% else %}
+                        <div class="tiptip">
+                            <a href="index.php?garage&receive={{ offer.id }}"
+                               class="button confirm" title="Item Received">
+                                <span class="icon icon110"></span></a>
+                        </div>
+                    {% endif %}
+                <td><div class="tiptip">
+                    <a href="index.php?offer&id={{ offer.offer_id }}"
+                       class="button" title="View Offer">
+                        <span class="icon icon113"></span></a>
+                </div>
+                <td><a href="#">{{ offer.type }}</a>
+                <td><a href="#">{{ offer.category }}</a>
+                <td>{{ offer.title }}
+                <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+                    {#{% if is_admin or is_owner %}#}
+                {#<td>#}
+                    {#<div class="tiptip">#}
+                        {#<a href="index.php?offer&delete={{ offer.offer_id }}"#}
+                           {#class="button delete" title="Delete Offer">#}
+                            {#<span class="icon icon186"></span></a>#}
+                    {#</div>#}
+                    {#{% endif %}#}
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>The garage is clear of any active item!</p>
+{% endif %}
+    <div class="tiptip">
+        <a href="#" class="button" title="Garage History">
+            <span class="icon icon140"></span>
+            <span class="label">Garage History</span>
+        </a>
+    </div>
+</div>
+
+{% endblock content %}

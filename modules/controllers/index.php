@@ -4,15 +4,14 @@ class Index_Controller extends Controller
 { 
     public function __construct(array $args)
     {
-        $this->startSession();
+        parent::__construct(FALSE);
 
         $this->data["title"] = "Auction Max";
 
         if ($this->isValidSession())
         {
             $this->data["specifier"] = "Member";
-            $this->data["is_logged_in"] = TRUE;
-
+            parent::__construct();
         }
         else
         {
@@ -25,6 +24,10 @@ class Index_Controller extends Controller
         $this->data["offers"] = $m_offer->getAllActiveOffer();
         $this->data["hot_offers"] = $m_offer->getHotOfferByPrice($hot_offer_threshold);
         $this->data["hot_offer_threshold"] = $hot_offer_threshold;
+        $this->data['giveaways'] = $m_offer->getGiveaways();
+
+        $this->m_storages = new Storage_Model();
+        $this->data['garage_sales'] = $this->m_storages->getAllGarageSales();
         $this->display('index.twig', $this->data);
     }
 }

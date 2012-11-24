@@ -2,10 +2,18 @@
 
 {% block content %}
 
+<h1>The Eloquante Offer</h1>
 <table>
-    <tr><td colspan="2">{{ offer.title }}</td></tr>
+    <tr>
+        <td colspan="2">
+            {{ offer.title }}
+            {% if (CanStore and is_owner) %}
+                <a href=    "index.php?storage&transaction_id={{ transact.id}}"> Store Item </a>
+            {% endif %}
+        </td>
+    </tr>
     <tr><td>{{ offer.type }}</td><td>{{ offer.category }}</td></tr>
-    <tr><td>Price:</td><td>{{ offer.price }}</td></tr>
+    <tr><td>Price:</td><td>$ {{ offer.price|number_format('2', '.', ' ') }}</td></tr>
     <tr>
         <td>Owner:</td>
         <td><a href="index.php?member&id={{ owner.id }}">{{ owner.username }}</a>
@@ -19,7 +27,11 @@
 {% if bids %}
 <table>
     <tr>
-        {% if is_owner %}<th>Accept</th>{% endif %}
+        {% if (is_owner and not( offer.expire)) %}
+            <th>Action</th>
+        {% else %}
+            <th>Status</th>
+        {% endif %}
         <th>Bidder</th>
         <th>Type</th>
         <th>Category</th>
@@ -28,8 +40,26 @@
     </tr>
     {% for bid in bids %}
         <tr>
-            {% if is_owner %}<td><a href="">Deal!</a></td>{% endif %}
-            <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder }}</a></td>
+            {% if (is_owner and not (offer.expire)) %}
+                <td>
+                    <div class="tiptip">
+                        <a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}&bid_id={{bid.id}}"
+                                           class="button confirm" title="Accept Offer">
+                        <span class="icon icon43"></span>
+                    </a></div>
+                </td>
+            {% else %}
+                <td>
+                    {% if not transact.bid_id %}
+                        Available
+                    {% elseif bid.id == transact.bid_id  %}
+                        Winner
+                    {% else %}
+                        Loser
+                    {% endif %}
+                </td>
+            {% endif %}
+            <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder}}</a></td>
             <td><a href="#">{{ bid.type }}</a></td>
             <td><a href="#">{{ bid.category }}</a></td>
             <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
@@ -37,14 +67,18 @@
         </tr>
     {% endfor %}
 </table>
+{% elseif is_owner %}
+    <p>No one is currently interested in this item.</p>
 {% else %}
     <p>There aren't currently any bid for this item.
         Be the first one to make a bid!</p>
 {% endif %}
 
-{% if not is_owner %}
+
+{% if (CanBid and not(is_owner)) %}
 <hr />
-<form action="index.php?offer&id={{ offer.id }}" method="POST">
+<ul class="error-field"></ul>
+<form action="index.php?offer&id={{ offer.id }}" method="POST" name="bid-offer-form">
     <ul>
         <li><select name="category">
             {% for key, type in categories %}
@@ -58,9 +92,19 @@
         <li><input type="text" name="price" placeholder="Price" />
         <li><input type="text" name="description" placeholder="Description" />
         <li><input type="hidden" name="bid" value="TRUE" />
-        <li><input type="submit" value="Bid" />
+        <li><div class="tiptip">
+                <button type="submit" name="submit" id="submit-bid"
+                        class="action red submit" title="Make Bid">
+                    <span class="icon icon51"></span>
+                    <span class="label">Bid</span>
+                </button>
+            </div>
     </ul>
 </form>
+{% elseif not(is_logged_in) %}
+    <p> Please <a href="index.php?login">Login</a> to bid </p>
+{% elseif not(CanBid) %}
+     <a href="index.php?creditcard">Add a Credit Card To Bid</a>
 {% endif %}
 
 {% endblock content %}

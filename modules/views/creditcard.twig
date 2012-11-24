@@ -1,0 +1,32 @@
+{% extends 'static/base.twig' %}
+
+{% block content %}
+    <h1>Credit Card Information</h1>
+    {% for error in errors %}
+        {% block error %}
+            <div id="error">{{ error }}</div></br>
+        {% endblock %}
+    {% endfor %}
+    <form action="index.php?creditcard" method="POST">
+        <h3>CreditCard</h3>
+        <ul>
+            <li>
+                <select name="credit_card_type">
+                    {% for company in type %}
+                        <option value="{{ company.id }}">{{ company.type|capitalize }}</option>
+                    {% endfor %}
+                </select>
+            <li><input type="text" name="card_holder" placeholder="Holder's Name"/>
+            <li><input type="text" name="credit_card_number" placeholder="Credit Card Number" />
+            <li><input type="text" name="expiration_month" placeholder="Expire Month" maxlength="2"/>
+            <li><input type="text" name="expiration_year" placeholder="Expire Year" maxlength="2"/>
+            <li><input type="text" name="verification_number" placeholder="Verification Number" maxlength="3"/>
+        </ul>
+        <input type="hidden" name="creditcardform" value="TRUE" />
+        <input type="hidden" name="previous_page" value="{{ previous_page }}"/>
+        <button type="submit" name="submit" class="action blue submit">
+            <span class="label">Submit</span>
+        </button>
+    </form>
+
+{% endblock content %}

@@ -1,91 +1,70 @@
+
+ <!-- Start PHP Code For Image Upload -->
 <?php
-//$name = $_FILES['file']['name'];
-//$tmp_name = $_FILES['file']['tmp_name'];
-/*
-if (isset($name))
-{
+           
+            //This function reads the extension of the file. It is used to determine if the file is an image by checking the extension.
+             function getExtension($str) {
+                 $i = strrpos($str,".");
+                 if (!$i) { return ""; }
+                 $l = strlen($str) - $i;
+                 $ext = substr($str,$i+1,$l);
+                 return $ext;
+             }
+    
+            //This variable is used as a flag. The value is initialized with 0 (meaning no error found) 
+            //and it will be changed to 1 if an errro occures. 
+            //If the error occures the file will not be uploaded.
+             $errors=0;
+            //checks if the form has been submitted
+             if(isset($_POST['Submit']))
+             {
+                 //reads the name of the file the user submitted for uploading
+                 $image=$_FILES['image']['name'];
+                 //if it is not empty
+                 if ($image)
+                 {
+                 //get the original name of the file from the clients machine
+                     $filename = stripslashes($_FILES['image']['name']);
+                 //get the extension of the file in a lower case format
+                     $extension = getExtension($filename);
+                     $extension = strtolower($extension);
+                 //if it is not a known extension, we will suppose it is an error and will not upload the file, 
+                //otherwise we will do more tests
+             if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif"))
+                     {
+                    //print error message
+                         echo '<h2>Unknown extension!</h2>';
+                         $errors=1;
+                     }
+                     else
+                     {
+           
+            //we will give an unique name, for example the time in unix time format
+            $image_name=$filename;
+            //the new name will be containing the full path where will be stored (images folder)
+            $location = '../../assets/img/web';
+            //we verify if the image has been uploaded, and print error instead
 
-	if (!empty($name))
-	{
-		$location = '/assets/img/web/';
-		if(move_uploaded_file($tmp_name, $location.$name))
-		{
-		   echo 'Uploaded';
-		}
-	}
-	else 
-	{	 
-		echo 'Please choose a file.';
-	}
-}
-*/
-//-------Security-File uploading-----------
-if (isset($_FILES['upload'])) 
-{
+            $move = move_uploaded_file($_FILES['image']['tmp_name'], $location.$image_name);
+            if (!$move)
+            {
 
-	$allowed_exts = array('jpg','jpeg','png', 'gif');
-	$ext = strtolower(substr($_FILES['upload']['name'], strrpos($_FILES['upload']['name'], '.') + 1));
-	$errors = array();
-
-	if(in_array($ext, $allowed_exts) == false)
-	{
-		$errors[] = 'You can upload only images.';
-	}
-
-	if($_FILES['upload']['size'] > 10000000)
-	{
-
-		$errors[] = 'The file was too big';
-
-	}
-
-	if(empty($errors))
-	{
-		move_uploaded_file($_FILES['upload']['tmp_name'], "files/{$_FILES['upload']['name']}");
-		//to get ONLY the extention of the file uploaded
-
-	}
-
-}
-
-
-
-//$error = $_FILES['file']['error'];
-
+                echo '<h2>Copy unsuccessful!</h2>';
+                $errors=1;
+            }}}}
+            //If no errors registred, print the success message
+         
 ?>
 
 
 
-<!DOCTYPE html>
-<html>
+<!-- End PHP Code For Image Upload -->
+        <!-- Start Image Upload Form -->
+        <form method="post" enctype="multipart/form-data" action="">
+        <input type="file" name="image"><br><br>
+        <input name="Submit" type="submit" value="Upload image">    
+        </form>
+        <!-- End Image Upload Form -->
 
 
-<body>
-	<div>
-		<?php
-			if(isset($errors))
-			{
-				if(empty($errors))
-				{
-					echo '<a href="files/', $_FILES['upload']['name'], '" >View Image</a>'; 
-				}
-				else
-				{
-					foreach($errors as $error)
-					{
-						echo $error;
-					}
-				}
-			}
-		?>
-	</div>
 
-<form action= "" method="POST" enctype="multipart/form-data">
-	<input type="file" name="upload"><br><br>
-	<input type="submit" value="Upload">
-</form>
-
-</body>
-
-
-</html>

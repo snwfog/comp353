@@ -2,10 +2,14 @@
 
 {% block content %}
     <h1>Member Login</h1>
-    <form action="index.php?login" method="POST">
-	<input type="text" name="username" placeholder="Username" />
-	<input type="password" name="password" placeholder="Password" />
-        <input type="submit" value="Login" />
-    	{#<a id="login-submit-button" class="button">Login</a>#}
-    </form>
+        <ul class="error-field"></ul>
+        <form action="index.php?login" method="POST" name="login-form">
+            <ul>
+                <li><input type="text" name="username" placeholder="Username" />
+                <li><input type="password" name="password" placeholder="Password" />
+                <li><button type="submit" name="submit" class="action blue submit">
+                        <span class="label">Sign In</span>
+                    </button>
+            </ul>
+        </form>
 {% endblock content %}

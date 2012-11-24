@@ -1,25 +1,28 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
+<div id="post">
+<ul class="error-field"></ul>
+<form action="index.php?post" method="POST" name="post-offer-form" enctype="multipart/form-data">
+    <ul>
+        <li><input type="text" name="title" placeholder="Title" />
+        <li><select name="category">
+            {% for key, type in categories %}
+                 <option disabled>--- {{ key|capitalize }} -----------</option>
 
-<form action="index.php?post" method="POST">
-<ul>
-    <li><input type="text" name="title" placeholder="Title" />
-    <li><select name="category">
-        {% for key, type in categories %}
-             <option disabled>--- {{ key|capitalize }} -----------</option>
-
-            {% for category in type %}
-                <option value="{{ category.id }}">{{ category.name|capitalize }}</option>
+                {% for category in type %}
+                    <option value="{{ category.id }}">{{ category.name|capitalize }}</option>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-    </select>
-    <li><input type="text" name="price" placeholder="Price" />
-    <li><textarea name="description" rows="6" cols="30"></textarea>
-    <li><input type="hidden" name="submit" value="TRUE" />
-    <li><input type="submit" value="Post Offer" />
-    {#<a id="offer-submit-button" class="button">Post Offer</a>#}
-</ul>
+        </select>
+        <li><input type="text" name="price" placeholder="Price" />
+        <li><textarea name="description" rows="6" cols="30"></textarea>
+        <li><input type="file" name="image" placeholder="image_url"/>
+        <li><input type="hidden" name="submit" value="TRUE" />
+        <li><button type="submit" class="action blue submit">
+                <span class="label">Post Offer</span>
+            </button>
+    </ul>
 </form>
-
+</div>
 {% endblock content %}
