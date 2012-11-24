@@ -54,7 +54,7 @@ class Member_Controller extends Controller implements IRedirectable
         foreach($boughts as $key => $value){
             if($m_storage->in_storage($value["id"])){
                 if($m_storage->ready_for_pick_up($value["id"])){
-                    $boughts[$key]["status"] = "Item Ready is available";
+                    $boughts[$key]["status"] = "Item is ready for pick up";
                 }else{
                     $boughts[$key]["status"] = "Item not in storage yet";
                 }
@@ -67,6 +67,7 @@ class Member_Controller extends Controller implements IRedirectable
             if($m_storage->in_storage($value["id"])){
                 if($m_storage->picked_up($value["id"])){
                     $solds[$key]["status"] = "Buyer picked up Item";
+                    $boughts[$key]["status"] = "--";
                 }elseif($m_storage->ready_for_pick_up($value["id"])){
                     $boughts[$key]["status"] = "Waiting for pick up";
                 }else{
@@ -81,7 +82,7 @@ class Member_Controller extends Controller implements IRedirectable
 
         $m_creditcard= new CreditCard_Model();
         $creditcard = $m_creditcard->getMemberCreditCard($this->getMemberId());
-         
+
         if (isset($creditcard)){
             $creditcard = $creditcard[0];
             $type_name = $m_creditcard->getCreditCardTypeName($creditcard["credit_card_type_id"]);
