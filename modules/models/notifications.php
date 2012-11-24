@@ -23,6 +23,17 @@ class Notification_Model extends Model
 
         $mysqli_result = $this->db->query($query);
         $result = $this->db->fetch();
+
+        // Delete after retrieval
+        if (!empty($result))
+        {
+            $query = "DELETE FROM notify_queue q
+              JOIN bids ON bids.id = nq.bid_id
+            WHERE bids.member_id = '$member_id'";
+
+            $this->db->query($query);
+        }
+
         return empty($result) ? NULL : $result;
     }
 
@@ -40,6 +51,17 @@ class Notification_Model extends Model
         $mysqli_result = $this->db->query($query);
         $result = $this->db->fetch();
 
+        if (!empty($result))
+        {
+            $query = "DELETE FROM notify_receive n
+              JOIN storages s ON s.id = n.storage_id
+              JOIN transacts t ON t.id = s.transact_id
+              JOIN offers o ON o.id = t.offer_id
+            WHERE t.seller_id = '$member_id'";
+
+            $this->db->query($query);
+        }
+
         return empty($result) ? NULL : $result;
     }
 
@@ -56,6 +78,17 @@ class Notification_Model extends Model
 
         $mysqli_result = $this->db->query($query);
         $result = $this->db->fetch();
+
+        if (!empty($result))
+        {
+            $query = "DELETE FROM notify_receive n
+              JOIN storages s ON s.id = n.storage_id
+              JOIN transacts t ON t.id = s.transact_id
+              JOIN offers o ON o.id = t.offer_id
+            WHERE t.buyer_id = '$member_id'";
+
+            $this->db->query($query);
+        }
 
         return empty($result) ? NULL : $result;
     }
