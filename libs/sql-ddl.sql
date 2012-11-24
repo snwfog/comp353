@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.25)
 # Database: comp353
-# Generation Time: 2012-11-23 16:06:49 +0000
+# Generation Time: 2012-11-24 15:23:33 +0000
 # ************************************************************
 
 
@@ -350,6 +350,22 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table garages
+# ------------------------------------------------------------
+
+DROP VIEW IF EXISTS `garages`;
+
+CREATE TABLE `garages` (
+   `id` INT(11) NOT NULL DEFAULT '0',
+   `transact_id` INT(11) NOT NULL,
+   `acquire_date` DATE DEFAULT NULL,
+   `pickup_date` DATE DEFAULT NULL,
+   `weight` INT(11) DEFAULT NULL,
+   `status` ENUM('Not Received','Received','Picked Up') DEFAULT 'Not Received'
+) ENGINE=MyISAM;
+
+
+
 # Dump of table giveaways
 # ------------------------------------------------------------
 
@@ -445,17 +461,8 @@ CREATE TABLE `notify_acquire` (
   PRIMARY KEY (`id`),
   KEY `fk_notify_acquire_storages` (`storage_id`),
   CONSTRAINT `fk_notify_acquire_storages` FOREIGN KEY (`storage_id`) REFERENCES `storages` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
-LOCK TABLES `notify_acquire` WRITE;
-/*!40000 ALTER TABLE `notify_acquire` DISABLE KEYS */;
-
-INSERT INTO `notify_acquire` (`id`, `storage_id`)
-VALUES
-	(1,1);
-
-/*!40000 ALTER TABLE `notify_acquire` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table notify_pickup
@@ -469,17 +476,8 @@ CREATE TABLE `notify_pickup` (
   PRIMARY KEY (`id`),
   KEY `fk_notify_pickup_storages` (`storage_id`),
   CONSTRAINT `fk_notify_pickup_storages` FOREIGN KEY (`storage_id`) REFERENCES `storages` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
-LOCK TABLES `notify_pickup` WRITE;
-/*!40000 ALTER TABLE `notify_pickup` DISABLE KEYS */;
-
-INSERT INTO `notify_pickup` (`id`, `storage_id`)
-VALUES
-	(1,1);
-
-/*!40000 ALTER TABLE `notify_pickup` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table notify_queue
@@ -502,18 +500,25 @@ LOCK TABLES `notify_queue` WRITE;
 INSERT INTO `notify_queue` (`id`, `bid_id`, `expire_date`)
 VALUES
 	(1,1,'2012-11-22'),
-	(2,2,'2012-11-22'),
-	(3,3,'2012-11-22'),
-	(4,4,'2012-11-22'),
-	(5,5,'2012-11-22'),
-	(6,1,'2012-11-22'),
-	(7,2,'2012-11-22'),
-	(8,3,'2012-11-22'),
-	(9,4,'2012-11-22'),
-	(10,5,'2012-11-22');
+	(2,2,'2012-11-22');
 
 /*!40000 ALTER TABLE `notify_queue` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+# Dump of table notify_receive
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `notify_receive`;
+
+CREATE TABLE `notify_receive` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `storage_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_notify_receive_storages` (`storage_id`),
+  CONSTRAINT `fk_notify_receive_storages` FOREIGN KEY (`storage_id`) REFERENCES `storages` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
 
 
 # Dump of table offers
@@ -652,7 +657,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_sessions_members_idx` (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
@@ -667,11 +672,11 @@ VALUES
 	(6,1,'7f1238f9a49fb00530adb1d157ad78d5cf8d54807d18fed6d82bd113c75e7741',1),
 	(7,2,'6c3af288214e2ade20c8a32644831fc212692ac18c93528da6eeb8f8238ec85b',1),
 	(8,1,'a903de29e3eca5d4272485b8fa236759364a9918924c5563a06164bbcbdfc251',1),
-	(9,3,'ee13a2a6c10281a734a081e6e98077cc824c911d9394178bb4efc3bc7918dc14',0),
+	(9,3,'ee13a2a6c10281a734a081e6e98077cc824c911d9394178bb4efc3bc7918dc14',1),
 	(10,1,'8f910d44f6cce53f2afc7c4edc9766dea9bc5de0f120bc3d01054e61233b632b',1),
 	(11,2,'cb43750921b327077a59b07dc6f6946be20bd05b81011e4f24a1612fd55cf33d',1),
 	(12,4,'9c2492694b84912a1ee23daad344a3da231ef22037d678d2f353b489b0ceb6eb',1),
-	(13,4,'3712a42378f1e74e88b710f64f55012b2afb4ff9599fa0c9013113597d9958a9',0),
+	(13,4,'3712a42378f1e74e88b710f64f55012b2afb4ff9599fa0c9013113597d9958a9',1),
 	(14,1,'37a70e3400281d38cf2348254c58f52fee92bb00f6db43bfdbf34036596a660e',1),
 	(15,1,'81eac6c5d625d8292257a08196ca9a51088e5296d6681bfc015ed3a9313eb6c9',1),
 	(16,1,'2f6ef088d6a6f399e4249d9c311beaeb8cc8d9d7aa08d1caf59429255a4de4ec',1),
@@ -743,10 +748,18 @@ VALUES
 	(82,1,'71d313fb9fcd3f6aa54a2681e559682b23f2ddc0af8e55bd6d46900f777b09d8',1),
 	(83,1,'fa2c5a892d458eaa298c0d14192264b91c663deadc5cb90774f4fa174215c04a',1),
 	(84,1,'5740b2d78b614315b50acc25a51a7fcffe147b952d244cf248a693c352e6ecdd',1),
-	(85,2,'34b041d018d02b4b0967bd4ef0dd8761418167121f17f80df56a298fa914ab78',0),
+	(85,2,'34b041d018d02b4b0967bd4ef0dd8761418167121f17f80df56a298fa914ab78',1),
 	(86,1,'b7db3f3ba0e6a97b98956c7e1b634b36cf78f0024ef97f17b5bb51f773493928',1),
 	(87,1,'174ef43500ac8080338c9fea4c237e6004a837ffdc45652e75c1c1f607c1ea84',1),
-	(88,1,'37a5448707c569bdc576d56751aaef91a1714f76306c952d0d8d145a8d58aca4',0);
+	(88,1,'37a5448707c569bdc576d56751aaef91a1714f76306c952d0d8d145a8d58aca4',1),
+	(89,1,'8468aac1254da1eb8776765abad2e644ab03a87fd67ea340f2ce0f5ed8ee5b9d',1),
+	(90,1,'1c5b6fbf232029a820880608d1b3fbb6a2b38a4954031a53abe1ca5d59b620c8',1),
+	(91,1,'cdf129f36179c52a99115ebfcd02086d5df255dafe2182e175a0c5a8324f50c5',1),
+	(92,1,'f48c9e6dbc4f0fb7a391ed82b4e84c319674bd424d032d4e85372150d5a367b4',1),
+	(93,1,'ce6509b235dd00e383aff4e78c2d483845fb67b09ae302f0174235022d020051',1),
+	(94,1,'18e7b23e1f84ffb1c7cfb74bcdd6798ca7ca2525048d75989d8a9968a29d2f8c',1),
+	(95,2,'8d7bd593a8b3d596df078eadad182ea44618fdce18ccbba9029c9c247ed3c907',0),
+	(96,1,'8fd61b1abf0019a26cc506014de4cb020154a2b7f5d1d173198ec08f02b5bc3f',0);
 
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -774,7 +787,7 @@ LOCK TABLES `storages` WRITE;
 
 INSERT INTO `storages` (`id`, `transact_id`, `acquire_date`, `pickup_date`, `weight`, `status`)
 VALUES
-	(1,3,'2012-11-23','2012-11-23',NULL,'Not Received');
+	(1,3,'2012-11-23',NULL,NULL,'Not Received');
 
 /*!40000 ALTER TABLE `storages` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -785,6 +798,7 @@ DELIMITER ;;
   IF (NEW.pickup_date IS NOT NULL) THEN
     INSERT INTO notify_pickup(storage_id) VALUES (NEW.id);
   ELSEIF (NEW.acquire_date IS NOT NULL) THEN
+	INSERT INTO notify_receive(storage_id) VALUES (NEW.id);
     INSERT INTO notify_acquire(storage_id) VALUES (NEW.id);
   END IF;
 END */;;
@@ -951,6 +965,22 @@ VALUES
 UNLOCK TABLES;
 
 
+
+
+# Replace placeholder table for garages with correct view syntax
+# ------------------------------------------------------------
+
+DROP TABLE `garages`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `garages`
+AS select
+   `storages`.`id` AS `id`,
+   `storages`.`transact_id` AS `transact_id`,
+   `storages`.`acquire_date` AS `acquire_date`,
+   `storages`.`pickup_date` AS `pickup_date`,
+   `storages`.`weight` AS `weight`,
+   `storages`.`status` AS `status`
+from `storages`
+where ((`storages`.`acquire_date` is not null) and ((cast(curdate() as date) - cast(`storages`.`acquire_date` as date)) > 14));
 
 
 # Replace placeholder table for view_emails with correct view syntax
