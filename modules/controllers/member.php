@@ -81,7 +81,7 @@ class Member_Controller extends Controller implements IRedirectable
 
         $m_creditcard= new CreditCard_Model();
         $creditcard = $m_creditcard->getMemberCreditCard($this->getMemberId());
-
+         
         if (isset($creditcard)){
             $creditcard = $creditcard[0];
             $type_name = $m_creditcard->getCreditCardTypeName($creditcard["credit_card_type_id"]);

@@ -35,7 +35,7 @@ class CreditCard_Model extends Model
     {
         $result = $this->db->query("Select * FROM credit_cards WHERE credit_cards.member_id = $member_id");
         $result = $this->db->fetch(MYSQL_ASSOC);
-        return $result;
+        return $result? $result : NULL;
     }
     
     public function create_credit_card($member_id, $credit_card_type_id, $number, $expire, $verification, $holder_name)
