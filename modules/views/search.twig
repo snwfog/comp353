@@ -1,0 +1,80 @@
+{% extends 'static/base.twig' %}
+
+{% block content %}
+<form action="index.php?search" method="POST" name="search_form">
+    <div>
+        <select name="type" style="height: 30px; float:left;">
+               <option value=""></option>
+               {% for key, type in categories %}
+                    <option value="{{ key }}">{{ key|capitalize }}</option>
+               {% endfor %}
+        </select>
+        <select name="category" style="height: 30px; float:left;">
+               <option value=""></option>
+                {% for key, type in categories %}
+                     <option disabled>--- {{ key|capitalize }} -----------</option>
+    
+                    {% for category in type %}
+                        <option value="{{ category.id }}">{{ category.name|capitalize }}</option>
+                    {% endfor %}
+                {% endfor %}
+         </select>
+    
+        <select name="price_range" style="height: 30px; float:left;">
+                    <option value=""></option>
+                    <option value="free"> Freebies </option>
+                    <option value="1-10">$1-$10</option>
+                    <option value="11-25">$11-$25</option>
+                    <option value="25-50">$25-$50</option>
+                    <option value="50-100">$50-$100</option>
+                    <option value="<100">Less than $100</option>
+                    <option value=">100">Greater than $100</option>
+                    <option value="<200">Less than $200</option>
+                    <option value=">200">Greater than $200</option>
+        </select>
+      <input type="hidden" name="search_form" value="TRUE">
+      <button class="action blue submit" style=" position:relative; float:left; top:-5px;">
+        <span class="label">Search</span>
+      </button>
+    </div>
+
+</form>
+
+
+{% if offers %}
+        <hr /><h1>All Offers</h1>
+        <table name="offer-table">
+            <tr>
+                <th>View
+                <th>Owner
+                <th>Type
+                <th>Category
+                <th>Title
+                <th>Price
+            </tr>
+            {% for offer in offers %}
+                <tr>
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?offer&id={{ offer.id }}"
+                               class="button" title="View Offer">
+                            <span class="icon icon113">View</span></a>
+                        </div>
+                    <td>
+                        {% if is_logged_in %}
+                            <a href="index.php?member&id={{ offer.owner_id }}">
+                                {{ offer.owner }}
+                            </a>
+                        {% else %}
+                            {{ offer.owner }}
+                        {% endif %}
+                    </td>
+                    <td><a href="#">{{ offer.type }}</a>
+                    <td><a href="#">{{ offer.category }}</a>
+                    <td>{{ offer.title }}
+                    <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+                </tr>
+            {% endfor %}
+        </table>
+{% endif %}
+{% endblock content %}

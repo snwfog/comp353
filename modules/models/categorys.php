@@ -35,4 +35,19 @@ class Category_Model extends Model
 
 		return $category_hash;
 	}
+
+
+    	public function getAllCategoriesByType($type_name)
+	{
+		// Get all the types
+		$query = "SELECT
+      			 FROM types t
+      			 INNER JOIN categories AS c
+      			 ON t.id = c.type_id
+`                WHERE t.name = $type_name";
+
+		$mysqli_result = $this->db->query($query);
+		$result = $this->db->fetch(MYSQLI_ASSOC);
+        print_r($result);
+	}
 }

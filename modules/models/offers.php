@@ -152,4 +152,60 @@ class Offer_Model extends Model
         $query = $this->db->query("UPDATE offers SET offers.expire = 1 WHERE offers.id=$offer_id;");
         return($query);
     }
+
+
+    public function FilterActiveOffer($type_name, $category_id, $price_range)
+	{
+         $where_clause = array();
+         if($type_name){
+            array_push($where_clause, "t.name = \"$type_name\"");
+         }
+    
+         if($category_id){
+            array_push($where_clause, "c.id = \"$category_id\"");
+         }
+
+         if($price_range){
+           if($price_range == "free"){
+                array_push($where_clause, "o.price = 0");
+           }elseif((strpos($price_range,'>') !== false) OR (strpos($price_range,'<') !== false)){
+                array_push($where_clause, "o.price$price_range");
+           }else{
+               $price = explode("-", $price_range);
+               array_push($where_clause, "o.price >=".$price[0]." AND o.price <= ".$price[1]);
+           }
+         }
+
+        $query = null;
+        if(!empty($where_clause)){
+           $query = " And " . implode(" AND ", $where_clause);
+        }
+
+        $type_name = "\"$type_name\"";
+		// Get all the types
+		$query = "SELECT
+                    m.id AS owner_id,
+                    m.username AS owner,
+                    o.id AS id,
+                    t.name AS type,
+                    c.name AS category,
+                    o.title AS title,
+                    o.price AS price,
+                    o.image_url AS image_url,
+                    o.description AS description
+      			 FROM types as t
+      			 INNER JOIN categories AS c
+      			    ON t.id = c.type_id
+                 INNER JOIN  offers as o 
+                    ON o.category_id = c.id
+                 INNER JOIN posts AS p
+                    ON p.offer_id = o.id
+                 INNER JOIN members AS m
+                    ON p.member_id = m.id
+                 WHERE o.expire <> 1 $query";
+
+		$mysqli_result = $this->db->query($query);
+		$result = $this->db->fetch(MYSQLI_ASSOC);
+        return $result ? $result : NULL;
+	}
 }
