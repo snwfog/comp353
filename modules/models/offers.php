@@ -44,6 +44,7 @@ class Offer_Model extends Model
             o.id AS id,
             t.name AS type,
             c.name AS category,
+            c.id as category_id,
             o.title AS title,
             o.price AS price,
             o.image_url AS image_url,

@@ -142,8 +142,8 @@
                             {{ offer.owner }}
                         {% endif %}
                     </td>
-                    <td><a href="#">{{ offer.type }}</a>
-                    <td><a href="#">{{ offer.category }}</a>
+                    <td><a href="index.php?search&type_name={{offer.type}}">{{ offer.type }}</a>
+                    <td><a href="index.php?search&category_id={{offer.category_id}}">{{ offer.category }}</a>
                     <td>{{ offer.title }}
                     <td>$ {{ offer.price|number_format('2', '.', ' ') }}
                 </tr>
@@ -185,8 +185,8 @@
                             {{ offer.owner }}
                         {% endif %}
                     </td>
-                    <td><a href="#">{{ offer.type }}</a>
-                    <td><a href="#">{{ offer.category }}</a>
+                    <td><a href="index.php?search&type_name={{offer.type}}">{{ offer.type }}</a>
+                    <td><a href="index.php?search&category_id={{offer.category_id}}">{{ offer.category }}</a>
                     <td>{{ offer.title }}
                     <td>$ {{ offer.price|number_format('2', '.', ' ') }}
                 </tr>
