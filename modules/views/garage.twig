@@ -16,15 +16,15 @@
         {% for offer in storages %}
             <tr>
                 <td>
-                    {% if acquire_date %}
+                    {% if offer.receive %}
                         <div class="tiptip">
-                            <a href="index.php?garagehook"
+                            <a href="index.php?garage&pickup={{ offer.id }}"
                                class="button confirm" title="Item Picked Up">
                                 <span class="icon icon44"></span></a>
                         </div>
                     {% else %}
                         <div class="tiptip">
-                            <a href="index.php?garagehook"
+                            <a href="index.php?garage&receive={{ offer.id }}"
                                class="button confirm" title="Item Received">
                                 <span class="icon icon110"></span></a>
                         </div>

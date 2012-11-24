@@ -40,7 +40,9 @@ class Storage_Model extends Model
           tp.name AS type,
           c.name AS category,
           o.title AS title,
-          o.price AS price
+          o.price AS price,
+          NOT ISNULL(pickup_date) AS pickup,
+          NOT ISNULL(acquire_date) AS receive
         FROM storages s
           JOIN transacts t ON t.id = s.transact_id
           JOIN offers o ON t.offer_id = o.id
@@ -49,7 +51,7 @@ class Storage_Model extends Model
           JOIN posts p ON p.offer_id = o.id
           JOIN members m ON p.member_id = m.id
         WHERE (acquire_date IS NULL AND pickup_date IS NULL)
-          OR (acquire_date IS NOT NULL AND
+          OR (acquire_date IS NOT NULL AND pickup_date IS NULL AND
             DATE(CURDATE()) - DATE(acquire_date) <= 14)";
 
         $mysqli_result = $this->db->query($query);
@@ -83,5 +85,18 @@ class Storage_Model extends Model
         return empty($result) ? NULL : $result;
     }
 
+    public function receive($storage_id)
+    {
+        $query = "UPDATE storages SET acquire_date = CURDATE()
+            WHERE id = '$storage_id'";
+        $this->db->query($query);
+    }
+
+    public function pickup($storage_id)
+    {
+        $query = "UPDATE storages SET pickup_date = CURDATE()
+            WHERE id = '$storage_id'";
+        $this->db->query($query);
+    }
 }
 ?>
