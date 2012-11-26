@@ -18,6 +18,10 @@
                 <span class="icon icon108"></span><span class="label"></span>
             </a>
 
+            <a href="index.php?search" class="button" title="Search">
+                <span class="icon icon198"></span><span class="label">Search</span>
+            </a>
+
             {% if is_logged_in %}
                 <a href="index.php?member" class="button" title="Profile">
                     <span class="icon icon191"></span><span class="label">
@@ -29,9 +33,9 @@
                 </a>
 
                 {% if is_admin %}
-                    <a href="index.php?admin" class="button" title="Admin Tool">
-                        <span class="icon icon185"></span><span class="label">Admin</span>
-                    </a>
+                    {#<a href="index.php?admin" class="button" title="Admin Tool">#}
+                        {#<span class="icon icon185"></span><span class="label">Admin</span>#}
+                    {#</a>#}
 
                     <a href="index.php?garage" class="button" title="Garage">
                         <span class="icon icon2"></span><span class="label">Garage</span>
@@ -42,9 +46,6 @@
                     <span class="icon icon151"></span><span class="label">Sign Out</span>
                 </a>
             {% else %}
-                <a href="index.php?search" class="button" title="Search">
-                    <span class="icon icon198"></span><span class="label">Search</span>
-                </a>
 
                 <a href="index.php?login" class="button" title="Sign In">
                     <span class="icon icon116"></span><span class="label">Sign In</span>
