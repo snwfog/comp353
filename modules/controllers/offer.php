@@ -54,8 +54,10 @@ class Offer_Controller extends Controller implements IRedirectable
                 if ($this->getMemberId() == $owner["id"])
                     $this->data["is_owner"] = TRUE;
 
-                // Prepare all the bidding information for this offer
+                // Prepare all the bidding/reserves information for this offer
                 $this->getBids($this->offer["id"]);
+                $reserves = $this->getReserves($this->offer["id"]);
+
 
                 $this->display("offer.twig", $this->data);
             }
@@ -131,5 +133,13 @@ class Offer_Controller extends Controller implements IRedirectable
             return $result ? FALSE : TRUE;
         }
         return FALSE;
+    }
+
+    public function getReserves($offer_id)
+    {
+       $m_reserves = new Reserve_Model();
+       $result = $m_reserves->get_all_reserves($offer_id);
+       $this->data["reserves"] = $result;
+
     }
 }

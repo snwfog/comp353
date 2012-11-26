@@ -27,7 +27,7 @@ class Index_Controller extends Controller
         $this->data['giveaways'] = $m_offer->getGiveaways();
 
         $this->m_storages = new Storage_Model();
-        $this->data['garage_sales'] = $this->m_storages->getAllGarageSales();
+        //$this->data['garage_sales'] = $this->m_storages->getAllGarageSales();
         $this->display('index.twig', $this->data);
     }
 }

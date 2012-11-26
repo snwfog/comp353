@@ -23,59 +23,81 @@
     <tr><td colspan="2">DERPPPPP IMAGE</td></tr>
 </table>
 
-<hr /><h1>Bids</h1>
-{% if bids %}
-<table>
-    <tr>
-        {% if (is_owner and not( offer.expire)) %}
-            <th>Action</th>
-        {% else %}
-            <th>Status</th>
-        {% endif %}
-        <th>Bidder</th>
-        <th>Type</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th>Description</th>
-    </tr>
-    {% for bid in bids %}
-        <tr>
-            {% if (is_owner and not (offer.expire)) %}
-                <td>
-                    <div class="tiptip">
-                        <a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}&bid_id={{bid.id}}"
-                                           class="button confirm" title="Accept Offer">
-                        <span class="icon icon43"></span>
-                    </a></div>
-                </td>
-            {% else %}
-                <td>
-                    {% if not transact.bid_id %}
-                        Available
-                    {% elseif bid.id == transact.bid_id  %}
-                        Winner
-                    {% else %}
-                        Loser
+{% if offer.price <= 0.00 %}
+    <hr /><h1>Reserves</h1>
+    {% if reserves %}
+        <table>
+            <th> Name </th>
+            {% if is_owner %}<th> phone_number</th> {% endif %}
+            <th> Reserved At </th>
+            {% for reserve in reserves %}
+                <tr>
+                    <td>{{ reserve.first_name }}{{ reserve.last_name }}</td>
+                    {% if is_owner %}
+                        <td>{{reserve.phone_number}}</td>
                     {% endif %}
-                </td>
+                    <td>{{ reserve.reserve_time }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endif %}
+
+{% if offer.price > 0.00 %}
+    <hr /><h1>Bids</h1>
+    {% if bids%}
+    <table>
+        <tr>
+            {% if (is_owner and not(offer.expire)) %}
+                <th>Action</th>
+            {% else %}
+                <th>Status</th>
             {% endif %}
-            <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder}}</a></td>
-            <td><a href="#">{{ bid.type }}</a></td>
-            <td><a href="#">{{ bid.category }}</a></td>
-            <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
-            <td>{{ bid.description }}</td>
+            <th>Bidder</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Description</th>
         </tr>
-    {% endfor %}
-</table>
-{% elseif is_owner %}
-    <p>No one is currently interested in this item.</p>
-{% else %}
-    <p>There aren't currently any bid for this item.
-        Be the first one to make a bid!</p>
+        {% for bid in bids %}
+            <tr>
+                {% if (is_owner and not (offer.expire)) %}
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}&bid_id={{bid.id}}"
+                                               class="button confirm" title="Accept Offer">
+                            <span class="icon icon43"></span>
+                        </a></div>
+                    </td>
+                {% else %}
+                    <td>
+                        {% if not transact.bid_id %}
+                            Available
+                        {% elseif bid.id == transact.bid_id  %}
+                            Winner
+                        {% else %}
+                            Loser
+                        {% endif %}
+                    </td>
+                {% endif %}
+                <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder}}</a></td>
+                <td><a href="#">{{ bid.type }}</a></td>
+                <td><a href="#">{{ bid.category }}</a></td>
+                <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
+                <td>{{ bid.description }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% elseif is_owner %}
+        <p>No one is currently interested in this item.</p>
+    {% else%}
+        <p>There aren't currently any bid for this item.
+            Be the first one to make a bid!</p>
+    {% endif %}
 {% endif %}
 
 
-{% if (CanBid and not(is_owner)) %}
+{% if (CanBid and not(is_owner) and offer.price > 0) %}
 <hr />
 <ul class="error-field"></ul>
 <form action="index.php?offer&id={{ offer.id }}" method="POST" name="bid-offer-form">
@@ -105,6 +127,38 @@
     <p> Please <a href="index.php?login">Login</a> to bid </p>
 {% elseif not(CanBid) %}
      <a href="index.php?creditcard">Add a Credit Card To Bid</a>
+{% endif %}
+
+<br/><br/>
+
+{% if (offer.price <=0 and not(is_owner))%}
+    {% if is_logged_in %}
+        <form action="index.php?reserve" method="POST" style="width:300px;">
+            <input type="hidden" name="offer_id" value="{{offer.id}}" />
+            <button type="submit" name="submit" id="submit-bid"
+                    class="action red submit" title="Make Bid">
+                <span class="icon icon51"></span>
+                <span class="label">RESERVE</span>
+            </button>
+        </form>
+    {% else %}
+        <div>
+        <form action="index.php?reserve" method="POST" style="width:300px;">
+          <h3>Contact Information</h3>
+            <ul>
+                <li><input type="text" name="first_name" placeholder="First name" />
+                <li><input type="text" name="last_name" placeholder="Last name" />
+                <li><input type="text" name="phone_number" placeholder="Phone number" />
+            </ul>
+            <input type="hidden" name="offer_id" value="{{offer.id}}" />
+            <button type="submit" name="submit" id="submit-bid"
+                    class="action red submit" title="Make Bid">
+                <span class="icon icon51"></span>
+                <span class="label">RESERVE</span>
+            </button>
+        </form>
+        </div>
+    {% endif %}
 {% endif %}
 
 {% endblock content %}

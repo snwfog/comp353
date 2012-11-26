@@ -75,6 +75,14 @@ class Member_Model extends Model
         return $result;
     }
 
+
+    public function get_visitor_id($member_id)
+    {
+        $this->db->query("Select visitor_id FROM members WHERE id = $member_id;");
+        $result = $this->db->fetch();
+        return empty($result) ? NULL : $result[0]["visitor_id"];
+    }
+
     public function exist_attribute($attribute, $value)
     {
         $value = "\"" . $value . "\"";
