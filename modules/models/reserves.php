@@ -10,7 +10,9 @@ class Reserve_Model extends Model
     public function create_reserve($visitor_id, $offer_id){
         $date_time = "\"". date("Y-m-d H:i:s") . "\"";
         $query = "INSERT INTO reserves (visitor_id, offer_id, reserve_time)
-            VALUES ('$visitor_id', '$offer_id', '$date_time')";
+            VALUES ('$visitor_id', '$offer_id', $date_time)";
+        $this->db->query($query);
+
         if($this->db->getErrorId()){
             return;
         }
