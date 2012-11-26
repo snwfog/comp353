@@ -27,11 +27,13 @@
     <hr /><h1>Reserves</h1>
     {% if reserves %}
         <table>
-            <th> Name </th>
-            {% if is_owner %}<th> phone_number</th> {% endif %}
-            <th> Reserved At </th>
+            <th>Position</th>
+            <th>Name</th>
+            {% if is_owner %}<th>Phone Number</th>{% endif %}
+            <th>Reserved Stamp</th>
             {% for reserve in reserves %}
                 <tr>
+                    <td>{{ loop.index }}</td>
                     <td>{{ reserve.first_name }}{{ reserve.last_name }}</td>
                     {% if is_owner %}
                         <td>{{reserve.phone_number}}</td>
@@ -61,6 +63,7 @@
         </tr>
         {% for bid in bids %}
             <tr>
+                <td>{{ loop.index }}</td>
                 {% if (is_owner and not (offer.expire)) %}
                     <td>
                         <div class="tiptip">
@@ -135,11 +138,11 @@
     {% if is_logged_in %}
         <form action="index.php?reserve" method="POST" style="width:300px;">
             <input type="hidden" name="offer_id" value="{{offer.id}}" />
-            <button type="submit" name="submit" id="submit-bid"
-                    class="action red submit" title="Make Bid">
-                <span class="icon icon51"></span>
-                <span class="label">RESERVE</span>
-            </button>
+            <div class="tiptip"><button type="submit" name="submit"
+                    class="action red submit" title="Reserve Offer">
+                <span class="icon icon99"></span>
+                <span class="label">Reserve</span>
+            </button></div>
         </form>
     {% else %}
         <div>
@@ -151,11 +154,11 @@
                 <li><input type="text" name="phone_number" placeholder="Phone number" />
             </ul>
             <input type="hidden" name="offer_id" value="{{offer.id}}" />
-            <button type="submit" name="submit" id="submit-bid"
-                    class="action red submit" title="Make Bid">
-                <span class="icon icon51"></span>
-                <span class="label">RESERVE</span>
-            </button>
+            <div class="tiptip"><button type="submit" name="submit"
+                    class="action red submit" title="Reserve Offer">
+                <span class="icon icon99"></span>
+                <span class="label">Reserve</span>
+            </button></div>
         </form>
         </div>
     {% endif %}
