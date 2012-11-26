@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.25)
 # Database: comp353
-# Generation Time: 2012-11-26 21:46:11 +0000
+# Generation Time: 2012-11-26 22:02:19 +0000
 # ************************************************************
 
 
@@ -376,14 +376,15 @@ CREATE TABLE `giveaways` (
   PRIMARY KEY (`id`),
   KEY `fk_giveaways_offers` (`offer_id`),
   CONSTRAINT `fk_giveaways_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 LOCK TABLES `giveaways` WRITE;
 /*!40000 ALTER TABLE `giveaways` DISABLE KEYS */;
 
 INSERT INTO `giveaways` (`id`, `offer_id`)
 VALUES
-	(1,31);
+	(1,31),
+	(2,37);
 
 /*!40000 ALTER TABLE `giveaways` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -515,7 +516,7 @@ CREATE TABLE `offers` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_offers_categories` (`category_id`),
   CONSTRAINT `fk_offers_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `offers` WRITE;
 /*!40000 ALTER TABLE `offers` DISABLE KEYS */;
@@ -539,7 +540,8 @@ VALUES
 	(33,'Database assignment tutoring','99 Dollar per hours for database comp353 tutoring.',99.00,39,'NULL',0),
 	(34,'asdfasdf','asdfasdfasdf',33343.00,32,'NULL',1),
 	(35,'123 123 123 ','123123123123',123.00,32,'NULL',0),
-	(36,'Unicorn rainbow candy','Selling unicorn rainbow cotton candy. Will grant you 3 wishes upon eating them.',9999999.00,30,'NULL',0);
+	(36,'Unicorn rainbow candy','Selling unicorn rainbow cotton candy. Will grant you 3 wishes upon eating them.',9999999.00,30,'NULL',0),
+	(37,'Staring','Contest',0.00,32,'NULL',0);
 
 /*!40000 ALTER TABLE `offers` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -575,7 +577,7 @@ CREATE TABLE `posts` (
   KEY `fk_posts_offers_idx1` (`offer_id`),
   CONSTRAINT `fk_posts_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_posts_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
@@ -598,7 +600,8 @@ VALUES
 	(2,33,21),
 	(1,34,22),
 	(1,35,23),
-	(1,36,24);
+	(1,36,24),
+	(1,37,25);
 
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -630,11 +633,12 @@ CREATE TABLE `reserves` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `visitor_id` int(11) NOT NULL,
   `offer_id` int(11) NOT NULL,
+  `reserve_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `visitor_id` (`visitor_id`,`offer_id`),
   KEY `fk_reserves_offers` (`offer_id`),
-  CONSTRAINT `fk_reserves_visitors` FOREIGN KEY (`visitor_id`) REFERENCES `visitors` (`id`),
-  CONSTRAINT `fk_reserves_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`)
+  CONSTRAINT `fk_reserves_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`),
+  CONSTRAINT `fk_reserves_visitors` FOREIGN KEY (`visitor_id`) REFERENCES `visitors` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -652,7 +656,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_sessions_members_idx` (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
@@ -753,8 +757,11 @@ VALUES
 	(92,1,'f48c9e6dbc4f0fb7a391ed82b4e84c319674bd424d032d4e85372150d5a367b4',1),
 	(93,1,'ce6509b235dd00e383aff4e78c2d483845fb67b09ae302f0174235022d020051',1),
 	(94,1,'18e7b23e1f84ffb1c7cfb74bcdd6798ca7ca2525048d75989d8a9968a29d2f8c',1),
-	(95,2,'8d7bd593a8b3d596df078eadad182ea44618fdce18ccbba9029c9c247ed3c907',0),
-	(96,1,'8fd61b1abf0019a26cc506014de4cb020154a2b7f5d1d173198ec08f02b5bc3f',0);
+	(95,2,'8d7bd593a8b3d596df078eadad182ea44618fdce18ccbba9029c9c247ed3c907',1),
+	(96,1,'8fd61b1abf0019a26cc506014de4cb020154a2b7f5d1d173198ec08f02b5bc3f',1),
+	(97,1,'d0be35b336b1834f7142b52767fdde220b09f1bf7b4c914a47d7395b199f9903',1),
+	(98,1,'09db34f769a754a865555c89ec2a601d98851740d889529adf2db9525696b794',0),
+	(99,2,'22363b4eb1c8d6ab8237e212dd6507134a51f67639fd2f5dfbf9736730dd66d8',0);
 
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
