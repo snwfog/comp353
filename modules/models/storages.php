@@ -19,7 +19,6 @@ class Storage_Model extends Model
     }
 
     public function ready_for_pick_up($transaction_id){
-      print_r($transaction_id);
       $this->db->query("Select * FROM storages WHERE transact_id = $transaction_id and acquire_date IS NOT NULL");
       $result = $this->db->fetch(MYSQL_ASSOC);
       return $result;
