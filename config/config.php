@@ -23,6 +23,7 @@ define('FOLDER_ROOT', '/Applications/MAMP/htdocs/353/');
 define('SERVER_ROOT', $_SERVER['DOCUMENT_ROOT'] . FOLDER_URL);
 define('SITE_ROOT', BASE_URL . FOLDER_URL);
 
+define('IMAGE_PATH', 'assets/img/offer-picture/');
 /**-----------------------------------------------------------------------------
  * Define project pathing constants.
  * Apparently PHP's include or require uses absolute pathing from the root

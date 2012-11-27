@@ -3,7 +3,8 @@
 {% block content %}
 <div id="post">
 <ul class="error-field"></ul>
-<form action="index.php?post" method="POST" name="post-offer-form" enctype="multipart/form-data">
+<form action="index.php?post" method="POST" name="post-offer-form"
+      enctype="multipart/form-data">
     <ul>
         <li><input type="text" name="title" placeholder="Title" />
         <li><select name="category">
@@ -17,7 +18,7 @@
         </select>
         <li><input type="text" name="price" placeholder="Price" />
         <li><textarea name="description" rows="6" cols="30"></textarea>
-        <li><input type="file" name="image" placeholder="image_url"/>
+        <li><input type="file" name="image" placeholder="Image URL"/>
         <li><input type="hidden" name="submit" value="TRUE" />
         <li><button type="submit" class="action blue submit">
                 <span class="label">Post Offer</span>
