@@ -5,7 +5,7 @@ class Search_Controller extends Controller implements IRedirectable
     protected $data = null;
     public function __construct(array $args)
     {
-       //parent::__construct();
+       parent::__construct(FALSE);
        $categoryModel = new Category_Model();
        $categories = $categoryModel->getAllCategories();
        $this->data["categories"] = $categories;

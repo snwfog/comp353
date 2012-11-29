@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.25)
 # Database: comp353
-# Generation Time: 2012-11-26 22:02:19 +0000
+# Generation Time: 2012-11-29 16:16:21 +0000
 # ************************************************************
 
 
@@ -439,7 +439,7 @@ CREATE TABLE `notify_acquire` (
   PRIMARY KEY (`id`),
   KEY `fk_notify_acquire_storages` (`storage_id`),
   CONSTRAINT `fk_notify_acquire_storages` FOREIGN KEY (`storage_id`) REFERENCES `storages` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
@@ -454,7 +454,7 @@ CREATE TABLE `notify_pickup` (
   PRIMARY KEY (`id`),
   KEY `fk_notify_pickup_storages` (`storage_id`),
   CONSTRAINT `fk_notify_pickup_storages` FOREIGN KEY (`storage_id`) REFERENCES `storages` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
@@ -470,7 +470,7 @@ CREATE TABLE `notify_queue` (
   PRIMARY KEY (`id`),
   KEY `fk_notify_queue_bids` (`bid_id`),
   CONSTRAINT `fk_notify_queue_bids` FOREIGN KEY (`bid_id`) REFERENCES `bids` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 LOCK TABLES `notify_queue` WRITE;
 /*!40000 ALTER TABLE `notify_queue` DISABLE KEYS */;
@@ -495,7 +495,7 @@ CREATE TABLE `notify_receive` (
   PRIMARY KEY (`id`),
   KEY `fk_notify_receive_storages` (`storage_id`),
   CONSTRAINT `fk_notify_receive_storages` FOREIGN KEY (`storage_id`) REFERENCES `storages` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
@@ -516,7 +516,7 @@ CREATE TABLE `offers` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_offers_categories` (`category_id`),
   CONSTRAINT `fk_offers_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `offers` WRITE;
 /*!40000 ALTER TABLE `offers` DISABLE KEYS */;
@@ -541,7 +541,18 @@ VALUES
 	(34,'asdfasdf','asdfasdfasdf',33343.00,32,'NULL',1),
 	(35,'123 123 123 ','123123123123',123.00,32,'NULL',0),
 	(36,'Unicorn rainbow candy','Selling unicorn rainbow cotton candy. Will grant you 3 wishes upon eating them.',9999999.00,30,'NULL',0),
-	(37,'Staring','Contest',0.00,32,'NULL',0);
+	(37,'Staring','Contest',0.00,32,'NULL',0),
+	(38,'asdfasdf','asdfasdfasdf',234.00,33,'NULL',0),
+	(39,'asdfasdf','asdfasdfasdf',234.00,33,'NULL',0),
+	(40,'asdfasdf','asdfasdfasdf',234.00,33,'NULL',0),
+	(41,'asdfasdf','asdfasdfasdf',234.00,33,'NULL',0),
+	(42,'asdfasdf','sdfasdfasdf',234.00,32,'NULL',0),
+	(43,'asdfasdf','sdfasdfasdf',234.00,32,'NULL',0),
+	(44,'Boot','asdfasdf',234.00,32,'NULL',0),
+	(45,'hello ','asfasdfasdfasdf',12323.00,32,'1a26b7dee6fc52c891e769ddab4fc79f4b6cce1b07a90fe95e53dcec05567f09.jpg',0),
+	(46,'234234234','asdfasdfasdfasdf',234234.00,33,'1a26b7dee6fc52c891e769ddab4fc79f4b6cce1b07a90fe95e53dcec05567f09.jpg',0),
+	(47,'sdfasdfasf','asdfasdfasdfasdf',234.00,32,'1a26b7dee6fc52c891e769ddab4fc79f4b6cce1b07a90fe95e53dcec05567f09.jpg',0),
+	(48,'asdfasdfasdf','asdfasdfasdf',234.00,32,'5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9.jpg',0);
 
 /*!40000 ALTER TABLE `offers` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -577,7 +588,7 @@ CREATE TABLE `posts` (
   KEY `fk_posts_offers_idx1` (`offer_id`),
   CONSTRAINT `fk_posts_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_posts_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
@@ -601,7 +612,18 @@ VALUES
 	(1,34,22),
 	(1,35,23),
 	(1,36,24),
-	(1,37,25);
+	(1,37,25),
+	(1,38,26),
+	(1,39,27),
+	(1,40,28),
+	(1,41,29),
+	(1,42,30),
+	(1,43,31),
+	(1,44,32),
+	(1,45,33),
+	(1,46,34),
+	(1,47,35),
+	(1,48,36);
 
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -639,8 +661,17 @@ CREATE TABLE `reserves` (
   KEY `fk_reserves_offers` (`offer_id`),
   CONSTRAINT `fk_reserves_offers` FOREIGN KEY (`offer_id`) REFERENCES `offers` (`id`),
   CONSTRAINT `fk_reserves_visitors` FOREIGN KEY (`visitor_id`) REFERENCES `visitors` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+LOCK TABLES `reserves` WRITE;
+/*!40000 ALTER TABLE `reserves` DISABLE KEYS */;
+
+INSERT INTO `reserves` (`id`, `visitor_id`, `offer_id`, `reserve_time`)
+VALUES
+	(1,2,37,'2012-11-26 17:02:59');
+
+/*!40000 ALTER TABLE `reserves` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table sessions
@@ -656,7 +687,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_sessions_members_idx` (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
@@ -760,8 +791,13 @@ VALUES
 	(95,2,'8d7bd593a8b3d596df078eadad182ea44618fdce18ccbba9029c9c247ed3c907',1),
 	(96,1,'8fd61b1abf0019a26cc506014de4cb020154a2b7f5d1d173198ec08f02b5bc3f',1),
 	(97,1,'d0be35b336b1834f7142b52767fdde220b09f1bf7b4c914a47d7395b199f9903',1),
-	(98,1,'09db34f769a754a865555c89ec2a601d98851740d889529adf2db9525696b794',0),
-	(99,2,'22363b4eb1c8d6ab8237e212dd6507134a51f67639fd2f5dfbf9736730dd66d8',0);
+	(98,1,'09db34f769a754a865555c89ec2a601d98851740d889529adf2db9525696b794',1),
+	(99,2,'22363b4eb1c8d6ab8237e212dd6507134a51f67639fd2f5dfbf9736730dd66d8',1),
+	(100,1,'8c9dc2ad4197923b4a404b5c1bac676f93fe510de2e8bf55c88ed54f1785da54',1),
+	(101,2,'82c2f2ca42df3b60f749dbd6877a010d1a2303c59850a9a59619047c4daeabff',0),
+	(102,1,'0ce17643423d4c6f8197e96308f5ca54739348add2fccce638d51d95c7116120',1),
+	(103,1,'5ab9ec4d54ddeda32604e8d82870c84224ffbe33fa74fd7ef37397eee9951b3f',1),
+	(104,1,'ff2cfb79c1f28b45db4543675612135e0628ccc5c1dcad072da1acda08f7cb96',0);
 
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -781,7 +817,7 @@ CREATE TABLE `storages` (
   PRIMARY KEY (`id`),
   KEY `fk_storages_transact_idx` (`transact_id`),
   CONSTRAINT `fk_storages_transact` FOREIGN KEY (`transact_id`) REFERENCES `transacts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `storages` WRITE;
 /*!40000 ALTER TABLE `storages` DISABLE KEYS */;
