@@ -21,8 +21,10 @@ class Garage_Controller extends Controller implements IRedirectable
             }
             if (isset($args['receive']) && $args['receive'])
             {
-                $this->m_storages->receive($args['receive']);
-                $this->back();
+                if(isset($_POST["volume"]) AND isset($_POST["weight"]) AND $_POST["volume"] !== "" AND $_POST["weight"] !== "" ){
+                    $this->m_storages->receive($args['receive'], $_POST["volume"], $_POST["weight"]);   
+                }
+                //$this->back();
             }
 
             $this->data['storages'] = $this->m_storages->getAllActiveStorageItems();

@@ -85,9 +85,9 @@ class Storage_Model extends Model
         return empty($result) ? NULL : $result;
     }
 
-    public function receive($storage_id)
+    public function receive($storage_id, $volume, $weight)
     {
-        $query = "UPDATE storages SET acquire_date = CURDATE()
+        $query = "UPDATE storages SET acquire_date = CURDATE(), weight = \"$weight\", volume = \"$volume\"
             WHERE id = '$storage_id'";
         $this->db->query($query);
     }
