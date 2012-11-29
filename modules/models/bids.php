@@ -32,6 +32,19 @@ class Bid_Model extends Model
         return empty($result) ? NULL : $result;
     }
 
+    public function getBidById($id)
+    {
+        $query = "SELECT *
+                  FROM bids AS b
+                  WHERE
+                    id = $id";
+
+        $this->db->query($query);
+        $result = $this->db->fetch(MYSQLI_ASSOC);
+
+        return empty($result) ? NULL : $result;
+    }
+
     public function getAllBidByMemberId($member_id)
     {
         $query = "SELECT b.id,
