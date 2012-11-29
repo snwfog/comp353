@@ -148,3 +148,31 @@ $(document).ready ->
     rules: "required|max_length[100]"
   }], displayError)
 
+  ###
+    Credit Card Information
+  ###
+  creditCardValidator = new FormValidator("credit-card-form", [{
+    name: "credit_card_type",
+    display: "Credit Card Type",
+    rules: "required"
+  }, {
+    name: "card_holder",
+    display: "Holder's Name",
+    rules: "required|alpha"
+  }, {
+    name: "credit_card_number",
+    display: "Credit Card Number",
+    rules: "required|numeric|exact_length[16]"
+  }, {
+    name: "expiration_month",
+    display: "Expire Month",
+    rules: "required|numeric|exact_length[2]"
+  }, {
+    name: "expiration_year",
+    display: "Expire Year",
+    rules: "required|numeric|exact_length[2]"
+  }, {
+    name: "verification_number",
+    display: "Verification Number",
+    rules: "required|numberic|less_than[4]"
+  }], displayError)

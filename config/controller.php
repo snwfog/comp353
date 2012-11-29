@@ -14,7 +14,9 @@ abstract class Controller
     public function __construct($redirect = TRUE)
     {
         $this->startSession();
-        
+        $this->data["title"] = "Wiz.Trade";
+        $this->data["specifier"] = "An GoBAGSys affiliate";
+
         if (!$this->isValidSession())
         {
             if ($redirect)

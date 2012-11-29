@@ -7,11 +7,11 @@
             <div id="error">{{ error }}</div></br>
         {% endblock %}
     {% endfor %}
-    <form action="index.php?creditcard" method="POST">
+    <form action="index.php?creditcard" method="POST" name="credit-card-form">
         <h3>CreditCard</h3>
         <ul>
             <li>
-                <select name="credit_card_type">
+                <select name="credit_card_type" id="credit-card-type">
                     {% for company in type %}
                         <option value="{{ company.id }}">{{ company.type|capitalize }}</option>
                     {% endfor %}
