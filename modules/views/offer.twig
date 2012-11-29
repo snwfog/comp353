@@ -20,7 +20,13 @@
         </td>
     </tr>
     <tr><td colspan="2"><p>{{ offer.description }}</p></td></tr>
-    <tr><td colspan="2"><img src="assets/img/offer-picture/{{ offer.image_url }}" alt=""></td></tr>
+    <tr><td colspan="2">
+        {% if offer.image_url != "NULL" %}
+            <img src="assets/img/offer-picture/{{ offer.image_url }}" alt="">
+        {% else %}
+            <img src="assets/img/web/default-offer-picture.jpeg" alt="">
+        {% endif %}
+    </td></tr>
 </table>
 
 {% if offer.price <= 0.00 %}
