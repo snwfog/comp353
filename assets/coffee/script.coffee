@@ -176,3 +176,56 @@ $(document).ready ->
     display: "Verification Number",
     rules: "required|numberic|less_than[4]"
   }], displayError)
+
+  ###
+    Registration Information
+  ###
+  registrationValidator = new FormValidator("registration-form", [{
+    name: "username",
+    display: "Username",
+    rules: "required|alpha_numeric|max_length[20]"
+  }, {
+    name: "password1",
+    display: "Password",
+    rules: "required"
+  }, {
+    name: "password2",
+    display: "Password Confirmation",
+    rules: "required|matches[password1]"
+  }, {
+    name: "first_name",
+    display: "First Name",
+    rules: "required|alpha"
+  }, {
+    name: "last_name",
+    display: "Last Name",
+    rules: "required|alpha"
+  }, {
+    name: "phone_number",
+    display: "Phone Number",
+    rules: "numeric|more_than[5]|max_length[20]"
+  }, {
+    name: "email",
+    display: "Email Address",
+    rules: "required|valid_email"
+  }, {
+    name: "address",
+    display: "Address",
+    rules: "required"
+  }, {
+    name: "city",
+    display: "City",
+    rules: "required"
+  }, {
+    name: "province",
+    display: "Province",
+    rules: "required"
+  }, {
+    name: "country",
+    display: "Country",
+    rules: "required"
+  }, {
+  name: "postal_code",
+  display: "Postal Code",
+  rules: "required|alpha_numeric"
+  }], displayError)

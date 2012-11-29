@@ -8,6 +8,8 @@ class Registration_Controller extends Controller implements IRedirectable
     
     public function __construct(array $args)
     {
+        parent::__construct(FALSE);
+
         if (isset($_POST["registration_form"]))
         {
             $this->password1              = $_POST["password1"];
