@@ -2,7 +2,55 @@
 
 $(function() {
   var noteAlert, recallTime;
-  recallTime = 10000;
+  recallTime = 5000;
+  setInterval(function() {
+    return $.ajax({
+      url: "index.php?ajax&notify_acquire=1",
+      dataType: "json"
+    }).done(function(data) {
+      if (data != null) {
+        return $.each(data, function(i, item) {
+          return noteAlert("Your bid \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            just arrived at the garage. You may come and pick it up            during our regular business hour within the next <b>14</b> days.", "success");
+        });
+      }
+    });
+  }, recallTime);
+  setInterval(function() {
+    return $.ajax({
+      url: "index.php?ajax&notify_expired_bids=1",
+      dataType: "json"
+    }).done(function(data) {
+      if (data != null) {
+        return $.each(data, function(i, item) {
+          return noteAlert(("Your bids \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.description + "</a></b>\"          was expired <b>") + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning");
+        });
+      }
+    });
+  }, recallTime);
+  setInterval(function() {
+    return $.ajax({
+      url: "index.php?ajax&notify_receive=1",
+      dataType: "json"
+    }).done(function(data) {
+      if (data != null) {
+        return $.each(data, function(i, item) {
+          return noteAlert("Hey, we just received your item \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            in our garage. Rest assured as we've already notified            the bidder to come and pick it up.", "success");
+        });
+      }
+    });
+  }, recallTime);
+  setInterval(function() {
+    return $.ajax({
+      url: "index.php?ajax&notify_modify=1",
+      dataType: "json"
+    }).done(function(data) {
+      if (data != null) {
+        return $.each(data, function(i, item) {
+          return noteAlert("The item \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                        has been modified by the owner.", "warning");
+        });
+      }
+    });
+  }, recallTime);
   $.ajax({
     url: "index.php?ajax&is_admin=1",
     dataType: "json"

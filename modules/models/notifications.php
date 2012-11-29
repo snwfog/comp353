@@ -7,6 +7,28 @@ class Notification_Model extends Model
         parent::__construct();
     }
 
+    public function getModifiedOffers($member_id)
+    {
+        $query = "SELECT
+          o.title AS title,
+          o.id AS id
+        FROM notify_modify n
+          JOIN offers o ON o.id = n.offer_id
+        WHERE n.member_id = '$member_id'";
+
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch();
+
+        if (!empty($result))
+        {
+            $query = "DELETE FROM notify_modify
+                WHERE member_id = '$member_id'";
+            $this->db->query($query);
+        }
+
+        return empty($result) ? NULL : $result;
+    }
+
     public function getExpiredBids($member_id)
     {
         $query = "SELECT
