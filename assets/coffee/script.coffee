@@ -79,7 +79,7 @@ $(document).ready ->
 
   # Hack to prevent default link follow click through so we
   # can call noty confirmation to follow the link through.
-  $(".delete, .confirm").live 'click', ->
+  $(".delete, .confirm, .modify, .warn").live 'click', ->
     this.blur()
     false
 
@@ -92,6 +92,14 @@ $(document).ready ->
   $('.confirm').click ->
     loc = $(this).attr "href"
     noteConfirm "Are you sure you want to accept this offer?", loc
+
+  $('.warn').click ->
+    loc = $(this).attr "href"
+    noteConfirm "Are you sure to send this warning to owner?", loc
+
+  $('.modify').click ->
+    loc = $(this).attr "href"
+    noteConfirm "Are you sure to modify this post?", loc
 
 ################################################################################
 # Validator Error Handler

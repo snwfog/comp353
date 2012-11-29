@@ -1,0 +1,99 @@
+<h1>The Eloquante Offer (Expired)</h1>
+
+<table id="offer-expired">
+
+    <tr>
+        <td colspan="2">
+            {{ offer.title }}
+            {% if (CanStore and is_owner) %}
+                <a href="index.php?storage&transaction_id={{ transact.id}}"> Store Item </a>
+            {% endif %}
+        </td>
+    </tr>
+    <tr><td>{{ offer.type }}</td><td>{{ offer.category }}</td></tr>
+    <tr><td>Price:</td><td>$ {{ offer.price|number_format('2', '.', ' ') }}</td></tr>
+    <tr>
+        <td>Owner:</td>
+        <td><a href="index.php?member&id={{ owner.id }}">{{ owner.username }}</a>
+        </td>
+    </tr>
+    <tr><td colspan="2"><p>{{ offer.description }}</p></td></tr>
+    <tr><td colspan="2">
+        {% if offer.image_url != "NULL" %}
+            <img src="assets/img/offer-picture/{{ offer.image_url }}" alt="">
+        {% else %}
+            <img src="assets/img/web/default-offer-picture.jpeg" alt="">
+        {% endif %}
+    </td></tr>
+</table>
+
+{% if offer.price <= 0.00 %}
+    <hr /><h1>Reserves</h1>
+    {% if reserves %}
+        <table>
+            <th>Position</th>
+            <th>Name</th>
+            {% if is_owner %}<th>Phone Number</th>{% endif %}
+            <th>Reserved Stamp</th>
+            {% for reserve in reserves %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ reserve.first_name }}{{ reserve.last_name }}</td>
+                    {% if is_owner %}
+                        <td>{{reserve.phone_number}}</td>
+                    {% endif %}
+                    <td>{{ reserve.reserve_time }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endif %}
+
+{% if offer.price > 0.00 %}
+    <hr /><h1>Bids</h1>
+    {% if bids%}
+    <table>
+        <tr>
+            {% if (is_owner and not(offer.expire)) %}
+                <th>Action</th>
+            {% else %}
+                <th>Status</th>
+            {% endif %}
+            <th>Bidder</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>
+        {% for bid in bids %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                {% if (is_owner and not (offer.expire)) %}
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}&bid_id={{bid.id}}"
+                                               class="button confirm" title="Accept Offer">
+                            <span class="icon icon43"></span>
+                        </a></div>
+                    </td>
+                {% else %}
+                    <td>
+                        {% if not transact.bid_id %}
+                            Available
+                        {% elseif bid.id == transact.bid_id  %}
+                            Winner
+                        {% else %}
+                            Loser
+                        {% endif %}
+                    </td>
+                {% endif %}
+                <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder}}</a></td>
+                <td><a href="#">{{ bid.type }}</a></td>
+                <td><a href="#">{{ bid.category }}</a></td>
+                <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
+                <td>{{ bid.description }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+{% endif %}

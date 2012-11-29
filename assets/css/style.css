@@ -143,6 +143,11 @@ select {
     color: rgba(100, 100, 100, 0.1);
 }
 
+#content table#offer-expired
+{
+    color: lightgrey;
+}
+
 #footer{
     margin: auto;
     padding: 5px;

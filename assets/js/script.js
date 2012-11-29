@@ -96,7 +96,7 @@ $(document).ready(function() {
       ]
     });
   };
-  $(".delete, .confirm").live('click', function() {
+  $(".delete, .confirm, .modify, .warn").live('click', function() {
     this.blur();
     return false;
   });
@@ -109,6 +109,16 @@ $(document).ready(function() {
     var loc;
     loc = $(this).attr("href");
     return noteConfirm("Are you sure you want to accept this offer?", loc);
+  });
+  $('.warn').click(function() {
+    var loc;
+    loc = $(this).attr("href");
+    return noteConfirm("Are you sure to send this warning to owner?", loc);
+  });
+  $('.modify').click(function() {
+    var loc;
+    loc = $(this).attr("href");
+    return noteConfirm("Are you sure to modify this post?", loc);
   });
   displayError = function(errors, event) {
     var error, errorString, _i, _len, _results;
