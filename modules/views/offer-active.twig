@@ -1,7 +1,7 @@
 <h1>The Eloquante Offer</h1>
 
 <div class="tiptip">
-    <a href="index.php?offer&modify={{ offer.id }}"
+    <a href="index.php?post&modify={{ offer.id }}"
        class="button modify" title="Modify Offer">
         <span class="icon icon196"></span>
         <span class="label">Modify</span></a>
@@ -34,10 +34,10 @@
     </tr>
     <tr><td colspan="2"><p>{{ offer.description }}</p></td></tr>
     <tr><td colspan="2">
-        {% if offer.image_url != "NULL" %}
-            <img src="assets/img/offer-picture/{{ offer.image_url }}" alt="">
+        {% if offer.image_url is not empty %}
+            <img src="assets/img/offer-picture/{{ offer.image_url }}" alt="{{ offer.title }}">
         {% else %}
-            <img src="assets/img/web/default-offer-picture.jpeg" alt="">
+            <img src="assets/img/web/default-offer-picture.jpeg" alt="{{ offer.title }}">
         {% endif %}
     </td></tr>
 </table>
