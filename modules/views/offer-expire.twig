@@ -4,7 +4,7 @@
 
     <tr>
         <td colspan="2">
-            {{ offer.title }}
+            <h5>{{ offer.title }}</h5>
             {% if (CanStore and is_owner) %}
                 <a href="index.php?storage&transaction_id={{ transact.id}}"> Store Item </a>
             {% endif %}
@@ -19,10 +19,10 @@
     </tr>
     <tr><td colspan="2"><p>{{ offer.description }}</p></td></tr>
     <tr><td colspan="2">
-        {% if offer.image_url != "NULL" %}
-            <img src="assets/img/offer-picture/{{ offer.image_url }}" alt="">
+        {% if offer.image_url is not empty %}
+            <img src="assets/img/offer-picture/{{ offer.image_url }}" alt="{{ offer.title }}">
         {% else %}
-            <img src="assets/img/web/default-offer-picture.jpeg" alt="">
+            <img src="assets/img/web/default-offer-picture.jpeg" alt="{{ offer.title }}">
         {% endif %}
     </td></tr>
 </table>
@@ -54,6 +54,7 @@
     {% if bids%}
     <table>
         <tr>
+            <th>Priority</th>
             {% if (is_owner and not(offer.expire)) %}
                 <th>Action</th>
             {% else %}

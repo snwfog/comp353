@@ -36,6 +36,17 @@ class Offer_Model extends Model
         return empty($result) ? NULL : $result[0];
     }
 
+    public function updateOffer($data, $offer_id)
+    {
+        $query = "UPDATE offers
+            SET title = '".$data["title"]."',
+            description = '".$data["description"]."',
+            price = '".$data["price"]."',
+            category_id = '".$data["category"]."'
+        WHERE id = '$offer_id'";
+        $mysqli_result = $this->db->query($query);
+    }
+
     public function getAllActiveOffer()
     {
         $query = "SELECT

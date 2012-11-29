@@ -3,46 +3,59 @@ $ ->
 ################################################################################
 # Fetch ready for pickup offer function handler
 ################################################################################
-  recallTime = 10000
+  recallTime = 5000
 
-#  setInterval ->
-#    $.ajax({
-#      url: "index.php?ajax&notify_acquire=1",
-#      dataType: "json"
-#    }).done (data) ->
-#      if data?
-#        $.each data, (i, item) ->
-#          noteAlert "Your bid \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
-#            just arrived at the garage. You may come and pick it up
-#            during our regular business hour within the next <b>14</b> days.", "success"
-#    , recallTime
+  setInterval ->
+    $.ajax({
+      url: "index.php?ajax&notify_acquire=1",
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $.each data, (i, item) ->
+          noteAlert "Your bid \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
+            just arrived at the garage. You may come and pick it up
+            during our regular business hour within the next <b>14</b> days.", "success"
+  , recallTime
 ################################################################################
 # Fetch expired bids function handler
 ################################################################################
-#  setInterval ->
-#    $.ajax({
-#      url: "index.php?ajax&notify_expired_bids=1",
-#      dataType: "json"
-#    }).done (data) ->
-#      if data?
-#        $.each data, (i, item) ->
-#          noteAlert "Your bids \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.description}</a></b>\"
-#          was expired <b>" + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning"
-#    , recallTime
+  setInterval ->
+    $.ajax({
+      url: "index.php?ajax&notify_expired_bids=1",
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $.each data, (i, item) ->
+          noteAlert "Your bids \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.description}</a></b>\"
+          was expired <b>" + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning"
+  , recallTime
 ################################################################################
 # Fetch received offer function handler
 ################################################################################
-#  setInterval ->
-#    $.ajax({
-#      url: "index.php?ajax&notify_receive=1",
-#      dataType: "json"
-#    }).done (data) ->
-#      if data?
-#        $.each data, (i, item) ->
-#          noteAlert "Hey, we just received your item \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
-#            in our garage. Rest assured as we've already notified
-#            the bidder to come and pick it up.", "success"
-#    , recallTime
+  setInterval ->
+    $.ajax({
+      url: "index.php?ajax&notify_receive=1",
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $.each data, (i, item) ->
+          noteAlert "Hey, we just received your item \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
+            in our garage. Rest assured as we've already notified
+            the bidder to come and pick it up.", "success"
+  , recallTime
+################################################################################
+# Fetch expired bids function handler
+################################################################################
+  setInterval ->
+    $.ajax({
+      url: "index.php?ajax&notify_modify=1",
+      dataType: "json"
+      }).done (data) ->
+        if data?
+          $.each data, (i, item) ->
+            noteAlert "The item \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
+                        has been modified by the owner.", "warning"
+  , recallTime
 ################################################################################
 # Rainbow unicorn mode
 ################################################################################
