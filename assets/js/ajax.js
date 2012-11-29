@@ -46,7 +46,7 @@ $(function() {
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert("The item \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                        has been modified by the owner.", "warning");
+          return noteAlert("The item \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                      has been modified by the owner.", "warning");
         });
       }
     });

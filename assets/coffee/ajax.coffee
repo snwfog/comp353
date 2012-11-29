@@ -44,17 +44,17 @@ $ ->
             the bidder to come and pick it up.", "success"
   , recallTime
 ################################################################################
-# Fetch expired bids function handler
+# Offer modified notifier
 ################################################################################
   setInterval ->
     $.ajax({
       url: "index.php?ajax&notify_modify=1",
       dataType: "json"
-      }).done (data) ->
-        if data?
-          $.each data, (i, item) ->
-            noteAlert "The item \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
-                        has been modified by the owner.", "warning"
+    }).done (data) ->
+      if data?
+        $.each data, (i, item) ->
+          noteAlert "The item \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
+                      has been modified by the owner.", "warning"
   , recallTime
 ################################################################################
 # Rainbow unicorn mode
