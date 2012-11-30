@@ -48,6 +48,5 @@ class Category_Model extends Model
 
 		$mysqli_result = $this->db->query($query);
 		$result = $this->db->fetch(MYSQLI_ASSOC);
-        print_r($result);
 	}
 }

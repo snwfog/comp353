@@ -1,14 +1,9 @@
 {% block header %}
 
 <div id="header">
+    <h1 id="title">Wiz.Trade</h1>
     <div id="nav">
         <div class="tiptip">
-
-            {#<form id="search" action="">#}
-                {#<input type="text" name="search" placeholder="Search" />#}
-                {#<a href="" class="button" title="Search">#}
-                    {#<span class="icon icon198"></span></a>#}
-
             {#</form>#}
             {% if is_admin %}
                 <img src="assets/img/web/admin-logo.jpeg" alt="Admin" id="unicorn" />
@@ -33,9 +28,9 @@
                 </a>
 
                 {% if is_admin %}
-                    {#<a href="index.php?admin" class="button" title="Admin Tool">#}
-                        {#<span class="icon icon185"></span><span class="label">Admin</span>#}
-                    {#</a>#}
+                    <a href="index.php?admin" class="button" title="Admin Tool">
+                        <span class="icon icon185"></span><span class="label">Admin</span>
+                    </a>
 
                     <a href="index.php?garage" class="button" title="Garage">
                         <span class="icon icon2"></span><span class="label">Garage</span>

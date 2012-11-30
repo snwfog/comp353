@@ -8,6 +8,8 @@ class Registration_Controller extends Controller implements IRedirectable
     
     public function __construct(array $args)
     {
+        parent::__construct(FALSE);
+
         if (isset($_POST["registration_form"]))
         {
             $this->password1              = $_POST["password1"];
@@ -30,6 +32,7 @@ class Registration_Controller extends Controller implements IRedirectable
     public function check_form($form)
     {
         $memberModel = new Member_Model();
+        $emailModel = new Email_Model();
         if ($this->password1 == "" && $this->password2 == "")
         {
             array_push($this->data["errors"], "Passwords is empty!");
@@ -41,6 +44,10 @@ class Registration_Controller extends Controller implements IRedirectable
         if ($memberModel->exist_attribute("username", $_POST["username"]))
         {
             array_push($this->data["errors"], "Username Exist!");
+        }
+        if ($emailModel->emailExist($_POST["email"]))
+        {
+            array_push($this->data["errors"], "Email Exist!");
         }
         if (count($this->data["errors"]) > 0)
         {
@@ -65,8 +72,8 @@ class Registration_Controller extends Controller implements IRedirectable
         $email_instance  = new Email_Model();
 
 
-        if($email_instance = $email_instance->setEmailAndGetId($_POST["email"])){
-            $visitor_instance = $visitorModel->create_visitor($_POST["first_name"], $_POST["last_name"], $_POST["phone_number"], $this);
+        if($visitor_instance = $visitorModel->create_visitor($_POST["first_name"], $_POST["last_name"], $_POST["phone_number"], $this)){
+            $email_instance = $email_instance->setEmailAndGetId($_POST["email"]);
             $address_instance = $addressModel->create_address($_POST["address"], $_POST["city"], $_POST["province"], $_POST["country"], $_POST["postal_code"], $this);
             $member_instance = $memberModel->create_member($_POST["username"], $this->password1, $email_instance, $address_instance["id"], $visitor_instance["id"], $this);
             return $member_instance;

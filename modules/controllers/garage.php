@@ -17,11 +17,22 @@ class Garage_Controller extends Controller implements IRedirectable
             if (isset($args['pickup']) && $args['pickup'])
             {
                 $this->m_storages->pickup($args['pickup']);
+                
+                $m_CCT = new CreditCardTransaction_Model();
+                $m_CC = new CreditCard_Model();
+                $m_transact = new Transact_Model();
+                $creditcard = $m_CC->getMemberCreditCard($this->getMemberId());
+
+                $storageItem= $this->m_storages->getStorage($args['pickup']);
+                $transactionItem = $m_transact->getTransactionById($storageItem[0]["transact_id"]);
+                $m_CCT->transact_storage_fee($creditcard[0]["id"], $transactionItem[0]["offer_id"], $args['pickup']);
                 $this->back();
             }
             if (isset($args['receive']) && $args['receive'])
             {
-                $this->m_storages->receive($args['receive']);
+                if(isset($_POST["volume"]) AND isset($_POST["weight"]) AND $_POST["volume"] !== "" AND $_POST["weight"] !== "" ){
+                    $this->m_storages->receive($args['receive'], $_POST["volume"], $_POST["weight"]);   
+                }
                 $this->back();
             }
 

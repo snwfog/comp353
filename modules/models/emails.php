@@ -28,8 +28,9 @@ class Email_Model extends Model
 		$value = array($name, $domain_id, $tld_id);
 		$attribute = array('name', 'domain_id', 'top_level_domain_id');
 		$table = "emails";
+        $result = $this->setRowAndGetId($value, $attribute, $table);
 
-		return $this->setRowAndGetId($value, $attribute, $table);
+		return $result ? $result : NULL;
     }
 
     public function getEmailById($id)
@@ -101,5 +102,21 @@ class Email_Model extends Model
     public function setDomainAndGetId($domain)
     {
 		return $this->setRowAndGetId($domain, "name", "domains");
+    }
+
+    public function emailExist($email){
+      list($name, $domain) = explode("@", $email);
+      list($domain, $top_level_domain) = explode(".", $domain);
+      $name = "\"" . $name ."\"";
+      $domain = "\"" . $domain ."\"";
+      $top_level_domain = "\"" . $top_level_domain ."\"";
+      $query = "SELECT *
+                FROM emails
+                INNER JOIN domains ON emails.domain_id = domains.id
+                INNER JOIN top_level_domains on emails.top_level_domain_id = top_level_domains.id
+                WHERE emails.name = $name AND domains.name = $domain AND top_level_domains.name = $top_level_domain;";
+      $this->db->query($query);
+      $result = $this->db->fetch(MYSQL_ASSOC);
+      return $result ? $result : NULL;
     }
 }

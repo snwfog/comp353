@@ -19,8 +19,28 @@ class Ajax_Controller extends Controller
         if (isset($args['notify_acquire']))
             $this->notifyAcquire();
 
+        if (isset($args['notify_modify']))
+            $this->notifyModify();
+
         return false;
     }
+
+    public function notifyModify()
+    {
+        $json = array();
+        $this->m_notifications = new Notification_Model();
+        $result = $this->m_notifications->getModifiedOffers($this->getMemberId());
+        if (!empty($result))
+        {
+            $json = array();
+
+            foreach($result as $row)
+                $json[] = $row;
+
+            echo json_encode($json);
+        }
+    }
+
 
     public function notifyExpiredBids()
     {
@@ -60,6 +80,7 @@ class Ajax_Controller extends Controller
         $json = array();
         $this->m_notifications = new Notification_Model();
         $result = $this->m_notifications->getAcquireOffers($this->getMemberId());
+        print_r($result);
         if (!empty($result))
         {
             $json = array();

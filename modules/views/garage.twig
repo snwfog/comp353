@@ -6,29 +6,17 @@
 {% if storages %}
     <table name="storage-table">
         <tr>
-            <th>Action
             <th>View
             <th>Type
             <th>Category
             <th>Title
             <th>Price
+            <th>weight
+            <th>volume
+            <th>Action
         </tr>
         {% for offer in storages %}
             <tr>
-                <td>
-                    {% if offer.receive %}
-                        <div class="tiptip">
-                            <a href="index.php?garage&pickup={{ offer.id }}"
-                               class="button confirm" title="Item Picked Up">
-                                <span class="icon icon44"></span></a>
-                        </div>
-                    {% else %}
-                        <div class="tiptip">
-                            <a href="index.php?garage&receive={{ offer.id }}"
-                               class="button confirm" title="Item Received">
-                                <span class="icon icon110"></span></a>
-                        </div>
-                    {% endif %}
                 <td><div class="tiptip">
                     <a href="index.php?offer&id={{ offer.offer_id }}"
                        class="button" title="View Offer">
@@ -46,6 +34,40 @@
                             {#<span class="icon icon186"></span></a>#}
                     {#</div>#}
                     {#{% endif %}#}
+
+                {% if offer.receive %}
+                    <td>{{ offer.weight }}</a>
+                    <td>{{ offer.volume }}</a>
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?garage&pickup={{ offer.id }}"
+                               class="button confirm" title="Item Picked Up">
+                                <span class="icon icon44"></span></a>
+                        </div>
+                {% else %}
+                        <form action="index.php?garage&receive={{ offer.id }}" method="POST" style="display:none;">                    
+                        <td>
+                            <select name="weight">
+                                <option value=""></option>
+                                <option value="light">light</option>
+                                <option value="medium">medium</option>
+                                <option value="heavy">heavy</option>
+                            </select>
+                        <td>
+                            <select name="volume">
+                                <option value=""></option>
+                                <option value="small">small</option>
+                                <option value="medium">medium</option>
+                                <option value="large">large</option>
+                            </select>
+                        <td>
+                            <div class="tiptip">
+                                <button type="submit" title="Item Received">
+                                    <span class="icon icon110"></span></a>
+                                </button>
+                            </div>
+                        </form>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

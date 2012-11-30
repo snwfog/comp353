@@ -49,5 +49,13 @@ class Transact_Model extends Model
       return $sold;
     }
 
+    public function getTransactionById($id){
+      $this->db->query("SELECT *
+                        FROM transacts T
+                        WHERE
+                            t.id = $id");
+      $result = $this->db->fetch(MYSQL_ASSOC);
+      return $result;
+    }
 }
 ?>

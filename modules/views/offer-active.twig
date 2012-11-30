@@ -1,0 +1,193 @@
+<h1>The Eloquante Offer</h1>
+
+<div class="tiptip">
+
+    {% if is_owner or is_admin %}
+    <a href="index.php?post&modify={{ offer.id }}"
+       class="button modify" title="Modify Offer">
+        <span class="icon icon196"></span>
+        <span class="label">Modify</span></a>
+    <a href="index.php?offer&delete={{ offer.id }}"
+       class="button delete" title="Delete Offer">
+        <span class="icon icon186"></span>
+        <span class="label">Delete</span></a>
+    {% endif %}
+
+    {% if is_admin %}
+    <a href="index.php?offer&warn={{ offer.id }}"
+       class="button warn" title="Send Warning">
+        <span class="icon icon5"></span>
+        <span class="label">Warn</span></a>
+    {% endif %}
+</div>
+
+<table>
+
+    <tr>
+        <td colspan="2">
+            <h5>{{ offer.title }}</h5>
+            {% if (CanStore and is_owner) %}
+                <a href="index.php?storage&transaction_id={{ transact.id}}"> Store Item </a>
+            {% endif %}
+        </td>
+    </tr>
+    <tr><td>{{ offer.type }}</td><td>{{ offer.category }}</td></tr>
+    <tr><td>Price:</td><td>$ {{ offer.price|number_format('2', '.', ' ') }}</td></tr>
+    <tr>
+        <td>Owner:</td>
+        <td><a href="index.php?member&id={{ owner.id }}">{{ owner.username }}</a>
+        </td>
+    </tr>
+    <tr><td colspan="2"><p>{{ offer.description }}</p></td></tr>
+    <tr><td colspan="2">
+        {% if offer.image_url is not empty %}
+            <img src="assets/img/offer-picture/{{ offer.image_url }}" alt="{{ offer.title }}">
+        {% else %}
+            <img src="assets/img/web/default-offer-picture.jpeg" alt="{{ offer.title }}">
+        {% endif %}
+    </td></tr>
+</table>
+
+{% if offer.price <= 0.00 %}
+    <hr /><h1>Reserves</h1>
+    {% if reserves %}
+        <table>
+            <th>Position</th>
+            <th>Name</th>
+            {% if is_owner %}<th>Phone Number</th>{% endif %}
+            <th>Reserved Stamp</th>
+            {% for reserve in reserves %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ reserve.first_name }}{{ reserve.last_name }}</td>
+                    {% if is_owner %}
+                        <td>{{reserve.phone_number}}</td>
+                    {% endif %}
+                    <td>{{ reserve.reserve_time }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p> There is currently no one reserving this FREE offer... Be first to reserve!</p>
+    {% endif %}
+{% endif %}
+
+{% if offer.price > 0.00 %}
+    <hr /><h1>Bids</h1>
+    {% if bids%}
+    <table>
+        <tr>
+            <th>Position</th>
+            {% if (is_owner and not(offer.expire)) %}
+                <th>Action</th>
+            {% else %}
+                <th>Status</th>
+            {% endif %}
+            <th>Bidder</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>
+        {% for bid in bids %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                {% if (is_owner and not (offer.expire)) %}
+                    <td>
+                        <div class="tiptip">
+                            <a href="index.php?transact&offer_id={{offer.id}}&bidder_id={{bid.bidder_id}}&bid_id={{bid.id}}"
+                                               class="button confirm" title="Accept Offer">
+                            <span class="icon icon43"></span>
+                        </a></div>
+                    </td>
+                {% else %}
+                    <td>
+                        {% if not transact.bid_id %}
+                            Available
+                        {% elseif bid.id == transact.bid_id  %}
+                            Winner
+                        {% else %}
+                            Loser
+                        {% endif %}
+                    </td>
+                {% endif %}
+                <td><a href="index.php?member&id={{ bid.bidder_id }}">{{ bid.bidder}}</a></td>
+                <td><a href="#">{{ bid.type }}</a></td>
+                <td><a href="#">{{ bid.category }}</a></td>
+                <td>$ {{ bid.price|number_format('2', '.', ' ') }}</td>
+                <td>{{ bid.description }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% elseif is_owner %}
+        <p>No one is currently interested in this item.</p>
+    {% else%}
+        <p>There aren't currently any bid for this item.
+            Be the first one to make a bid!</p>
+    {% endif %}
+{% endif %}
+
+
+{% if (CanBid and not(is_owner) and offer.price > 0) %}
+<hr />
+<ul class="error-field"></ul>
+<form action="index.php?offer&id={{ offer.id }}" method="POST" name="bid-offer-form">
+    <ul>
+        <li><select name="category">
+            {% for key, type in categories %}
+                <option disabled>--- {{ key|capitalize }} -----------</option>
+
+                {% for category in type %}
+                    <option value="{{ category.id }}">{{ category.name|capitalize }}</option>
+                {% endfor %}
+            {% endfor %}
+        </select>
+        <li><input type="text" name="price" placeholder="Price" />
+        <li><input type="text" name="description" placeholder="Description" />
+        <li><input type="hidden" name="bid" value="TRUE" />
+        <li><div class="tiptip">
+                <button type="submit" name="submit" id="submit-bid"
+                        class="action red submit" title="Make Bid">
+                    <span class="icon icon51"></span>
+                    <span class="label">Bid</span>
+                </button>
+            </div>
+    </ul>
+</form>
+{% elseif (price > 0.00 and not(is_logged_in)) %}
+    <p> Please <a href="index.php?login">Login</a> to bid </p>
+{% elseif (is_logged_in and price > 0.00 and not(CanBid)) %}
+     <a href="index.php?creditcard">Add a Credit Card To Bid</a>
+{% endif %}
+
+<br/><br/>
+
+{% if (offer.price <=0.00 and not(is_owner))%}
+    {% if is_logged_in %}
+        <form action="index.php?reserve" method="POST" style="width:300px;">
+            <input type="hidden" name="offer_id" value="{{offer.id}}" />
+            <div class="tiptip"><button type="submit" name="submit"
+                    class="action red submit" title="Reserve Offer">
+                <span class="icon icon99"></span>
+                <span class="label">Reserve</span>
+            </button></div>
+        </form>
+    {% else %}
+        <div>
+        <form action="index.php?reserve" method="POST" style="width:300px;">
+          <h3>Contact Information</h3>
+            <ul>
+                <li><input type="text" name="first_name" placeholder="First name" />
+                <li><input type="text" name="last_name" placeholder="Last name" />
+                <li><input type="text" name="phone_number" placeholder="Phone number" />
+            </ul>
+            <input type="hidden" name="offer_id" value="{{offer.id}}" />
+            <div class="tiptip"><button type="submit" name="submit"
+                    class="action red submit" title="Reserve Offer">
+                <span class="icon icon99"></span>
+                <span class="label">Reserve</span>
+            </button></div>
+        </form>
+        </div>
+    {% endif %}
+{% endif %}
