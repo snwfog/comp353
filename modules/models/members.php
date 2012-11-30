@@ -95,10 +95,16 @@ class Member_Model extends Model
         }
     }
 
-    public function getMemberStatsByName($nameString)
+    public function getMemberStatsByName($args)
     {
+
         $query = "SELECT * FROM member_stats WHERE
-          username LIKE '%$nameString%'";
+          username LIKE '%" . $args['admin_member_search'] . "%'";
+        if (isset($args['order_by']))
+            $query .= " ORDER BY ". $args['order_by'];
+            if (isset($args['direction']))
+                $query .= " " . $args['direction'];
+
         $mysqli_result = $this->db->query($query);
         $result = $this->db->fetch();
 

@@ -91,21 +91,33 @@ $ ->
 ################################################################################
 # Admin member search
 ################################################################################
-  $('#member-name').keyup ->
+  $('#admin-member-search, #member-name').live 'click keyup', ->
+    evalStr = ""
+    if $('input[name=order_by]:checked').val()
+      evalStr += "&order_by=" + $('input[name=order_by]:checked').val()
+      if $('input[name=direction]:checked').val()
+        evalStr += "&direction=" + $('input[name=direction]:checked').val()
+
     $.ajax({
-      url: "index.php?ajax&admin_member_search=" + $(this).val(),
+      url: "index.php?ajax&admin_member_search=" + $(this).val() + evalStr,
       dataType: "json"
     }).done (data) ->
       if data?
-        $('#member-search-table').html "<tr><th>User</th><th>Posts</th>
+        $('#member-search-table').html "<tr><th>Position</th><th>User</th><th>Posts</th>
           <th>Buys</th><th>Sells</th><th>Rating</th></tr>"
         $.each data, (i, item) ->
           $('#member-search-table').append "<tr>" +
-            "<td><div class='tiptip'>" +
+            "<td>#{i+1}</td><td><div class='tiptip'>" +
             "<a href='index.php?member&id=" + item.id + "' class='button'>" +
             "<span class='icon icon191'>" +
             "</span><span class='label'>" + item.username + "</span></a></div></td>" +
             "<td>#{item.posts}</td>" +
             "<td>#{item.buys}</td>" +
             "<td>#{item.sells}</td>" +
-            "<td>" + if item.rating is null then "No Rating" else item.rating + "</td></tr>"
+            "<td>" + if item.rating is null then "No Rating" else drawRating(item.rating) + "</td></tr>"
+
+  drawRating = (rating) ->
+    str = "<span class='earned-rating'>"
+    for i in [1..rating]
+      str += "$&nbsp;"
+    return str + "</span>"

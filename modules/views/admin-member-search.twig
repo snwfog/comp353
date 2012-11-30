@@ -5,12 +5,24 @@
 <form action="index.php?ajax&admin_member_search=1"
       id="admin-member-search">
     <input type="text" id="member-name" placeholder="Search Member..." />
+    <ul>
+        <li><label>Order By</label></li>
+        <li><input type="radio" name="order_by" value="posts">&nbsp;&nbsp;Posts
+        <li><input type="radio" name="order_by" value="buys">&nbsp;&nbsp;Buys
+        <li><input type="radio" name="order_by" value="sells">&nbsp;&nbsp;Sells
+        <li><input type="radio" name="order_by" value="rating">&nbsp;&nbsp;Rating
+    </ul>
+
+    <ul>
+        <li><label>Direction</label></li>
+        <li><input type="radio" name="direction" value="ASC">&nbsp;&nbsp;Ascending
+        <li><input type="radio" name="direction" value="DESC">&nbsp;&nbsp;Descending
+    </ul>
+
 </form>
 
-<table id="member-search-table">
-
-
-</table>
+{# Used to fill the search result information #}
+<table id="member-search-table"></table>
 
 {% endblock option %}
 
