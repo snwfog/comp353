@@ -9,7 +9,7 @@ class Admin_Controller extends Controller implements IRedirectable
         // Extra security for admin check
         if ($this->isAdmin())
         {
-
+            $this->display('admin.twig', $this->data);
         }
         else
         {

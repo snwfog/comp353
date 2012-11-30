@@ -32,7 +32,8 @@ class Post_Model extends Model
    				 		ON o.category_id = c.id
     				INNER JOIN types AS t 
     					ON c.type_id = t.id
-				  WHERE member_id = $member_id";
+				  WHERE member_id = $member_id
+				  ORDER BY p.id ASC";
 
 		$result_object = $this->db->query($query);
 		$result = $this->db->fetch(MYSQLI_ASSOC);

@@ -13,7 +13,7 @@
             <li>
                 <select name="credit_card_type" id="credit-card-type">
                     {% for company in type %}
-                        <option value="{{ company.id }}">{{ company.type|capitalize }}</option>
+                        <option value="{{ company.id }}">{{ company.type }}</option>
                     {% endfor %}
                 </select>
             <li><input type="text" name="card_holder" placeholder="Holder's Name"/>

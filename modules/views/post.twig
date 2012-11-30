@@ -1,8 +1,7 @@
 {% extends 'static/base.twig' %}
 
 {% block content %}
-<div id="post">
-<ul class="error-field"></ul>
+<h1>Post Offer</h1>
 {% if offerId %}
     <form action="index.php?post&modify={{ offerId }}" method="POST" name="post-offer-form"
         enctype="multipart/form-data">
@@ -37,5 +36,5 @@
             </button>
     </ul>
 </form>
-</div>
+
 {% endblock content %}

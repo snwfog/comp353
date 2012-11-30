@@ -69,7 +69,8 @@ class Offer_Model extends Model
             ON p.offer_id = o.id
           INNER JOIN members AS m
             ON p.member_id = m.id
-        WHERE o.expire = '0'";
+        WHERE o.expire = '0'
+        ORDER BY p.id DESC";
 
         $mysqli_result = $this->db->query($query);
         $result = $this->db->fetch(MYSQLI_ASSOC);

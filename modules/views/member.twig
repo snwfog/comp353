@@ -59,10 +59,11 @@
         {% endif %}
     </table>
     {% if private %}
-        <h4>Credit Card Information (<a href="index.php?creditcard">Change/Add</a>)</h4>
+        <h4>Credit Card Information</h4>
+
         <table>
             <tr>
-                <td>HolderName</td>
+                <td>Credit Card Holder Name</td>
                 <td>{{creditcard.holder_name}}</td>
             </tr>
             <tr>
@@ -78,6 +79,12 @@
                 <td>{{ creditcard.expire }}</td>
             </tr>
         </table>
+        <div class="tiptip">
+            <a href="index.php?creditcard" class="button" title="Change Credit Card">
+                <span class="icon icon111"></span>
+                <span class="label">Edit</span>
+            </a>
+        </div>
     {% endif %}
 </div>
 
@@ -282,21 +289,28 @@
                 <th>Price
                 <th>Buyer
                 <th>Transaction Date
-                <th>Storage Status
+                <th>Storage
             </tr>
             {% for x in solds %}
-                      <tr>
-                          <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
-                          <td><a href="#">$ {{ x.price|number_format('2', '.', ' ') }}</a>
-                          <td><a href="index.php?member&id={{x.buyer_id}}">{{ x.username }}</a>
-                          <td>{{ x.transact_date }}
-                          <td>
-                              {% if x.status == "link" %}
-                                  <a href="index.php?storage&transaction_id={{x.id}}">Store Item</a>
-                              {% else %}
-                                  {{ x.status }}
-                              {% endif %}
-                      </tr>
+                  <tr>
+                      <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
+                      <td>$ {{ x.price|number_format('2', '.', ' ') }}
+                      <td><a href="index.php?member&id={{x.buyer_id}}">{{ x.username }}</a>
+                      <td>{{ x.transact_date }}
+                      {% if x.type == "Good" %}
+                      <td>
+                          {% if x.status == "link" %}
+                              <div class="tiptip">
+                                  <a href="index.php?storage&transaction_id={{x.id}}"
+                                     class="button confirm" title="Store Garage">
+                                      <span class="icon icon12"></span>
+                                  </a>
+                              </div>
+                          {% else %}
+                              {{ x.status }}
+                          {% endif %}
+                      {% endif %}
+                  </tr>
             {% endfor %}
             </table>
         {% endif %}
@@ -315,7 +329,7 @@
             {% for x in boughts %}
                       <tr>
                           <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
-                          <td><a href="#">$ {{ x.price|number_format('2', '.', ' ') }}</a>
+                          <td>$ {{ x.price|number_format('2', '.', ' ') }}
                           <td><a href="index.php?member&id={{x.seller_id}}">{{ x.username }}</a>
                           <td>{{ x.transact_date }}
                           <td>{{ x.status }}

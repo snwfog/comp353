@@ -14,17 +14,38 @@ class Transact_Model extends Model
       return $this->setRowAndGetId($value, $attribute, "transacts");
     }
 
-    public function getSoldTransactionByMemberId($id){
-      $this->db->query("SELECT t.id, t.transact_date, t.offer_id, t.buyer_id, O.title, O.description, O.price, M.username
-                        FROM transacts t
-                        INNER JOIN offers AS O 
-                            ON (t.offer_id = O.id)
-                        INNER JOIN members AS M 
-                            ON (M.id = t.buyer_id)
-                        WHERE
-                            t.seller_id = $id");
-      $bought = $this->db->fetch(MYSQL_ASSOC);
-      return $bought;
+    public function getSoldTransactionByMemberId($id)
+    {
+        $query = "SELECT t.id, t.transact_date,
+          t.offer_id, t.buyer_id, o.title,
+          o.description, o.price, m.username,
+          types.name AS type
+        FROM transacts t
+          JOIN offers o ON t.offer_id = o.id
+          JOIN members m ON m.id = t.buyer_id
+          JOIN categories c ON c.id = o.category_id
+          JOIN types ON types.id = c.type_id
+        WHERE t.seller_id = '$id'";
+
+        $this->db->query($query);
+
+//      $this->db->query("SELECT t.id, t.transact_date,
+//                          t.offer_id, t.buyer_id, O.title,
+//                          O.description, O.price, M.username,
+//                          types.name AS type
+//                        FROM transacts t
+//                        INNER JOIN offers AS O
+//                            ON (t.offer_id = O.id)
+//                        INNER JOIN members AS M
+//                            ON (M.id = t.buyer_id)
+//                        JOIN categories
+//                          ON offers.category_id = categories.id
+//                        JOIN types
+//                          ON categories.type_id = types.id
+//                        WHERE
+//                            t.seller_id = $id");
+        $bought = $this->db->fetch();
+        return empty($bought) ? NULL : $bought;
     }
 
     public function getBoughtTransactionByMemberId($id){
@@ -42,7 +63,7 @@ class Transact_Model extends Model
 
     public function getTransactionByOfferId($id){
       $this->db->query("SELECT *
-                        FROM transacts T
+                        FROM transacts t
                         WHERE
                             t.offer_id = $id");
       $sold = $this->db->fetch(MYSQL_ASSOC);
@@ -51,7 +72,7 @@ class Transact_Model extends Model
 
     public function getTransactionById($id){
       $this->db->query("SELECT *
-                        FROM transacts T
+                        FROM transacts t
                         WHERE
                             t.id = $id");
       $result = $this->db->fetch(MYSQL_ASSOC);

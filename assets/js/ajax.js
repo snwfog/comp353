@@ -2,7 +2,7 @@
 
 $(function() {
   var noteAlert, recallTime;
-  recallTime = 5000;
+  recallTime = 2000;
   setInterval(function() {
     return $.ajax({
       url: "index.php?ajax&notify_acquire=1",
