@@ -40,4 +40,25 @@ class Post_Model extends Model
 
 		return isset($result) ? $result : NULL;
 	}
+
+    public function warn($offer_id)
+    {
+        // Get the post id of this offer first
+        $query = "SELECT * FROM posts WHERE offer_id = '$offer_id'";
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch();
+
+        // Get the member who post this offer to set him a warning
+        $member_id = $result[0]['member_id'];
+
+        $query = "UPDATE members SET warning = warning + 1
+        WHERE id = '$member_id'";
+        $this->db->query($query);
+
+        // Insert into notify_warning
+        $query = "INSERT INTO notify_warn (post_id)
+        VALUE ('" . $result[0]['id'] . "')";
+        $this->db->query($query);
+
+    }
 }

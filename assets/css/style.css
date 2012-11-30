@@ -29,7 +29,6 @@ ul li
 
 h1, h2, h3, h4, h5 {
     clear: both;
-    margin: 20px 0;
     font-family: Serifa BT;
     text-shadow: 1px 1px rgba(100, 100, 100, 0.2);
 }
@@ -40,12 +39,19 @@ h1
     color: #4C8FFD;
 }
 
-h2, h3, h4, h5
+h2
 {
     font-size: 20px;
+    text-shadow: none;
+}
+
+
+h3, h4, h5
+{
+    font-size: 20px;
+    margin-top: 50px;
     color: #4C8FFD;
     text-shadow: none;
-    margin-top: 70px;
 }
 
 hr {
