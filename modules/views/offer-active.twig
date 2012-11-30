@@ -1,6 +1,8 @@
 <h1>The Eloquante Offer</h1>
 
 <div class="tiptip">
+
+    {% if is_owner or is_admin %}
     <a href="index.php?post&modify={{ offer.id }}"
        class="button modify" title="Modify Offer">
         <span class="icon icon196"></span>
@@ -9,10 +11,14 @@
        class="button delete" title="Delete Offer">
         <span class="icon icon186"></span>
         <span class="label">Delete</span></a>
+    {% endif %}
+
+    {% if is_admin %}
     <a href="index.php?offer&warn={{ offer.id }}"
        class="button warn" title="Send Warning">
         <span class="icon icon5"></span>
         <span class="label">Warn</span></a>
+    {% endif %}
 </div>
 
 <table>
