@@ -48,7 +48,30 @@ class CreditCardTransaction_Model extends Model
         $query = "INSERT INTO credit_card_transactions (credit_card_id, offer_id, amount, description, fee_type) 
                   VALUES ($credit_card_id, $offer_id, $charge, $description, \"storage\")";
         $this->db->query($query);
-    }   
+    } 
+
+    public function getAllTransactionByMemberId($member_id){
+        $query = "SELECT 
+                    CCT.amount  as charge,
+                    CCT.description as charge_description,
+                    CCT.fee_type,
+                    CCT.date as fee_date,
+                    CC.number as cc_number,
+                    CC.holder_name as cc_name,
+                    T.type as cc_type,
+                    O.title,
+                    O.description,
+                    O.price
+                  From credit_card_transactions AS CCT 
+                  INNER JOIN  credit_cards as CC ON CCT.credit_card_id = CC.id
+                  INNER JOIN offers as O ON CCT.offer_id = O.id
+                  INNER JOIN credit_card_types AS T ON CC.credit_card_type_id = T.id 
+                  WHERE CC.member_id = $member_id;";
+        $result = $this->db->query($query);
+        $result = $this->db->fetch(MYSQL_ASSOC);
+        return $result ? $result : NULL;
+    }
+  
 }
 
 ?>

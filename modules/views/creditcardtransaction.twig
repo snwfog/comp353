@@ -1,0 +1,26 @@
+{% extends 'static/base.twig' %}
+{% block content %}
+<table name="transact-table">
+		<th colspan="2"> <b> Offer Title </b>
+		<th colspan="3"> <b> Offer Description </b>
+		<th colspan="1"> <b> Fee Type </b>
+		<th colspan="2"> <b> Charge </b>
+	{% for t in transactions %}
+			<tr>
+				<td colspan="2"> {{ t.title}}
+				<td colspan="3">{{ t.description}}
+				<td colspan="1">{{t.fee_type}}
+				<td colspan="2">$ {{ t.charge}}
+			</tr>
+			<tr>
+				<td colspan="2"> <b style="float:right;">TO:</b>
+				<td>{{ t.cc_name}}
+				<td>{{ t.cc_number}}
+				<td>{{ t.cc_type}}
+				<td>{{ t.charge_description }}
+
+			</tr>
+	{% endfor %}
+</table>
+
+{% endblock content %}
