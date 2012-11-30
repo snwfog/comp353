@@ -33,7 +33,7 @@ class Transact_Model extends Model
                         INNER JOIN offers AS O
                             ON (T.offer_id = O.id)
                         INNER JOIN members AS M 
-                            ON (M.id = T.seller_id)
+                            ON (M.id = t.seller_id)
                         WHERE
                             t.buyer_id = $id");
       $sold = $this->db->fetch(MYSQL_ASSOC);
