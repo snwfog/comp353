@@ -101,7 +101,7 @@ class Notification_Model extends Model
         $mysqli_result = $this->db->query($query);
         $result = $this->db->fetch();
 
-        if (!empty($result))offer_id
+        if (!empty($result))
         {
             $query = "DELETE FROM notify_acquire
               JOIN storages ON storages.id = notify_acquire.storage_id
