@@ -112,7 +112,7 @@ $ ->
         evalStr += "&direction=" + $('input[name=direction]:checked').val()
 
     $.ajax({
-      url: "index.php?ajax&admin_member_search=" + $(this).val() + evalStr,
+      url: "index.php?ajax&admin_member_search=" + $('#member-name').val() + evalStr,
       dataType: "json"
     }).done (data) ->
       if data?

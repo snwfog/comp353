@@ -101,7 +101,7 @@ $(function() {
       }
     }
     return $.ajax({
-      url: "index.php?ajax&admin_member_search=" + $(this).val() + evalStr,
+      url: "index.php?ajax&admin_member_search=" + $('#member-name').val() + evalStr,
       dataType: "json"
     }).done(function(data) {
       if (data != null) {
