@@ -61,7 +61,7 @@ $(function() {
       }
     }
   });
-  return noteAlert = function(msg, type) {
+  noteAlert = function(msg, type) {
     var n;
     return n = noty({
       layout: 'bottomRight',
@@ -79,4 +79,17 @@ $(function() {
       }
     });
   };
+  return $('#member-name').keyup(function() {
+    return $.ajax({
+      url: "index.php?ajax&admin_member_search=" + $(this).val(),
+      dataType: "json"
+    }).done(function(data) {
+      if (data != null) {
+        $('#member-search-table').html("<tr><th>User</th><th>Posts</th>          <th>Buys</th><th>Sells</th><th>Rating</th></tr>");
+        return $.each(data, function(i, item) {
+          return $('#member-search-table').append("<tr>" + "<td><div class='tiptip'>" + "<a href='index.php?member&id=" + item.id + "' class='button'>" + "<span class='icon icon191'>" + "</span><span class='label'>" + item.username + "</span></a></div></td>" + ("<td>" + item.posts + "</td>") + ("<td>" + item.buys + "</td>") + ("<td>" + item.sells + "</td>") + "<td>" + (item.rating === null ? "No Rating" : item.rating + "</td></tr>"));
+        });
+      }
+    });
+  });
 });

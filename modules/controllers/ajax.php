@@ -22,7 +22,26 @@ class Ajax_Controller extends Controller
         if (isset($args['notify_modify']))
             $this->notifyModify();
 
+        if (isset($args['admin_member_search']))
+            $this->adminMemberSearch($args['admin_member_search']);
+
         return false;
+    }
+
+    private function adminMemberSearch($searchString)
+    {
+        $json = array();
+        $this->m_members = new Member_Model();
+        $result = $this->m_members->getMemberStatsByName($searchString);
+        if (!empty($result))
+        {
+            $json = array();
+
+            foreach($result as $row)
+                $json[] = $row;
+
+            echo json_encode($json);
+        }
     }
 
     public function notifyModify()

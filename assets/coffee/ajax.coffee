@@ -87,3 +87,25 @@ $ ->
         speed: 200
       },
     })
+
+################################################################################
+# Admin member search
+################################################################################
+  $('#member-name').keyup ->
+    $.ajax({
+      url: "index.php?ajax&admin_member_search=" + $(this).val(),
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $('#member-search-table').html "<tr><th>User</th><th>Posts</th>
+          <th>Buys</th><th>Sells</th><th>Rating</th></tr>"
+        $.each data, (i, item) ->
+          $('#member-search-table').append "<tr>" +
+            "<td><div class='tiptip'>" +
+            "<a href='index.php?member&id=" + item.id + "' class='button'>" +
+            "<span class='icon icon191'>" +
+            "</span><span class='label'>" + item.username + "</span></a></div></td>" +
+            "<td>#{item.posts}</td>" +
+            "<td>#{item.buys}</td>" +
+            "<td>#{item.sells}</td>" +
+            "<td>" + if item.rating is null then "No Rating" else item.rating + "</td></tr>"

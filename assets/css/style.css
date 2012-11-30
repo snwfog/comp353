@@ -70,6 +70,7 @@ form {
     border: 1px solid #CCC;
     padding: 20px 20px 50px;
     background: #EEE;
+    margin: 20px 0px;
 }
 
 input {
@@ -165,6 +166,13 @@ select {
     box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
     color: white;
 }
+
+#content form#admin-member-search
+{
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
 
 
 /* Easter Eggs */

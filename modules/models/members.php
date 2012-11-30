@@ -95,6 +95,16 @@ class Member_Model extends Model
         }
     }
 
+    public function getMemberStatsByName($nameString)
+    {
+        $query = "SELECT * FROM member_stats WHERE
+          username LIKE '%$nameString%'";
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch();
+
+        return empty($result) ? NULL : $result;
+    }
+
 
     public function create_member($username, $password, $email_id, $address_id,
                                   $visitor_id, $registration_controller)
