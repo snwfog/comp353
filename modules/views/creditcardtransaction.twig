@@ -1,25 +1,28 @@
 {% extends 'static/base.twig' %}
 {% block content %}
 <table name="transact-table">
-		<th colspan="2"> <b> Offer Title </b>
-		<th colspan="3"> <b> Offer Description </b>
-		<th colspan="1"> <b> Fee Type </b>
-		<th colspan="2"> <b> Charge </b>
-	{% for t in transactions %}
-			<tr>
-				<td colspan="2"> {{ t.title}}
-				<td colspan="3">{{ t.description}}
-				<td colspan="1">{{t.fee_type}}
-				<td colspan="2">$ {{ t.charge}}
-			</tr>
-			<tr>
-				<td colspan="2"> <b style="float:right;">TO:</b>
-				<td colspan="1">{{ t.cc_name}}
-				<td colspan="1">{{ t.cc_number}}
-				<td colspan="1">{{ t.cc_type}}
-				<td colspan="1">{{ t.charge_description }}
-
-			</tr>
+    <th>Date</th>
+    <th>View</th>
+    <th>Credit Card</th>
+    <th>Fee Type</th>
+    <th>Amount</th>
+	{% for date, date_set in transactions %}
+        <tr><td colspan="5"><h2>{{ date }}</h2></td></tr>
+        {% for t in date_set %}
+        <tr>
+            <td>{{ t.fee_date_month }} {{ t.fee_date_date }}, {{ t.fee_date_year }}</td>
+            <td><div class="tiptip"><a class="button" href="index.php?offer&id={{ t.id }}"
+                                   title="{{ t.title }}">
+                <span class="icon icon130"></span>
+            </a></div>
+            <td><div class="tiptip">
+                <a class="button" href="" title="{{ t.cc_number }}">
+                <span class="icon icon130"></span><span class="label">{{ t.cc_type }}</span>
+            </a></div></td>
+            <td>{{t.fee_type|capitalize }} charge
+            <td>$ {{ t.charge|number_format('2', '.', ' ') }}
+        </tr>
+        {% endfor %}
 	{% endfor %}
 </table>
 
