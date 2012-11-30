@@ -75,7 +75,6 @@ class Member_Model extends Model
         return $result;
     }
 
-
     public function get_visitor_id($member_id)
     {
         $this->db->query("Select visitor_id FROM members WHERE id = $member_id;");
@@ -110,7 +109,6 @@ class Member_Model extends Model
 
         return empty($result) ? NULL : $result;
     }
-
 
     public function create_member($username, $password, $email_id, $address_id,
                                   $visitor_id, $registration_controller)

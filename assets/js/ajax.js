@@ -51,6 +51,18 @@ $(function() {
       }
     });
   }, recallTime);
+  setInterval(function() {
+    return $.ajax({
+      url: "index.php?ajax&warn=1",
+      dataType: "json"
+    }).done(function(data) {
+      if (data != null) {
+        return $.each(data, function(i, item) {
+          return noteAlert("You received a warning for your post \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"", "error");
+        });
+      }
+    });
+  }, recallTime);
   $.ajax({
     url: "index.php?ajax&is_admin=1",
     dataType: "json"

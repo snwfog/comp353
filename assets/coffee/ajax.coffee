@@ -56,6 +56,19 @@ $ ->
           noteAlert "The item \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
                       has been modified by the owner.", "warning"
   , recallTime
+
+################################################################################
+# Fetch warning alert
+################################################################################
+  setInterval ->
+    $.ajax({
+      url: "index.php?ajax&warn=1",
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $.each data, (i, item) ->
+          noteAlert "You received a warning for your post \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"", "error"
+  , recallTime
 ################################################################################
 # Rainbow unicorn mode
 ################################################################################
