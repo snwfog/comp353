@@ -26,7 +26,11 @@ class CreditCardTransaction_Model extends Model
     	$query = "INSERT INTO credit_card_transactions (credit_card_id, offer_id, amount, description, fee_type) 
     		      VALUES ($credit_card_id, $offer_id, $charge, $description, \"service\")";
     	$this->db->query($query);
-    }    
+    } 
+
+    public function transact_storage_fee($credit_card_id, $offer_id){
+        
+    }   
 }
 
 ?>
