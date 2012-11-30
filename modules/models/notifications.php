@@ -49,8 +49,8 @@ class Notification_Model extends Model
         // Delete after retrieval
         if (!empty($result))
         {
-            $query = "DELETE FROM notify_queue q
-              JOIN bids ON bids.id = nq.bid_id
+            $query = "DELETE notify_queue FROM notify_queue
+              JOIN bids ON bids.id = notify_queue.bid_id
             WHERE bids.member_id = '$member_id'";
 
             $this->db->query($query);
@@ -92,10 +92,10 @@ class Notification_Model extends Model
         $query = "SELECT
           o.title AS title,
           o.id AS id
-        FROM notify_receive n
+        FROM notify_acquire n
           JOIN storages s ON s.id = n.storage_id
           JOIN transacts t ON t.id = s.transact_id
-          JOIN offers o ON o.id = t.
+          JOIN offers o ON o.id = t.offer_id
         WHERE t.buyer_id = '$member_id'";
 
         $mysqli_result = $this->db->query($query);
@@ -103,7 +103,7 @@ class Notification_Model extends Model
 
         if (!empty($result))
         {
-            $query = "DELETE FROM notify_acquire
+            $query = "DELETE notify_acquire FROM notify_acquire
               JOIN storages ON storages.id = notify_acquire.storage_id
               JOIN transacts ON transacts.id = storages.transact_id
               JOIN offers ON offers.id = transacts.offer_id
