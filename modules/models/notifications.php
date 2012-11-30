@@ -75,13 +75,13 @@ class Notification_Model extends Model
 
         if (!empty($result))
         {
-            $query = "DELETE FROM notify_receive n
-              JOIN storages s ON s.id = n.storage_id
-              JOIN transacts t ON t.id = s.transact_id
-              JOIN offers o ON o.id = t.offer_id
-            WHERE t.seller_id = '$member_id'";
-
-            $this->db->query($query);
+//            $query = "DELETE FROM notify_receive n
+//              JOIN storages s ON s.id = n.storage_id
+//              JOIN transacts t ON t.id = s.transact_id
+//              JOIN offers o ON o.id = t.offer_id
+//            WHERE t.seller_id = '$member_id'";
+//
+//            $this->db->query($query);
         }
 
         return empty($result) ? NULL : $result;
@@ -103,13 +103,13 @@ class Notification_Model extends Model
 
         if (!empty($result))
         {
-            $query = "DELETE FROM notify_receive n
-              JOIN storages s ON s.id = n.storage_id
-              JOIN transacts t ON t.id = s.transact_id
-              JOIN offers o ON o.id = t.offer_id
-            WHERE t.buyer_id = '$member_id'";
-
-            $this->db->query($query);
+//            $query = "DELETE FROM notify_acquire n
+//              JOIN storages s ON s.id = n.storage_id
+//              JOIN transacts t ON t.id = s.transact_id
+//              JOIN offers o ON o.id = t.offer_id
+//            WHERE t.buyer_id = '$member_id'";
+//
+//            $this->db->query($query);
         }
 
         return empty($result) ? NULL : $result;

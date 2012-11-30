@@ -80,6 +80,7 @@ class Ajax_Controller extends Controller
         $json = array();
         $this->m_notifications = new Notification_Model();
         $result = $this->m_notifications->getAcquireOffers($this->getMemberId());
+        print_r($result);
         if (!empty($result))
         {
             $json = array();
