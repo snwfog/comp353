@@ -118,6 +118,9 @@
             <th>User
             <th>Rating
             <th>Comment
+            {% if is_admin %}
+            <th>Action
+            {% endif %}
         </tr>
         {% for comment in comments %}
             <tr>
@@ -136,6 +139,14 @@
                         {% for i in 1..(10-comment.rating) %} $ {% endfor %}
                     </span>
                 <td>{{ comment.comment }}
+                {% if is_admin %}
+                <td><div class="tiptip">
+                    <a class="button" title="Delete Comment"
+                       href="index.php?member&delete_feedback={{ comment.feedback_id }}">
+                        <span class="icon icon186"></span>
+                    </a></div>
+                </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>
@@ -146,7 +157,7 @@
 
 {#{% if not is_owner and is_transact %}#}
 {% if not is_owner %}
-    <form action="index.php?member&id={{ id }}" method="POST">
+    <form action="index.php?member&id={{ id }}" method="POST" name="comment-form">
         <ul>
             <li><select name="rating">
                 {% for value in 1..10 %}

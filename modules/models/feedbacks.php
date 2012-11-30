@@ -28,6 +28,12 @@ class Feedback_Model extends Model
         return empty($result) ? NULL : $result;
     }
 
+    public function deleteFeedback($feedback_id)
+    {
+        $this->db->query("DELETE FROM
+            feedbacks WHERE id = '$feedback_id'");
+    }
+
     public function getRating($member_id)
     {
         $query = "SELECT ROUND(AVG(f.rating)) AS rating

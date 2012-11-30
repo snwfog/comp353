@@ -169,6 +169,21 @@ $(document).ready(function() {
     }
   ], displayError);
   /*
+      Post Offer Form Validator
+  */
+
+  postOfferValidator = new FormValidator("comment-form", [
+    {
+      name: "rating",
+      display: "Rating",
+      rules: "required"
+    }, {
+      name: "comment",
+      display: "Comment",
+      rules: "required"
+    }
+  ], displayError);
+  /*
       Bid On Offer Form Validator
   */
 

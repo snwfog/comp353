@@ -17,6 +17,10 @@ class Member_Controller extends Controller implements IRedirectable
         // Check if we are making any feedbacks
         $this->setFeedback();
 
+        // Check delete comment
+        if (isset($args['delete_feedback']))
+            $this->deleteFeedback($args['delete_feedback']);
+
         if (isset($args['id']) && empty($args['id']))
             $this->redirect(self::REDIRECT_INDEX);
 
@@ -133,5 +137,15 @@ class Member_Controller extends Controller implements IRedirectable
     {
         $m_bids = new Bid_Model();
         $this->data["bids"] = $m_bids->getOngoingBidByMemberId($this->id);
+    }
+
+    private function deleteFeedback($feedback_id)
+    {
+        if ($this->isAdmin())
+        {
+            $this->m_feedbacks = new Feedback_Model();
+            $this->m_feedbacks->deleteFeedback($feedback_id);
+            $this->back();
+        }
     }
 }
