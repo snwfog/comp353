@@ -16,6 +16,22 @@ $ ->
             just arrived at the garage. You may come and pick it up
             during our regular business hour within the next <b>14</b> days.", "success"
   , recallTime
+
+################################################################################
+# Fetch expired bids function handler
+################################################################################
+  setInterval ->
+    $.ajax({
+      url: "index.php?ajax&notify_bid=1",
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $.each data, (i, item) ->
+          noteAlert "You received a new bid for your offer
+            \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
+            approximately <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.", "success"
+  , recallTime
+
 ################################################################################
 # Fetch expired bids function handler
 ################################################################################
