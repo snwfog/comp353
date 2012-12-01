@@ -153,7 +153,8 @@ class Notification_Model extends Model
         if (!empty($result))
         {
             $query = "DELETE notify_bid FROM notify_bid
-            WHERE member_id = '$member_id'";
+              JOIN posts p ON notify_bid.offer_id = p.offer_id
+            WHERE p.member_id = '$member_id'";
 
             $this->db->query($query);
         }
