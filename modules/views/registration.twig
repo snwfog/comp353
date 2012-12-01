@@ -10,7 +10,7 @@
     {% endfor %}
    <div id="registration"> 
     <form action="index.php?registration" method="POST" name="registration-form">
-        <h3>Personal Information</h3>
+        <h2>Personal Information</h2>
         <ul>
             <li><input type="text" name="username" placeholder="Username" value="{{form["username"]}}" />
             <li><input type="password" name="password1" placeholder="Password" />
@@ -21,7 +21,7 @@
             <li><input type="text" name="email" placeholder="Email Address" value="{{form["email"]}}"/>
         </ul>
 
-        <h3>Address</h3>
+        <h2>Address</h2>
         <ul>
             <li><input type="text" name="address" placeholder="Address" value="{{form["address"]}}"/>
             <li><input type="text" name="city" placeholder="City" value="{{form["city"]}}" />

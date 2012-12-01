@@ -22,13 +22,13 @@ class Offer_Model extends Model
             o.price AS price,
             o.image_url AS image_url,
             o.description AS description,
-            expire
+            expire AS expire,
+            DATE_FORMAT(o.date, '%M %d, %Y') AS date
         FROM offers AS o
-          INNER JOIN categories AS c
-            ON o.category_id = c.id
-          INNER JOIN types AS t
-            ON c.type_id = t.id
-        WHERE o.id = $offer_id";
+          JOIN categories c ON o.category_id = c.id
+          JOIN types t ON c.type_id = t.id
+          JOIN posts p ON p.offer_id = o.id
+        WHERE o.id = '$offer_id'";
 
         $mysqli_result = $this->db->query($query);
         $result = $this->db->fetch(MYSQLI_ASSOC);

@@ -189,11 +189,11 @@ $(document).ready ->
   }, {
     name: "expiration_month",
     display: "Expire Month",
-    rules: "required|numeric|exact_length[2]"
+    rules: "required|numeric|exact_length[2]|less_than[12]|more_than[1]"
   }, {
     name: "expiration_year",
     display: "Expire Year",
-    rules: "required|numeric|exact_length[2]"
+    rules: "required|numeric|exact_length[2]|less_than[2030]|more_than[2012]"
   }, {
     name: "verification_number",
     display: "Verification Number",
@@ -218,11 +218,11 @@ $(document).ready ->
   }, {
     name: "first_name",
     display: "First Name",
-    rules: "required|alpha"
+    rules: "required"
   }, {
     name: "last_name",
     display: "Last Name",
-    rules: "required|alpha"
+    rules: "required"
   }, {
     name: "phone_number",
     display: "Phone Number",
@@ -238,10 +238,6 @@ $(document).ready ->
   }, {
     name: "city",
     display: "City",
-    rules: "required"
-  }, {
-    name: "province",
-    display: "Province",
     rules: "required"
   }, {
     name: "country",

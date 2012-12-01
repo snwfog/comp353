@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.25)
 # Database: comp353
-# Generation Time: 2012-11-30 20:17:46 +0000
+# Generation Time: 2012-12-01 19:28:13 +0000
 # ************************************************************
 
 
@@ -229,15 +229,15 @@ LOCK TABLES `credit_card_transactions` WRITE;
 
 INSERT INTO `credit_card_transactions` (`id`, `credit_card_id`, `offer_id`, `amount`, `description`, `fee_type`, `date`)
 VALUES
-	(8,1,33,4.45,'This is a service charge for offer, Database assignment tutoring, at the price of 89$','service','2012-11-28 23:39:39'),
+	(8,1,33,4.45,'This is a service charge for offer, Database assignment tutoring, at the price of 89$','service','2012-10-28 23:39:39'),
 	(11,2,12,30.00,'This is a storage charge for offer, Mega Man Atari Game LOLOLOL.','storage','2012-11-29 20:13:06'),
 	(12,2,39,11711.70,'This is a service charge for offer, test, at the price of 234234$','service','2012-11-29 20:15:41'),
 	(13,2,39,37.00,'This is a storage charge for offer, test.','storage','2012-11-29 20:18:41'),
-	(14,1,53,46192460.00,'This is a service charge for offer, amazing offer, at the price of 923849234$','service','2012-11-29 20:36:11'),
+	(14,1,53,46192460.00,'This is a service charge for offer, amazing offer, at the price of 923849234$','service','2012-09-29 20:36:11'),
 	(15,2,40,6.15,'This is a service charge for offer, test, at the price of 123$','service','2012-11-29 20:42:52'),
 	(16,2,55,6.15,'This is a service charge for offer, body, at the price of 123$','service','2012-11-30 01:01:19'),
-	(17,2,33,23.00,'This is a storage charge for offer, Database assignment tutoring.','storage','2012-11-30 01:44:56'),
-	(18,2,40,25.00,'This is a storage charge for offer, test.','storage','2012-11-30 01:44:58');
+	(17,2,33,23.00,'This is a storage charge for offer, Database assignment tutoring.','storage','2011-11-30 01:44:56'),
+	(18,2,40,25.00,'This is a storage charge for offer, test.','storage','2009-10-30 01:44:58');
 
 /*!40000 ALTER TABLE `credit_card_transactions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -495,7 +495,7 @@ LOCK TABLES `members` WRITE;
 
 INSERT INTO `members` (`id`, `username`, `password`, `email_id`, `address_id`, `visitor_id`, `avatar_url`, `active`, `warning`)
 VALUES
-	(1,'snw','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,1,1,NULL,0,0),
+	(1,'snw','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,1,1,NULL,0,1),
 	(2,'fog','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',2,2,2,NULL,0,0),
 	(3,'mike','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',3,3,3,NULL,0,0),
 	(4,'scavenger101','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',4,4,4,NULL,0,0);
@@ -614,7 +614,7 @@ CREATE TABLE `notify_warn` (
   PRIMARY KEY (`id`),
   KEY `fk_notify_warn_posts` (`post_id`),
   CONSTRAINT `fk_notify_warn_posts` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 
 
@@ -631,54 +631,56 @@ CREATE TABLE `offers` (
   `category_id` int(11) NOT NULL,
   `image_url` varchar(255) DEFAULT NULL,
   `expire` int(1) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_offers_categories` (`category_id`),
   CONSTRAINT `fk_offers_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `offers` WRITE;
 /*!40000 ALTER TABLE `offers` DISABLE KEYS */;
 
-INSERT INTO `offers` (`id`, `title`, `description`, `price`, `category_id`, `image_url`, `expire`)
+INSERT INTO `offers` (`id`, `title`, `description`, `price`, `category_id`, `image_url`, `expire`, `date`)
 VALUES
-	(8,'Eye lash','Integer at massa diam. Etiam euismod lectus in metus suscipit eget mattis dolor pharetra. Nulla ultrices vestibulum arcu, ac ornare risus posuere vel. Fusce gravida sagittis justo, nec vestibulum sapien tincidunt sit amet. Nullam tempor ante et purus luctus pretium quis in erat. Morbi hendrerit hendrerit metus, nec vehicula magna lacinia sed. Vivamus ac mi odio. Nam viverra erat nec metus scelerisque tempus. Donec eleifend feugiat nunc, eget scelerisque neque varius vitae. Vivamus facilisis, risus sed varius rutrum, leo ipsum sodales lectus, vitae adipiscing sapien tellus non lorem. Maecenas felis odio, auctor sit amet condimentum at, condimentum non ligula. Mauris non arcu odio, sed tristique nibh. Morbi eu felis a nisi sodales laoreet at eu odio. Suspendisse aliquam bibendum orci ut lacinia. Praesent sem erat, gravida a accumsan quis, tempus ut tortor.\r\n\r\nSed massa nulla, facilisis tristique faucibus vel, euismod eu arcu. Pellentesque ultrices gravida justo, sit amet interdum ligula eleifend quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus consectetur lobortis elit, quis euismod enim mattis sit amet. Cras viverra nibh erat. Fusce tincidunt venenatis est, et scelerisque tortor scelerisque nec. Mauris porttitor, augue at aliquet accumsan, metus elit scelerisque ipsum, id auctor diam ante vel ',12323.00,32,'',1),
-	(9,'Sup sup sup','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',23942394.00,3,'',0),
-	(10,'Sup sup sup','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',23942394.00,3,'',1),
-	(11,'Hello Kitty Tooth brush','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',23.00,32,'',1),
-	(12,'Mega Man Atari Game LOLOLOL','Praesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n',2.00,31,'',1),
-	(13,'Apple iPad Mini Black','Brand new Apple iPad mini in black. Asking for 400. Cash only. SErious offer contact.',400.00,23,'',1),
-	(14,'','',0.00,32,'',1),
-	(15,'','',0.00,32,'',1),
-	(16,'','',0.00,32,'',1),
-	(17,'','',0.00,32,'',1),
-	(18,'MenBody Magazine July 1983','Selling my July 1983 MenBodys magazine. In good shape, used by my grand parents.',3.99,13,'',1),
-	(25,'Old car 1980','Giving away my little car from my grand dad.',4.00,19,'',1),
-	(31,'Baby clothes','Give away 3 years old baby clothes',0.00,5,'',1),
-	(32,'Macbook pro 13 in 2009','still in good condition. PST',800.00,33,'',1),
-	(33,'Database assignment tutoring','99 Dollar per hours for database comp353 tutoring.',99.00,39,'',1),
-	(34,'asdfasdf','asdfasdfasdf',33343.00,32,'',1),
-	(35,'123 123 123','123123123123',234234240.00,5,'',0),
-	(36,'Unicorn rainbow candy','Selling unicorn rainbow cotton candy. Will grant you 3 wishes upon eating them.',9999999.00,30,'',0),
-	(37,'Staring','Contest',0.00,32,'',1),
-	(38,'New staring contest','Contest',0.00,32,'',0),
-	(39,'test','test',234.00,32,'',1),
-	(40,'test','test',234.00,32,'',1),
-	(41,'test','test',234.00,32,'',0),
-	(42,'test','test',234.00,32,'5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9.jpg',0),
-	(43,'234234','asdfasdfasdf',234234.00,32,'',0),
-	(44,'234234','asdfasdfasdf',234.00,34,'',0),
-	(45,'asdfasdf','asdfasdf',234234.00,32,'',0),
-	(46,'kasdjfkasdf','testets',34.00,32,'',0),
-	(47,'my offer','bye world',123123.00,32,'',0),
-	(48,'new elegant offer','new elegant offer',0.00,32,'',0),
-	(49,'asdf','asdfasdf',234.00,32,'',0),
-	(50,'234234','asdfasdf',234234.00,32,'',0),
-	(51,'Another elegant offer','aksdfjkasdjfkasdf',199999.00,32,'',0),
-	(52,'new elegant offer with picture','dadfasdfasdf',293493280.00,32,'5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9.jpg',0),
-	(53,'amazing offer','sdfsdfsdfsdf',213123120.00,32,'',1),
-	(54,'new offer','asfasdf',123213.00,32,'',0),
-	(55,'body','sdfasdf',123.00,3,'',1);
+	(8,'Eye lash','Integer at massa diam. Etiam euismod lectus in metus suscipit eget mattis dolor pharetra. Nulla ultrices vestibulum arcu, ac ornare risus posuere vel. Fusce gravida sagittis justo, nec vestibulum sapien tincidunt sit amet. Nullam tempor ante et purus luctus pretium quis in erat. Morbi hendrerit hendrerit metus, nec vehicula magna lacinia sed. Vivamus ac mi odio. Nam viverra erat nec metus scelerisque tempus. Donec eleifend feugiat nunc, eget scelerisque neque varius vitae. Vivamus facilisis, risus sed varius rutrum, leo ipsum sodales lectus, vitae adipiscing sapien tellus non lorem. Maecenas felis odio, auctor sit amet condimentum at, condimentum non ligula. Mauris non arcu odio, sed tristique nibh. Morbi eu felis a nisi sodales laoreet at eu odio. Suspendisse aliquam bibendum orci ut lacinia. Praesent sem erat, gravida a accumsan quis, tempus ut tortor.\r\n\r\nSed massa nulla, facilisis tristique faucibus vel, euismod eu arcu. Pellentesque ultrices gravida justo, sit amet interdum ligula eleifend quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus consectetur lobortis elit, quis euismod enim mattis sit amet. Cras viverra nibh erat. Fusce tincidunt venenatis est, et scelerisque tortor scelerisque nec. Mauris porttitor, augue at aliquet accumsan, metus elit scelerisque ipsum, id auctor diam ante vel ',12323.00,32,'',1,'2012-12-01 14:03:16'),
+	(9,'Sup sup sup','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',23942394.00,3,'',0,'2012-12-01 14:03:16'),
+	(10,'Sup sup sup','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',23942394.00,3,'',1,'2012-12-01 14:03:16'),
+	(11,'Hello Kitty Tooth brush','<p>\r\nPraesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n</p>\r\n<p>\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n</p>\r\n<p>\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n</p>',23.00,32,'',1,'2012-12-01 14:03:16'),
+	(12,'Mega Man Atari Game LOLOLOL','Praesent rhoncus, sapien eu luctus faucibus, dolor purus semper metus, vitae ultrices velit neque eleifend odio. Sed laoreet eros scelerisque libero rhoncus a faucibus ligula sollicitudin. In diam justo, elementum ac venenatis id, laoreet a turpis. Nunc elit dolor, aliquam vel tempor id, interdum ullamcorper tortor. Donec ultrices tincidunt ligula, et pharetra felis ultricies quis. Aenean faucibus nibh non nunc interdum quis facilisis justo pharetra. Aenean aliquam fermentum orci, sed cursus nisl accumsan at. Aliquam lacus neque, auctor a accumsan sit amet, tempus et lacus. Sed vitae nibh eget enim lobortis lobortis. Sed lacinia ipsum eget mauris placerat laoreet. Suspendisse laoreet quam et diam consectetur molestie. Cras ultricies sagittis congue. Aliquam neque elit, tempus nec feugiat id, condimentum a mauris.\r\n\r\nQuisque tempus adipiscing enim, nec rutrum elit dignissim fringilla. Praesent vitae mauris eget velit condimentum euismod sit amet eu arcu. Quisque volutpat lobortis dui, vel tristique ante ullamcorper non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Aenean nec neque ac dolor dignissim fringilla. Aenean condimentum, risus eu malesuada mollis, mi leo auctor risus, vitae gravida purus mauris non sem. Sed et nisi quis eros pharetra rhoncus eu vitae massa. Vestibulum luctus metus in massa lobortis volutpat. Suspendisse semper odio ullamcorper dui porttitor consequat. Suspendisse porttitor, orci eget suscipit blandit, turpis magna tincidunt tortor, vel egestas nisi purus et nibh. Cras in lobortis dolor. Integer ut lectus massa, a vestibulum mauris.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit tristique consequat. Suspendisse nibh nisi, tempor sit amet congue a, sollicitudin eu orci. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus eget dapibus tortor. Phasellus quis porttitor sapien. Nulla neque nisl, tempor pulvinar auctor eu, viverra at tellus. Nam non turpis vitae magna porttitor pretium et quis eros. Donec facilisis egestas lacinia. Curabitur tortor velit, bibendum sit amet dapibus id, adipiscing volutpat arcu. Donec et nunc quis justo suscipit fringilla vel vel nisl. Duis sit amet urna urna.\r\n',2.00,31,'',1,'2012-12-01 14:03:16'),
+	(13,'Apple iPad Mini Black','Brand new Apple iPad mini in black. Asking for 400. Cash only. SErious offer contact.',400.00,23,'',1,'2012-12-01 14:03:16'),
+	(14,'','',0.00,32,'',1,'2012-12-01 14:03:16'),
+	(15,'','',0.00,32,'',1,'2012-12-01 14:03:16'),
+	(16,'','',0.00,32,'',1,'2012-12-01 14:03:16'),
+	(17,'','',0.00,32,'',1,'2012-12-01 14:03:16'),
+	(18,'MenBody Magazine July 1983','Selling my July 1983 MenBodys magazine. In good shape, used by my grand parents.',3.99,13,'',1,'2012-12-01 14:03:16'),
+	(25,'Old car 1980','Giving away my little car from my grand dad.',4.00,19,'',1,'2012-12-01 14:03:16'),
+	(31,'Baby clothes','Give away 3 years old baby clothes',0.00,5,'',1,'2012-12-01 14:03:16'),
+	(32,'Macbook pro 13 in 2009','still in good condition. PST',800.00,33,'',1,'2012-12-01 14:03:16'),
+	(33,'Database assignment tutoring','99 Dollar per hours for database comp353 tutoring.',99.00,39,'',1,'2012-12-01 14:03:16'),
+	(34,'asdfasdf','asdfasdfasdf',33343.00,32,'',1,'2012-12-01 14:03:16'),
+	(35,'123 123 123','123123123123',234234240.00,5,'',0,'2012-12-01 14:03:16'),
+	(36,'Unicorn rainbow candy','Selling unicorn rainbow cotton candy. Will grant you 3 wishes upon eating them.',9999999.00,30,'',0,'2012-12-01 14:03:16'),
+	(37,'Staring','Contest',0.00,32,'',1,'2012-12-01 14:03:16'),
+	(38,'New staring contest','Contest',0.00,32,'',0,'2012-12-01 14:03:16'),
+	(39,'test','test',234.00,32,'',1,'2012-12-01 14:03:16'),
+	(40,'test','test',234.00,32,'',1,'2012-12-01 14:03:16'),
+	(41,'test','test',234.00,32,'',0,'2012-12-01 14:03:16'),
+	(42,'test','test',234.00,32,'5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9.jpg',0,'2012-12-01 14:03:16'),
+	(43,'234234','asdfasdfasdf',234234.00,32,'',0,'2012-12-01 14:03:16'),
+	(44,'234234','asdfasdfasdf',234.00,34,'',0,'2012-12-01 14:03:16'),
+	(45,'asdfasdf','asdfasdf',234234.00,32,'',0,'2012-12-01 14:03:16'),
+	(46,'kasdjfkasdf','testets',34.00,32,'',0,'2012-12-01 14:03:16'),
+	(47,'my offer','bye world',123123.00,32,'',0,'2012-12-01 14:03:16'),
+	(48,'new elegant offer','new elegant offer',0.00,32,'',0,'2012-12-01 14:03:16'),
+	(49,'asdf','asdfasdf',234.00,32,'',0,'2012-12-01 14:03:16'),
+	(50,'234234','asdfasdf',234234.00,32,'',0,'2012-12-01 14:03:16'),
+	(51,'Another elegant offer','aksdfjkasdjfkasdf',199999.00,32,'',0,'2012-12-01 14:03:16'),
+	(52,'new elegant offer with picture','dadfasdfasdf',293493280.00,32,'5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9.jpg',0,'2012-12-01 14:03:16'),
+	(53,'amazing offer','sdfsdfsdfsdf',213123120.00,32,'',1,'2012-12-01 14:03:16'),
+	(54,'new offer','asfasdf',123213.00,32,'',0,'2012-12-01 14:03:16'),
+	(55,'body','sdfasdf',123.00,3,'',1,'2012-12-01 14:03:16'),
+	(56,'hair','asdkfjaskdfj\n',334.00,32,'',0,'2012-12-01 14:04:51');
 
 /*!40000 ALTER TABLE `offers` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -840,7 +842,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_sessions_members_idx` (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8;
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
@@ -985,8 +987,13 @@ VALUES
 	(136,2,'499f960dd32716fcde798473ed1e7d46bbeb14cd17b1b6f8a3950660ea1f379b',1),
 	(137,1,'79dea1845a07d3445934eb0dc207ca4910cbced699c74eadffc89abff146096a',1),
 	(138,1,'0eaf02e1900b7ed56b667670422ad7eb7677997365c8fed4ca8517f1233ce6e9',1),
-	(139,2,'f8000ab06ac9bc34953c2f476e916195c69218860a9489d0aaf940759389a693',0),
-	(140,1,'73dc5643efb7ca81cfe668de7b4625a45cf224eaf271a2d120782dce64750516',0);
+	(139,2,'f8000ab06ac9bc34953c2f476e916195c69218860a9489d0aaf940759389a693',1),
+	(140,1,'73dc5643efb7ca81cfe668de7b4625a45cf224eaf271a2d120782dce64750516',1),
+	(141,2,'02d8feaa81eb2ba54396fae0878a954aae2dd18eddf8e24380cea1c39770dd1e',0),
+	(142,1,'48b78913820dd1a85617a265253f8d9fc9198eb9a4521144165ce04199dc0455',1),
+	(143,1,'4790ec51a7704a5d651816d0963399a46a60d3320b1afd18b83f51731b528024',1),
+	(144,1,'ea597d13ae5d065d1c422e1ee3bba2297f5311b7953a27976b2d90d30e53087e',1),
+	(145,1,'678b976e711be203bc9a9be3bc6b8cf592b97d600ea225b272469d89bff336da',0);
 
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -1217,7 +1224,7 @@ AS select
    `storages`.`pickup_date` AS `pickup_date`,
    `storages`.`weight` AS `weight`
 from `storages`
-where ((`storages`.`acquire_date` is not null) and ((cast(curdate() as date) - cast(`storages`.`acquire_date` as date)) > 14));
+where ((`storages`.`acquire_date` is not null) and isnull(`storages`.`pickup_date`) and ((cast(curdate() as date) - cast(`storages`.`acquire_date` as date)) > 14));
 
 
 # Replace placeholder table for member_stats with correct view syntax
@@ -1265,7 +1272,7 @@ END */;;
 /*!50003 DROP PROCEDURE IF EXISTS `get_hot_offers` */;;
 /*!50003 SET SESSION SQL_MODE="NO_AUTO_VALUE_ON_ZERO"*/;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `get_hot_offers`(IN max INT)
-BEGIN
+BEGIN 
   SELECT * FROM offers WHERE price <= `max`;
 END */;;
 
