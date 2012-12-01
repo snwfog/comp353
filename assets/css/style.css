@@ -29,14 +29,30 @@ ul li
 
 h1, h2, h3, h4, h5 {
     clear: both;
-    margin: 20px 0;
     font-family: Serifa BT;
     text-shadow: 1px 1px rgba(100, 100, 100, 0.2);
 }
 
-h1 {
+h1
+{
     font-size: 30px;
+    margin: 30px 0px;
     color: #4C8FFD;
+}
+
+h2
+{
+    font-size: 20px;
+    text-shadow: none;
+}
+
+
+h3, h4, h5
+{
+    font-size: 20px;
+    margin: 100px 0px 20px;
+    color: #4C8FFD;
+    text-shadow: none;
 }
 
 hr {
@@ -48,6 +64,7 @@ hr {
 table, table th, table td
 {
     padding: 5px;
+    clear: both;
     border: 1px dashed #d3d3d3;
     text-align: left;
     vertical-align: middle;
@@ -61,6 +78,7 @@ form {
     border: 1px solid #CCC;
     padding: 20px 20px 50px;
     background: #EEE;
+    margin: 20px 0px;
 }
 
 input {
@@ -155,6 +173,19 @@ select {
     background-color: #4C8FFD;
     box-shadow: 1px 2px rgba(100, 100, 100, 0.2);
     color: white;
+}
+
+#content form#admin-member-search
+{
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#content #graph
+{
+    margin: 20px;
+    width: 600px;
+    height: 400px;
 }
 
 

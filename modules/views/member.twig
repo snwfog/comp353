@@ -58,11 +58,13 @@
             </tr>
         {% endif %}
     </table>
+
     {% if private %}
-        <h4>Credit Card Information (<a href="index.php?creditcard">Change/Add</a>)</h4>
+        <h4>Credit Card Information</h4>
+
         <table>
             <tr>
-                <td>HolderName</td>
+                <td>Credit Card Holder Name</td>
                 <td>{{creditcard.holder_name}}</td>
             </tr>
             <tr>
@@ -78,6 +80,18 @@
                 <td>{{ creditcard.expire }}</td>
             </tr>
         </table>
+        <div class="tiptip">
+            <a href="index.php?creditcard" class="button" title="Change Credit Card">
+                <span class="icon icon111"></span>
+                <span class="label">Edit</span>
+            </a>
+        </div>
+        <div class="tiptip">
+          <a href="index.php?creditcardtransaction" class="button" title="Offer History">
+            <span class="icon icon140"></span>
+            <span class="label">Credit Card Transactions</span>
+          </a>
+        </div>
     {% endif %}
 </div>
 
@@ -111,6 +125,9 @@
             <th>User
             <th>Rating
             <th>Comment
+            {% if is_admin %}
+            <th>Action
+            {% endif %}
         </tr>
         {% for comment in comments %}
             <tr>
@@ -129,6 +146,14 @@
                         {% for i in 1..(10-comment.rating) %} $ {% endfor %}
                     </span>
                 <td>{{ comment.comment }}
+                {% if is_admin %}
+                <td><div class="tiptip">
+                    <a class="button" title="Delete Comment"
+                       href="index.php?member&delete_feedback={{ comment.feedback_id }}">
+                        <span class="icon icon186"></span>
+                    </a></div>
+                </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>
@@ -139,7 +164,7 @@
 
 {#{% if not is_owner and is_transact %}#}
 {% if not is_owner %}
-    <form action="index.php?member&id={{ id }}" method="POST">
+    <form action="index.php?member&id={{ id }}" method="POST" name="comment-form">
         <ul>
             <li><select name="rating">
                 {% for value in 1..10 %}
@@ -282,21 +307,28 @@
                 <th>Price
                 <th>Buyer
                 <th>Transaction Date
-                <th>Storage Status
+                <th>Storage
             </tr>
             {% for x in solds %}
-                      <tr>
-                          <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
-                          <td><a href="#">$ {{ x.price|number_format('2', '.', ' ') }}</a>
-                          <td><a href="index.php?member&id={{x.buyer_id}}">{{ x.username }}</a>
-                          <td>{{ x.transact_date }}
-                          <td>
-                              {% if x.status == "link" %}
-                                  <a href="index.php?storage&transaction_id={{x.id}}">Store Item</a>
-                              {% else %}
-                                  {{ x.status }}
-                              {% endif %}
-                      </tr>
+                  <tr>
+                      <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
+                      <td>$ {{ x.price|number_format('2', '.', ' ') }}
+                      <td><a href="index.php?member&id={{x.buyer_id}}">{{ x.username }}</a>
+                      <td>{{ x.transact_date }}
+                      {% if x.type == "Good" %}
+                      <td>
+                          {% if x.status == "link" %}
+                              <div class="tiptip">
+                                  <a href="index.php?storage&transaction_id={{x.id}}"
+                                     class="button confirm" title="Store Garage">
+                                      <span class="icon icon12"></span>
+                                  </a>
+                              </div>
+                          {% else %}
+                              {{ x.status }}
+                          {% endif %}
+                      {% endif %}
+                  </tr>
             {% endfor %}
             </table>
         {% endif %}
@@ -315,7 +347,7 @@
             {% for x in boughts %}
                       <tr>
                           <td><a href="index.php?offer&id={{ x.offer_id }}">{{ x.title }}</a>
-                          <td><a href="#">$ {{ x.price|number_format('2', '.', ' ') }}</a>
+                          <td>$ {{ x.price|number_format('2', '.', ' ') }}
                           <td><a href="index.php?member&id={{x.seller_id}}">{{ x.username }}</a>
                           <td>{{ x.transact_date }}
                           <td>{{ x.status }}

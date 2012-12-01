@@ -114,4 +114,26 @@ class Notification_Model extends Model
 
         return empty($result) ? NULL : $result;
     }
+
+    public function getWarnings($member_id)
+    {
+        $query = "SELECT o.id AS id, o.title AS title
+        FROM notify_warn n
+          JOIN posts p ON p.id = n.post_id
+          JOIN offers o ON o.id = p.offer_id
+        WHERE p.member_id = '$member_id'";
+
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch();
+
+        if (!empty($result))
+        {
+            $query = "DELETE notify_warn FROM notify_warn
+              JOIN posts p ON p.id = notify_warn.post_id
+            WHERE p.member_id = '$member_id'";
+            $this->db->query($query);
+        }
+
+        return empty($result) ? NULL : $result;
+    }
 }

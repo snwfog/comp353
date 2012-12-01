@@ -75,7 +75,6 @@ class Member_Model extends Model
         return $result;
     }
 
-
     public function get_visitor_id($member_id)
     {
         $this->db->query("Select visitor_id FROM members WHERE id = $member_id;");
@@ -95,6 +94,21 @@ class Member_Model extends Model
         }
     }
 
+    public function getMemberStatsByName($args)
+    {
+
+        $query = "SELECT * FROM member_stats WHERE
+          username LIKE '%" . $args['admin_member_search'] . "%'";
+        if (isset($args['order_by']))
+            $query .= " ORDER BY ". $args['order_by'];
+            if (isset($args['direction']))
+                $query .= " " . $args['direction'];
+
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch();
+
+        return empty($result) ? NULL : $result;
+    }
 
     public function create_member($username, $password, $email_id, $address_id,
                                   $visitor_id, $registration_controller)

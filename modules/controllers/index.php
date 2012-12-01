@@ -6,8 +6,6 @@ class Index_Controller extends Controller
     {
         parent::__construct(FALSE);
 
-        $this->data["title"] = "Auction Max";
-
         if ($this->isValidSession())
         {
             $this->data["specifier"] = "Member";

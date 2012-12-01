@@ -9,7 +9,14 @@ class Offer_Controller extends Controller implements IRedirectable
 
         // Check if the offer id is set
         $m_offer = new Offer_Model();
-        if (isset($args['id']))
+
+        // Check if we are giving a warning
+        if (isset($args['warn']))
+        {
+            $this->warn($args['warn']);
+            $this->back();
+        }
+        else if (isset($args['id']))
         {
             $this->offer = $m_offer->getOffer($args['id']);
 
@@ -89,6 +96,11 @@ class Offer_Controller extends Controller implements IRedirectable
 
     }
 
+    public function warn($offer_id)
+    {
+        $m_posts = new Post_Model();
+        $m_posts->warn($offer_id);
+    }
 
     public function makeBid()
     {

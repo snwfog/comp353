@@ -3,7 +3,7 @@ $ ->
 ################################################################################
 # Fetch ready for pickup offer function handler
 ################################################################################
-  recallTime = 5000
+  recallTime = 2000
 
   setInterval ->
     $.ajax({
@@ -56,6 +56,19 @@ $ ->
           noteAlert "The item \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
                       has been modified by the owner.", "warning"
   , recallTime
+
+################################################################################
+# Fetch warning alert
+################################################################################
+  setInterval ->
+    $.ajax({
+      url: "index.php?ajax&warn=1",
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $.each data, (i, item) ->
+          noteAlert "You received a warning for your post \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"", "error"
+  , recallTime
 ################################################################################
 # Rainbow unicorn mode
 ################################################################################
@@ -87,3 +100,60 @@ $ ->
         speed: 200
       },
     })
+
+################################################################################
+# Admin member search
+################################################################################
+  $('#admin-member-search, #member-name').live 'click keyup', ->
+    evalStr = ""
+    if $('input[name=order_by]:checked').val()
+      evalStr += "&order_by=" + $('input[name=order_by]:checked').val()
+      if $('input[name=direction]:checked').val()
+        evalStr += "&direction=" + $('input[name=direction]:checked').val()
+
+    $.ajax({
+      url: "index.php?ajax&admin_member_search=" + $('#member-name').val() + evalStr,
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $('#member-search-table').html "<tr><th>Position</th><th>User</th><th>Posts</th>
+          <th>Buys</th><th>Sells</th><th>Rating</th></tr>"
+        $.each data, (i, item) ->
+          $('#member-search-table').append "<tr>" +
+            "<td>#{i+1}</td><td><div class='tiptip'>" +
+            "<a href='index.php?member&id=" + item.id + "' class='button'>" +
+            "<span class='icon icon191'>" +
+            "</span><span class='label'>" + item.username + "</span></a></div></td>" +
+            "<td>#{item.posts}</td>" +
+            "<td>#{item.buys}</td>" +
+            "<td>#{item.sells}</td>" +
+            "<td>" + if item.rating is null then "No Rating" else drawRating(item.rating) + "</td></tr>"
+
+  drawRating = (rating) ->
+    str = "<span class='earned-rating'>"
+    for i in [1..rating]
+      str += "$&nbsp;"
+    return str + "</span>"
+################################################################################
+# Admin category plot
+################################################################################
+  d2 = [[0, 507812330], [1, 234232323], [2, 23393849], [9, 13]]
+  $.plot($("#graph"), [
+    {
+      data: d2,
+      bars: { show: true}
+    }
+  ], {
+    xaxis: {
+      show: false
+    },
+    yaxis: {
+      font: {
+        size: 17,
+        weight: "bold",
+        family: "Helvetica Neue"
+      }
+    }
+  })
+
+  true

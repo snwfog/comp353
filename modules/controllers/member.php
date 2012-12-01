@@ -17,6 +17,10 @@ class Member_Controller extends Controller implements IRedirectable
         // Check if we are making any feedbacks
         $this->setFeedback();
 
+        // Check delete comment
+        if (isset($args['delete_feedback']))
+            $this->deleteFeedback($args['delete_feedback']);
+
         if (isset($args['id']) && empty($args['id']))
             $this->redirect(self::REDIRECT_INDEX);
 
@@ -54,9 +58,9 @@ class Member_Controller extends Controller implements IRedirectable
         foreach($boughts as $key => $value){
             if($m_storage->in_storage($value["id"])){
                 if($m_storage->ready_for_pick_up($value["id"])){
-                    $boughts[$key]["status"] = "Item is ready for pick up";
+                    $boughts[$key]["status"] = "Ready for pickup";
                 }else{
-                    $boughts[$key]["status"] = "Item not in storage yet";
+                    $boughts[$key]["status"] = "Not yet received";
                 }
             }else{
                 $boughts[$key]["status"]="n/a";
@@ -66,10 +70,10 @@ class Member_Controller extends Controller implements IRedirectable
         foreach($solds as $key => $value){
             if($m_storage->in_storage($value["id"])){
                 if($m_storage->picked_up($value["id"])){
-                    $solds[$key]["status"] = "Buyer picked up Item";
+                    $solds[$key]["status"] = "Completed";
                     $boughts[$key]["status"] = "--";
                 }elseif($m_storage->ready_for_pick_up($value["id"])){
-                    $boughts[$key]["status"] = "Waiting for pick up";
+                    $boughts[$key]["status"] = "Waiting for pickup";
                 }else{
                     $solds[$key]["status"] = "Pending...";
                 }
@@ -133,5 +137,15 @@ class Member_Controller extends Controller implements IRedirectable
     {
         $m_bids = new Bid_Model();
         $this->data["bids"] = $m_bids->getOngoingBidByMemberId($this->id);
+    }
+
+    private function deleteFeedback($feedback_id)
+    {
+        if ($this->isAdmin())
+        {
+            $this->m_feedbacks = new Feedback_Model();
+            $this->m_feedbacks->deleteFeedback($feedback_id);
+            $this->back();
+        }
     }
 }

@@ -1,0 +1,31 @@
+{% extends 'static/base.twig' %}
+
+{% block content %}
+
+<h1>Admin Tool</h1>
+<div class="tiptip">
+    <a class="button left" href="index.php?admin&member_search=1" title="All Members">
+        <span class="icon icon127"></span>
+        <span class="label">Members</span>
+    </a>
+    <a class="button middle" href="index.php?admin&buys_and_sells=1" title="Buys and Sells">
+        <span class="icon icon18"></span>
+        <span class="label">Buys and Sells</span>
+    </a>
+    <a class="button middle" href="index.php?admin&transactions=1" title="Transactions">
+        <span class="icon icon101"></span>
+        <span class="label">Transactions</span>
+    </a>
+    <a class="button middle" href="index.php?admin&categories=1" title="Categories">
+        <span class="icon icon169"></span>
+        <span class="label">Categories</span>
+    </a>
+    <a class="button right" href="index.php?admin&regions_and_territories=1" title="Regions and Territories">
+        <span class="icon icon19"></span>
+        <span class="label">Regions and Territories</span>
+    </a>
+</div>
+
+{% block option %} {% endblock option %}
+
+{% endblock content %}
