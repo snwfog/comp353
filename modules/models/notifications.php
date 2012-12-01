@@ -136,4 +136,30 @@ class Notification_Model extends Model
 
         return empty($result) ? NULL : $result;
     }
+
+    public function getNewBids($member_id)
+    {
+        $query = "SELECT o.id, o.title, n.date
+        FROM notify_bid n
+          JOIN offers o ON o.id = n.offer_id
+          JOIN posts p ON o.id = p.offer_id
+        WHERE p.member_id = '$member_id'
+        ORDER BY n.date DESC";
+
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch();
+
+        // Delete after retrieval
+        if (!empty($result))
+        {
+            $query = "DELETE notify_bid FROM notify_bid
+              JOIN posts p ON notify_bid.offer_id = p.offer_id
+            WHERE p.member_id = '$member_id'";
+
+            $this->db->query($query);
+        }
+
+        return empty($result) ? NULL : $result;
+
+    }
 }

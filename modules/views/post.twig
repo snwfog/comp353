@@ -26,7 +26,7 @@
                 {% endfor %}
             {% endfor %}
         </select>
-        <li><input type="text" name="price" placeholder="Price"
+        <li><input type="text" name="price" placeholder="$$$Price(Free Item = 0.00 Not Free >0.00)"
                 value="{% if offerPrice %}{{ offerPrice }}{% endif %}"/>
         <li><textarea name="description" rows="6" cols="30">{% if offerDescription %}{{ offerDescription }}{% endif %}</textarea>
         <li><input type="file" name="image" placeholder="Image URL"/>

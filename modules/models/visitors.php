@@ -30,7 +30,7 @@ class Visitor_Model extends Model
         }
     }
     
-    public function create_visitor($f_name, $l_name, $phone_number, $registration_controller)
+    public function create_visitor($f_name, $l_name, $phone_number, $registration_controller, $is_registration = TRUE)
     {
         $f_name       = "\"" . $f_name . "\"";
         $l_name       = "\"" . $l_name . "\"";
@@ -44,16 +44,18 @@ class Visitor_Model extends Model
         );
         $insert       = implode(",", $insert);
         
-        $this->db->query("SELECT *
-                        FROM  `visitors`
-                        JOIN members ON members.visitor_id = visitors.id
-                        WHERE first_name=$f_name AND last_name=$l_name AND phone_number=$phone_number");
-        $result = $this->db->fetch(MYSQL_ASSOC);
-        if (count($result) == 1)
-        {
-            array_push($registration_controller->data["errors"], "First name, last name, phone number in use!");
-            $registration_controller->display("registration.twig", $registration_controller->data);
-            exit;
+        if($is_registration){
+            $this->db->query("SELECT *
+                            FROM  `visitors`
+                            JOIN members ON members.visitor_id = visitors.id
+                            WHERE first_name=$f_name AND last_name=$l_name AND phone_number=$phone_number");
+            $result = $this->db->fetch(MYSQL_ASSOC);
+            if (count($result) == 1)
+            {
+                array_push($registration_controller->data["errors"], "First name, last name, phone number in use!");
+                $registration_controller->display("registration.twig", $registration_controller->data);
+                exit;
+            }
         }
         
         $this->db->query("SELECT *

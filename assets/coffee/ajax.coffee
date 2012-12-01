@@ -16,6 +16,22 @@ $ ->
             just arrived at the garage. You may come and pick it up
             during our regular business hour within the next <b>14</b> days.", "success"
   , recallTime
+
+################################################################################
+# Fetch expired bids function handler
+################################################################################
+  setInterval ->
+    $.ajax({
+      url: "index.php?ajax&notify_bid=1",
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $.each data, (i, item) ->
+          noteAlert "You received a new bid for your offer
+            \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
+            approximately <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.", "success"
+  , recallTime
+
 ################################################################################
 # Fetch expired bids function handler
 ################################################################################
@@ -137,23 +153,5 @@ $ ->
 ################################################################################
 # Admin category plot
 ################################################################################
-  d2 = [[0, 507812330], [1, 234232323], [2, 23393849], [9, 13]]
-  $.plot($("#graph"), [
-    {
-      data: d2,
-      bars: { show: true}
-    }
-  ], {
-    xaxis: {
-      show: false
-    },
-    yaxis: {
-      font: {
-        size: 17,
-        weight: "bold",
-        family: "Helvetica Neue"
-      }
-    }
-  })
-
+  new Ico.SparkLine($('graph'), [21, 41, 32, 1, 10, 5, 32, 10, 23], { width: 30, height: 14, background_colour: '#ccc' })
   true

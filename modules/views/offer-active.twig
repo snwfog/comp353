@@ -165,30 +165,37 @@
 
 {% if (offer.price <=0.00 and not(is_owner))%}
     {% if is_logged_in %}
-        <form action="index.php?reserve" method="POST" style="width:300px;">
-            <input type="hidden" name="offer_id" value="{{offer.id}}" />
-            <div class="tiptip"><button type="submit" name="submit"
-                    class="action red submit" title="Reserve Offer">
-                <span class="icon icon99"></span>
-                <span class="label">Reserve</span>
-            </button></div>
-        </form>
+        {% if CanReserve %}
+            <form action="index.php?reserve" method="POST" style="width:300px;">
+                <input type="hidden" name="offer_id" value="{{offer.id}}" />
+                <div class="tiptip"><button type="submit" name="submit"
+                        class="action red submit" title="Reserve Offer">
+                    <span class="icon icon99"></span>
+                    <span class="label">Reserve</span>
+                </button></div>
+            </form>
+        {% else %}
+            <p style="color:red;">
+                 You reach your maximum reserve limit !
+            </p>
+        {% endif %}
     {% else %}
         <div>
-        <form action="index.php?reserve" method="POST" style="width:300px;">
-          <h3>Contact Information</h3>
-            <ul>
-                <li><input type="text" name="first_name" placeholder="First name" />
-                <li><input type="text" name="last_name" placeholder="Last name" />
-                <li><input type="text" name="phone_number" placeholder="Phone number" />
-            </ul>
-            <input type="hidden" name="offer_id" value="{{offer.id}}" />
-            <div class="tiptip"><button type="submit" name="submit"
-                    class="action red submit" title="Reserve Offer">
-                <span class="icon icon99"></span>
-                <span class="label">Reserve</span>
-            </button></div>
-        </form>
+
+            <form action="index.php?reserve" method="POST" style="width:300px;">
+              <h3>Contact Information</h3>
+                <ul>
+                    <li><input type="text" name="first_name" placeholder="First name" />
+                    <li><input type="text" name="last_name" placeholder="Last name" />
+                    <li><input type="text" name="phone_number" placeholder="Phone number" />
+                </ul>
+                <input type="hidden" name="offer_id" value="{{offer.id}}" />
+                <div class="tiptip"><button type="submit" name="submit"
+                        class="action red submit" title="Reserve Offer">
+                    <span class="icon icon99"></span>
+                    <span class="label">Reserve</span>
+                </button></div>
+            </form>
         </div>
     {% endif %}
 {% endif %}

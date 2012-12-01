@@ -19,14 +19,14 @@ class Admin_Controller extends Controller implements IRedirectable
                 $this->display('admin-categories.twig', $this->data);
             else if (isset($args['regions_and_territories']))
                 $this->display('admin-regions-and-territories.twig', $this->data);
+            else if (isset($args['store_variables']))
+                $this->display('admin-variables.twig', $this->data);
             else
                 $this->display('admin.twig', $this->data);
         }
         else
         {
-            $this->redirect($this::REDIRECT_INDEX);
+            $this->redirect(self::REDIRECT_INDEX);
         }
     }
-
-
 }

@@ -28,4 +28,13 @@ class Reserve_Model extends Model
       $result = $this->db->fetch(MYSQL_ASSOC);
       return $result? $result : NULL;
    }
+
+   public function get_all_active_reserves_by_visitor_id($visitor_id){
+        $query = "SELECT * FROM reserves 
+                  INNER JOIN offers ON reserves.offer_id = offers.id
+                  WHERE reserves.visitor_id = $visitor_id AND offers.expire = 0;";
+        $this->db->query($query);
+        $result = $this->db->fetch(MYSQL_ASSOC);
+        return $result; 
+  }
 }
