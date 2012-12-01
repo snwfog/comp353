@@ -53,9 +53,10 @@ class Offer_Controller extends Controller implements IRedirectable
                   $this->data["CanStore"] = $this->canStoreOffer($transact[0]);
                 }
 
-                //Can bid?
+                //Can bid? Can Reserve?
                 $this->data["CanBid"] = $this->CanBids();
                 $this->data["categories"] = $categories;
+                $this->data["CanReserve"] = $this->CanReserve();
 
                 // Check if the current viewer is the offer owner
                 // To disallow owner bidding on his own item
@@ -153,6 +154,24 @@ class Offer_Controller extends Controller implements IRedirectable
        $m_reserves = new Reserve_Model();
        $result = $m_reserves->get_all_reserves($offer_id);
        $this->data["reserves"] = $result;
+    }
 
+    public function CanReserve(){
+        
+        if ($this->isValidSession())
+        {
+            $m_Reserve = new Reserve_Model();
+            $m_member = new Member_Model();
+            $result = $m_Reserve->get_all_active_reserves_by_visitor_id(
+                        $m_member->get_visitor_id($this->getMemberId())
+                    );
+            if(count($result)>=3){
+                return FALSE;
+            }else{
+                return TRUE;
+            }          
+        }
+
+        return FALSE;
     }
 }
