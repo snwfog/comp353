@@ -17,6 +17,18 @@ $(function() {
   }, recallTime);
   setInterval(function() {
     return $.ajax({
+      url: "index.php?ajax&notify_bid=1",
+      dataType: "json"
+    }).done(function(data) {
+      if (data != null) {
+        return $.each(data, function(i, item) {
+          return noteAlert(("You received a new bid for your offer            \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            approximately <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.", "success");
+        });
+      }
+    });
+  }, recallTime);
+  setInterval(function() {
+    return $.ajax({
       url: "index.php?ajax&notify_expired_bids=1",
       dataType: "json"
     }).done(function(data) {
