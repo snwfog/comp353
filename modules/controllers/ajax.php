@@ -95,8 +95,6 @@ class Ajax_Controller extends Controller
 
             echo json_encode($json);
         }
-
-        // IMPLEMENT DELETES TABLE ENTRY HERE>>>>>>>>>>>
     }
 
     public function notifyReceive()

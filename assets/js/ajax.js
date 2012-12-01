@@ -22,7 +22,7 @@ $(function() {
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert(("Your bids \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.description + "</a></b>\"          was expired <b>") + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning");
+          return noteAlert(("Your bids \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.description + "</a></b>\"          was expired <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.", "warning");
         });
       }
     });

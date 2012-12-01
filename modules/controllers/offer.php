@@ -29,6 +29,7 @@ class Offer_Controller extends Controller implements IRedirectable
                 if (isset($_POST["bid"]))
                 {
                     $this->makeBid();
+                    $this->back();
                 }
 
                 $this->data["title"] = "Offer";

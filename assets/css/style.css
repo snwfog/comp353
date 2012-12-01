@@ -47,7 +47,14 @@ h2
 }
 
 
-h3, h4, h5
+h3 {
+    font-size: 20px;
+    margin: 30px 0px;
+    color: #4C8FFD;
+}
+
+
+h4, h5
 {
     font-size: 20px;
     margin: 100px 0px 20px;

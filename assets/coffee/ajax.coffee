@@ -27,7 +27,7 @@ $ ->
       if data?
         $.each data, (i, item) ->
           noteAlert "Your bids \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.description}</a></b>\"
-          was expired <b>" + moment(item.date, "YYYY-MM-DD").fromNow() + "</b>.", "warning"
+          was expired <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.", "warning"
   , recallTime
 ################################################################################
 # Fetch received offer function handler
