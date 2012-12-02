@@ -18,7 +18,7 @@ $ ->
   , recallTime
 
 ################################################################################
-# Fetch expired bids function handler
+# Fetch new bid function handler
 ################################################################################
   setInterval ->
     $.ajax({
