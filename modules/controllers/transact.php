@@ -17,6 +17,10 @@ class Transact_Controller extends Controller implements IRedirectable
             $m_CC = new CreditCard_Model();
             $credit_card = $m_CC->getMemberCreditCard($this->getMemberId());
             $m_CCT->transact_offer_fee($credit_card[0]["id"], $args["offer_id"], $args["bid_id"]);
+
+            //transact buyer
+            $credit_card = $m_CC->getMemberCreditCard($args["bidder_id"]);
+            $m_CCT->transact_offer_fee($credit_card[0]["id"], $args["offer_id"], $args["bid_id"]);
             $this->back();
         }
 
