@@ -42,7 +42,8 @@ class Offer_Model extends Model
             SET title = '".$data["title"]."',
             description = '".$data["description"]."',
             price = '".$data["price"]."',
-            category_id = '".$data["category"]."'
+            category_id = '".$data["category"]."',
+            image_url = '".$data['image_url']."'
         WHERE id = '$offer_id'";
         $mysqli_result = $this->db->query($query);
     }
