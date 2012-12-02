@@ -12,11 +12,17 @@ class Reserve_Model extends Model
         $query = "INSERT INTO reserves (visitor_id, offer_id, reserve_time)
             VALUES ('$visitor_id', '$offer_id', $date_time)";
 
-          $result = $this->db->query($query);
-        if(!$result){
+          
+        try{
+            $result = $this->db->query($query);
+            if(!$result){
+              throw new Exception('error in reserve query');
+            }
+            return;
+        }catch(Exception $e)
+        {
           return;
         }
-        return;
     }
     
     public function get_all_reserves($offer_id){
