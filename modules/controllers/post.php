@@ -96,14 +96,15 @@ class Post_Controller extends Controller implements IRedirectable
         {
             list($name, $ext) = explode(".", $filename);
 
-            if (!in_array($ext, $allowedFiletypes))
+            if (!preg_grep("/$ext/i" , $allowedFiletypes))
                 die('The file you attempted to ulpload is not allowed.');
             if (filesize($_FILES['image']['tmp_name']) > $maxFilesize)
                 die('The file you attempted to upload is too large.');
             if (!is_writeable(IMAGE_PATH))
                 die('You cannot upload to the specified directory.');
 
-            $safeName = hash('sha256', $name + date('l jS \of F Y h:i:s A'));
+            srand(date('l jS \of F Y h:i:s A'));
+            $safeName = hash('sha256', $name + rand());
 
             // Move image to destination folder
             if (!move_uploaded_file($_FILES['image']['tmp_name'],

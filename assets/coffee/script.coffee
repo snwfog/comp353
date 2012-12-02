@@ -181,7 +181,7 @@ $(document).ready ->
   }, {
     name: "card_holder",
     display: "Holder's Name",
-    rules: "required|alpha"
+    rules: "required"
   }, {
     name: "credit_card_number",
     display: "Credit Card Number",
@@ -189,15 +189,15 @@ $(document).ready ->
   }, {
     name: "expiration_month",
     display: "Expire Month",
-    rules: "required|numeric|exact_length[2]|less_than[12]|more_than[1]"
+    rules: "required|numeric|exact_length[2]|less_than[13]|more_than[0]"
   }, {
     name: "expiration_year",
     display: "Expire Year",
-    rules: "required|numeric|exact_length[2]|less_than[2030]|more_than[2012]"
+    rules: "required|numeric|exact_length[2]|less_than[30]|more_than[11]"
   }, {
     name: "verification_number",
     display: "Verification Number",
-    rules: "required|numberic|less_than[4]"
+    rules: "required|numberic|max_length[3]"
   }], displayError)
 
   ###
