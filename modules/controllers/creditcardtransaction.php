@@ -8,12 +8,14 @@ class CreditCardTransaction_Controller extends Controller implements IRedirectab
 
         $sorted = array();
         // Format the data into date arrays
-        foreach ($AllTransaction as $value)
-        {
-            $sorted[$value['fee_date_month']." ".$value['fee_date_year']][] = $value;
-        }
+        if(count($AllTransaction)>0){
+            foreach ($AllTransaction as $value)
+            {
+                $sorted[$value['fee_date_month']." ".$value['fee_date_year']][] = $value;
+            }
 
-        $this->data["transactions"] = $sorted;
+            $this->data["transactions"] = $sorted;
+        }  
 
 
         $this->display("creditcardtransaction.twig", $this->data);
