@@ -162,8 +162,7 @@
     any transaction.</p>
 {% endif %}
 
-{#{% if not is_owner and is_transact %}#}
-{% if not is_owner %}
+{% if not is_owner and has_transact %}
     <form action="index.php?member&id={{ id }}" method="POST" name="comment-form">
         <ul>
             <li><select name="rating">
@@ -320,7 +319,7 @@
                           {% if x.status == "link" %}
                               <div class="tiptip">
                                   <a href="index.php?storage&transaction_id={{x.id}}"
-                                     class="button confirm" title="Store Garage">
+                                     class="button confirm" title="Store Garage [Cost: $20]">
                                       <span class="icon icon12"></span>
                                   </a>
                               </div>

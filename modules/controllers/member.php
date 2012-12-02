@@ -23,10 +23,14 @@ class Member_Controller extends Controller implements IRedirectable
         if (isset($args['id']) && empty($args['id']))
             $this->redirect(self::REDIRECT_INDEX);
 
+
+        $m_transact = new Transact_Model();
+
         if (isset($args['id']) && $args['id'] != $this->getMemberId()) {
             // If id is set, we are looking at somebody
             $this->id = $args['id'];
             $this->data["private"] = VIEW_MODE_PUBLIC;
+            $this->data['has_transact'] = $m_transact->hasTransactedWith($this->getMemberId(), $args['id']);
         } else {
             // If id is not set, we are looking at the owner of the session
             $this->id = $this->getMemberId();
@@ -46,7 +50,6 @@ class Member_Controller extends Controller implements IRedirectable
         $offers = $m_post->getPostByMemberId($this->id);
 
         //transaction preparing
-        $m_transact = new Transact_Model();
         $boughts = $m_transact->getBoughtTransactionByMemberId($this->getMemberId());
         $solds = $m_transact->getSoldTransactionByMemberId($this->getMemberId());
 
@@ -84,6 +87,9 @@ class Member_Controller extends Controller implements IRedirectable
             }
         }
         //end transaction
+
+
+
 
         $m_creditcard = new CreditCard_Model();
         $creditcard = $m_creditcard->getMemberCreditCard($this->getMemberId());

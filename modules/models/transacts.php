@@ -61,6 +61,18 @@ class Transact_Model extends Model
       return $sold;
     }
 
+    public function hasTransactedWith($member_id, $another_member_id)
+    {
+        $query = "SELECT COUNT(*) AS transacts_count FROM transacts t
+        WHERE (t.buyer_id = '$member_id' AND t.seller_id = '$another_member_id')
+        OR (t.buyer_id = '$another_member_id' AND t.seller_id = '$member_id')";
+
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch();
+        return $result[0]['transacts_count']; // Result the number right away
+    }
+
+
     public function getTransactionByOfferId($id){
       $this->db->query("SELECT *
                         FROM transacts t
