@@ -168,7 +168,7 @@ $(document).ready ->
     rules: "required|numeric"
   }, {
     name: "description",
-    rules: "required|max_length[100]"
+    rules: "required|max_length[255]"
   }], displayError)
 
   ###
