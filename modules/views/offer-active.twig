@@ -167,7 +167,7 @@
 </form>
 {% elseif (price > 0.00 and not(is_logged_in)) %}
     <p> Please <a href="index.php?login">Login</a> to bid </p>
-{% elseif (is_logged_in and offer.price > 0 and not(CanBid)) %}
+{% elseif (is_logged_in and offer.price > 0 and not(CanBid) and not(is_owner)) %}
      <a href="index.php?creditcard">Add a Credit Card To Bid</a>
 {% endif %}
 
