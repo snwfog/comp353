@@ -124,7 +124,7 @@ $(function() {
       }
     });
   });
-  return drawRating = function(rating) {
+  drawRating = function(rating) {
     var i, str, _i;
     str = "<span class='earned-rating'>";
     for (i = _i = 1; 1 <= rating ? _i <= rating : _i >= rating; i = 1 <= rating ? ++_i : --_i) {
@@ -132,4 +132,10 @@ $(function() {
     }
     return str + "</span>";
   };
+  new Ico.SparkLine($('graph'), [21, 41, 32, 1, 10, 5, 32, 10, 23], {
+    width: 30,
+    height: 14,
+    background_colour: '#ccc'
+  });
+  return true;
 });
