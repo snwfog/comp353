@@ -6,10 +6,12 @@ class Offer_Controller extends Controller implements IRedirectable
     {
         // Commenting this code will disable login check
         parent::__construct(FALSE);
-
+        $this->data['errors'] = array();
         // Check if the offer id is set
         $m_offer = new Offer_Model();
-
+        if(isset($args['error'])){
+        array_push($this->data['errors'], $args['error']);
+        }   
         // Check if we are giving a warning
         if (isset($args['warn']))
         {
@@ -162,10 +164,12 @@ class Offer_Controller extends Controller implements IRedirectable
         {
             $m_Reserve = new Reserve_Model();
             $m_member = new Member_Model();
+            $m_price = new Price_Model();
+            $limit = $m_price->get_fee_by_name("member_reserve_limit");
             $result = $m_Reserve->get_all_active_reserves_by_visitor_id(
                         $m_member->get_visitor_id($this->getMemberId())
                     );
-            if(count($result)>=3){
+            if(count($result)>=$limit['amount']){
                 return FALSE;
             }else{
                 return TRUE;
