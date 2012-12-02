@@ -31,7 +31,6 @@ $ ->
             \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
             approximately <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.", "success"
   , recallTime
-
 ################################################################################
 # Fetch expired bids function handler
 ################################################################################
