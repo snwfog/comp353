@@ -21,10 +21,11 @@ class Garage_Controller extends Controller implements IRedirectable
                 $m_CCT = new CreditCardTransaction_Model();
                 $m_CC = new CreditCard_Model();
                 $m_transact = new Transact_Model();
-                $creditcard = $m_CC->getMemberCreditCard($this->getMemberId());
+                
 
                 $storageItem= $this->m_storages->getStorage($args['pickup']);
                 $transactionItem = $m_transact->getTransactionById($storageItem[0]["transact_id"]);
+                $creditcard = $m_CC->getMemberCreditCard($transactionItem[0]["seller_id"]);
                 $m_CCT->transact_storage_fee($creditcard[0]["id"], $transactionItem[0]["offer_id"], $args['pickup']);
                 $this->back();
             }
