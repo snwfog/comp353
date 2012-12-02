@@ -6,24 +6,26 @@
     <th>Credit Card</th>
     <th>Fee Type</th>
     <th>Amount</th>
-	{% for date, date_set in transactions %}
-        <tr><td colspan="5"><h2>{{ date }}</h2></td></tr>
-        {% for t in date_set %}
-        <tr>
-            <td>{{ t.fee_date_month }} {{ t.fee_date_date }}, {{ t.fee_date_year }}</td>
-            <td><div class="tiptip"><a class="button" href="index.php?offer&id={{ t.offer_id }}"
-                                   title="{{ t.title }}">
-                <span class="icon icon130"></span>
-            </a></div>
-            <td><div class="tiptip">
-                <a class="button" href="" title="{{ t.cc_number }}">
-                <span class="icon icon130"></span><span class="label">{{ t.cc_type }}</span>
-            </a></div></td>
-            <td>{{t.fee_type|capitalize }} charge
-            <td>$ {{ t.charge|number_format('2', '.', ' ') }}
-        </tr>
-        {% endfor %}
-	{% endfor %}
+    {% if transactions is defined %}
+    	{% for date, date_set in transactions %}
+            <tr><td colspan="5"><h2>{{ date }}</h2></td></tr>
+            {% for t in date_set %}
+            <tr>
+                <td>{{ t.fee_date_month }} {{ t.fee_date_date }}, {{ t.fee_date_year }}</td>
+                <td><div class="tiptip"><a class="button" href="index.php?offer&id={{ t.offer_id }}"
+                                       title="{{ t.title }}">
+                    <span class="icon icon130"></span>
+                </a></div>
+                <td><div class="tiptip">
+                    <a class="button" href="" title="{{ t.cc_number }}">
+                    <span class="icon icon130"></span><span class="label">{{ t.cc_type }}</span>
+                </a></div></td>
+                <td>{{t.fee_type|capitalize }} charge
+                <td>$ {{ t.charge|number_format('2', '.', ' ') }}
+            </tr>
+            {% endfor %}
+    	{% endfor %}
+    {% endif %}
 </table>
 
 {% endblock content %}

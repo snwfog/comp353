@@ -10,7 +10,9 @@ class Price_Model extends Model
     public function get_fee_by_name($fee_name){
     	if($this->db->query("SELECT * FROM prices WHERE fee_name = \"$fee_name\" ")){
         	$plan = $this->db->fetch(MYSQL_ASSOC);
-        	$plan = $plan[0];
+        	if($plan){
+                $plan = $plan[0];
+            }
         	return $plan;
         }
     }
