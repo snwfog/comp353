@@ -103,8 +103,7 @@ class Post_Controller extends Controller implements IRedirectable
             if (!is_writeable(IMAGE_PATH))
                 die('You cannot upload to the specified directory.');
 
-            srand(date('l jS \of F Y h:i:s A'));
-            $safeName = hash('sha256', $name + rand());
+            $safeName = hash('sha256', $name + date('l jS \of F Y h:i:s A') + rand());
 
             // Move image to destination folder
             if (!move_uploaded_file($_FILES['image']['tmp_name'],
