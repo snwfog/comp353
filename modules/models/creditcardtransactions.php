@@ -58,6 +58,7 @@ class CreditCardTransaction_Model extends Model
                     date_format(CCT.date, '%d') AS fee_date_date,
                     date_format(CCT.date, '%M') as fee_date_month,
                     date_format(CCT.date, '%Y') AS fee_date_year,
+                    date_format(CCT.date, '%m') AS true_month,
                     CC.number as cc_number,
                     CC.holder_name as cc_name,
                     T.type as cc_type,
@@ -70,12 +71,41 @@ class CreditCardTransaction_Model extends Model
                   INNER JOIN offers as O ON CCT.offer_id = O.id
                   INNER JOIN credit_card_types AS T ON CC.credit_card_type_id = T.id
                   WHERE CC.member_id = '$member_id'
-                  ORDER BY fee_date_year DESC, fee_date_month DESC, fee_date_date DESC";
+                  ORDER BY fee_date_year DESC, true_month DESC, fee_date_date DESC";
         $result = $this->db->query($query);
         $result = $this->db->fetch(MYSQL_ASSOC);
         return $result ? $result : NULL;
     }
-  
+
+    public function getMonthlyServiceCharges()
+    {
+        $query = "SELECT
+          DATE_FORMAT(date, '%M') AS month,
+          SUM(amount) AS amount
+        FROM credit_card_transactions
+        WHERE fee_type LIKE 'service'
+        GROUP BY month ORDER BY date ASC";
+
+        $this->db->query($query);
+        $result = $this->db->fetch();
+
+        return empty($result) ? NULL : $result;
+    }
+
+    public function getMonthlyStorageCharges()
+    {
+        $query = "SELECT
+          DATE_FORMAT(date, '%M') AS month,
+          SUM(amount) AS amount
+        FROM credit_card_transactions
+        WHERE fee_type LIKE 'storage'
+        GROUP BY month ORDER BY date ASC";
+
+        $this->db->query($query);
+        $result = $this->db->fetch();
+
+        return empty($result) ? NULL : $result;
+    }
 }
 
 ?>

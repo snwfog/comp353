@@ -7,6 +7,25 @@ class Notification_Model extends Model
         parent::__construct();
     }
 
+    public function getWinningBids($member_id)
+    {
+        $query = "SELECT o.id, o.title, n.date
+        FROM notify_winning_bid n
+          JOIN offers o ON o.id = offer_id
+        WHERE member_id = '$member_id'";
+
+        $this->db->query($query);
+        $result = $this->db->fetch();
+
+        if (!empty($result))
+        {
+            $query = "DELETE FROM notify_winning_bid
+                WHERE member_id = '$member_id'";
+            $this->db->query($query);
+        }
+        return empty($result) ? NULL : $result;
+    }
+
     public function getModifiedOffers($member_id)
     {
         $query = "SELECT

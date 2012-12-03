@@ -33,6 +33,23 @@ $ ->
   , recallTime
 
 ################################################################################
+# Fetch winning bids for current member
+################################################################################
+  setInterval ->
+    $.ajax({
+    url: "index.php?ajax&notify_winning_bid=1",
+    dataType: "json"
+    }).done (data) ->
+      if data?
+        $.each data, (i, item) ->
+          noteAlert "You just won an offer
+                      \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
+                      approximately <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.
+                      You will be billed accordingly to your bidding offer. Please see your
+                      credit card transaction history for detail information.", "success"
+  , recallTime
+
+################################################################################
 # Fetch expired bids function handler
 ################################################################################
   setInterval ->
@@ -153,5 +170,161 @@ $ ->
 ################################################################################
 # Admin category plot
 ################################################################################
-  new Ico.SparkLine($('graph'), [21, 41, 32, 1, 10, 5, 32, 10, 23], { width: 30, height: 14, background_colour: '#ccc' })
+  $('#admin-category').live 'click keyup', ->
+    evalStr = ""
+    if $('input[name=order_by]:checked').val()
+      evalStr += "&order_by=" + $('input[name=order_by]:checked').val()
+      if $('input[name=direction]:checked').val()
+        evalStr += "&direction=" + $('input[name=direction]:checked').val()
+
+    $.ajax({
+      url: "index.php?ajax&admin_category=1" + evalStr,
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $('#volume-graph, #counts-graph').html ""
+
+        category = []
+        volume = []
+        counts = []
+
+        $.each data, (i, item) ->
+          category.push item.name
+          volume.push parseInt item.volume
+          counts.push parseInt item.counts
+
+        new Ico.LineGraph($('#volume-graph')[0], {
+          one: volume
+        }, {
+          markers: 'circle',
+          colours: { one: 'pink' },
+          labels: category,
+          meanline: false,
+          grid: true,
+          grid_colour: "#EEEEEE",
+          stroke_width: "2px"
+        })
+
+        new Ico.LineGraph($('#counts-graph')[0], {
+          one: counts
+        }, {
+          markers: 'circle',
+          colours: { one: 'orange' },
+          labels: category,
+          meanline: false,
+          grid: true,
+          grid_colour: "#EEEEEE",
+          stroke_width: "2px"
+        })
+################################################################################
+# Admin transaction plot
+################################################################################
+  $('#by_month, #by_week').live 'click', ->
+    event.preventDefault()
+    if ($(this).attr "id") is "by_month"
+      by_what = "By Month"
+      url = "&by_month=1"
+    else if ($(this).attr "id") is "by_week"
+      by_what = "By Week"
+      url = "&by_week=1"
+    $.ajax({
+      url: "index.php?ajax&admin_transaction=1" + url,
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $('#by_what').html by_what
+        $('#transaction-graph').html ""
+
+        x_axis = []
+        y_axis = []
+
+        $.each data, (i, item) ->
+          x_axis.push item.date
+          y_axis.push parseInt item.counts
+
+        new Ico.LineGraph($('#transaction-graph')[0], {
+          one: y_axis
+        }, {
+          markers: 'circle',
+          colours: { one: 'pink' },
+          labels: x_axis,
+          meanline: false,
+          grid: true,
+          grid_colour: "#EEEEEE",
+          stroke_width: "2px"
+        })
+
+################################################################################
+# Admin transaction plot
+################################################################################
+  $('#by_city, #by_country').live 'click', ->
+    event.preventDefault()
+    if ($(this).attr "id") is "by_city"
+      by_what = "By City"
+      url = "&by_city=1"
+    else if ($(this).attr "id") is "by_country"
+      by_what = "By Country"
+      url = "&by_country=1"
+    $.ajax({
+      url: "index.php?ajax&admin_regions_and_territories=1" + url,
+      dataType: "json"
+    }).done (data) ->
+      if data?
+        $('#by_what').html by_what
+        $('#transaction-graph').html ""
+
+        x_axis = []
+        y_axis = []
+
+        $.each data, (i, item) ->
+          x_axis.push item.location
+          y_axis.push parseInt item.counts
+
+        new Ico.LineGraph($('#transaction-graph')[0], {
+        one: y_axis
+        }, {
+        markers: 'circle',
+        colours: { one: 'pink' },
+        labels: x_axis,
+        meanline: false,
+        grid: true,
+        grid_colour: "#EEEEEE",
+        stroke_width: "2px"
+        })
+################################################################################
+# Admin garage earning plot
+################################################################################
+  $('#by_storage, #by_service').live 'click', ->
+    event.preventDefault()
+    if ($(this).attr "id") is "by_storage"
+      by_what = "By Storage"
+      url = "&by_storage=1"
+    else if ($(this).attr "id") is "by_service"
+      by_what = "By Service"
+      url = "&by_service=1"
+    $.ajax({
+    url: "index.php?ajax&admin_buys_and_sells=1" + url,
+    dataType: "json"
+    }).done (data) ->
+      if data?
+        $('#by_what').html by_what
+        $('#transaction-graph').html ""
+
+        x_axis = []
+        y_axis = []
+
+        $.each data, (i, item) ->
+          x_axis.push item.month
+          y_axis.push parseInt item.amount
+
+        new Ico.BarGraph($('#transaction-graph')[0], {
+          one: y_axis
+        }, {
+          colours: { one: 'green' },
+          labels: x_axis,
+          meanline: false,
+          grid: true,
+        grid_colour: "#EEEEEE",
+        })
+
   true

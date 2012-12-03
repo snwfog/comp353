@@ -1,0 +1,35 @@
+{% extends 'static/base.twig' %}
+
+{% block content %}
+
+<h1>Offer History</h1>
+{% if offers %}
+<table name="offer-history-table">
+    <tr>
+        <th>View
+        <th>Type
+        <th>Category
+        <th>Title
+        <th>Price
+        <th>Date
+    </tr>
+    {% for offer in offers %}
+        <tr>
+            <td><div class="tiptip">
+                <a href="index.php?offer&id={{ offer.id }}"
+                   class="button" title="View Offer">
+                    <span class="icon icon113"></span></a>
+            </div>
+            <td><a href="#">{{ offer.type }}</a>
+            <td><a href="#">{{ offer.category }}</a>
+            <td>{{ offer.title }}
+            <td>$ {{ offer.price|number_format('2', '.', ' ') }}
+            <th>{{ offer.date }}
+        </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>Empty offer history.</p>
+{% endif %}
+
+{% endblock content %}
