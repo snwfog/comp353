@@ -279,6 +279,10 @@ $(document).ready(function() {
       name: "postal_code",
       display: "Postal Code",
       rules: "required|alpha_numeric"
+    }, {
+      name: "tos",
+      display: "Term of Use",
+      rules: "required"
     }
   ], displayError);
 });

@@ -244,7 +244,11 @@ $(document).ready ->
     display: "Country",
     rules: "required"
   }, {
-  name: "postal_code",
-  display: "Postal Code",
-  rules: "required|alpha_numeric"
+    name: "postal_code",
+    display: "Postal Code",
+    rules: "required|alpha_numeric"
+  }, {
+    name: "tos",
+    display: "Term of Use",
+    rules: "required"
   }], displayError)
