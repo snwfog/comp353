@@ -114,11 +114,11 @@
                 {% else %}
                     <td>
                         {% if not transact.bid_id %}
-                            Available
+                            <img src="assets/img/web/available.png" />
                         {% elseif bid.id == transact.bid_id  %}
-                            Winner
+                            <img src="assets/img/web/winner.png" />
                         {% else %}
-                            Loser
+                            <img src="assets/img/web/loser.png" />
                         {% endif %}
                     </td>
                 {% endif %}
