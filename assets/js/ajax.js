@@ -29,6 +29,18 @@ $(function() {
   }, recallTime);
   setInterval(function() {
     return $.ajax({
+      url: "index.php?ajax&notify_winning_bid=1",
+      dataType: "json"
+    }).done(function(data) {
+      if (data != null) {
+        return $.each(data, function(i, item) {
+          return noteAlert(("You just won an offer                      \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                      approximately <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.                      You will be billed accordingly to your bidding offer. Please see your                      credit card transaction history for detail information.", "success");
+        });
+      }
+    });
+  }, recallTime);
+  setInterval(function() {
+    return $.ajax({
       url: "index.php?ajax&notify_expired_bids=1",
       dataType: "json"
     }).done(function(data) {
@@ -132,10 +144,176 @@ $(function() {
     }
     return str + "</span>";
   };
-  new Ico.SparkLine($('graph'), [21, 41, 32, 1, 10, 5, 32, 10, 23], {
-    width: 30,
-    height: 14,
-    background_colour: '#ccc'
+  $('#admin-category').live('click keyup', function() {
+    var evalStr;
+    evalStr = "";
+    if ($('input[name=order_by]:checked').val()) {
+      evalStr += "&order_by=" + $('input[name=order_by]:checked').val();
+      if ($('input[name=direction]:checked').val()) {
+        evalStr += "&direction=" + $('input[name=direction]:checked').val();
+      }
+    }
+    return $.ajax({
+      url: "index.php?ajax&admin_category=1" + evalStr,
+      dataType: "json"
+    }).done(function(data) {
+      var category, counts, volume;
+      if (data != null) {
+        $('#volume-graph, #counts-graph').html("");
+        category = [];
+        volume = [];
+        counts = [];
+        $.each(data, function(i, item) {
+          category.push(item.name);
+          volume.push(parseInt(item.volume));
+          return counts.push(parseInt(item.counts));
+        });
+        new Ico.LineGraph($('#volume-graph')[0], {
+          one: volume
+        }, {
+          markers: 'circle',
+          colours: {
+            one: 'pink'
+          },
+          labels: category,
+          meanline: false,
+          grid: true,
+          grid_colour: "#EEEEEE",
+          stroke_width: "2px"
+        });
+        return new Ico.LineGraph($('#counts-graph')[0], {
+          one: counts
+        }, {
+          markers: 'circle',
+          colours: {
+            one: 'orange'
+          },
+          labels: category,
+          meanline: false,
+          grid: true,
+          grid_colour: "#EEEEEE",
+          stroke_width: "2px"
+        });
+      }
+    });
+  });
+  $('#by_month, #by_week').live('click', function() {
+    var by_what, url;
+    event.preventDefault();
+    if (($(this).attr("id")) === "by_month") {
+      by_what = "By Month";
+      url = "&by_month=1";
+    } else if (($(this).attr("id")) === "by_week") {
+      by_what = "By Week";
+      url = "&by_week=1";
+    }
+    return $.ajax({
+      url: "index.php?ajax&admin_transaction=1" + url,
+      dataType: "json"
+    }).done(function(data) {
+      var x_axis, y_axis;
+      if (data != null) {
+        $('#by_what').html(by_what);
+        $('#transaction-graph').html("");
+        x_axis = [];
+        y_axis = [];
+        $.each(data, function(i, item) {
+          x_axis.push(item.date);
+          return y_axis.push(parseInt(item.counts));
+        });
+        return new Ico.LineGraph($('#transaction-graph')[0], {
+          one: y_axis
+        }, {
+          markers: 'circle',
+          colours: {
+            one: 'pink'
+          },
+          labels: x_axis,
+          meanline: false,
+          grid: true,
+          grid_colour: "#EEEEEE",
+          stroke_width: "2px"
+        });
+      }
+    });
+  });
+  $('#by_city, #by_country').live('click', function() {
+    var by_what, url;
+    event.preventDefault();
+    if (($(this).attr("id")) === "by_city") {
+      by_what = "By City";
+      url = "&by_city=1";
+    } else if (($(this).attr("id")) === "by_country") {
+      by_what = "By Country";
+      url = "&by_country=1";
+    }
+    return $.ajax({
+      url: "index.php?ajax&admin_regions_and_territories=1" + url,
+      dataType: "json"
+    }).done(function(data) {
+      var x_axis, y_axis;
+      if (data != null) {
+        $('#by_what').html(by_what);
+        $('#transaction-graph').html("");
+        x_axis = [];
+        y_axis = [];
+        $.each(data, function(i, item) {
+          x_axis.push(item.location);
+          return y_axis.push(parseInt(item.counts));
+        });
+        return new Ico.LineGraph($('#transaction-graph')[0], {
+          one: y_axis
+        }, {
+          markers: 'circle',
+          colours: {
+            one: 'pink'
+          },
+          labels: x_axis,
+          meanline: false,
+          grid: true,
+          grid_colour: "#EEEEEE",
+          stroke_width: "2px"
+        });
+      }
+    });
+  });
+  $('#by_storage, #by_service').live('click', function() {
+    var by_what, url;
+    event.preventDefault();
+    if (($(this).attr("id")) === "by_storage") {
+      by_what = "By Storage";
+      url = "&by_storage=1";
+    } else if (($(this).attr("id")) === "by_service") {
+      by_what = "By Service";
+      url = "&by_service=1";
+    }
+    return $.ajax({
+      url: "index.php?ajax&admin_buys_and_sells=1" + url,
+      dataType: "json"
+    }).done(function(data) {
+      var x_axis, y_axis;
+      if (data != null) {
+        $('#by_what').html(by_what);
+        $('#transaction-graph').html("");
+        x_axis = [];
+        y_axis = [];
+        $.each(data, function(i, item) {
+          x_axis.push(item.month);
+          return y_axis.push(parseInt(item.amount));
+        });
+        return new Ico.BarGraph($('#transaction-graph')[0], {
+          one: y_axis
+        }, {
+          colours: {
+            one: 'green'
+          },
+          labels: x_axis,
+          meanline: false,
+          grid: true,
+          grid_colour: "#EEEEEE"
+        });
+      }
+    });
   });
   return true;
 });

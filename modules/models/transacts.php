@@ -25,7 +25,8 @@ class Transact_Model extends Model
           JOIN members m ON m.id = t.buyer_id
           JOIN categories c ON c.id = o.category_id
           JOIN types ON types.id = c.type_id
-        WHERE t.seller_id = '$id'";
+        WHERE t.seller_id = '$id'
+        ORDER BY t.transact_date DESC";
 
         $this->db->query($query);
 
@@ -56,7 +57,8 @@ class Transact_Model extends Model
                         INNER JOIN members AS M 
                             ON (M.id = t.seller_id)
                         WHERE
-                            t.buyer_id = $id");
+                            t.buyer_id = $id
+                        ORDER BY t.transact_date DESC");
       $sold = $this->db->fetch(MYSQL_ASSOC);
       return $sold;
     }
@@ -89,6 +91,40 @@ class Transact_Model extends Model
                             t.id = $id");
       $result = $this->db->fetch(MYSQL_ASSOC);
       return $result;
+    }
+
+    public function getTransactionStatsByMonth()
+    {
+        $query = "SELECT
+          DATE_FORMAT(t.transact_date, '%M') AS date,
+          COUNT(*) AS counts,
+          DATE_FORMAT(t.transact_date, '%w') AS true_date
+        FROM transacts t
+        WHERE YEAR(t.transact_date) = YEAR(CURDATE())
+        GROUP BY DATE_FORMAT(t.transact_date, '%M')
+        ORDER BY true_date ASC";
+
+        $this->db->query($query);
+        $result = $this->db->fetch();
+
+        return empty($result) ? NULL : $result;
+    }
+
+    public function getTransactionStatsByWeek()
+    {
+        $query = "SELECT
+          DATE_FORMAT(t.transact_date, '%W') AS date,
+          COUNT(*) AS counts,
+          DATE_FORMAT(t.transact_date, '%w') AS true_date
+        FROM transacts t
+        WHERE YEAR(t.transact_date) = YEAR(CURDATE())
+        GROUP BY DATE_FORMAT(t.transact_date, '%W')
+        ORDER BY true_date ASC";
+
+        $this->db->query($query);
+        $result = $this->db->fetch();
+
+        return empty($result) ? NULL : $result;
     }
 }
 ?>

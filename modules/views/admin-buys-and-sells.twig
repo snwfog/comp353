@@ -1,7 +1,18 @@
 {% extends 'admin.twig' %}
 
 {% block option %}
-    <h5>Buys and Sells</h5>
-
+    <h5>Garage Earnings</h5>
+    <div class="tiptip">
+        <a class="button" id="by_storage" title="Show Earning by Storage">
+            <span class="icon icon179"></span>
+            <span class="label">Earning by Storage</span>
+        </a>
+        <a class="button" id="by_service" title="Show Earning by Service">
+            <span class="icon icon179"></span>
+            <span class="label">Earning by Service</span>
+        </a>
+    </div>
+    <h2 id="by_what"></h2>
+    <div id="transaction-graph" style="width:600px;height:300px;"></div>
 
 {% endblock option %}

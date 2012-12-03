@@ -10,6 +10,9 @@ class Ajax_Controller extends Controller
         if (isset($args['notify_bid']))
             $this->_notifyBids();
 
+        if (isset($args['notify_winning_bid']))
+            $this->_notifyWinningBid();
+
         if (isset($args['notify_expired_bids']))
             $this->notifyExpiredBids();
 
@@ -28,11 +31,104 @@ class Ajax_Controller extends Controller
         if (isset($args['admin_member_search']))
             $this->adminMemberSearch($args);
 
+        if (isset($args['admin_category']))
+            $this->_adminCategory($args);
+
+        if (isset($args['admin_transaction']))
+            $this->_adminTransaction($args);
+
+        if (isset($args['admin_regions_and_territories']))
+            $this->_adminRegion($args);
+
+        if (isset($args['admin_buys_and_sells']))
+            $this->_adminBuyAndSell($args);
+
         if (isset($args['warn']))
             $this->notifyWarn();
 
         return false;
     }
+
+    private function _adminBuyAndSell($args)
+    {
+        $json = array();
+        $m_creditcardtransactions = new CreditCardTransaction_Model();
+
+        if (isset($args['by_storage']))
+            $result = $m_creditcardtransactions->getMonthlyStorageCharges();
+        else if (isset($args['by_service']))
+            $result = $m_creditcardtransactions->getMonthlyServiceCharges();
+
+        if (!empty($result))
+        {
+            $json = array();
+
+            foreach($result as $row)
+                $json[] = $row;
+
+            echo json_encode($json);
+        }
+    }
+
+    private function _notifyWinningBid()
+    {
+        $json = array();
+        $this->m_notifications = new Notification_Model();
+        $result = $this->m_notifications->getWinningBids($this->getMemberId());
+
+        if (!empty($result))
+        {
+            $json = array();
+
+            foreach($result as $row)
+                $json[] = $row;
+
+            echo json_encode($json);
+        }
+    }
+
+    private function _adminRegion($args)
+    {
+        $json = array();
+        $m_transact = new Address_Model();
+
+        if (isset($args['by_city']))
+            $result = $m_transact->getCityStats();
+        else if (isset($args['by_country']))
+            $result = $m_transact->getCountryStats();
+
+        if (!empty($result))
+        {
+            $json = array();
+
+            foreach($result as $row)
+                $json[] = $row;
+
+            echo json_encode($json);
+        }
+    }
+
+    private function _adminTransaction($args)
+    {
+        $json = array();
+        $m_transact = new Transact_Model();
+
+        if (isset($args['by_week']))
+            $result = $m_transact->getTransactionStatsByWeek();
+        else if (isset($args['by_month']))
+            $result = $m_transact->getTransactionStatsByMonth();
+
+        if (!empty($result))
+        {
+            $json = array();
+
+            foreach($result as $row)
+                $json[] = $row;
+
+            echo json_encode($json);
+        }
+    }
+
 
     private function _notifyBids()
     {
@@ -56,6 +152,24 @@ class Ajax_Controller extends Controller
         $json = array();
         $this->m_notifications = new Notification_Model();
         $result = $this->m_notifications->getWarnings($this->getMemberId());
+
+        if (!empty($result))
+        {
+            $json = array();
+
+            foreach($result as $row)
+                $json[] = $row;
+
+            echo json_encode($json);
+        }
+    }
+
+
+    private function _adminCategory($args)
+    {
+        $json = array();
+        $m_category = new Category_Model();
+        $result = $m_category->getCategoryStats($args);
 
         if (!empty($result))
         {

@@ -79,6 +79,34 @@ class Offer_Model extends Model
         return empty($result) ? NULL : $result;
     }
 
+    public function getExpireOfferByMember($member_id)
+    {
+        $query = "SELECT
+            m.id AS owner_id,
+            m.username AS owner,
+            o.id AS id,
+            t.name AS type,
+            c.name AS category,
+            c.id as category_id,
+            o.title AS title,
+            o.price AS price,
+            o.image_url AS image_url,
+            o.description AS description,
+            DATE_FORMAT(o.date, '%M %d, %Y') AS date
+        FROM offers AS o
+          JOIN categories AS c ON o.category_id = c.id
+          JOIN types AS t ON c.type_id = t.id
+          JOIN posts AS p ON p.offer_id = o.id
+          JOIN members AS m ON p.member_id = m.id
+        WHERE o.expire = '1' AND m.id = '$member_id'
+        ORDER BY o.date DESC";
+
+        $mysqli_result = $this->db->query($query);
+        $result = $this->db->fetch();
+
+        return empty($result) ? NULL : $result;
+    }
+
     public function getGiveaways()
     {
         $query = "SELECT

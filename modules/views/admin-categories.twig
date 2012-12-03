@@ -2,6 +2,28 @@
 
 {% block option %}
     <h5>Categories</h5>
+    <form action="index.php?ajax&admin_category=1"
+          id="admin-category">
+        <ul>
+            <li><label>Order By</label></li>
+            <li><input type="radio" name="order_by" value="name">&nbsp;&nbsp;Category
+            <li><input type="radio" name="order_by" value="volume">&nbsp;&nbsp;Volume
+            <li><input type="radio" name="order_by" value="counts">&nbsp;&nbsp;Counts
+        </ul>
 
-    <div id="graph"></div>
+        <ul>
+            <li><label>Direction</label></li>
+            <li><input type="radio" name="direction" value="ASC">&nbsp;&nbsp;Ascending
+            <li><input type="radio" name="direction" value="DESC">&nbsp;&nbsp;Descending
+        </ul>
+    </form>
+
+    <h2>By Volume</h2>
+    <div id="volume-graph" style="width:600px;height:300px;"></div>
+
+    <h2>By Counts</h2>
+    <div id="counts-graph" style="width:600px;height:300px;"></div>
+
 {% endblock option %}
+
+

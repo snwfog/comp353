@@ -2,4 +2,17 @@
 
 {% block option %}
     <h5>Transactions</h5>
+    <div class="tiptip">
+        <a class="button" id="by_month" title="Show Transactions by Month">
+            <span class="icon icon179"></span>
+            <span class="label">Transaction By Month</span>
+        </a>
+        <a class="button" id="by_week" title="Show Transactions by Week">
+            <span class="icon icon179"></span>
+            <span class="label">Transaction By Week</span>
+        </a>
+    </div>
+    <h2 id="by_what"></h2>
+    <div id="transaction-graph" style="width:600px;height:300px;"></div>
+
 {% endblock option %}
