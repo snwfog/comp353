@@ -58,7 +58,7 @@ class Offer_Controller extends Controller implements IRedirectable
                 //Can bid? Can Reserve?
                 $this->data["CanBid"] = $this->CanBids();
                 $this->data["categories"] = $categories;
-                if(!$this->offer['price']>0.00){
+                if(!($this->data['offer']['price']>0.00)){
                     $this->data["CanReserve"] = $this->CanReserve();
                 }
 
