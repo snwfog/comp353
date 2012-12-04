@@ -1,7 +1,7 @@
 /* General style for everything */
 
 html {
-    font-family: Helvetica Neue, Helvetica, Arial, Calibri;
+    font-family: Helvetica Neue, Anaheim, Helvetica, Arial, Calibri;
     font-weight: lighter;
 }
 
@@ -29,7 +29,7 @@ ul li
 
 h1, h2, h3, h4, h5 {
     clear: both;
-    font-family: Serifa BT;
+    font-family: Serifa BT, Rambla;
     text-shadow: 1px 1px rgba(100, 100, 100, 0.2);
 }
 
