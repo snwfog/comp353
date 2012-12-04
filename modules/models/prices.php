@@ -16,5 +16,19 @@ class Price_Model extends Model
         	return $plan;
         }
     }
+
+    public function get_all_fees(){
+      $this->db->query("Select * from prices");
+      $plan = $this->db->fetch(MYSQL_ASSOC);
+      return $plan? $plan : NULL;  
+    }
+
+    public function update_fee($fee_name, $amount){
+    $fee_name = "\"". $fee_name . "\"";
+      $update = $this->db->query("UPDATE prices SET amount = $amount WHERE fee_name = $fee_name");
+      return $update? TRUE : NULL;  
+    }
+
+
 }
 ?>

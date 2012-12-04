@@ -2,6 +2,19 @@
 
 {% block option %}
     <h5>Store Variables</h5>
+    {% if fees is defined %}
+    <form action="index.php?admin&store_variables=1&update_variables=1" method="POST">
+            <ul>
+                {%for fee in fees%}
+            		<li>{{fee.fee_name}} <br>
+            			<input type="text" name="{{fee.fee_name}}" value="{{fee.amount}}" />
+            	{% endfor %}
+	        </ul>
+        <button class="action blue submit">
+            <span class="label">Submit</span>
+        </button>
+    </form>
+    {% endif %}
 
-
+    
 {% endblock option %}

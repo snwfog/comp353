@@ -58,7 +58,9 @@ class Offer_Controller extends Controller implements IRedirectable
                 //Can bid? Can Reserve?
                 $this->data["CanBid"] = $this->CanBids();
                 $this->data["categories"] = $categories;
-                $this->data["CanReserve"] = $this->CanReserve();
+                if(!$this->offer['price']>0.00){
+                    $this->data["CanReserve"] = $this->CanReserve();
+                }
 
                 // Check if the current viewer is the offer owner
                 // To disallow owner bidding on his own item
