@@ -19,8 +19,23 @@ class Admin_Controller extends Controller implements IRedirectable
                 $this->display('admin-categories.twig', $this->data);
             else if (isset($args['regions_and_territories']))
                 $this->display('admin-regions-and-territories.twig', $this->data);
-            else if (isset($args['store_variables']))
+            else if (isset($args['store_variables'])){
+                $m_price = new Price_Model();
+                if(isset($args['update_variables'])){
+                    foreach($_POST as $key => $value){
+                        $theFee = $m_price->get_fee_by_name($key);
+                        if(!($theFee["amount"] == $value AND $value == NULL)){
+                            $m_price->update_fee($key, $value);
+                        }
+                    }
+                }      
+
+                $fees = $m_price->get_all_fees();
+                if($fees){
+                    $this->data['fees'] = $fees;
+                }
                 $this->display('admin-variables.twig', $this->data);
+            }
             else
                 $this->display('admin.twig', $this->data);
         }
