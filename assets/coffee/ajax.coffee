@@ -27,7 +27,7 @@ $ ->
     }).done (data) ->
       if data?
         $.each data, (i, item) ->
-          alert " hell world "
+          alert item.date
           noteAlert "You received a new bid for your offer
             \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
             approximately <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.", "success"
