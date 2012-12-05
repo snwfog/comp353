@@ -27,10 +27,9 @@ $ ->
     }).done (data) ->
       if data?
         $.each data, (i, item) ->
-          alert item.date
           noteAlert "You received a new bid for your offer
             \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
-            approximately <b>" + moment(item.date, "YYYY-MM-DD HH:MM:SS").fromNow() + "</b>.", "success"
+            approximately <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.", "success"
   , recallTime
 ################################################################################
 # Fetch winning bids for current member
@@ -44,7 +43,7 @@ $ ->
         $.each data, (i, item) ->
           noteAlert "You just won an offer
                       \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
-                      approximately <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.
+                      approximately <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.
                       You will be billed accordingly to your bidding offer. Please see your
                       credit card transaction history for detail information.", "success"
   , recallTime
@@ -60,7 +59,7 @@ $ ->
       if data?
         $.each data, (i, item) ->
           noteAlert "Your bids \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.description}</a></b>\"
-          was expired <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.", "warning"
+          was expired <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.", "warning"
   , recallTime
 ################################################################################
 # Fetch received offer function handler

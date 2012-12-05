@@ -22,8 +22,7 @@ $(function() {
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          alert(item.date);
-          return noteAlert(("You received a new bid for your offer            \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            approximately <b>") + moment(item.date, "YYYY-MM-DD HH:MM:SS").fromNow() + "</b>.", "success");
+          return noteAlert(("You received a new bid for your offer            \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"            approximately <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.", "success");
         });
       }
     });
@@ -35,7 +34,7 @@ $(function() {
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert(("You just won an offer                      \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                      approximately <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.                      You will be billed accordingly to your bidding offer. Please see your                      credit card transaction history for detail information.", "success");
+          return noteAlert(("You just won an offer                      \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.title + "</a></b>\"                      approximately <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.                      You will be billed accordingly to your bidding offer. Please see your                      credit card transaction history for detail information.", "success");
         });
       }
     });
@@ -47,7 +46,7 @@ $(function() {
     }).done(function(data) {
       if (data != null) {
         return $.each(data, function(i, item) {
-          return noteAlert(("Your bids \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.description + "</a></b>\"          was expired <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.", "warning");
+          return noteAlert(("Your bids \"<b><a href=\"index.php?offer&id=" + item.id + "\">" + item.description + "</a></b>\"          was expired <b>") + moment(item.date, "YYYY-MM-DD hh:mm:ss").add('hours', 1).fromNow() + "</b>.", "warning");
         });
       }
     });
