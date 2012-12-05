@@ -30,7 +30,7 @@ $ ->
           alert item.date
           noteAlert "You received a new bid for your offer
             \"<b><a href=\"index.php?offer&id=#{item.id}\">#{item.title}</a></b>\"
-            approximately <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").fromNow() + "</b>.", "success"
+            approximately <b>" + moment(item.date, "YYYY-MM-DD hh:mm:ss").subtract('second', 5).fromNow() + "</b>.", "success"
   , recallTime
 ################################################################################
 # Fetch winning bids for current member
