@@ -175,7 +175,7 @@ class Notification_Model extends Model
               JOIN posts p ON notify_bid.offer_id = p.offer_id
             WHERE p.member_id = '$member_id'";
 
-            $this->db->query($query);
+            //$this->db->query($query);
         }
 
         return empty($result) ? NULL : $result;
